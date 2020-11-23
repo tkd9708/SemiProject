@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-테스트중 수정수정
+JSP 파일을 만들었습니다.
 </body>
 </html>
