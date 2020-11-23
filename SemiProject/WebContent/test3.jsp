@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-정수진-수정함
+정수진-수정했다
 </body>
 </html>
