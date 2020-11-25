@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-JSP 파일을 만들었습니다.
+JSP 파일을 만들었습니다.내용을 수정.
 </body>
 </html>
