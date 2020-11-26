@@ -18,6 +18,8 @@
 	div.spotList {
 		float: left;
 		padding: 40px;
+		width: 300px;
+		height: 400px;
 	}
 </style>
 <script type="text/javascript">
@@ -37,18 +39,18 @@
 		        		if(addr.indexOf(area) != -1){
 		        			s += "<div class='spotList'>";
 		        			if(item.repPhoto != null){
-						       	 s += "<img style='width: 230px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + ">";
+						       	 s += "<img style='width: 230px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
 					       	 } 
 				        	else {
 					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
-					        s += "</div>";
+		        			s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
+					        s += "</div></div>";
 		        		}
 		        		
 		        	}
 
 		        	
-		      		
 		        });
 		        
 				
