@@ -10,15 +10,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <%
-String contentsid = request.getParameter("contentsid");
-%>
+		String contentsid = request.getParameter("contentsid");
+		%>
 <script type="text/javascript">
 	$(function(){
+		<%System.out.println(contentsid);%>
+		
 		$.ajax({
 		    type:"get",
 		    dataType:"html",
 		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
+		  
 		       var s ="<h1>관광지 상세</h1>";
 		       s += "<table><tr>";
 		       s += "<th style='width: 50px;'>관광지</th>";
@@ -31,7 +34,7 @@ String contentsid = request.getParameter("contentsid");
 		       s += "</tr>";
 		       
 		       $.each(JSON.parse(data).items, function(i,item){
-		      
+		    	   if("<%=contentsid%>" == item.contentsid){
 		      	 s += "<tr>";
 		      	 s += "<td>" + item.title + "</td>";
 		       	 s += "<td>" + item.region1cd.label + "</td>";
@@ -46,11 +49,12 @@ String contentsid = request.getParameter("contentsid");
 		       		 s += "<td></td>";
 		       	 }
 		       	 s += "</tr>";
-		       
+		    	   }
 		       });
 		       s += "</table>";
 				
 				$("#out").html(s);
+		    
 		    }
 		});
 	});
