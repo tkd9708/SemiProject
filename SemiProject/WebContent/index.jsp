@@ -29,8 +29,9 @@
 	div.layout div.main {
 		position: absolute;
 		left: 100px;
-		top: 280px;
+		top: 200px;
 		margin-bottom: 150px;
+		margin-right: 100px;
 	}
 </style>
 </head>
