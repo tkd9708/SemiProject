@@ -46,6 +46,11 @@
 			});
 		});
 		
+		//이메일 입력시 메세지 지우기
+		$("#email").keydown(function(){
+			$("b.emailChk").html("");
+		});
+		
 		//이메일 입력후 포커스가 벗어날때 이메일 체크하기
 		$("#email").blur(function(){
 			var email=$(this).val();
@@ -102,8 +107,9 @@
 					<th>비밀번호</th>
 					<td>
 						<div class="formHolder password">
-							<input type="text" title="비밀번호"
+							<input type="password" title="비밀번호"
 							placeholder="비밀번호를 입력해 주세요."
+							maxlength="16"
 							class="inputText vPlaceholder">
 						</div>
 					</td>
