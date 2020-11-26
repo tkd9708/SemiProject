@@ -6,46 +6,51 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
+	request.setCharacterEncoding("utf-8");
 	String area = request.getParameter("area");
 %>
+<style type="text/css">
+	#areaTitle {
+		margin-left: 20px;
+		margin-bottom: 50px;
+	}
+	
+	div.spotList {
+		float: left;
+		padding: 40px;
+	}
+</style>
 <script type="text/javascript">
 	$(function(){
 		$.ajax({
 		    type:"get",
 		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=1",
+		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
 		    	var area = "<%=area%>";
-		        var s ="<h1>" + area + "</h1>";
-		        s += "<table><tr>";
-		        s += "<th style='width: 50px;'>관광지</th>";
-		        s += "<th style='width: 80px;'>지역</th>";
-		        s += "<th style='width: 200px;'>주소</th>";
-		        s += "<th style='width: 100px;'>태그</th>";
-		        s += "<th style='width: 200px;'>설명</th>";
-		        s += "<th style='width: 100px;'>위도, 경도</th>";
-		        s += "<th style='width: 100px;'>썸네일 이미지</th>";
-		        s += "</tr>";
-		       
+		        var s ="<h2 id='areaTitle'>" + area + " 명소</h2>";
+		        
 		        $.each(JSON.parse(data).items, function(i,item){
-		      
-		      		s += "<tr>";
-		      	 	s += "<td>" + item.title + "</td>";
-		       	 	s += "<td>" + item.region1cd.label + "</td>";
-		       	 	s += "<td>" + item.address + "</td>";
-		       	 	s += "<td>" + item.alltag + "</td>";
-		       	 	s += "<td>" + item.introduction + "</td>";
-		       	 	s += "<td>위도 : " + item.latitude + "<br>경도 : " + item.longitude + "</td>";
-		       	 	if(item.repPhoto != null){
+		        	
+		        	var addr = item.address;
+		        	if(addr != null){
+		        		if(addr.indexOf(area) != -1){
+		        			s += "<div class='spotList'>";
+		        			if(item.repPhoto != null){
+						       	 s += "<img style='width: 230px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + ">";
+					       	 } 
+				        	else {
+					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
+					       	 }
+					        s += "</div>";
+		        		}
+		        		
+		        	}
 
-			       	 	s += "<td><img style='width:100px'src=" + item.repPhoto.photoid.thumbnailpath + "></td>";
-		       	 	} else {
-		       		 	s += "<td></td>";
-		       	 	}
-		       	 	s += "</tr>";
-		       
+		        	
+		      		
 		        });
-		        s += "</table>";
+		        
 				
 				$("#out").html(s);
 			}

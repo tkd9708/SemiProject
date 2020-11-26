@@ -14,7 +14,7 @@
 		$.ajax({
 		    type:"get",
 		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
+		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=4",
 		    success:function(data){
 		       var s ="<h1>관광지 상세</h1>";
 		       s += "<table><tr>";
@@ -36,7 +36,7 @@
 		       	 s += "<td>" + item.alltag + "</td>";
 		       	 s += "<td>" + item.introduction + "</td>";
 		       	 s += "<td>위도 : " + item.latitude + "<br>경도 : " + item.longitude + "</td>";
-		       	 if(item.repPhoto != null){
+		       	 if(item.repPhoto !== null){
 
 			       	 s += "<td><img style='width:100px'src=" + item.repPhoto.photoid.thumbnailpath + "></td>";
 		       	 } else {
