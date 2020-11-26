@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	공유게시판
 </body>
 </html>

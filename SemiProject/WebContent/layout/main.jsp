@@ -23,5 +23,10 @@
 <button id="btn_go_hangyeong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경면'">한경면</button>
 <button id="btn_go_hanrim" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림읍'">한림읍</button>
 <button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월읍'">애월읍</button>
+<button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도'">우도</button>
+<button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'">공유게시판</button>
+<div>
+	<img src="image/jejuisland_dark_cut.png" style="max-width: 100%;height: auto;">
+</div>
 </body>
 </html>
