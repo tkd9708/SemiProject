@@ -28,7 +28,7 @@
 		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
 		    	var area = "<%=area%>";
-		        var s ="<h2 id='areaTitle'>" + area + " 명소</h2>";
+		        var s ="<h2 id='areaTitle'>" + area + "의 명소</h2>";
 		        
 		        $.each(JSON.parse(data).items, function(i,item){
 		        	
