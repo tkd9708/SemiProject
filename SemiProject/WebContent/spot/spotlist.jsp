@@ -38,24 +38,25 @@
 		        
 		        $.each(JSON.parse(data).items, function(i,item){
 		        	
-		        	var addr = item.address;
+		        	var addr = item.region2cd.label;
 		        	if(addr != null){
 		        		if(addr.indexOf(area) != -1){
 		        			s += "<div class='spotList'>";
+		        			s += "<div class ='gotodetail' contentsid="+item.contentsid+">"
 		        			if(item.repPhoto != null){
-		        				s += "<div class ='gotodetail' contentsid="+item.contentsid+">"		
-						       	 s += "<img style='width: 230px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
-					       		s+="</div>" 
+						       	 s += "<img style='width: 280px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
 		        			} 
 				        	else {
 					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
-		        			s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
+		        			s+="</div>" 
+		        			s += "<div style='width: 230px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b><br>";
+		        			s += "<div style='color: #aaa; margin: 5px;'>" + item.introduction + "</div>";
+		        			
 					        s += "</div></div>";
 		        		}
 		        		
 		        	}
-
 		        	
 		        });
 		        

@@ -20,7 +20,7 @@
 <button id="btn_go_namwon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원'">남원읍</button>
 <button id="btn_go_seogwipo" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포'">서귀포시</button>
 <button id="btn_go_andeok" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕'">안덕면</button>
-<button id="btn_go_daecheong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대청'">대청읍</button>
+<button id="btn_go_daejung" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정'">대정읍</button>
 <button id="btn_go_hangyeong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경'">한경면</button>
 <button id="btn_go_hanrim" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림'">한림읍</button>
 <button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월'">애월읍</button>
