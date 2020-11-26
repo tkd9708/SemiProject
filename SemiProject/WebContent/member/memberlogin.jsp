@@ -45,7 +45,38 @@
 				}
 			});
 		});
-	});
+		
+		//이메일 입력후 포커스가 벗어날때 이메일 체크하기
+		$("#email").blur(function(){
+			var email=$(this).val();
+			
+			$.ajax({
+				type: "get",
+				url:"member/emailcheckxml.jsp",
+				dataType:"xml",
+				data:{"email":email},
+				success:function(data){
+					//alert($(data).text());
+					if($(data).text()=='yes'){
+						$("b.emailChk").html("이미 등록된 이메일입니다");
+						$("b.emailChk").css({
+							"color":"red",
+							"font-size":"14px"
+						});
+						$("#email").val("");
+					}
+					else{
+						$("b.emailChk").html("사용가능한 이메일입니다");
+						$("b.emailChk").css({
+							"color":"green",
+							"font-size":"14px"
+						});
+					}
+				}
+			});
+		});
+		
+	});//function close
 </script>
 </head>
 <body>
@@ -120,7 +151,9 @@
 					<td>
 						<div class="formHolder">
 							<input type="text" placeholder="이메일 주소를 입력해 주세요. (예, ddoddot@naver.com)"
-							class="inputText vPlaceholder">
+							class="inputText vPlaceholder"
+							required="required" name="email" id="email">
+							<b class="emailChk"></b>
 						</div>
 					</td>
 				</tr>

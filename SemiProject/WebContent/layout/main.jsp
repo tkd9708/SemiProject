@@ -12,6 +12,7 @@
 %>
 <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <button id="btn_go_jeju" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주시'">제주시</button>
 <button id="btn_go_jocheon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천읍'">조천읍</button>
 <button id="btn_go_gujwa" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌읍'">구좌읍</button>
@@ -26,6 +27,9 @@
 <button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월읍'">애월읍</button>
 =======
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 <button id="btn_go_jeju" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주'">제주시</button>
 <button id="btn_go_jocheon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천'">조천읍</button>
 <button id="btn_go_gujwa" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌'">구좌읍</button>
@@ -34,7 +38,7 @@
 <button id="btn_go_namwon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원'">남원읍</button>
 <button id="btn_go_seogwipo" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포'">서귀포시</button>
 <button id="btn_go_andeok" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕'">안덕면</button>
-<button id="btn_go_daecheong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대청'">대청읍</button>
+<button id="btn_go_daejung" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정'">대정읍</button>
 <button id="btn_go_hangyeong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경'">한경면</button>
 <button id="btn_go_hanrim" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림'">한림읍</button>
 <button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월'">애월읍</button>
@@ -43,6 +47,10 @@
 <div>
 	<img src="image/jejuisland_dark_cut.png" style="max-width: 100%;height: auto;">
 </div>
+<<<<<<< HEAD
+
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
+=======
 
 >>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 </body>
