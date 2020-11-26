@@ -13,6 +13,7 @@
 <<<<<<< HEAD
 =======
 <style type="text/css">
+<!--확인용 주석 -->
 	.thumbnail {
 		width: 500px;
 		height: 500px;

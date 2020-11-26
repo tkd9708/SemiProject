@@ -10,6 +10,7 @@
 	String area = request.getParameter("area");
 %>
 <style type="text/css">
+<!-- 확인용 주석 -->
 	#areaTitle {
 		margin-left: 20px;
 		margin-bottom: 50px;
