@@ -22,7 +22,7 @@
 <script type="text/javascript">
   $("a.home").click(function(e){
 	  e.preventDefault();
-	  location.href="main.jsp";
+	  location.href="index.jsp";
   });
 </script>
 </body>
