@@ -9,12 +9,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<%
+String contentsid = request.getParameter("contentsid");
+%>
 <script type="text/javascript">
 	$(function(){
 		$.ajax({
 		    type:"get",
 		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=4",
+		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
 		       var s ="<h1>관광지 상세</h1>";
 		       s += "<table><tr>";
@@ -48,7 +51,7 @@
 		       s += "</table>";
 				
 				$("#out").html(s);
-			}
+		    }
 		});
 	});
 </script>

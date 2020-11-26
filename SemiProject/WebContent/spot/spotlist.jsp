@@ -20,6 +20,10 @@
 		padding: 40px;
 		width: 300px;
 		height: 400px;
+		
+	}
+	div.gotodetail{
+		cursor:pointer;
 	}
 </style>
 <script type="text/javascript">
@@ -39,8 +43,10 @@
 		        		if(addr.indexOf(area) != -1){
 		        			s += "<div class='spotList'>";
 		        			if(item.repPhoto != null){
+		        				s += "<div class ='gotodetail' contentsid="+item.contentsid+">"		
 						       	 s += "<img style='width: 230px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
-					       	 } 
+					       		s+="</div>" 
+		        			} 
 				        	else {
 					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
@@ -57,7 +63,14 @@
 				$("#out").html(s);
 			}
 		});
-	});
+		
+		//사진클릭하면 디테일로 값보내기
+		$(document).on("click","div.gotodetail",function(){
+			var contentsid=$(this).attr("contentsid"); 
+			location.href="index.jsp?main=spot/spotdetail.jsp?contentsid="+contentsid;
+		})
+		
+	}); //function 끝
 </script>
 </head>
 <body>
