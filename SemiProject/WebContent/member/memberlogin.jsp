@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="../image/favicon.ico">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 제주한달살기</title>
 <script type="text/javascript">
@@ -82,12 +83,34 @@
 		});
 		
 	});//function close
+	
+	function formChk(){
+		try{
+			var pass1V=document.getElementById("pass").value;
+			var pass2V=document.getElementById("cfpass").value;
+			
+			var pass2=document.getElementById("cfpass");
+			
+			if (pass1V != pass2V) {
+				var passChk = document.getElementById("passChk");
+				passChk.innerHTML="비밀번호가 맞지 않습니다";
+				pass2.focus();
+				return false;
+			}			
+		}catch(e){
+			console.log(e);
+			return false;
+		}
+		
+		return true;
+	}
 </script>
 </head>
 <body>
 <div class="regWrap">
 	<form action="member/insertaction.jsp" method="post"
-		class="regForm" name="memberform" id="myfrm">
+		class="regForm" name="memberform" id="myfrm"
+		onsubmit="return formChk(this);">
 		<table class="tType">
 			<caption><h3>회원 가입</h3></caption>
 			<tbody>
@@ -108,9 +131,28 @@
 					<td>
 						<div class="formHolder password">
 							<input type="password" title="비밀번호"
-							placeholder="비밀번호를 입력해 주세요."
-							maxlength="16"
-							class="inputText vPlaceholder">
+							placeholder="영문, 숫자, 특수문자 조합하여 8자이상"
+							class="inputText vPlaceholder"
+							autocomplete="new-password" spellcheck="false"
+							id="pass" name="pass" required="required">
+							<span class="passChk" id="passChk"></span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>비밀번호 확인</th>
+					<td>
+						<div class="formHolder cfpassword">
+							<input type="password" title="비번확인"
+							placeholder="비밀번호 한번 더 입력"
+							class="inputText vPlaceholder"
+							autocomplete="new-password"
+							spellcheck="false" required="required"
+							name="cfpass" id="cfpass">
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  								<path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z"/>
+  								<path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+							</svg>
 						</div>
 					</td>
 				</tr>
@@ -120,7 +162,7 @@
 						<div class="formHolder name">
 							<input type="text" title="이름"
 							placeholder="이름을 입력해 주세요."
-							class="inputText vPlaceholder">
+							class="inputText vPlaceholder" required="required">
 						</div>
 					</td>
 				</tr>
@@ -147,7 +189,7 @@
 							</button>
 							<br><br><br>
 							<input type="text" title="주소2"
-							placeholder="주소를 입력해 주세요."
+							placeholder="상세주소를 입력해 주세요."
 							class="inputText vPlaceholder">
 						</div>
 					</td>
@@ -155,8 +197,8 @@
 				<tr>
 					<th>이메일</th>
 					<td>
-						<div class="formHolder">
-							<input type="text" placeholder="이메일 주소를 입력해 주세요. (예, ddoddot@naver.com)"
+						<div class="formHolder email">
+							<input type="text" placeholder="이메일 주소 입력 (예, ddoddot@naver.com)"
 							class="inputText vPlaceholder"
 							required="required" name="email" id="email">
 							<b class="emailChk"></b>

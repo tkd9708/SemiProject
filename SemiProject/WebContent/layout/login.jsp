@@ -15,7 +15,7 @@
 <script type="text/javascript">
   $("a.main_login").click(function(e){
 	  e.preventDefault();
-	  location.href="member/loginform.jsp";
+	  location.href="index.jsp?main=member/loginform.jsp";
   });
 </script>
 </body>

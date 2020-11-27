@@ -43,7 +43,7 @@
 											<strong class="tit">맨도롱 또똣 회원</strong>
 										</div>
 										<div class="btnWrap login">
-											<a href="memberlogin.jsp" class="btn big pink">회원가입</a>
+											<a href="index.jsp?main=member/memberlogin.jsp" class="btn big pink">회원가입</a>
 										</div>
 									</div>
 									<div class="inr right">
