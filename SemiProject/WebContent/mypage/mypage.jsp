@@ -75,7 +75,7 @@ margin-bottom: -50px;
  	}
 
 
-	function drawCalendar(){ //달력 그리는 함수
+function drawCalendar(){ //달력 그리는 함수
 			var y = today.getFullYear(); //년
 			var m = today.getMonth(); //월
 			var d = today.getDate(); //일
@@ -139,6 +139,7 @@ margin-bottom: -50px;
 	
 	
 }
+
 
 </script>
 
@@ -211,7 +212,8 @@ margin-bottom: -50px;
         	<div class="addSchedule" align="center" >
         		<form action ="scheduleAdd.jsp" method="post" class="form-inline" >
         			<table class="table table-condensed">
-        				<input type="hidden" name="mem_num" value="test">
+        			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
+        				<input type="hidden" name="mem_id" value="test">
         				<tr>
         					<td align="center" style="font-size: 13pt">내용</td>
         					<td align="center"><input type="text" name="content" style="width:300px;"></td>
@@ -253,6 +255,7 @@ margin-bottom: -50px;
 	})
 	$(document).on("click","div.btnScheduleAdd",function(){
 		$("#addModal").modal();
+		$("input[name=content]").val("");
 		
 	})
 </script>

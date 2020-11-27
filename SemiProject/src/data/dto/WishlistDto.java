@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class WishlistDto {
 	private String num;
-	private String mem_num;
+	private String mem_id;
 	private String spot_id;
 	private String share_num;
 	private String content;
@@ -16,11 +16,11 @@ public class WishlistDto {
 	public void setNum(String num) {
 		this.num = num;
 	}
-	public String getMem_num() {
-		return mem_num;
+	public String getMem_id() {
+		return  mem_id;
 	}
-	public void setMem_num(String mem_num) {
-		this.mem_num = mem_num;
+	public void setMem_id(String mem_id) {
+		this.mem_id =  mem_id;
 	}
 	public String getSpot_id() {
 		return spot_id;

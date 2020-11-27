@@ -1,10 +1,8 @@
-
 <%@page import="data.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String myid = request.getParameter("myid");
 %>
 <!-- useBean dto, dao 선언 -->
 <jsp:useBean id="dao" class="data.dao.WishlistDao"/>
@@ -16,4 +14,9 @@
 //insert 메소드 호출
 dao.insertContent(dto);
 response.sendRedirect("../index.jsp?main=mypage/mypage.jsp");
+
+
+
+//@@@@@@@뒤로가기 추가@@@@@@@@@@2
+
 %>
