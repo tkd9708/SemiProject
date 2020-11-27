@@ -77,7 +77,7 @@ public class MemberDao {
 		 * +"?,?,?,?,?,?,?,sysdate)";
 		 */
 		
-		String sql="insert into member (id,pass,name,address,addrdetail,email,hp) VALUES('"+dto.getId()+"','"+dto.getPass()+"','"+dto.getName()+"','"+dto.getAddress()+"', '"+dto.getAddrdetail()+"', '"+dto.getEmail()+"', '"+dto.getHp()+"')";
+		String sql="insert into member (id,pass,name,address,addrdetail,email,hp) VALUES ('"+dto.getId()+"','"+dto.getPass()+"','"+dto.getName()+"','"+dto.getAddress()+"', '"+dto.getAddrdetail()+"', '"+dto.getEmail()+"', '"+dto.getHp()+"')";
 		
 		Connection conn=null;
 		PreparedStatement pstmt=null;

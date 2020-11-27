@@ -4,6 +4,11 @@
 <html>
 <head>
 <link rel="shortcut icon" href="../image/favicon.ico">
+<%
+String url=request.getContextPath();
+/* System.out.println(url); */
+%>
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/memberlogin.css">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 제주한달살기</title>
 <script type="text/javascript">
@@ -121,7 +126,7 @@
 							<input type="text" title="아이디" name="id" id="id" 
 							autofocus="autofocus" required="required"
 							placeholder="아이디를 입력해 주세요."
-							class="inputText vPlaceholder">
+							class="inputText vPlaceholder" autocomplete="username">
 							<b class="idcheck"></b>
 						</div>
 					</td>
@@ -207,7 +212,7 @@
 				</tr>
 				<tr>
 					<td class="regMemberBtn">
-						<button type="submit" class="btn big pink">
+						<button type="submit" class="btnbigpink">
 						회원가입</button>
 					</td>
 				</tr>
