@@ -3,8 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="../image/favicon.ico">
-<link rel="stylesheet" type="text/css" href="loginform.css">
+<link rel="shortcut icon" href="/image/favicon.ico">
+<%
+String url=request.getContextPath();
+System.out.println(url);
+%>
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/loginform.css">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 1등 여행사</title>
 </head>
@@ -61,7 +65,9 @@
 			<p>aside</p>
 		</aside>
 		<!-- 풋터 -->
-		<footer>footer</footer>
+		<footer>
+			(풋터)멘도롱 또똣(풋터)
+		</footer>
 	</div>
 </body>
 </html>

@@ -42,3 +42,6 @@ article {
 	margin: 20px;
 	background-color: #999;
 }
+.btn>.big>.pink {
+	margin: 0 auto;
+}
