@@ -41,7 +41,7 @@
 		$.ajax({
 		    type:"get",
 		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=4",
+		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
 		  
 		       var s ="";
@@ -76,7 +76,14 @@
 		       	});
 				
 				$("#out").html(s);
+<<<<<<< HEAD
 
+=======
+		    
+		    }
+		});
+	});
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 </script>
 <body>
 	<div id="out">

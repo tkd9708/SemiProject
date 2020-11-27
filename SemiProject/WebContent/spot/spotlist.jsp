@@ -49,14 +49,22 @@
 				        	else {
 					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
+<<<<<<< HEAD
 
 		        			s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
 		        			s+="<b>"+addr+"</b>"
 
+=======
+		        			s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
+		        			s+="<b>"+addr+"</b>"
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 		        			s+="</div>" 
 		        			s += "<div style='width: 230px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b><br>";
 		        			s += "<div style='color: #aaa; margin: 5px;'>" + item.introduction + "</div>";
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 		        			
 					        s += "</div></div>";
 		        		}
