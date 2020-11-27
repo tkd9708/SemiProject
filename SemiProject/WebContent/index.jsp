@@ -6,31 +6,27 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-	div.layout div.title {
-		height: 130px;
-		line-height: 130px;
-		margin-bottom: 30px;
-	}
-	 
-	div.layout div.login {
-	    text-align:right;
-		padding-right: 100px;
-		font-size: 20px;
-		
-	}
-	
-	div.layout div.main {
-		max-width: 100%;
-	}
+div.layout div.title {
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+div.layout div.main {
+    position: relative;
+    z-index: 1;
+}
 </style>
 
 </head>
@@ -42,20 +38,15 @@
 	}
 %>
 <body>
-
-<div class="layout">
-   <!-- 타이틀 부분 -->
-   <div class="title">
-      <jsp:include page="layout/title.jsp"/>
-   </div>
-   <!-- 로그인 부분 -->
-   <div class="login">
-      <jsp:include page="layout/login.jsp"/>
-   </div>
-   <!-- 제주도 지도부분 -->
-   <div class="main">
-      <jsp:include page="<%=mainPage%>"/> 
-   </div>
-</div>
+	<div class="layout">
+		<!-- 타이틀 부분 -->
+		<div class="title">
+			<jsp:include page="layout/title.jsp" />
+		</div>
+		<!-- 제주도 지도부분 -->
+		<div class="main">
+			<jsp:include page="<%=mainPage%>" />
+		</div>
+	</div>
 </body>
 </html>
