@@ -6,8 +6,8 @@ public class SpotlistDto {
 	private String label1;
 	private String label2;
 	private String roadaddr;
-	private String latitude;
-	private String logitude;
+	private Double latitude;
+	private Double longitude;
 	private String tag;
 	private String introduction;
 	private String thumbnail;
@@ -42,17 +42,17 @@ public class SpotlistDto {
 	public void setRoadaddr(String roadaddr) {
 		this.roadaddr = roadaddr;
 	}
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public String getLogitude() {
-		return logitude;
+	public Double getLongitude() {
+		return longitude;
 	}
-	public void setLogitude(String logitude) {
-		this.logitude = logitude;
+	public void setLongitude(Double logitude) {
+		this.longitude = logitude;
 	}
 	public String getTag() {
 		return tag;

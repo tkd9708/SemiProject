@@ -1,3 +1,5 @@
+<%@page import="data.dao.SpotlistDao"%>
+<%@page import="data.dto.SpotlistDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,77 +35,34 @@
 </style>
 <%
 	String contentsid = request.getParameter("contentsid");
+	SpotlistDao dao = new SpotlistDao();
+	SpotlistDto dto = dao.getData(contentsid);
 %>
-<script type="text/javascript">
-	$(function(){
-		<%System.out.println(contentsid);%>
-		
-		$.ajax({
-		    type:"get",
-		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13&cid=<%=contentsid%>",
-		    success:function(data){
-		  
-		    		var s ="";
-		    		$.each(JSON.parse(data).items, function(i, item){
-		    			if(item.repPhoto != null){
-			       			s += "<img class='thumbnail' src=" + item.repPhoto.photoid.thumbnailpath + ">";
-		      	 		} 
-		      	 		else {
-		      		 		s += "<div class='thumbnail'>썸네일 없음</div>";
-		      	 		} 
-		      	 		
-		      	 		 s += "<div class='thumbnailDetail'>";
-		      	 		s += "<b style='font-size: 20pt;'>" + item.title + "</b>";
-		      	 		s += "<span style='color: red; float: right; font-size: 30pt;' class='glyphicon glyphicon-heart-empty'></span><br><br>";
-		      	 		s += "<span style='color: #ccc; font-size: 13px;'> >&nbsp;&nbsp;&nbsp;" + item.alltag + "</span><br>";
-		      	 		s += "<hr>";
-		      	 		s += "<b style='color: gray;'>" + item.introduction + "</b><br><br>";
-		      	 		s += "<span style='color: #F0CD58; font-size: 18px;'>★★★★★</span><br><br>";
-		      	 		s += "<span class='glyphicon glyphicon-map-marker' style='margin-right: 10px;'></span>" + item.address + "<br>";
-		      	 		
-		      	 		s += "</div>"; 
-		    		});
-			       
-	      	 		
-	      	 		
-			       <%--  $.each(JSON.parse(data).items, function(i,item){
-			    	    if("<%=contentsid%>" == item.contentsid){
-			      	 		/* s += "<tr>";
-			      	 		s += "<td>" + item.title + "</td>";
-			       	 		s += "<td>" + item.region1cd.label + "</td>";
-			       	 		s += "<td>" + item.address + "</td>";
-			       	 		s += "<td>" + item.alltag + "</td>";
-			       	 		s += "<td>" + item.introduction + "</td>";
-			       	 		s += "<td>위도 : " + item.latitude + "<br>경도 : " + item.longitude + "</td>"; */
-			       	 		if(item.repPhoto !== null){
-				       			s += "<img class='thumbnail' src=" + item.repPhoto.photoid.imgpath + ">";
-			       	 		} 
-			       	 		else {
-			       		 		s += "<div class='thumbnail'></div>";
-			       	 		}
-			       	 		
-			       	 		s += "<div class='thumbnailDetail'>";
-			       	 		s += "<b style='font-size: 20pt;'>" + item.title + "</b>";
-			       	 		s += "<span style='color: red; float: right; font-size: 30pt;' class='glyphicon glyphicon-heart-empty'></span><br><br>";
-			       	 		s += "<span style='color: #ccc; font-size: 13px;'> >&nbsp;&nbsp;&nbsp;" + item.alltag + "</span><br>";
-			       	 		s += "<hr>";
-			       	 		s += "<b style='color: gray;'>" + item.introduction + "</b><br><br>";
-			       	 		s += "<span style='color: #F0CD58; font-size: 18px;'>★★★★★</span><br><br>";
-			       	 		s += "<span class='glyphicon glyphicon-map-marker' style='margin-right: 10px;'></span>" + item.address + "<br>";
-			       	 		
-			       	 		s += "</div>";
-			    	    }
-			       	}); --%>
-					
-					$("#out").html(s);
-		    }
-		});
-	});
-
-</script>
 <body>
-	<div id="out">
+	<%
+	if(dto.getThumbnail() != null){
+		%>
+		<img class="thumbnail" src="<%=dto.getThumbnail()%>">
+		<%
+	}
+	else {
+		%>
+		<div class="thumbnail">썸네일 없음</div>
+		<%
+	}
+	%>
+	<div class="thumbnailDetail">
+		<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
+		<span style="color: red; float: right; font-size: 30pt;" class="glyphicon glyphicon-heart-empty"></span>
+		<br><br>
+		<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;<%=dto.getTag() %></span><br>
+		<hr>
+		<b style="color: gray;"><%=dto.getIntroduction() %></b>
+		<br><br>
+		<span style="color: #F0CD58; font-size: 18px;">★★★★★</span><br><br>
+		<span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
+		<%=dto.getRoadaddr() %>
+		<br>
 	</div>
 	<hr>
 	<div id="spot_review"></div>

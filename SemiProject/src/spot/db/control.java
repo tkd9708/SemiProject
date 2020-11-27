@@ -1,5 +1,7 @@
 package spot.db;
 
+import java.util.List;
+
 import data.dao.SpotlistDao;
 import data.dto.SpotlistDto;
 
@@ -7,9 +9,13 @@ public class control {
 
 	public static void main(String[] args) {
 		SpotlistJSON spJson = new SpotlistJSON();
-		SpotlistDto dto = spJson.getSpotlist();
+		List<SpotlistDto> list = spJson.getSpotlist();
 		
 		SpotlistDao dao = new SpotlistDao();
-		dao.insertSpotlist(dto);
+		
+		for(SpotlistDto dto : list) {
+
+			dao.insertSpotlist(dto);
+		}	
 	}
 }
