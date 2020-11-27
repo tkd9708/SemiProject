@@ -13,7 +13,7 @@
 	.thumbnail {
 		width: 500px;
 		height: 500px;
-		margin-left: 100px;
+		margin-left: 200px;
 		margin-top: 80px;
 		display: inline-block;
 	
@@ -21,7 +21,7 @@
 	
 	div.thumbnailDetail {
 		display: inline-block;
-		margin-left: 80px;
+		margin-left: 100px;
 		width: 520px;
 		height: 500px;
 		vertical-align: bottom;
@@ -44,26 +44,30 @@
 		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13&cid=<%=contentsid%>",
 		    success:function(data){
 		  
-		    	var s ="";
+		    		var s ="";
+		    		$.each(JSON.parse(data).items, function(i, item){
+		    			if(item.repPhoto != null){
+			       			s += "<img class='thumbnail' src=" + item.repPhoto.photoid.thumbnailpath + ">";
+		      	 		} 
+		      	 		else {
+		      		 		s += "<div class='thumbnail'>썸네일 없음</div>";
+		      	 		} 
+		      	 		
+		      	 		 s += "<div class='thumbnailDetail'>";
+		      	 		s += "<b style='font-size: 20pt;'>" + item.title + "</b>";
+		      	 		s += "<span style='color: red; float: right; font-size: 30pt;' class='glyphicon glyphicon-heart-empty'></span><br><br>";
+		      	 		s += "<span style='color: #ccc; font-size: 13px;'> >&nbsp;&nbsp;&nbsp;" + item.alltag + "</span><br>";
+		      	 		s += "<hr>";
+		      	 		s += "<b style='color: gray;'>" + item.introduction + "</b><br><br>";
+		      	 		s += "<span style='color: #F0CD58; font-size: 18px;'>★★★★★</span><br><br>";
+		      	 		s += "<span class='glyphicon glyphicon-map-marker' style='margin-right: 10px;'></span>" + item.address + "<br>";
+		      	 		
+		      	 		s += "</div>"; 
+		    		});
 			       
-			       if(item.repPhoto !== null){
-		       			s += "<img class='thumbnail' src=" + data.repPhoto.photoid.imgpath + ">";
-	      	 		} 
-	      	 		else {
-	      		 		s += "<div class='thumbnail'></div>";
-	      	 		}
 	      	 		
-	      	 		s += "<div class='thumbnailDetail'>";
-	      	 		s += "<b style='font-size: 20pt;'>" + data.title + "</b>";
-	      	 		s += "<span style='color: red; float: right; font-size: 30pt;' class='glyphicon glyphicon-heart-empty'></span><br><br>";
-	      	 		s += "<span style='color: #ccc; font-size: 13px;'> >&nbsp;&nbsp;&nbsp;" + data.alltag + "</span><br>";
-	      	 		s += "<hr>";
-	      	 		s += "<b style='color: gray;'>" + data.introduction + "</b><br><br>";
-	      	 		s += "<span style='color: #F0CD58; font-size: 18px;'>★★★★★</span><br><br>";
-	      	 		s += "<span class='glyphicon glyphicon-map-marker' style='margin-right: 10px;'></span>" + data.address + "<br>";
 	      	 		
-	      	 		s += "</div>";
-			       <%-- $.each(JSON.parse(data).items, function(i,item){
+			       <%--  $.each(JSON.parse(data).items, function(i,item){
 			    	    if("<%=contentsid%>" == item.contentsid){
 			      	 		/* s += "<tr>";
 			      	 		s += "<td>" + item.title + "</td>";

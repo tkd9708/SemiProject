@@ -16,15 +16,20 @@
 	}
 	
 	div.spotList {
+		margin-top: 50px;
 		margin-left: 150px;
-		margin-right: 150px;
+		margin-right: 100px;
 		
 	}
 	div.gotodetail{
 		cursor:pointer;
 		float: left;
-		width: 300px;
-		height: 400px;
+		width: 350px;
+		height: 550px;
+		text-align: center;
+		margin-bottom: 50px;
+		margin-right: 70px;
+		box-shadow: 2px 2px 2px 2px #ddd;
 	}
 </style>
 <script type="text/javascript">
@@ -35,9 +40,10 @@
 		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
 		    success:function(data){
 		    	var area = "<%=area%>";
-		        var s ="<h2 id='areaTitle'>" + area + "의 명소</h2>";
 
-    			s += "<div class='spotList'>";
+    			var s = "<div class='spotList'>";
+
+		        s += "<h2 id='areaTitle'>" + area + "의 명소</h2>";
 		        $.each(JSON.parse(data).items, function(i,item){
 		        	
 		        	var addr = item.region2cd.label;
@@ -45,19 +51,24 @@
 		        		if(addr.indexOf(area) != -1){
 		        			s += "<div class ='gotodetail' contentsid="+item.contentsid+">"
 		        			if(item.repPhoto != null){
-						       	 s += "<img style='width: 280px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
+						       	 s += "<img style='width: 350px; height: 250px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
 		        			} 
 				        	else {
-					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
+					       		 s += "<div style='width: 350px; height: 250px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
 
-		        			//s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
-		        			//s+="<b>"+addr+"</b>"
-
-		        			//s+="</div>" 
-		        			s += "<div style='width: 230px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b></div><br>";
-		        			s += "<div style='color: #aaa; margin: 5px;'>" + item.introduction + "</div>";
-
+		        			s += "<div style='width: 350px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b></div><br>";
+		        			s += "<div style='color: #F0CD58; font-size: 18px;'>★★★★★</div><br>";
+		        			s += "<div style='color: #aaa;'>" + item.region1cd.label + " > " + item.region2cd.label + "</div>";
+							var tag = item.tag.split(",");
+							
+							s += "<div style='margin-top: 20px; color:#ff7f00'><b>";
+							$.each(tag, function(i, ele){
+								s += "#" + tag[i] + "&nbsp;&nbsp;";
+								if ((i+1)%4 == 0)
+									s += "<br>";
+							});
+							s += "</b></div>";
 		        			
 					        s += "</div>";
 		        		}
