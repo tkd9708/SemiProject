@@ -1,3 +1,6 @@
+<%@page import="data.dto.SpotlistDto"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.SpotlistDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,17 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%
-	request.setCharacterEncoding("utf-8");
-	String area = request.getParameter("area");
-%>
+
 <style type="text/css">
 	#areaTitle {
 		margin-left: 20px;
 		margin-bottom: 50px;
 	}
 	
-	div.spotList {
+	div#spotList {
 		margin-top: 50px;
 		margin-left: 150px;
 		margin-right: 100px;
@@ -32,55 +32,14 @@
 		box-shadow: 2px 2px 2px 2px #ddd;
 	}
 </style>
+<%
+	request.setCharacterEncoding("utf-8");
+	String area = request.getParameter("area");
+	SpotlistDao dao = new SpotlistDao();
+	List<SpotlistDto> list = dao.getList(area);
+%>
 <script type="text/javascript">
 	$(function(){
-		$.ajax({
-		    type:"get",
-		    dataType:"html",
-		    url:"http://api.visitjeju.net/vsjApi/contents/searchList?apiKey=3vvg2yzxxd2edm7h&locale=kr&category=c1&page=13",
-		    success:function(data){
-		    	var area = "<%=area%>";
-
-    			var s = "<div class='spotList'>";
-
-		        s += "<h2 id='areaTitle'>" + area + "의 명소</h2>";
-		        $.each(JSON.parse(data).items, function(i,item){
-		        	
-		        	var addr = item.region2cd.label;
-		        	if(addr != null){
-		        		if(addr.indexOf(area) != -1){
-		        			s += "<div class ='gotodetail' contentsid="+item.contentsid+">"
-		        			if(item.repPhoto != null){
-						       	 s += "<img style='width: 350px; height: 250px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
-		        			} 
-				        	else {
-					       		 s += "<div style='width: 350px; height: 250px; float: left; text-align: center;'>썸네일 없음</div>";
-					       	 }
-
-		        			s += "<div style='width: 350px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b></div><br>";
-		        			s += "<div style='color: #F0CD58; font-size: 18px;'>★★★★★</div><br>";
-		        			s += "<div style='color: #aaa;'>" + item.region1cd.label + " > " + item.region2cd.label + "</div>";
-							var tag = item.tag.split(",");
-							
-							s += "<div style='margin-top: 20px; color:#ff7f00'><b>";
-							$.each(tag, function(i, ele){
-								s += "#" + tag[i] + "&nbsp;&nbsp;";
-								if ((i+1)%4 == 0)
-									s += "<br>";
-							});
-							s += "</b></div>";
-		        			
-					        s += "</div>";
-		        		}
-		        		
-		        	}
-		        	
-		        });
-		        
-				s += "</div>";
-				$("#out").html(s);
-			}
-		});
 		
 		//사진클릭하면 디테일로 값보내기
 		$(document).on("click","div.gotodetail",function(){
@@ -92,8 +51,56 @@
 </script>
 </head>
 <body>
-	<div id="out">
-	
+	<div id="spotList">
+		<h2><%=area %>의 명소 </h2>
+		<%
+        for (SpotlistDto dto : list){
+        	%>
+        	<div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
+        		<%
+        		if(dto.getThumbnail() == null){
+        		%>
+        			<div style="width: 350px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
+        		<%
+        		}
+        		else {
+        		%>
+        			<img style="width: 350px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
+        		<%
+        		}
+        		%>
+        		<div style="width: 350px; margin-top: 20px;">
+        			<b style="font-size: 13pt;"><%=dto.getTitle() %></b>
+        		</div>
+        		<br>
+        		<div style="color: #F0CD58; font-size: 18px;">
+        			★★★★★
+        		</div>
+        		<br>
+        		<div style="color: #aaa;">
+					<%=dto.getLabel1() %> > <%=dto.getLabel2() %>
+				</div>
+        		<div style="margin-top: 20px; color:#ff7f00">
+        		<b>
+        		<%
+        		String[] tags = dto.getTag().split(",");
+        		for(int i=0; i<tags.length; i++){
+        			%>
+        			#<%=tags[i] %>&nbsp;&nbsp;
+        			<%	
+        			if((i+1)%4 == 0){
+        				%><br><%
+        			}
+        			
+        		}
+        		%>
+        		</b>
+        		</div>
+        	</div>
+        	<%
+        }
+        %>
+        	
 	</div>
 </body>
 </html>
