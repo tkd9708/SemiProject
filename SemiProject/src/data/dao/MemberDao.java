@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import data.dto.MemberDto;
 import mysql.db.MysqlConnect;
 
 public class MemberDao {
@@ -66,5 +67,35 @@ public class MemberDao {
 		}
 		
 		return find;
+	}
+	
+	//insert
+	public void insertMember(MemberDto dto)
+	{
+		/*
+		 * String sql="insert into member values (seq_mini.nextval,"
+		 * +"?,?,?,?,?,?,?,sysdate)";
+		 */
+		String sql="insert into member values (seq_mini.nextval,'"+dto.getId()+"','"+dto.getPass()+"','"+dto.getName()+"','"+dto.getAddress()+"','"+dto.getAddrdetail()+"','"+dto.getEmail()+"','"+dto.getHp()+"', sysdate)";
+		
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		Statement stmt=null;
+		
+		conn=db.getConnection();
+		try {
+			//pstmt=conn.prepareStatement(sql);
+			
+			stmt=conn.createStatement();
+			
+			stmt.execute(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//db.dbClose(conn, pstmt);
+			db.dbClose(conn, stmt);
+		}
 	}
 }
