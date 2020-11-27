@@ -162,7 +162,7 @@
 						<div class="formHolder name">
 							<input type="text" title="이름"
 							placeholder="이름을 입력해 주세요."
-							class="inputText vPlaceholder" required="required">
+							class="inputText vPlaceholder" required="required" name="name">
 						</div>
 					</td>
 				</tr>
@@ -172,7 +172,7 @@
 						<div class="formHolder hp">
 							<input type="text" title="핸드폰"
 							placeholder="핸드폰을 입력해 주세요."
-							class="inputText vPlaceholder">
+							class="inputText vPlaceholder" name="hp">
 						</div>
 					</td>
 				</tr>
@@ -183,14 +183,14 @@
 							<input type="text" title="주소1"
 							class="inputText vPlaceholder"
 							readonly="readonly"
-							required="required">
+							required="required" name="address">
 							<button type="button" class="btn">
 								주소검색
 							</button>
 							<br><br><br>
 							<input type="text" title="주소2"
 							placeholder="상세주소를 입력해 주세요."
-							class="inputText vPlaceholder">
+							class="inputText vPlaceholder" name="addrdetail">
 						</div>
 					</td>
 				</tr>
