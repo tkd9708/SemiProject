@@ -14,6 +14,10 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 <style type="text/css">
 	div.layout div.title {
 		height: 130px;
@@ -28,13 +32,21 @@
 	}
 	
 	div.layout div.main {
+<<<<<<< HEAD
 		position: absolute;
 		left: 100px;
 		top: 200px;
 		margin-bottom: 150px;
 		margin-right: 100px;
+=======
+		max-width: 100%;
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 	}
 </style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 </head>
 <%
 	// 메인페이지에 들어갈 파일 읽기
@@ -44,6 +56,10 @@
 	}
 %>
 <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
 <div class="layout">
    <!-- 타이틀 부분 -->
    <div class="title">
@@ -53,7 +69,11 @@
    <div class="login">
       <jsp:include page="layout/login.jsp"/>
    </div>
+<<<<<<< HEAD
    <!-- 제주도 지도 부분 -->
+=======
+   <!-- 제주도 지도부분 -->
+>>>>>>> branch 'master' of https://github.com/tkd9708/SemiProject.git
    <div class="main">
       <jsp:include page="<%=mainPage %>"/> 
    </div>
