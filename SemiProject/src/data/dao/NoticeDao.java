@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.dto.ShareBoardDto;
+import data.dto.NoticeDto;
 import mysql.db.MysqlConnect;
 
-public class ShareBoardDao {
+public class NoticeDao {
 
 	MysqlConnect my=new MysqlConnect();
 
 	//insert
-	public void insertShare(ShareBoardDto dto)
+	public void insertNotice(NoticeDto dto)
 	{
-		String sql="insert into shareboard (id,subject,content,photo) values (?,?,?,?)";
+		String sql="insert into noticeboard (id,subject,content,files,writeday) values (?,?,?,?,now())";
 				
 				
 		Connection conn=null;
@@ -29,7 +29,7 @@ public class ShareBoardDao {
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
-			pstmt.setString(4, dto.getPhoto());
+			pstmt.setString(4, dto.getFiles());
 
 			//실행
 			pstmt.execute();
@@ -47,7 +47,7 @@ public class ShareBoardDao {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(*)from shareboard";
+		String sql="select count(*) from noticeboard";
 		conn=my.getConnection();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -66,10 +66,10 @@ public class ShareBoardDao {
 	}
 
 	
-	public ShareBoardDto getData(String num)
+	public NoticeDto getData(String num)
 	{
-		ShareBoardDto dto=new ShareBoardDto();
-		String sql="select * from shareboard where num=?";
+		NoticeDto dto=new NoticeDto();
+		String sql="select * from noticeboard where num=?";
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -88,12 +88,11 @@ public class ShareBoardDao {
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
-				dto.setPhoto(rs.getString("photo"));
+				dto.setFiles(rs.getString("files"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setFsName(rs.getString("fsName"));
-				dto.setFaAddr(rs.getString("fsAddr"));
-				dto.setStar(rs.getInt("star"));
+				
+
 
 			}
 
@@ -108,10 +107,10 @@ public class ShareBoardDao {
 	}
 	
 	//페이징처리한 리스트 목록 반환
-	public List<ShareBoardDto> getList(int start,int end)
+	public List<NoticeDto> getList(int start,int end)
 	{
-		List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
-		String sql="select * from shareboard oders limit ?,?";
+		List<NoticeDto> list=new ArrayList<NoticeDto>();
+		String sql="select * from noticeboard orders limit ?,?";
 				   
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -127,17 +126,14 @@ public class ShareBoardDao {
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
-				ShareBoardDto dto=new ShareBoardDto();
+				NoticeDto dto=new NoticeDto();
 				dto.setNum(rs.getString("num"));
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
-				dto.setPhoto(rs.getString("photo"));
+				dto.setFiles(rs.getString("files"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setFsName(rs.getString("fsName"));
-				dto.setFaAddr(rs.getString("fsAddr"));
-				dto.setStar(rs.getInt("star"));
 
 
 				//list에 추가
@@ -155,7 +151,7 @@ public class ShareBoardDao {
 	public int getMaxNum()
 	{
 		int max=0;
-		String sql="select nvl(max(num),0) from shareboard";
+		String sql="select ifnull(max(num),0) from noticeboard";
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -180,7 +176,7 @@ public class ShareBoardDao {
 
 	public void updateReadcount(String num)
 	{
-		String sql="update shareboard set readcount=readcount+1 where num=?";
+		String sql="update noticeboard set readcount=readcount+1 where num=?";
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		conn=my.getConnection();
