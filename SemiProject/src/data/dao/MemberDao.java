@@ -76,7 +76,7 @@ public class MemberDao {
 		 * String sql="insert into member values (seq_mini.nextval,"
 		 * +"?,?,?,?,?,?,?,sysdate)";
 		 */
-		String sql="insert into member values (seq_mini.nextval,'"+dto.getId()+"','"+dto.getPass()+"','"+dto.getName()+"','"+dto.getAddress()+"','"+dto.getAddrdetail()+"','"+dto.getEmail()+"','"+dto.getHp()+"', sysdate)";
+		String sql="insert into member (id,pass,name,address,addrdetail,email,hp) VALUES('"+dto.getId()+"','"+dto.getPass()+"','"+dto.getName()+"','"+dto.getAddress()+"', ifnull('"+dto.getAddrdetail()+"', ''), '"+dto.getEmail()+"', ifnull('"+dto.getHp()+"', '')";
 		
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -85,8 +85,6 @@ public class MemberDao {
 		
 		conn=db.getConnection();
 		try {
-			//pstmt=conn.prepareStatement(sql);
-			
 			stmt=conn.createStatement();
 			
 			stmt.execute(sql);

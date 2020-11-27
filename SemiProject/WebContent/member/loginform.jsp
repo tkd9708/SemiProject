@@ -46,9 +46,7 @@ System.out.println(url);
 										<div class="textWrap">
 											<strong class="tit">맨도롱 또똣 회원</strong>
 										</div>
-										<div class="btnWrap login">
-											<a href="index.jsp?main=member/memberlogin.jsp" class="btn big pink">회원가입</a>
-										</div>
+										<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
 									</div>
 									<div class="inr right">
 										<!-- 다른 회원가입 -->
