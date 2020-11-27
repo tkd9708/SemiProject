@@ -16,14 +16,15 @@
 	}
 	
 	div.spotList {
-		float: left;
-		padding: 40px;
-		width: 300px;
-		height: 400px;
+		margin-left: 150px;
+		margin-right: 150px;
 		
 	}
 	div.gotodetail{
 		cursor:pointer;
+		float: left;
+		width: 300px;
+		height: 400px;
 	}
 </style>
 <script type="text/javascript">
@@ -35,13 +36,13 @@
 		    success:function(data){
 		    	var area = "<%=area%>";
 		        var s ="<h2 id='areaTitle'>" + area + "의 명소</h2>";
-		        
+
+    			s += "<div class='spotList'>";
 		        $.each(JSON.parse(data).items, function(i,item){
 		        	
 		        	var addr = item.region2cd.label;
 		        	if(addr != null){
 		        		if(addr.indexOf(area) != -1){
-		        			s += "<div class='spotList'>";
 		        			s += "<div class ='gotodetail' contentsid="+item.contentsid+">"
 		        			if(item.repPhoto != null){
 						       	 s += "<img style='width: 280px; height: 230px;' src = " + item.repPhoto.photoid.thumbnailpath + "><br>";
@@ -50,22 +51,22 @@
 					       		 s += "<div style='width: 230px; height: 230px; float: left; text-align: center;'>썸네일 없음</div>";
 					       	 }
 
-		        			s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
-		        			s+="<b>"+addr+"</b>"
+		        			//s += "<div style='width: 230px; margin-top: 20px;'><b>" + item.title + "</b>";
+		        			//s+="<b>"+addr+"</b>"
 
-		        			s+="</div>" 
-		        			s += "<div style='width: 230px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b><br>";
+		        			//s+="</div>" 
+		        			s += "<div style='width: 230px; margin-top: 20px;'><b style='font-size: 13pt;'>" + item.title + "</b></div><br>";
 		        			s += "<div style='color: #aaa; margin: 5px;'>" + item.introduction + "</div>";
 
 		        			
-					        s += "</div></div>";
+					        s += "</div>";
 		        		}
 		        		
 		        	}
 		        	
 		        });
 		        
-				
+				s += "</div>";
 				$("#out").html(s);
 			}
 		});
