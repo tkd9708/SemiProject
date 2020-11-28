@@ -149,6 +149,7 @@ System.out.println(url);
 											<strong class="tit">맨도롱 또똣 회원</strong>
 										</div>
 										<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
+										<a href="index.jsp?main=member/reallogin.jsp" class="btnbigpink">로그인</a>
 									</div>
 									<div class="inr right">
 										<!-- 다른 회원가입 -->

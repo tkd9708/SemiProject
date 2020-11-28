@@ -12,7 +12,7 @@
 %>
 <body>
 <a class="main_login">login</a>
-<a class="main_mypage">mypage</a>
+<a class="main_mypage" href="index.jsp?main=member/mypage.jsp">mypage</a>
 <script type="text/javascript">
   $("a.main_login").click(function(e){
 	  e.preventDefault();
