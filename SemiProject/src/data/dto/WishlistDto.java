@@ -9,6 +9,9 @@ public class WishlistDto {
 	private String share_num;
 	private String content;
 	private String wishday;
+	private String title;
+	private String roadaddr;
+	private String thumbmail;
 	
 	public String getNum() {
 		return num;
@@ -46,6 +49,28 @@ public class WishlistDto {
 	public void setWishday (String wishday) {
 		this.wishday = wishday;
 	}
+	
+//관광지 이름, 주소, 썸네일 얻고저장.
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getRoadaddr() {
+		return roadaddr;
+	}
+	public void setRoadaddr(String roadaddr) {
+		this.roadaddr = roadaddr;
+	}
+	public String getThumbmail() {
+		return thumbmail;
+	}
+	public void setThumbmail(String thumbmail) {
+		this.thumbmail = thumbmail;
+	}
+	
 	
 	
 }

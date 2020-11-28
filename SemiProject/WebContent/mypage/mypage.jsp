@@ -103,7 +103,7 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			//년월 띄우기
 			 tbCalendarYM.innerHTML = y + "년 " +(m+1) + "월"; 
-			
+
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -121,23 +121,62 @@ function drawCalendar(){ //달력 그리는 함수
 							tdClass="";
 						}
 						
-						
+						//일정 어떻게 넣쥥
+						var mem_id = $("#mem_id").val();
+						var xmlyear = 0
+						var xmlmonth =0
+						var xmlday = 0
+						var content = 0;
+					
 						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'>"
-						+"<span class='date'day="+dNum+">"+dNum+"</span>";
-						+"<ul class='scheduleRW>'"
-							+"<li></li>"
-						+"</ul>"
-						+"</td>";
+						+"<span class='date'day="+dNum+">"+dNum+"</span>"
+						+"<div id='"+y+(m+1)+dNum+"'></div>"
+						+"</td>"
+						
 						dNum++;
+						
+						
 					}
 
 				}
 				calendar +="</tr>";
 				
 			}
+			
 			$("#calendarBody").html(calendar);
-	
-	
+}
+
+//String sessionId = (String)session.getAttribute("myid"); 
+//xml받아서 출력하기
+function getData(){
+	var mem_id = $("#mem_id").val();
+	$.ajax({
+		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		type:"get",
+		dataType:"xml",
+		data:{"mem_id":mem_id},
+		success:function(data){
+			$(data).find("wish").each(function(){
+
+				var content =$(this).find("content").text()+"<br>";
+				
+				var wishday = $(this).find("wishday").text();
+			
+				var wday = wishday.replaceAll("-", "");
+				var split = wishday.split("-");
+				
+					var xmlyear = split[0];
+					var xmlmonth = split[1];
+					var xmlday = split[2];
+					
+					$("#"+wday).append(content);
+					
+					
+					
+			});
+		}
+		
+	})
 }
 
 
@@ -148,7 +187,15 @@ function drawCalendar(){ //달력 그리는 함수
 
 <h1>마이페이지</h1>
 <div class="calendar">
+<!-- 일정추가버튼 -->
 <div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus-sign"></span></div>
+
+<!--일정 리스트버튼-->
+<div class="btnSchedulelist"><a class="glyphicon glyphicon-th-list" role="button" aria-expanded="false"></a>
+	<div id="slist" class="tab-content">
+	일정리스트
+	</div>	
+</div>
 
 <table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
     <caption style="text-align:left"><b>나의 일정</b></caption>
@@ -213,7 +260,7 @@ function drawCalendar(){ //달력 그리는 함수
         		<form action ="scheduleAdd.jsp" method="post" class="form-inline" >
         			<table class="table table-condensed">
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
-        				<input type="hidden" name="mem_id" value="test">
+        				<input type="hidden" name="mem_id" id="mem_id" value="test">
         				<tr>
         					<td align="center" style="font-size: 13pt">내용</td>
         					<td align="center"><input type="text" name="content" style="width:300px;"></td>
@@ -233,14 +280,12 @@ function drawCalendar(){ //달력 그리는 함수
     </div>
   </div>
   
-  
-  
-  
 
 
 <script type="text/javascript">
 
 	drawCalendar();
+	getData();
 	$(document).on("click","#tbCalendarYM",function(){
 		
 		
