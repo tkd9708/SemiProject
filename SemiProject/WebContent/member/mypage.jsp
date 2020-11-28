@@ -4,6 +4,10 @@
 <html>
 <head>
 <%
+String url=request.getContextPath();
+%>
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/mypage.css">
+<%
 	//session 에 saveid 가 있을경우(아이디저장체크한경우)
 	//세션에서 myid를 얻는다
 	String saveid=(String)session.getAttribute("saveid");
@@ -26,8 +30,14 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div class="mbList" id="mbList">
- 	<a href="index.jsp?main=member/memberlist.jsp">회원 명단</a>
- </div>
+	<nav>
+		<ul>
+			<li>
+				<div class="mbList" id="mbList">
+					<a href="index.jsp?main=member/memberlist.jsp" class="ambList">회원 명단</a>
+				</div>				
+			</li>
+		</ul>
+	</nav>
 </body>
 </html>
