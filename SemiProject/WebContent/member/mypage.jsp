@@ -18,13 +18,14 @@ String url=request.getContextPath();
 	String idcf=(String)session.getAttribute("myid");
 %>
 <script type="text/javascript">
-	<%-- window.onload = function() {
-		document.getElementById("mbList").setAttribute("hidden", true);	
+	window.onload = function() {
+		var mbList=document.getElementById("mbList");
+		mbList.setAttribute("hidden", "hidden");	
 		if("<%=idcf%>"=="admin") {
 			console.log("<%=idcf%>");
-			document.getElementById("mbList").setAttribute("hidden", false);
+			mbList.removeAttribute("hidden");
 		}
-	} --%>
+	}
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
