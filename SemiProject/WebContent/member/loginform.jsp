@@ -8,7 +8,7 @@
 String url=request.getContextPath();
 System.out.println(url);
 %>
-<link rel="stylesheet" type="text/css" href="<%=url%>/member/loginform.css">
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/css/loginform.css">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 1등 여행사</title>
 </head>

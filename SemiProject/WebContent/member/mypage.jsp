@@ -6,7 +6,7 @@
 <%
 String url=request.getContextPath();
 %>
-<link rel="stylesheet" type="text/css" href="<%=url%>/member/mypage.css">
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/css/mypage.css">
 <%
 	//session 에 saveid 가 있을경우(아이디저장체크한경우)
 	//세션에서 myid를 얻는다

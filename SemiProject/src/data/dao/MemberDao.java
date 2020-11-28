@@ -53,7 +53,7 @@ public class MemberDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		
-		String sql="select * from member where email="+email;
+		String sql="SELECT * FROM member WHERE email='"+email+"'";
 		
 		conn=db.getConnection();
 		
