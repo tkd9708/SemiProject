@@ -16,4 +16,5 @@ a.main_login, a.main_mypage {
 	line-height: normal;
 	vertical-align: middle;
 	user-select: none;
+	outline: 0;
 }
