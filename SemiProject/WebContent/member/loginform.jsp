@@ -13,9 +13,10 @@ System.out.println(url);
 <title>맨도롱 또똣 :: 1등 여행사</title>
 </head>
 <body>
-	<div id="wrapper">
-		<!-- 헤더시작 -->
-		<header>
+	
+	<!-- 헤더시작 -->
+	<header>
+		<div id="wrapper">
 			<!-- 네비게이션 -->
 			<nav>
 				<ul class="mainList">
@@ -128,47 +129,47 @@ System.out.println(url);
 					</li>
 				</ul>
 			</nav>
-		</header>
-		<!-- 콘텐츠부분 -->
-		<section>
-			<div id="container">
-				<div class="inr">
-					<div id="contents" class="contents">
-						<div class="signupWrap">
-							<div class="textWrap top">
-								<strong class="tit">회원가입</strong>
-								<p class="txt">
-								맨도롱 또똣에 오신 것을 환영합니다.<br>
-								맨도롱 또똣 회원이 되시면 더욱 다양한 혜택을 누리실 수 있습니다.
-								</p>
-							</div>
-							<div class="signupBox">
-								<div class="innerWrap">
-									<div class="inr">
-										<div class="textWrap">
-											<strong class="tit">맨도롱 또똣 회원</strong>
-										</div>
-										<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
-										<a href="index.jsp?main=member/reallogin.jsp" class="btnbigpink">로그인</a>
+		</div>
+	</header>
+	<!-- 콘텐츠부분 -->
+	<section>
+		<div id="container">
+			<div class="inr">
+				<div id="contents" class="contents">
+					<div class="signupWrap">
+						<div class="textWrap top">
+							<strong class="tit">회원가입</strong>
+							<p class="txt">
+							맨도롱 또똣에 오신 것을 환영합니다.<br>
+							맨도롱 또똣 회원이 되시면 더욱 다양한 혜택을 누리실 수 있습니다.
+							</p>
+						</div>
+						<div class="signupBox">
+							<div class="innerWrap">
+								<div class="inr">
+									<div class="textWrap">
+										<strong class="tit">맨도롱 또똣 회원</strong>
 									</div>
-									<div class="inr right">
-										<!-- 다른 회원가입 -->
-									</div>
+									<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
+									<a href="index.jsp?main=member/reallogin.jsp" class="btnbigpink">로그인</a>
+								</div>
+								<div class="inr right">
+									<!-- 다른 회원가입 -->
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- 사이드바 -->
-		<aside>
-			<p>aside</p>
-		</aside>
-		<!-- 풋터 -->
-		<footer>
-			(풋터)멘도롱 또똣(풋터)
-		</footer>
-	</div>
+		</div>
+	</section>
+	<!-- 사이드바 -->
+	<aside>
+		<p>aside</p>
+	</aside>
+	<!-- 풋터 -->
+	<footer>
+		(풋터)멘도롱 또똣(풋터)
+	</footer>
 </body>
 </html>
