@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+td{
+width: 100px;
+}
 td.nodate{
 height: 100px;
 vertical-align: top;
@@ -128,7 +131,7 @@ function drawCalendar(){ //달력 그리는 함수
 						var xmlday = 0
 						var content = 0;
 					
-						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'>"
+						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'day='"+dNum+"'>"
 						+"<span class='date'day="+dNum+">"+dNum+"</span>"
 						+"<div id='"+y+(m+1)+dNum+"'></div>"
 						+"</td>"
@@ -172,6 +175,37 @@ function getData(){
 					$("#"+wday).append(content);
 					
 					
+			});
+		}
+		
+	})
+}
+
+function getDetail(){
+	var mem_id = $("#mem_id").val();
+	
+	$.ajax({
+		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		type:"get",
+		dataType:"xml",
+		data:{"mem_id":mem_id},
+		success:function(data){
+			$(data).find("wish").each(function(){
+				$("#"+wday+".detail").text("");
+				var content =$(this).find("content").text()+"<br>";
+				
+				var wishday = $(this).find("wishday").text();
+			
+				var wday = wishday.replaceAll("-", "");
+				var split = wishday.split("-");
+				
+					var xmlyear = split[0];
+					var xmlmonth = split[1];
+					var xmlday = split[2];
+					
+				
+					$("#"+wday+".detail").append(content);
+					
 					
 			});
 		}
@@ -179,6 +213,8 @@ function getData(){
 	})
 }
 
+
+//모달에 추가하기
 
 </script>
 
@@ -225,7 +261,8 @@ function getData(){
     </tbody>
 </table>
 <hr>
-
+<button type="button" class="btn btn-danger btn-sm"><b>회원탈퇴</b></button>  
+<button type="button" class="btn btn-info btn-sm"><b>회원정보수정</b></button>
 
 </div>
 <!-- 상세일정모달 -->
@@ -239,23 +276,24 @@ function getData(){
 			</h4>
         </div>
         <div class="modal-body">
-          <span><b>일정출력</b></span>
-        </div>
+          <div class="detail"><span class="	glyphicon glyphicon-minus-sign"></span> </div>
+          
+       </div>
       </div>
     </div>
   </div>
   
   <!-- 일정추가 모달 -->
  <div class="modal fade" id="addModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="height:400px;width:600px">
-        <div class="modal-header">
+    <div class="addmodal-dialog modal-lg">
+      <div class="addmodal-content" style="height:400px;width:600px">
+        <div class="addmodal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 id="modal_title" style="text-align: center" >
+          <h4 id="addmodal_title" style="text-align: center" >
 		 	<b>일정추가</b>
 			</h4>
         </div>
-        <div class="modal-body">
+        <div class="addmodal-body">
         	<div class="addSchedule" align="center" >
         		<form action ="scheduleAdd.jsp" method="post" class="form-inline" >
         			<table class="table table-condensed">
@@ -279,7 +317,7 @@ function getData(){
       </div>
     </div>
   </div>
-  
+<br><br>
 
 
 <script type="text/javascript">
@@ -293,9 +331,11 @@ function getData(){
 	
 	$(document).on("click","td.date",function(){
 		$("#myModal").modal();
-		var modal_day=$(this).text();
+		var modal_day=$(this).attr("day");
 		var modal_month=$(this).attr("month");
 		var modal_year = $(this).attr("year");
+		$("div.modal-body div.detail").attr("id",modal_year+modal_month+modal_day);
+		getDetail();
 		schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일"; 
 	})
 	$(document).on("click","div.btnScheduleAdd",function(){
