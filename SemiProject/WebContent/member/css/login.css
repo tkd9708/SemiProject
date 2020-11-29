@@ -1,7 +1,6 @@
 @charset "UTF-8";
 a.main_login, a.main_mypage {
 	text-decoration: none;
-	color: inherit;
 	cursor: pointer;
 	font-weight: 400;
 	position: relative;

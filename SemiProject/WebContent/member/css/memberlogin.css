@@ -3,3 +3,28 @@
 .btnbigpink {
 	cursor: pointer;
 }
+
+span.putBieye {
+	position: relative;
+	display: inline-block;
+}
+
+div.toolTip {
+	background-color: orange;
+	padding: .4rem .4rem .4rem .4rem;
+	position: absolute;
+	color: #f4f4f4;
+	text-align: center;
+	z-index: 1;
+	white-space: nowrap;
+	border-radius: .5rem;
+	visibility: hidden;
+}
+
+div.toolTip p {
+	margin: 0;
+}
+
+span.putBieye:hover div.toolTip {
+	visibility: visible;
+}
