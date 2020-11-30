@@ -107,10 +107,6 @@ div.btn{
               name="content" id="content"></textarea>
            </td>
        </tr>
-     </table>     
-    </form>
-  </fieldset>
-     <div class="btn">
        <tr>
           <td colspan="2" align="center">
              <button type="button" 
@@ -124,7 +120,10 @@ div.btn{
                onclick="location.href='index.jsp?main=notice/noticelist.jsp'">목록</button> 
           </td>             
        </tr>
-      </div>
+     </table>     
+    </form>
+  </fieldset>
+
 </div>
 <script type="text/javascript">
 var oEditors = [];

@@ -203,7 +203,7 @@ html, body {
 
 			</table>
 			
-		<!--  <b>총 <span style="color: #ff9900;"><%=totalCount%></span> 개의 글이있습니다</b>  -->
+		
 		</div>
 	</div>
 	

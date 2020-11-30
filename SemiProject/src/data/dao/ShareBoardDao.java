@@ -18,7 +18,7 @@ public class ShareBoardDao {
 	//insert
 		public void insertShare(ShareBoardDto dto)
 		{
-			String sql="insert into shareboard (id,files,subject,content,readcount,star,writeday) values (?,?,?,?,?,?,now())";
+			String sql="insert into shareboard (id,photo,subject,content,addr,star,writeday) values (?,?,?,?,?,?,now())";
 					
 					
 			Connection conn=null;
@@ -28,11 +28,13 @@ public class ShareBoardDao {
 				pstmt=conn.prepareStatement(sql);
 				//바인딩
 				pstmt.setString(1, dto.getId());
-				pstmt.setString(2, dto.getFiles());
+				pstmt.setString(2, dto.getPhoto());
 				pstmt.setString(3, dto.getSubject());
 				pstmt.setString(4, dto.getContent());
-				pstmt.setInt(5, dto.getStar());
+				pstmt.setString(5, dto.getAddr());
+				pstmt.setString(6, dto.getStar());
 				
+												
 
 				//실행
 				pstmt.execute();
@@ -88,12 +90,15 @@ public class ShareBoardDao {
 				{
 					dto.setNum(rs.getString("num"));
 					dto.setId(rs.getString("id"));
-					dto.setFiles(rs.getString("files"));
 					dto.setSubject(rs.getString("subject"));
 					dto.setContent(rs.getString("content"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setLikes(rs.getInt("likes"));
+					dto.setStar(rs.getString("star"));
+					dto.setPhoto(rs.getString("photo"));
 					dto.setWriteday(rs.getTimestamp("writeday"));
-					dto.setReadcount(rs.getInt("readcount"));
-					dto.setStar(rs.getInt("star"));
+					
+					
 
 				}
 
@@ -130,13 +135,14 @@ public class ShareBoardDao {
 					ShareBoardDto dto=new ShareBoardDto();
 					dto.setNum(rs.getString("num"));
 					dto.setId(rs.getString("id"));
-					dto.setFiles(rs.getString("files"));
 					dto.setSubject(rs.getString("subject"));
 					dto.setContent(rs.getString("content"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setLikes(rs.getInt("likes"));
+					dto.setStar(rs.getString("star"));
+					dto.setPhoto(rs.getString("photo"));
 					dto.setWriteday(rs.getTimestamp("writeday"));
-					dto.setReadcount(rs.getInt("readcount"));
-					dto.setStar(rs.getInt("star"));
-
+							
 
 					//list에 추가
 					list.add(dto);

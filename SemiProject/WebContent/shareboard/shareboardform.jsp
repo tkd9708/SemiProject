@@ -34,18 +34,7 @@
       background: white;
       
    }
-   .on{
-      background-color: #ffcc00;
-      overflow: hidden;
-      
-      
-      
-      
-   }
-   i{
-      cursor: pointer;
-      text-decoration: none;
-   }
+
    
    div.shareboardform{
       position: absolute;
@@ -165,14 +154,41 @@ div.btn{
    
 
 </style>
-
+<script type="text/javascript">
+$(function(){
+   $(".stars__checkbox").on("click", function(){
+        var idx = $(this).index()/2;
+        switch (idx) {
+        case 0:
+           idx=5;
+           break;
+        case 1:
+           idx=4;
+           break;
+        case 2:
+           idx=3;
+           break;
+        case 3:
+           idx=2;
+           break;
+        case 4:
+           idx=1;
+           break;
+        default:
+           break;
+        }
+        alert(idx);
+        $("#sharestar").val(idx);   
+     });
+   
+}); //function close
+</script>
 </head>
 <body>
 <div class="shareboardform">
 <fieldset style="width: 800px;">
    <legend >공유하기</legend>
-   <form action="notice/shareboardaction.jsp" method="post" 
-   enctype="multipart/form-data">
+   <form action="shareboard/shareboardaction.jsp" method="post" enctype="multipart/form-data">
    <table class="table table-bordered">
          <tr>
             <th bgcolor="#ffc34d"><span>추천맛집</span></th>
@@ -203,8 +219,7 @@ div.btn{
             <th bgcolor="#ffc34d"><span>내용</span></th>
             <td>
               <textarea class="form-control"
-               rows="13" cols="70" maxlength="1500" name="content"
-               style="resize: none;">
+               rows="13" cols="70" maxlength="1500" name="content" style="resize: none;">
               </textarea>
             </td>
          </tr>
@@ -212,12 +227,12 @@ div.btn{
          <tr>
            <th bgcolor="#ffc34d"><span>평가</span></th>
             <td>
-                               
+                <input type="hidden" id="sharestar" name="stars" value="0">               
            <!-- 별점 -->
       <div class="stars">
         <input class="stars__checkbox" type="radio" id="first-star" name="star">
         <label class="stars__star" for="first-star">
-            <svg class="stars__star-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
                 <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
                     10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
@@ -225,7 +240,7 @@ div.btn{
         </label>
         <input class="stars__checkbox" type="radio" id="second-star" name="star">
         <label class="stars__star" for="second-star">
-            <svg class="stars__star-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
                 <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
                     10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
@@ -233,7 +248,7 @@ div.btn{
         </label>
         <input class="stars__checkbox" type="radio" id="third-star" name="star">
         <label class="stars__star" for="third-star">
-            <svg class="stars__star-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
                 <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
                     10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
@@ -241,7 +256,7 @@ div.btn{
         </label>
         <input class="stars__checkbox" type="radio" id="fourth-star" name="star">
         <label class="stars__star" for="fourth-star">
-            <svg class="stars__star-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
                 <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
                     10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
@@ -249,7 +264,7 @@ div.btn{
         </label>
         <input class="stars__checkbox" type="radio" id="fifth-star" name="star">
         <label class="stars__star" for="fifth-star">
-            <svg class="stars__star-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
                 <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
                     10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
@@ -257,26 +272,18 @@ div.btn{
         </label>
         </div>
         </td> 
-       </tr>   
+       </tr>  
+        <tr>
+          <td colspan="2" align="center">
+             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
+               
+             <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
+               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
+          </td>             
+       </tr> 
        </table> 
     </form>
    </fieldset>
-              
-    <div class="btn">
-        <tr>
-          <td colspan="2" align="center">
-             <input type="button" value="공유하기"
-              class="button"
-               style="width: 100px; color: white;"
-               onclick="submitContents(this)">
-               
-             <input type="button" value="추천목록"
-              class="button"
-               style="width: 100px;color: white;"
-               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
-          </td>             
-       </tr>
-    </div>
   </div>
 </body>
 </html>
