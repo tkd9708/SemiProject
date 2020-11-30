@@ -54,6 +54,52 @@ th{
 text-align: center;
 }
 
+/*버튼 css*/
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 99px;
+  height: 35px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+ }
+ 
+ div.point{
+  position: relative;
+  top: -30px;
+  right: -830px;
+ }
+  
+
+
+.button:hover {
+  background-color: #ffaa00;
+
+  transform: translateY(-7px);
+}
+
+
 </style>
 </head>
 <body>
@@ -101,8 +147,8 @@ text-align: center;
 	<h2>공지사항</h2><br><br><br><br>
 	
 	<input type="button" value="게시물등록"
-		class="button btn btn-warning btn-xs"
-		style="width: 100px; margin-left: 200px;"
+		class="button"
+		style="width: 100px; margin-left: 200px; color: white;"
 		onclick="location.href='index.jsp?main=notice/noticeform.jsp'">
 
 	<br>
