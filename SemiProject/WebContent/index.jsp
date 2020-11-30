@@ -19,6 +19,9 @@
 <style type="text/css">
 body { 
     -ms-overflow-style: none; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
 } 
 ::-webkit-scrollbar {
     display: none; 
@@ -33,10 +36,14 @@ div.layout div.title {
 div.layout div.main {
     position: relative;
     z-index: 1;
+    height: 100%;
 }
 
-a {
-	cursor:pointer;
+div.layout div.footer {
+    position: inherit;
+    z-index: 1;
+    bottom: 0;
+    padding: 30px 0;
 }
 
 
@@ -57,9 +64,14 @@ a {
 			<jsp:include page="layout/title.jsp" />
 		</div>
 		<!-- 제주도 지도부분 -->
-		<div class="main">
+		<div class="main" id="main">
 			<jsp:include page="<%=mainPage%>" />
 		</div>
+	    <!-- footer부분 -->
+		<footer>
+		     <jsp:include page="layout/footer.jsp" />
+		</footer>
 	</div>
+		
 </body>
 </html>
