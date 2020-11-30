@@ -14,7 +14,9 @@ System.out.println(url);
 </head>
 <body>
 	<!-- 헤더시작 -->
-	<header>
+	<div class="bfHead">
+	</div>
+	<header class="navHeader">
 		<div id="wrapper">
 			<!-- 네비게이션 -->
 			<nav>

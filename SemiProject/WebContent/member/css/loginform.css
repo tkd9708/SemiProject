@@ -5,8 +5,8 @@
 	width: 900px;
 } */
 div#wrapper {
-<<<<<<< HEAD
 	position: relative;
+	height: 50px;
 }
 div#container {
 	margin-top: 100px;
@@ -23,12 +23,11 @@ div.signupBox {
 header, footer, nav, aside, section {
 	border: 1px solid #999;
 }
-header {
+.navHeader {
 	height: 50px;
 	background-color: red;
 	width: 100%;
-	position: fixed;
-	z-index: 9999;
+	margin-top: 70px;
 }
 nav {
 	background-color: goldenrod;
@@ -44,7 +43,6 @@ footer {
 }
 a.btnbigpink {
 	color: black;
-=======
 	width: 100%;
 	height: inherit;
 }
@@ -98,7 +96,6 @@ a.btnbigpink {
 	background-color: #ffaa00;
 	border: 1px solid #cccccc;
 	line-height: normal;
->>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
 }
 li {
 	float: left;

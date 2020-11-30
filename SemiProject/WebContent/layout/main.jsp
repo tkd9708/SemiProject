@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/main.css">
+
 <!-- 슬라이드 관련 link이므로 건들이지말아주세요! -->
 <!--Import materialize.css-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
@@ -57,22 +59,62 @@ $(function(){
 		 </ul>
 	</div>
    <!-- 상단 슬라이드 부분 close -->
-   
-<button id="btn_go_jeju" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주'">제주시</button>
-<button id="btn_go_jocheon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천'">조천읍</button>
-<button id="btn_go_gujwa" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌'">구좌읍</button>
-<button id="btn_go_sungsan" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=성산'">성산읍</button>
-<button id="btn_go_pyoseon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=표선'">표선면</button>
-<button id="btn_go_namwon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원'">남원읍</button>
-<button id="btn_go_seogwipo" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포'">서귀포시</button>
-<button id="btn_go_andeok" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕'">안덕면</button>
-<button id="btn_go_daejung" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정'">대정읍</button>
-<button id="btn_go_hangyeong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경'">한경면</button>
-<button id="btn_go_hanrim" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림'">한림읍</button>
-<button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월'">애월읍</button>
-<button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도'">우도</button>
-<button id="btn_go_notice" onclick="location.href='<%=url%>/index.jsp?main=notice/noticelist.jsp'">공지사항</button>
-<button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'">공유게시판</button>
+
+	<ul class="menuUl">
+		
+		<li class="menuLi">
+			<button id="btn_go_notice">지역별 관광지</button>
+				<ul class="menuUl spotLst">
+				<li class="menuLi">
+				<button id="btn_go_jeju" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주'">제주시</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_jocheon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천'">조천읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_gujwa" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌'">구좌읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_sungsan" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=성산'">성산읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_pyoseon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=표선'">표선면</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_namwon" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원'">남원읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_seogwipo" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포'">서귀포시</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_andeok" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕'">안덕면</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_daejung" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정'">대정읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_hangyeong" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경'">한경면</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_hanrim" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림'">한림읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월'">애월읍</button>
+				</li>
+				<li class="menuLi">
+				<button id="btn_go_aewol" onclick="location.href='<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도'">우도</button>
+				</li>
+				</ul>
+		</li>
+		
+		<li class="menuLi">
+		<button id="btn_go_notice" onclick="location.href='<%=url%>/index.jsp?main=notice/noticelist.jsp'">공지사항</button>
+		</li>
+		
+		<li class="menuLi">
+		<button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'">공유게시판</button>
+		</li>
+	</ul>  
 <div>
 	<img src="image/jejuisland_dark_cut.png" style="max-width: 100%;height: auto;">
 </div>

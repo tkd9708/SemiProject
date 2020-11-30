@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+li.menuLi {
+	float: left;
+	display: block;
+	padding: 0 5px;
+}
+
+ul.menuUl ul.menuUl {
+	display: none;
+}
+
+li.menuLi:hover >ul.menuUl{
+	display: block;
+}
+li.menuLi>ul.menuUl {
+	position: absolute;
+}
+
+.spotLst {
+	width: 340px;
+	border: 1px solid #ff5500;
+}
