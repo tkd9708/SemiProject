@@ -38,7 +38,15 @@ String url=request.getContextPath();
 					<a href="index.jsp?main=member/memberlist.jsp" class="ambList">회원 명단</a>
 				</div>				
 			</li>
+			<li>
+				<div class="myMenu1" id="myMenu1">
+					<a href="#">메뉴1</a>
+				</div>
+			</li>
 		</ul>
 	</nav>
+	<div>
+		<jsp:include page="../member/info.jsp"/>
+	</div>
 </body>
 </html>

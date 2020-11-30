@@ -196,4 +196,38 @@ public class MemberDao {
 		
 		return ans;
 	}
+	
+	public String getName(String id)
+	{
+		String name="";
+		Connection conn=null;
+		Statement stmt=null;
+		
+		ResultSet rs=null;
+		String sql="select name from member where id='"+id+"'";
+		
+		
+		conn=db.getConnection();
+		
+		try {
+			//pstmt=conn.prepareStatement(sql);
+			//¹ÙÀÎµù
+//			pstmt.setString(1, id);
+//			rs=pstmt.executeQuery();
+//			if(rs.next())
+//				name=rs.getString("name");
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				name=rs.getString("name");				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, stmt, rs);
+		}	
+		return name;
+	}
 }

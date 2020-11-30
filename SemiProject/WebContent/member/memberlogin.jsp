@@ -10,153 +10,6 @@ String url=request.getContextPath();
 %>
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/memberlogin.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/memberlogin.js"></script>
-<script type="text/javascript">
-	window.onload = function () {
-		var shPw = document.getElementById("bieye");
-		var hidePw = document.getElementById("bieyeslash");
-		var pass1 = document.getElementById("pass");
-		var pass2 = document.getElementById("cfpass");
-		var spanImg = document.getElementById("putBieye");
-		var pS = document.getElementById("pS");
-		var pH = document.getElementById("pH");
-		/*console.log(shPw+hidePw+pass1+pass2+spanImg+pS+pH);*/
-		pH.style.display= "none";
-		
-		hidePw.style.display = "none";
-		
-		//shPw 객체에 onclick 이벤트 속성을 연결
-		spanImg.onclick = function() {
-		
-			pass1.getAttribute("type")=="password"?pass1.setAttribute("type", "text"):pass1.setAttribute("type", "password");
-			pass2.getAttribute("type")=="password"?pass2.setAttribute("type", "text"):pass2.setAttribute("type", "password");
-				
-			/* console.log(this.getAttribute("id")); */
-		
-			if(hidePw.style.display == "none"){
-			 	hidePw.style.display="inline-block";
-			 	shPw.style.display="none";
-			 	pS.style.display="none";
-			 	pH.style.display="block";
-			}
-			else{
-				hidePw.style.display="none";
-				shPw.style.display="inline-block";
-			 	pS.style.display="block";
-			 	pH.style.display="none";
-			}
-		};	
-		
-		//아이디 입력시 메세지 지우기
-		$("#id").keydown(function(){
-			$("b.idcheck").html("");
-		});
-		
-		//아이디 입력후 포커스가 벗어날때 아이디 체크하기
-		$("#id").blur(function(){
-			var id=$(this).val();//앞뒤공백제거
-			if(id.trim().length==0){
-				//alert("공백제거");
-				$(this).val('');
-				return;
-			}
-			$.ajax({
-				type: "get",
-				url:"member/idcheckxml.jsp",
-				dataType:"xml",
-				data:{"id":id},
-				success:function(data){
-					//alert($(data).text());
-					if($(data).text()=='yes'){
-						$("b.idcheck").html("이미 등록된 아이디입니다");
-						$("b.idcheck").css({
-							"color":"red",
-							"font-size":"14px"
-						});
-						$("#id").val("");
-					}
-					else{
-						$("b.idcheck").html("사용가능한 아이디입니다");
-						$("b.idcheck").css({
-							"color":"green",
-							"font-size":"14px"
-						});
-					}
-				}
-			});
-		});
-		
-		//이메일 입력시 메세지 지우기
-		$("#email").keydown(function(){
-			$("b.emailChk").html("");
-		});
-		
-		//이메일 입력후 포커스가 벗어날때 이메일 체크하기
-		$("#email").blur(function(){
-			var email=$(this).val();
-			if(email.length!=0){
-				$.ajax({
-					type: "get",
-					url:"member/emailcheckxml.jsp",
-					dataType:"xml",
-					data:{"email":email},
-					success:function(data){
-						/*alert($(data).text());*/
-						if($(data).text()=='yes'){
-							$("b.emailChk").html("이미 등록된 이메일입니다");
-							$("b.emailChk").css({
-								"color":"red",
-								"font-size":"14px"
-							});
-							$("#email").val("");
-						}
-						else{
-							$("b.emailChk").html("사용가능한 이메일입니다");
-							$("b.emailChk").css({
-								"color":"green",
-								"font-size":"14px"
-							});
-						}
-					}
-				});
-			}
-		});
-		
-		$("#btnSubmit").click(function(e) {
-			//submit 버튼이 아니라서 자동입력체크를 못한다
-			//코드로 입력체크 추가
-			var pass1V=$(".pwText").val();
-			var pass2V=$(".cfpwText").val();
-			/* alert(pass1V+"VS"+pass2V); */
-			
-			var rtn = false;
-			
-			$.ajax({
-				type: "post",
-				url: "member/chkvalid.jsp",
-				dataType: "xml",
-				data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V},
-				async: false,
-				success: function(data){
-					if($(data).find("validpw").text()=="no"){
-						$("span.passChk").html("8자이상의 영문/숫자/특수문자 조합으로 입력하세요.");
-						$("span.passChk").css({
-							"color":"orange",
-							"font-size":"12px",
-							"letter-spacing":"-1px"
-						});
-						$("#pass").val("");
-						$("#pass").focus();
-					}
-					else{
-						$("#myRegfrm").submit();
-					}
-				}
-			});
-			
-			return rtn;
-		});
-	}//window onload function close
-</script>
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 제주한달살기</title>
 </head>
@@ -269,7 +122,7 @@ String url=request.getContextPath();
 							class="inputText vPlaceholder"
 							readonly="readonly"
 							required="required" name="address">
-							<button type="button" class="btn">
+							<button type="button" class="SearchPost" id="SearchPost">
 								주소검색
 							</button>
 							<br><br><br>
@@ -290,5 +143,172 @@ String url=request.getContextPath();
 		</table>
 	</form>
 </div>
+<script type="text/javascript">
+window.onload=function() {
+	var shPw = document.getElementById("bieye");
+	var hidePw = document.getElementById("bieyeslash");
+	var pass1 = document.getElementById("pass");
+	var pass2 = document.getElementById("cfpass");
+	var spanImg = document.getElementById("putBieye");
+	var pS = document.getElementById("pS");
+	var pH = document.getElementById("pH");
+	/*console.log(shPw+hidePw+pass1+pass2+spanImg+pS+pH);*/
+	pH.style.display= "none";
+	
+	hidePw.style.display = "none";
+	
+	//shPw 객체에 onclick 이벤트 속성을 연결
+	spanImg.onclick = function() {
+	
+		pass1.getAttribute("type")=="password"?pass1.setAttribute("type", "text"):pass1.setAttribute("type", "password");
+		pass2.getAttribute("type")=="password"?pass2.setAttribute("type", "text"):pass2.setAttribute("type", "password");
+			
+		/* console.log(this.getAttribute("id")); */
+	
+		if(hidePw.style.display == "none"){
+		 	hidePw.style.display="inline-block";
+		 	shPw.style.display="none";
+		 	pS.style.display="none";
+		 	pH.style.display="block";
+		}
+		else{
+			hidePw.style.display="none";
+			shPw.style.display="inline-block";
+		 	pS.style.display="block";
+		 	pH.style.display="none";
+		}
+	};	
+	
+	//아이디 입력시 메세지 지우기
+	$("#id").keydown(function(){
+		$("b.idcheck").html("");
+	});
+	
+	//아이디 입력후 포커스가 벗어날때 아이디 체크하기
+	$("#id").blur(function(){
+		var id=$(this).val();//앞뒤공백제거
+		if(id.trim().length==0){
+			//alert("공백제거");
+			$(this).val('');
+			return;
+		}
+		$.ajax({
+			type: "get",
+			url:"member/idcheckxml.jsp",
+			dataType:"xml",
+			data:{"id":id},
+			success:function(data){
+				//alert($(data).text());
+				if($(data).text()=='yes'){
+					$("b.idcheck").html("이미 등록된 아이디입니다");
+					$("b.idcheck").css({
+						"color":"red",
+						"font-size":"14px"
+					});
+					$("#id").val("");
+				}
+				else{
+					$("b.idcheck").html("사용가능한 아이디입니다");
+					$("b.idcheck").css({
+						"color":"green",
+						"font-size":"14px"
+					});
+				}
+			}
+		});
+	});
+	
+	//이메일 입력시 메세지 지우기
+	$("#email").keydown(function(){
+		$("b.emailChk").html("");
+	});
+	
+	//이메일 입력후 포커스가 벗어날때 이메일 체크하기
+	$("#email").blur(function(){
+		var email=$(this).val();
+		if(email.length!=0){
+			$.ajax({
+				type: "get",
+				url:"member/emailcheckxml.jsp",
+				dataType:"xml",
+				data:{"email":email},
+				success:function(data){
+					/*alert($(data).text());*/
+					if($(data).text()=='yes'){
+						$("b.emailChk").html("이미 등록된 이메일입니다");
+						$("b.emailChk").css({
+							"color":"red",
+							"font-size":"14px"
+						});
+						$("#email").val("");
+					}
+					else{
+						$("b.emailChk").html("사용가능한 이메일입니다");
+						$("b.emailChk").css({
+							"color":"green",
+							"font-size":"14px"
+						});
+					}
+				}
+			});
+		}
+	});
+	
+	//비밀번호 입력시 메세지 지우기
+	$("#cfpass").keydown(function(){
+		$(".passChk").html("");
+	});
+	
+	$("#btnSubmit").click(function(e) {
+		//submit 버튼이 아니라서 자동입력체크를 못한다
+		//코드로 입력체크 추가
+		var pass1V=$(".pwText").val();
+		var pass2V=$(".cfpwText").val();
+		alert(pass1V+"VS"+pass2V);
+		
+		var rtn = false;
+		
+		$.ajax({
+			type: "post",
+			url: "member/chkvalid.jsp",
+			dataType: "xml",
+			data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V},
+			async: false,
+			success: function(data){
+				if($(data).find("validpw").text()=="no"){
+					$("span.passChk").html("8자이상의 영문/숫자/특수문자 조합으로 입력하세요.");
+					$("span.passChk").css({
+						"color":"orange",
+						"font-size":"12px",
+						"letter-spacing":"-1px"
+					});
+					$("#pass").val("");
+					$("#pass").focus();
+				}
+				else if($(data).find("samepw").text()=="no"){
+					/* alert($(data).find("samepw").text()); */
+					$(".passChk").html("비밀번호가 같지 않습니다");
+					$(".passChk").css({
+						"color":"#ff5500",
+						"font-size":"12px",
+						"letter-spacing":"-1px"
+					});
+					$("#cfpass").val("");
+					$("#cfpass").focus();
+				}
+				else{
+					$("#myRegfrm").submit();
+				}
+			}
+		});
+		
+		return rtn;
+	});
+	
+	$(".SearchPost").click(function() {
+		window.open("member/postsearch.jsp","","left=100px,top=100px,width=500px,height=600px");
+	});
+}//window onload function close
+</script>
 </body>
 </html>

@@ -9,8 +9,10 @@
 
 	String pass1=request.getParameter("pass1");
 	String pass2=request.getParameter("pass2");
+	/* System.out.println(pass1+" vs "+pass2); */
 	boolean samePw = false;
-	samePw = (pass1 != pass2) ? false : true;
+	samePw = !(pass1.equals(pass2)) ? false : true;
+	/* System.out.println(samePw); */
 	
 	String pass1V=request.getParameter("pass1V");
 	MemberDto dto=new MemberDto();
