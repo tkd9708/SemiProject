@@ -11,7 +11,7 @@
 	String mem_id = request.getParameter("mem_id");
 	MysqlConnect db = new MysqlConnect();
 
-	String sql = "select * from wishlist where mem_id=?";
+	String sql = "select * from wishlist where mem_id=? order by wishday asc";
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;

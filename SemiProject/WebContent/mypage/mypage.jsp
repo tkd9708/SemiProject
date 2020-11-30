@@ -153,7 +153,11 @@ function drawCalendar(){ //달력 그리는 함수
 						var xmlmonth =0
 						var xmlday = 0
 						var content = 0;
-					
+						dNum=dNum+"";
+					if(dNum.length==1){
+						dNum = "0"+dNum;
+					}
+				
 						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'day='"+dNum+"'>"
 						+"<span class='date'day="+dNum+">"+dNum+"</span>"
 						+"<div id='"+y+(m+1)+dNum+"'></div>"
@@ -228,7 +232,6 @@ function getDetail(){
 					var xmlmonth = split[1];
 					var xmlday = split[2];
 
-				
 					$("#"+wday+".detail").append(detailcontent);
 					
 					
@@ -237,6 +240,44 @@ function getDetail(){
 		
 	})
 }
+function getlist(){
+	var s="";
+	var content="";
+	var wishday ="";
+	var mem_id = $("#mem_id").val();
+	$.ajax({
+		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		type:"get",
+		dataType:"xml",
+		data:{"mem_id":mem_id},
+		success:function(data){
+			$(data).find("wish").each(function(){
+				
+			
+			 content +="<span>"+$(this).find("wishday").text()+"</span><br><span>"+$(this).find("content").text()+"</span><br>";
+				
+				
+			//wishday +="<b>"+ $(this).find("wishday").text()+"</b><br>";
+			
+				//s = "<span>"+wishday+"<br>"+content+"</span>";
+				var wday = wishday.replaceAll("-", "");
+				var split = wishday.split("-");
+				
+					var xmlyear = split[0];
+					var xmlmonth = split[1];
+					var xmlday = split[2];
+					
+					$("#myslist").html(content);
+				
+					
+			});
+		}
+		
+	})
+	
+}
+
+
 function detailList(){
 	document.getElementById("myslist").classList.toggle("show");
 }
@@ -258,10 +299,10 @@ function detailList(){
 <div class="btnSchedulelist">
 	<div class="slist">
 	<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" ></a>
-	  <div id="myslist" class="dropdown-content">
-		<a href="#home">Home</a><br>
+	  <div id="myslist" class="dropdown-content" style="width: 200px;">
+		<!-- <a href="#home">Home</a><br>
     	<a href="#about">About</a><br>
-    	<a href="#contact">Contact</a>
+    	<a href="#contact">Contact</a> -->
 	  </div>
 	</div>
 </div>
@@ -359,6 +400,7 @@ function detailList(){
 	getData();
 	
 	$(document).on("click","div.btnSchedulelist",function(e){
+		 getlist();
 		if(!e.target.matches('.dropbtn')){
 			var dropdowns = document.getElementsByClassName("dropdown-content");
 			var i;
