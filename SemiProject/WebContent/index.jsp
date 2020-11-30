@@ -14,10 +14,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+body { 
+    -ms-overflow-style: none; 
+} 
+::-webkit-scrollbar {
+    display: none; 
+}
+
+
 div.layout div.title {
     position: absolute;
     top: 0px;
@@ -27,6 +34,8 @@ div.layout div.main {
     position: relative;
     z-index: 1;
 }
+
+
 </style>
 
 </head>
