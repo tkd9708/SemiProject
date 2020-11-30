@@ -6,24 +6,40 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
+
 div.mypage_main{
 margin-top: 200px;
 }
+span.date{
+	border-radius: 30px;
+    border: 5px solid white;
+    background-color: white;
+}
+span.today{
+background-color:#FAAC58; 
+border: 5px solid #FAAC58;
+}
 td{
 width: 100px;
+background-color:  #F6E9DC;
+
 }
 td.nodate{
 height: 100px;
 vertical-align: top;
-border: 1px solid gray;
+border-bottom: 1px solid gray;
+/*border: 1px solid gray;*/
 }
 td.date{
 height: 150px;
 vertical-align: top;
-border: 1px solid gray;
+/*border: 1px solid gray;*/
+border-bottom: 1px solid gray;
 cursor:pointer;
 padding-top: 10px;
 padding-left: 10px;
+
 }
 td.date:hover{
 font-style: italic;
@@ -32,15 +48,10 @@ font-weight: bold;
 td.dateTitle{
 text-align:center;
 height:30px;
-background-color: orange;
-}
-td.today{
-height: 100px;
-vertical-align: top;
-border: 3px solid tomato;
-cursor:pointer;
-padding-top: 10px;
-padding-left: 10px;
+background-color: #FAAC58;
+text-align:center ;
+color:#424242;
+font-size:13pt
 }
 div.calendar{
 margin-left: 150px;
@@ -60,6 +71,14 @@ margin-bottom: -50px;
 span.btnDel{
 cursor:pointer;
 }
+div.modal-backdrop{
+z-index:0;}
+div.modal-content{
+margin-top:200px;
+z-index:1111;
+
+}
+
 
 
 /*드롭다운메뉴*/
@@ -77,6 +96,8 @@ cursor:pointer;
   z-index: 1;
 }
 .show {display: block;}
+
+
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
@@ -147,19 +168,20 @@ function drawCalendar(){ //달력 그리는 함수
 							tdClass="";
 						}
 						
-						//일정 어떻게 넣쥥
+						/* //일정 어떻게 넣쥥
 						var mem_id = $("#mem_id").val();
 						var xmlyear = 0
 						var xmlmonth =0
 						var xmlday = 0
-						var content = 0;
+						var content = 0; */
+						//dNum 일의 자리 앞에 0넣기
 						dNum=dNum+"";
 					if(dNum.length==1){
 						dNum = "0"+dNum;
 					}
 				
 						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'day='"+dNum+"'>"
-						+"<span class='date'day="+dNum+">"+dNum+"</span>"
+						+"<span class='date"+" "+tdClass+"' day="+dNum+">"+dNum+"</span>"
 						+"<div id='"+y+(m+1)+dNum+"'></div>"
 						+"</td>"
 						
@@ -181,14 +203,14 @@ function drawCalendar(){ //달력 그리는 함수
 function getData(){
 	var mem_id = $("#mem_id").val();
 	$.ajax({
-		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "mypage/getwishtoxml.jsp",  
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
 		success:function(data){
 			$(data).find("wish").each(function(){
 
-				var content =$(this).find("content").text()+"<br>";
+				var content ="✔"+$(this).find("content").text()+"<br>";
 				
 				var wishday = $(this).find("wishday").text();
 			
@@ -212,7 +234,7 @@ function getDetail(){
 	var mem_id = $("#mem_id").val();
 	
 	$.ajax({
-		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "mypage/getwishtoxml.jsp",  
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
@@ -220,8 +242,8 @@ function getDetail(){
 
 			$(data).find("wish").each(function(){
 			
-				var content =$(this).find("content").text()+"<br>";
-				var detailcontent ="<div >"+$(this).find("content").text()+"<span num='"+$(this).find("num").text()+"'style='float:right; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+				//var content =$(this).find("content").text()+"<br>";
+				var detailcontent ="<div style='font-size:13pt; margin-left:20px;' >✔&nbsp;"+$(this).find("content").text()+"<span num='"+$(this).find("num").text()+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
 			
 				var wishday = $(this).find("wishday").text();
 			
@@ -231,7 +253,8 @@ function getDetail(){
 					var xmlyear = split[0];
 					var xmlmonth = split[1];
 					var xmlday = split[2];
-
+					
+					//if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
 					$("#"+wday+".detail").append(detailcontent);
 					
 					
@@ -246,7 +269,7 @@ function getlist(){
 	var wishday ="";
 	var mem_id = $("#mem_id").val();
 	$.ajax({
-		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "mypage/getwishtoxml.jsp",  
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
@@ -254,9 +277,8 @@ function getlist(){
 			$(data).find("wish").each(function(){
 				
 			
-			 content +="<span>"+$(this).find("wishday").text()+"</span><br><span>"+$(this).find("content").text()+"</span><br>";
-				
-				
+			 content +="<span style='float: left;'>"+$(this).find("wishday").text()+"</span><span style='float: right'>"+$(this).find("content").text()+"</span><br>";
+			
 			//wishday +="<b>"+ $(this).find("wishday").text()+"</b><br>";
 			
 				//s = "<span>"+wishday+"<br>"+content+"</span>";
@@ -295,40 +317,46 @@ function detailList(){
 <!-- 일정추가버튼 -->
 <div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus-sign"></span></div>
 
-<!--일정 리스트버튼-->
-<div class="btnSchedulelist">
-	<div class="slist">
-	<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" ></a>
-	  <div id="myslist" class="dropdown-content" style="width: 200px;">
-		<!-- <a href="#home">Home</a><br>
-    	<a href="#about">About</a><br>
-    	<a href="#contact">Contact</a> -->
-	  </div>
-	</div>
-</div>
+
 
 <table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
-    <caption style="text-align:left"><b>나의 일정</b></caption>
+    <caption style="text-align:left">       
+     <!--일정 리스트버튼-->
+		<div class="btnSchedulelist">
+			<b style="float:left;">나의 일정</b>
+			&nbsp;&nbsp;
+			<div class="slist" style="display: inline-block;">
+			<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" style="text-decoration: none; color:#424242; font-size: 16pt;" ></a>
+			  <div id="myslist" class="dropdown-content" style="width: 200px; padding:10px; background-color:#F6E9DC; border:3px solid ">
+				<!-- <a href="#home">Home</a><br>
+		    	<a href="#about">About</a><br>
+		    	<a href="#contact">Contact</a> -->
+			  </div>
+			</div>
+			
+		</div>
+</caption>
     <thead>
-    <tr><!-- label은 마우스로 클릭을 편하게 해줌 -->
-        <td>
-        	<label onclick="prevCalendar()" style=" cursor:pointer;float:right" class="	glyphicon glyphicon-menu-left"></label>	
+    <tr ><!-- label은 마우스로 클릭을 편하게 해줌 -->
+        <td style="background-color:#FAAC58;color:white">
+        	<label onclick="prevCalendar()" style=" font-size: 20pt;cursor:pointer;float:right" class="	glyphicon glyphicon-menu-left"></label>	
         </td>	
-        <td align="center" id="tbCalendarYM" colspan="5">
-        	<b style="font-size: 20px">yyyy년 m월</b>
+        <td align="center" id="tbCalendarYM" colspan="5" style="font-size: 20pt;background-color: #FAAC58;color:white">
+        	<b>yyyy년 m월</b>
         </td>
-        <td>	
-        	<label onclick="nextCalendar()" style=" cursor:pointer" class="glyphicon glyphicon-menu-right" ></label>
+        <td style="background-color: #FAAC58;color:white">	
+        	<label onclick="nextCalendar()" style="font-size: 20pt; cursor:pointer" class="glyphicon glyphicon-menu-right" ></label>
+        	
         </td>
     </tr>
     <tr>
-        <td class="dateTitle" style="text-align:center"><font color ="#FE2E2E">일</td>
-        <td class="dateTitle" style="text-align:center">월</td>
-        <td class="dateTitle" style="text-align:center">화</td>
-        <td class="dateTitle" style="text-align:center">수</td>
-        <td class="dateTitle" style="text-align:center">목</td>
-        <td class="dateTitle" style="text-align:center">금</td>
-        <td class="dateTitle" style="text-align:center"><font color ="#045FB4">토</td>
+        <td class="dateTitle" ><b>일</b></td>
+        <td class="dateTitle" ><b>월</b></td>
+        <td class="dateTitle" ><b>화</b></td>
+        <td class="dateTitle" ><b>수</b></td>
+        <td class="dateTitle" ><b>목</b></td>
+        <td class="dateTitle" ><b>금</b></td>
+        <td class="dateTitle"><b>토</b></td>
     </tr> 
     </thead>
     <tbody id="calendarBody">
@@ -341,8 +369,8 @@ function detailList(){
 </div>
 <!-- 상세일정모달 -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="height:800px;width:600px">
+    <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
+      <div class="modal-content" style="width:500px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="schedule_title" style="text-align: center" >
@@ -359,8 +387,8 @@ function detailList(){
   
   <!-- 일정추가 모달 -->
  <div class="modal fade" id="addModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="height:400px;width:600px">
+    <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
+      <div class="modal-content" style="height:250px;width:600px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="addmodal_title" style="text-align: center" >
@@ -369,21 +397,22 @@ function detailList(){
         </div>
         <div class="modal-body">
         	<div class="addSchedule" align="center" >
-        		<form action ="/mypage/scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
-        			<table class="table table-condensed">
+        		<form action ="mypage/scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
+        			<table class="modal_table table table-condensed">
         			
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
         				<input type="hidden" name="mem_id" id="mem_id" value="test">
         				<tr>
-        					<td align="center" style="font-size: 13pt">내용</td>
-        					<td align="center"><input type="text" name="content" style="width:300px;"></td>
+        					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
+        					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" ></td>
         				</tr>
         				<tr>
-        					<td align="center" style="font-size: 13pt">날짜</td>
-        					<td align="center"><input name="wishday" type="date" ></td>
+        					<td align="center" style="font-size: 13pt; background-color: white;border: 0px;">내용</td>
+        					<td align="center" style="background-color: white;border: 0px;"><input type="text" name="content" style="width:300px;"></td>
         				</tr>
+        				
         				<tr>
-        					<td colspan="2" align="center"><button type="submit" class="btn_scheduleAdd btn btn-info btn-lg">일정추가</button>
+        					<td colspan="2" align="center" style="background-color: white;border: 0px;"><button type="submit" class="btn_scheduleAdd btn btn-warning">일정추가</button>
         					</td>
         				</tr>
         			</table>
@@ -437,7 +466,7 @@ function detailList(){
 		if(ans){
 			var num = $(this).attr("num");
 			$.ajax({
-				url: "/mypage/deleteContent.jsp",  //@@@@@프로젝트때는경로바꿔야함
+				url: "mypage/deleteContent.jsp",  //@@@@@프로젝트때는경로바꿔야함
 				type:"get",
 				dataType:"html",
 				data:{"num":num},
@@ -450,6 +479,10 @@ function detailList(){
 		window.history.back();	
 		}
 	})
+	$(document).on("click","label",function(){
+		getData();
+	})
+	
 	
 </script>
 </div>
