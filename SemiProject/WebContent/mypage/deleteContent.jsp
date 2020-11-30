@@ -12,5 +12,8 @@ String num = request.getParameter("num");
 WishlistDao dao = new WishlistDao();
 dao.deleteContent(num);
 
-response.sendRedirect("mypage.jsp");//@@@@@@@@@@경로수정
+//response.sendRedirect("mypage.jsp");//@@@@@@@@@@경로수정
 %>
+<script type="text/javascript">
+history.back();
+</script>

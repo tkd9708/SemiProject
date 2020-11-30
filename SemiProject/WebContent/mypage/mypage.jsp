@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+div.mypage_main{
+margin-top: 200px;
+}
 td{
 width: 100px;
 }
@@ -58,6 +61,22 @@ span.btnDel{
 cursor:pointer;
 }
 
+
+/*드롭다운메뉴*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.show {display: block;}
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
@@ -218,7 +237,9 @@ function getDetail(){
 		
 	})
 }
-
+function detailList(){
+	document.getElementById("myslist").classList.toggle("show");
+}
 
 
 //모달에 추가하기
@@ -227,17 +248,22 @@ function getDetail(){
 
 </head>
 <body>
-
+<div class="mypage_main">
 <h1>마이페이지</h1>
 <div class="calendar">
 <!-- 일정추가버튼 -->
 <div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus-sign"></span></div>
 
 <!--일정 리스트버튼-->
-<div class="btnSchedulelist"><a class="glyphicon glyphicon-th-list" role="button" aria-expanded="false"></a>
-	<div id="slist" class="tab-content">
-	일정리스트
-	</div>	
+<div class="btnSchedulelist">
+	<div class="slist">
+	<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" ></a>
+	  <div id="myslist" class="dropdown-content">
+		<a href="#home">Home</a><br>
+    	<a href="#about">About</a><br>
+    	<a href="#contact">Contact</a>
+	  </div>
+	</div>
 </div>
 
 <table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
@@ -332,8 +358,17 @@ function getDetail(){
 	drawCalendar();
 	getData();
 	
-	$(document).on("click","#tbCalendarYM",function(){
-		
+	$(document).on("click","div.btnSchedulelist",function(e){
+		if(!e.target.matches('.dropbtn')){
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for(i=0;i<dropdowns.length;i++){
+				var openDropdown = dropdowns[i];
+				if(openDropdown.classList.contains('show')){
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
 		
 	})
 	
@@ -359,12 +394,12 @@ function getDetail(){
 		if(ans){
 			var num = $(this).attr("num");
 			$.ajax({
-				url: "deleteContent.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+				url: "deleteContent.jsp",  //@@@@@프로젝트때는경로바꿔야함
 				type:"get",
 				dataType:"html",
 				data:{"num":num},
 				success:function(data){
-					getData();
+					location.reload();
 				}
 			})
 		}
@@ -374,5 +409,6 @@ function getDetail(){
 	})
 	
 </script>
+</div>
 </body>
 </html>
