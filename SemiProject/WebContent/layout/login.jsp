@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/login.css">
 <title>Insert title here</title>
 </head>
 <%
@@ -11,12 +12,13 @@
     String url=request.getContextPath();
 %>
 <body>
-<a class="main_login">login</a>
-<a class="main_mypage">mypage</a>
+<a class="main_login">Login</a>
+<a class="main_mypage" href="index.jsp?main=member/mypage.jsp">mypage</a>
 <script type="text/javascript">
   $("a.main_login").click(function(e){
 	  e.preventDefault();
-	  location.href="<%=url%>/index.jsp?main=member/loginform.jsp";
+	  location.href="index.jsp?main=member/loginform.jsp";
+	  <%-- location.href="<%=url%>/index.jsp?main=member/loginform.jsp"; --%>
   });
 </script>
 </body>
