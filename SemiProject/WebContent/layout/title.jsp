@@ -26,6 +26,9 @@
   }
   div.navbar img, div.header img{
       width: 150px;
+      padding-top: 10px;
+      padding-bottom:10px;
+      padding-left: 30px;
   }
   div.header a.main_login, div.header a.main_mypage{
       float: right;
@@ -35,12 +38,14 @@
   }
   a.main_login {
       padding-right: 50px;
-      padding-top: 31px;
+      padding-top: 35px;
   }
   a.main_mypage{
       padding-right:30px;
-      padding-top: 31px; 
+      padding-top: 35px; 
   }
+  
+  
 </style>
 </head>
 <%
@@ -54,14 +59,14 @@
             <s_if_var_logoImage>
               <img src="<%=url %>/image/title_no.png" class="img_logo">
             </s_if_var_logoImage>
-          </a>  
+          </a> 
         <a class="main_login">login</a>
         <a class="main_mypage">mypage</a>
       </div>
 <!-- // box_header -->
 
-<!-- 복사한 box_header -->
-      <div class="navbar" id="navbar">
+	<!-- 복사한 box_header -->
+	<div class="navbar" id="navbar">
           <a href="index.jsp" class="link">
             <s_if_var_logoImage>
               <img src="<%=url %>/image/title_no.png" class="img_logo">
@@ -70,7 +75,7 @@
         <a class="main_login">login</a>
         <a class="main_mypage">mypage</a>
       </div>
-      <!-- // box_header -->
+<!-- // box_header -->
       
 <!-- 상단바 script -->      
 <script type="text/javascript">
@@ -91,6 +96,7 @@ function scrollFunction(){
 		  document.getElementById("navbar").style.top = "-200px";  
 		  }
   }
+  
 </script>
 </body>
 </html>
