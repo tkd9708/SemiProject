@@ -35,6 +35,10 @@ div.layout div.main {
     z-index: 1;
 }
 
+a {
+	cursor:pointer;
+}
+
 
 </style>
 

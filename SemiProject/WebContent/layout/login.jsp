@@ -14,10 +14,18 @@
 <a class="main_login">login</a>
 <a class="main_mypage">mypage</a>
 <script type="text/javascript">
-  $("a.main_login").click(function(e){
-	  e.preventDefault();
-	  location.href="<%=url%>/index.jsp?main=member/loginform.jsp";
-  });
+	$(function(){
+		  $("a.main_login").click(function(e){
+			  e.preventDefault();
+			  location.href="<%=url%>/index.jsp?main=member/loginform.jsp";
+		  });
+		  
+		  $("a.main_mypage").click(function(e){
+			  e.preventDefault();
+			  location.href="<%=url%>/index.jsp?main=mypage/mypage.jsp";
+		  });
+	});
+  
 </script>
 </body>
 </html>

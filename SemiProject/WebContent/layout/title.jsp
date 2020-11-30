@@ -84,6 +84,12 @@
 	  location.href="<%=url%>/index.jsp?main=member/loginform.jsp";
   });
   
+
+  $("a.main_mypage").click(function(e){
+	  e.preventDefault();
+	  location.href="<%=url%>/index.jsp?main=mypage/mypage.jsp";
+  });
+  
   window.onscroll = function () {
 	  scrollFunction(); 
 };
