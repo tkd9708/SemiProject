@@ -1,5 +1,3 @@
-<%@page import="data.dto.ShareBoardDto"%>
-<%@page import="data.dao.ShareBoardDao"%>
 <%@page import="data.dto.NoticeDto"%>
 <%@page import="data.dao.NoticeDao"%>
 <%@page import="java.util.List"%>
@@ -36,8 +34,6 @@ input.button {
 b {
 	position: absolute;
 	left: 50px;
-	
-	text-align: center;
 }
 
 div.page {
@@ -70,13 +66,13 @@ html, body {
 }
 
 .button {
-  width: 140px;
-  height: 55px;
+  width: 99px;
+  height: 35px;
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000;
   background-color: #ffc34d;
   border: none;
@@ -88,11 +84,10 @@ html, body {
  }
  
  div.point{
-	  position: relative;
-	  top: -30px;
-	  right: -530px;
+  position: relative;
+  top: -30px;
+  right: -830px;
  }
-  
   
 
 
@@ -102,18 +97,15 @@ html, body {
   transform: translateY(-7px);
 }
 
-#shareout{
-	margin-top: 200px;
-}
-
 
 </style>
 </head>
-<%
-	ShareBoardDao db=new ShareBoardDao();
+<body>
+	<%
+	NoticeDao db=new NoticeDao();
 	//페이징 처리에 필요한 변수들	
 	int totalCount=db.getTotalCount(); //총 글의 갯수
-	int perPage=10; //한페이지당 보여지는 글의 갯수
+	int perPage=5; //한페이지당 보여지는 글의 갯수
 	int perBlock=5; //한블럭당 보여지는 페이지번호의 수
 	int currentPage;//현재페이지,만약 널값이면 1로 줌
 	int totalPage; //총 페이지의 갯수
@@ -146,19 +138,17 @@ html, body {
 	if(endPage>totalPage)
 	   endPage=totalPage;
 	
-	List<ShareBoardDto> list=db.getList(startNum,endNum);
+	List<NoticeDto> list=db.getList(startNum,endNum);
 	//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
 	no=totalCount-((currentPage-1)*perPage);
 %>
-<body>
+	<h2>공지사항</h2><br><br><br><br>
 	
-	<div id="shareout">
-		<h2 >맛집 공유 게시판</h2><br><br><br><br>
-	
-	<div class="point">
-	<input type="button" value="맛집공유" style="color: white;"
-		class="button" onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
-    </div>
+	<input type="button" value="게시물등록"
+		class="button"
+		style="width: 100px; margin-left: 200px; color: white;"
+		onclick="location.href='index.jsp?main=notice/noticeform.jsp'">
+
 	<br>
 	<br>
 	<%
@@ -166,17 +156,14 @@ html, body {
  %>
 	<div class="container">
 		<div style="margin-left: -50px;">
-			<table class="table table-bordered">
+			<table class="table table-hover" style="width: 800px;">
 			<thead>
-				<tr class="warning" >
-					<th width="50">id</th>
-					<th width="180">photo</th>
-					<th width="60">맛집</th>
-					<th width="150">추천 내용</th>
-					<th width="70">별점</th>
-					<th width="50">좋아요</th>
-					<th width="50">찜하기</th>
-					<th width="60">작성일</th>
+				<tr class="active" >
+					<th width="80">번호</th>
+					<th width="400">제 목</th>
+					<th width="80">작성자</th>
+					<th width="80">조회수</th>
+					<th width="80">작성일</th>
 				</tr>
 			<thead>
 				
@@ -185,30 +172,22 @@ html, body {
  		if(totalCount==0)
  	 	{%>
 
-				<tr align="center" height="300">
-					<td colspan="7"><b>공유된 맛집이 없습니다</b></td>
+				<tr align="center" height="50">
+					<td colspan="7"><b>등록된 글이 없습니다</b></td>
 				</tr>
 
 	    <%}
- 		 		
- 	    %>
-
-
-				<%
- 	 	 		for(ShareBoardDto dto:list)
+ 	 	 		for(NoticeDto dto:list)
  	 	 	 	{%>
  	 	 	
 				<tbody>
 				<tr class="warning">
+					<td align="center"><%=no-- %></td>
 					<td><a style="color: black;"
-						href="index.jsp?main=shareboard/shareboardcontent.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>&key=list">
-							<%=dto.getId()%></a></td>
-					<td align="center"><%=dto.getPhoto()%></td>
-					<td align="center"><%=dto.getSubject()%></td>
-					<td align="center"><%=dto.getContent()%></td>
-					<td align="center"><%=dto.getStar()%></td>
-					<td align="center"><%=dto.getLikes()%></td>
-					<td align="center">♥</td>
+						href="index.jsp?main=notice/noticecontent.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>&key=list">
+							<%=dto.getSubject()%></a></td>
+					<td align="center"><%=dto.getId()%></td>
+					<td align="center"><%=dto.getReadcount()%></td>
 					<td align="center"><%=sdf.format(dto.getWriteday())%></td>
 				</tr>
 				</tbody>
@@ -231,7 +210,7 @@ html, body {
 	 if(startPage>1)
 	 {%>
 		<li>
-		<a href="index.jsp?main=shareboard/shareboardlist.jsp?pageNum=<%=startPage-1%>">
+		<a href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=startPage-1%>">
 		◀</a></li> 
 	 <%}
 	 %>	  
@@ -242,7 +221,7 @@ html, body {
 		<li>
 		<a 
 		style="color:<%=currentPage==i?"orange":"green"%>"
-		href="index.jsp?main=shareboard/shareboardlist.jsp?pageNum=<%=i%>"><%=i%></a>
+		href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=i%>"><%=i%></a>
 		</li> 
 	 <%}
 	 %>	
@@ -252,13 +231,11 @@ html, body {
 	 if(endPage<totalPage)
 	 {%>
 		<li>
-		<a href="index.jsp?main=shareboard/shareboardlist.jsp?pageNum=<%=endPage+1%>">
+		<a href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=endPage+1%>">
 		▶</a></li> 
 	 <%}
 	 %>	 
 	 </ul>	
 	</div>
-	</div>
 </body>
 </html>
-

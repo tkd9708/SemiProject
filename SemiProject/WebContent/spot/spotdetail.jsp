@@ -39,11 +39,62 @@
 		height: 1000px;
 	}
 	
-	span.star {
+	/* span.star {
 		font-size: 20pt; 
 		color: #F0CD58;
 		cursor: pointer;
-	}
+	} */
+	
+   /*별점 css*/
+ 
+
+.stars{
+    display: flex;
+    flex-wrap: wrap;
+
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+
+}
+
+.stars__star-icon{
+    stroke:#EFCE4A;
+    stroke-width: 2px;
+    fill: transparent;
+    transition: .1s all;
+}
+
+.stars__star{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.stars__checkbox{
+    position: absolute;
+    top: -9999px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.stars__star:hover > .stars__star-icon{
+    fill: #EFCE4A;
+}
+
+.stars__star:hover ~ .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
+
+.stars__checkbox:checked + .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
+
+.stars__checkbox:checked ~ .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
 	
 	.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
@@ -72,7 +123,7 @@
 <script type="text/javascript">
 	$(function(){
 		
-		$("#srstarBox span").on("click",function(){
+		/* $("#srstarBox span").on("click",function(){
 			var idx = $(this).index()+1;
 			$(".star").removeClass("glyphicon glyphicon-star-empty");
 			
@@ -82,6 +133,31 @@
 			for(var i=idx; i<=5; i++){
 			   	$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
 			}
+			$("#spotReviewStar").val(idx);	
+		}); */
+		
+		$(".stars__checkbox").on("click", function(){
+			var idx = $(this).index()/2;
+			switch (idx) {
+			case 0:
+				idx=5;
+				break;
+			case 1:
+				idx=4;
+				break;
+			case 2:
+				idx=3;
+				break;
+			case 3:
+				idx=2;
+				break;
+			case 4:
+				idx=1;
+				break;
+			default:
+				break;
+			}
+			alert(idx);
 			$("#spotReviewStar").val(idx);	
 		});
 		
@@ -135,7 +211,67 @@
 		</span><br><br>
 		<span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
 		<%=dto.getRoadaddr() %>
-		<br>
+		<br><br>
+		<div id="spotMap">
+			<div id="map" style="width:500px;;height:250px;"></div>
+     		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3e5d36ebdbe678f839591abd28e09be7&libraries=services"></script>
+			<script>
+			var mapContainer = document.getElementById('map'), // 지도의 중심좌표
+			mapOption = { 
+    			center: new kakao.maps.LatLng(<%=dto.getLatitude()%>, <%=dto.getLongitude()%>), // 지도의 중심좌표
+    			level: 3 // 지도의 확대 레벨
+			}; 
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+			//지도에 마커를 표시합니다 
+			var marker = new kakao.maps.Marker({
+				map: map, 
+				position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
+			});
+
+			//커스텀 오버레이에 표시할 컨텐츠 입니다
+			//커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에	
+			//별도의 이벤트 메소드를 제공하지 않습니다 
+			var content = '<div class="wrap">' + 
+        '    <div class="info">' + 
+        '        <div class="mtitle">' + 
+        '            <%=dto.getTitle()%>' + 
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+        '        </div>' + 
+        '        <div class="body">' + 
+        '            <div class="img">' +
+        '                <img src="<%=dto.getThumbnail()%>" width="73" height="70">' +
+        '           </div>' + 
+        '            <div class="desc">' + 
+        '                <div class="ellipsis"><%=dto.getRoadaddr().substring(0,12)%></div>' + 
+        '                <div class="jibun ellipsis"><%=dto.getRoadaddr().substring(12)%></div>' + 
+        '                <div  style="color: #F0CD58; font-size: 18px;">★★★★★</div>' + 
+        '            </div>' + 
+        '        </div>' + 
+        '    </div>' +    
+        '</div>';
+
+			//마커 위에 커스텀오버레이를 표시합니다
+			//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+			var overlay = new kakao.maps.CustomOverlay({
+				content: content,
+				map: map,
+				position: marker.getPosition()       
+			});
+
+			//마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+			kakao.maps.event.addListener(marker, 'click', function() {
+				overlay.setMap(map);
+			});
+
+			//커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+			function closeOverlay() {
+				overlay.setMap(null);     
+			}
+
+			</script>
+		</div>
 	</div>
 	<hr>
 	<br><br>
@@ -150,13 +286,61 @@
 			<br>
 			<b>작성자 : 로그인한 ID</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="hidden" name="memNum" id="srMemNum" value="0">
-			<div id="srstarBox" style="display: inline-block;">
+			<br><br>
+			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-			</div>
+			</div> -->
+			
+			                         
+                                 
+           <!-- 별점 -->
+     <div class="stars">
+        <input class="stars__checkbox" type="radio" id="sd_first-star" name="star">
+        <label class="stars__star" for="sd_first-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="sd_second-star" name="star">
+        <label class="stars__star" for="sd_second-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="sd_third-star" name="star">
+        <label class="stars__star" for="sd_third-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="sd_fourth-star" name="star">
+        <label class="stars__star" for="sd_fourth-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="sd_fifth-star" name="star">
+        <label class="stars__star" for="sd_fifth-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        </div>
+        
 			<input type="hidden" name="star" id="spotReviewStar" value="0">
 			<br><br>
 			<textarea name="content" id="srContent" style="width: 500px; height: 100px; float: left;" class="form-control"></textarea>
@@ -226,65 +410,6 @@
 	</div>
 	
 	
-	<div id="spotMap">
-			<div id="map" style="width:75%;height:550px; position: absolute;left:250px;"></div>
-     		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3e5d36ebdbe678f839591abd28e09be7&libraries=services"></script>
-			<script>
-			var mapContainer = document.getElementById('map'), // 지도의 중심좌표
-			mapOption = { 
-    			center: new kakao.maps.LatLng(<%=dto.getLatitude()%>, <%=dto.getLongitude()%>), // 지도의 중심좌표
-    			level: 3 // 지도의 확대 레벨
-			}; 
-
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-			//지도에 마커를 표시합니다 
-			var marker = new kakao.maps.Marker({
-				map: map, 
-				position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
-			});
-
-			//커스텀 오버레이에 표시할 컨텐츠 입니다
-			//커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에	
-			//별도의 이벤트 메소드를 제공하지 않습니다 
-			var content = '<div class="wrap">' + 
-        '    <div class="info">' + 
-        '        <div class="mtitle">' + 
-        '            <%=dto.getTitle()%>' + 
-        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-        '        </div>' + 
-        '        <div class="body">' + 
-        '            <div class="img">' +
-        '                <img src="<%=dto.getThumbnail()%>" width="73" height="70">' +
-        '           </div>' + 
-        '            <div class="desc">' + 
-        '                <div class="ellipsis"><%=dto.getRoadaddr().substring(0,12)%></div>' + 
-        '                <div class="jibun ellipsis"><%=dto.getRoadaddr().substring(12)%></div>' + 
-        '                <div  style="color: #F0CD58; font-size: 18px;">★★★★★</div>' + 
-        '            </div>' + 
-        '        </div>' + 
-        '    </div>' +    
-        '</div>';
-
-			//마커 위에 커스텀오버레이를 표시합니다
-			//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-			var overlay = new kakao.maps.CustomOverlay({
-				content: content,
-				map: map,
-				position: marker.getPosition()       
-			});
-
-			//마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-			kakao.maps.event.addListener(marker, 'click', function() {
-				overlay.setMap(map);
-			});
-
-			//커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-			function closeOverlay() {
-				overlay.setMap(null);     
-			}
-
-			</script>
-		</div>
+	
 </body>
 </html>
