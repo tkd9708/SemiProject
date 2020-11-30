@@ -7,8 +7,6 @@
     "outline": {
       
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
     "jscs": {
       
     },
@@ -16,12 +14,6 @@
       
     },
     "jquery-ui1-12": {
-=======
-    "bootstrap": {
->>>>>>> branch 'feature/1' of https://github.com/tkd9708/SemiProject.git
-=======
-    "ckeditor4.4.x": {
->>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
       
     }
   },
