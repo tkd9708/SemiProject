@@ -1,6 +1,6 @@
 
-<%@page import="data.dao.ShareBoardDao"%>
-<%@page import="data.dto.ShareBoardDto"%>
+<%@page import="data.dao.NoticeDao"%>
+<%@page import="data.dto.NoticeDto"%>
 <%@page import="java.io.File"%>
 
 <%@page import="java.text.SimpleDateFormat"%>
@@ -15,6 +15,11 @@
 <style type="text/css">
    #cl-dashboard{display: none;}
    
+  .contentform{
+      position: absolute;
+      left: 250px;
+   }
+   
 </style>
 </head>
 <body>
@@ -27,29 +32,27 @@
    //(이유:수정후에도 content.jsp 로 오기때문에 목록에서
     //         올 경우에만 증가함)
    //조회수 증가
-   ShareBoardDao db=new ShareBoardDao();
+   NoticeDao db=new NoticeDao();
    if(key!=null && key.equals("list"))
       db.updateReadcount(num);
    
    //번호에 해당하는 dto 가져오기
-   ShareBoardDto dto=db.getData(num);
+   NoticeDto dto=db.getData(num);
    
-   SimpleDateFormat sdf=
-         new SimpleDateFormat("yyyy-MM-dd HH:mm");
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd ");
 %>   
-<table class="table table-striped" style="width: 500px;">
+<table class="contentform table table-striped" style="width: 800px;">
    <tr>
       <td width="350">
-         <b><%=dto.getSubject()%></b>
+         <b>제목: <%=dto.getSubject()%></b>
       </td>
       <td>
          <span style="color: #ccc;font-size: 9pt;">
-         <%=sdf.format(dto.getWriteday()) %></span>
+         <%=dto.getWriteday()%></span>
       </td>
    </tr>
    <tr height="350">
       <td colspan="2" valign="top">
-         <img src="image/chr15.gif" width="30">
          <b><%=dto.getId()%></b>
          <br><br>         
          <pre><%=dto.getContent()%></pre>   
@@ -64,12 +67,12 @@
    </tr>
    <tr>
       <td colspan="2" align="right">
-         <input type="button" class="btn btn-default btn-xs"
-           value="글쓰기" style="width: 60px;"
-           onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
-         <input type="button" class="btn btn-default btn-xs"
-           value="글목록" style="width: 60px;"
-           onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp?pageNum=<%=pageNum%>'">         
+         <input type="button" class="btn btn-warning btn-xs"
+           value="댓글" style="width: 60px;"
+           onclick="location.href='index.jsp?main=notice/noticeform.jsp'">
+         <input type="button" class="btn btn-warning btn-xs"
+           value="공지사항 목록" style="width: 60px;"
+           onclick="location.href='index.jsp?main=notice/noticelist.jsp?pageNum=<%=pageNum%>'">         
       </td>
    </tr>   
 </table>

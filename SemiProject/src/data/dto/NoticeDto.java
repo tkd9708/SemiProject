@@ -2,17 +2,15 @@ package data.dto;
 
 import java.sql.Timestamp;
 
-public class ShareBoardDto {
-	private String num;
-	private String id;
-	private String files;
-	private String subject;
-	private String content;
-	private Timestamp writeday;
-	private int readcount;
-	private int star;
-	
-	
+public class NoticeDto {
+	   private String num;
+	   private String id;
+	   private String subject;
+	   private String content;
+	   private String files;
+	   private Timestamp writeday;
+	   private int readcount;
+	   
 	public String getNum() {
 		return num;
 	}
@@ -24,12 +22,6 @@ public class ShareBoardDto {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getFiles() {
-		return files;
-	}
-	public void setFiles(String files) {
-		this.files = files;
 	}
 	public String getSubject() {
 		return subject;
@@ -43,6 +35,12 @@ public class ShareBoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getFiles() {
+		return files;
+	}
+	public void setFiles(String files) {
+		this.files = files;
+	}
 	public Timestamp getWriteday() {
 		return writeday;
 	}
@@ -55,16 +53,16 @@ public class ShareBoardDto {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public int getStar() {
-		return star;
-	}
-	public void setStar(int star) {
-		this.star = star;
-	}
+	   
+	   
 	
+	   
+
+	   
 	
-	
-	
-	
+	   
+ 
+	   
+
 
 }
