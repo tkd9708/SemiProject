@@ -46,13 +46,13 @@ public class SpotlistDao {
 		}
 	}
 	
-	public List<SpotlistDto> getList(String label2){
+	public List<SpotlistDto> getList(){
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from spotlist where label2 like '%" + label2 + "%'";
+		String sql = "select * from spotlist";
 		
 		conn = db.getConnection();
 		try {
@@ -71,6 +71,8 @@ public class SpotlistDao {
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
+				dto.setStar(rs.getInt("star"));
+				dto.setLikes(rs.getInt("likes"));
 				
 				list.add(dto);
 			}
@@ -111,6 +113,8 @@ public class SpotlistDao {
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
+				dto.setStar(rs.getInt("star"));
+				dto.setLikes(rs.getInt("likes"));
 				
 			}
 			
@@ -124,5 +128,113 @@ public class SpotlistDao {
 		
 		
 		return dto;
+	}
+	
+	public List<SpotlistDto> getList(int start, int perpage, String label2){
+		// 그룹변수의 내림차순, 같은 그룹인경우 step의 오름차순 출력
+		// limit로 시작번지와 몇개를 가져올지 바인딩
+		String sql = "select * from spotlist where label2 like '%" + label2 + "%' limit ?,?";
+		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SpotlistDto dto = new SpotlistDto();
+				dto.setContentsid(rs.getString("contentsid"));
+				dto.setIntroduction(rs.getString("introduction"));
+				dto.setLabel1(rs.getString("label1"));
+				dto.setLabel2(rs.getString("label2"));
+				dto.setLatitude(rs.getDouble("latitude"));
+				dto.setLongitude(rs.getDouble("longitude"));
+				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setTag(rs.getString("tag"));
+				dto.setThumbnail(rs.getString("thumbnail"));
+				dto.setTitle(rs.getString("title"));
+				dto.setStar(rs.getInt("star"));
+				dto.setLikes(rs.getInt("likes"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	
+	public int getTotalCount(String label2) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from spotlist where label2 like '%" + label2 + "%'";
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		
+		return total;
+	}
+	
+	public void updateLikes(String contentsid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update spotlist set likes = likes + 1 where contentsid = ?";
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentsid);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt);
+		}
+		
+	}
+	
+	public void updateStar(String contentsid, int avg) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update spotlist set star = ? where contentsid = ?";
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, avg);
+			pstmt.setString(2, contentsid);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt);
+		}
+		
 	}
 }
