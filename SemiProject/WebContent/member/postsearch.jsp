@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="data.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,9 +11,6 @@
 <title>멘도롱 또똣 :: 우편번호 보기</title>
 <script type="text/javascript">
 	window.onload = function() {
-		
-		document.getElementById("#regionName").focus();
-		
 		window.addEventListener("keydown", (e) => {
 			const key = document.getElementById(e.key)
 			console.log(key.nextSibling.nextSibling.nextSibling);
@@ -40,9 +39,10 @@
 					<div class="postSearch">
 						<div class="wrapAddress">
 							<input type="text" id="regionName" class="findRegion" name="regionName"
-							value="" autocomplete="off">
+							value="" autocomplete="off" required="required"
+							autofocus="autofocus">
 							<input type="hidden" name="key" value="result">
-							<button type="button" class="btnSearch">
+							<button type="submit" class="btnSearch">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" 
 								class="bi bi-search imgPost" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -75,6 +75,15 @@
 		</div>
 	</div>
 	<%}
+	else
+	{//결과
+		String dong=request.getParameter("dong");
+		//dao 선언
+		MemberDao dao=new MemberDao();
+		
+		//메서드 호출
+		List<>
+	}
 %>
 </body>
 </html>
