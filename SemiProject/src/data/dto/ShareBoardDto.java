@@ -1,0 +1,70 @@
+package data.dto;
+
+import java.sql.Timestamp;
+
+public class ShareBoardDto {
+	private String num;
+	private String id;
+	private String files;
+	private String subject;
+	private String content;
+	private Timestamp writeday;
+	private int readcount;
+	private int star;
+	
+	
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getFiles() {
+		return files;
+	}
+	public void setFiles(String files) {
+		this.files = files;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Timestamp getWriteday() {
+		return writeday;
+	}
+	public void setWriteday(Timestamp writeday) {
+		this.writeday = writeday;
+	}
+	public int getReadcount() {
+		return readcount;
+	}
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	
+	
+	
+	
+	
+
+}
