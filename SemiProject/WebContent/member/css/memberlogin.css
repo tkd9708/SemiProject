@@ -2,8 +2,6 @@
 
 .btnbigpink {
 	cursor: pointer;
-<<<<<<< HEAD
-=======
 }
 
 span.putBieye {
@@ -29,5 +27,8 @@ div.toolTip p {
 
 span.putBieye:hover div.toolTip {
 	visibility: visible;
->>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
+}
+
+div.regWrap {
+	margin-top: 100px;
 }

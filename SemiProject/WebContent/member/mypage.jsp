@@ -16,9 +16,20 @@ String url=request.getContextPath();
 		id=(String)session.getAttribute("myid");
 	}
 	String idcf=(String)session.getAttribute("myid");
+	String loginok=(String)session.getAttribute("loginok");
+	System.out.println(loginok);
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(function(){
+		$("#mbList").hide();
+		if("<%=idcf%>"=="admin") {
+			console.log("<%=idcf%>");
+			$("#mbList").show();
+		}		
+	});
+</script>
 </head>
 <body>
 	<div class="showPage" id="showPage">
@@ -40,26 +51,5 @@ String url=request.getContextPath();
 			<jsp:include page="../member/info.jsp"/>
 		</div>
 	</div>
-<script type="text/javascript">
-	window.onlaod = function(){
-		if("<%=(String)session.getAttribute("loginok")%>" != "success"){
-			var showPage = document.getElementById("showPage");
-			showPage.setAttribute("hidden", "hidden");
-			if(confirm("로그인이 필요한 페이지입니다. 로그인하시겠습니까?") == true){	//확인
-				location.href="index.jsp?main=member/reallogin.jsp";
-			}
-			else{	//취소
-				location.href="index.jsp";
-			}
-		}
-		
-		var mbList=document.getElementById("mbList");
-		mbList.setAttribute("hidden", "hidden");	
-		if("<%=idcf%>"=="admin") {
-			console.log("<%=idcf%>");
-			mbList.removeAttribute("hidden");
-		}		
-	});
-</script>
 </body>
 </html>

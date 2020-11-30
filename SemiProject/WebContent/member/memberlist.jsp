@@ -16,26 +16,28 @@
 	List<MemberDto> list=dao.getAllMembers();
 %>
 <body>
+	<div class="forMargin">관리자 페이지
 	<h3><b>회원 명단</b></h3>
-	<div class="infos">
-		<%
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		for(MemberDto dto:list)
-		{%>
-		<div class="info">
-			<span>
-				<b>아이디 : </b> <%=dto.getId()%> <br>
-				<b>이  름 : </b> <%=dto.getName()%> <br>
-				<button type="button" class="btnUpdate">정보수정</button><br>
-				<button type="button" class="btnOut">회원탈퇴</button><br>
-				<b>핸드폰 : </b> <%=dto.getHp()%> <br>
-				<b>주  소 : </b> <%=dto.getAddress()%> <br>
-				<b>이메일 : </b> <%=dto.getEmail()%> <br>
-				<b>가입일 : </b> <%=dto.getGaipday()%> <br>
-			</span>
+		<div class="infos">
+			<%
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			for(MemberDto dto:list)
+			{%>
+			<div class="info">
+				<span>
+					<b>아이디 : </b> <%=dto.getId()%> <br>
+					<b>이  름 : </b> <%=dto.getName()%> <br>
+					<button type="button" class="btnUpdate">정보수정</button><br>
+					<button type="button" class="btnOut">회원탈퇴</button><br>
+					<b>핸드폰 : </b> <%=dto.getHp()%> <br>
+					<b>주  소 : </b> <%=dto.getAddress()%> <br>
+					<b>이메일 : </b> <%=dto.getEmail()%> <br>
+					<b>가입일 : </b> <%=dto.getGaipday()%> <br>
+				</span>
+			</div>
+			<%}
+			%>
 		</div>
-		<%}
-		%>
 	</div>
 </body>
 </html>

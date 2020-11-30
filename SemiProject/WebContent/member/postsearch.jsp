@@ -1,3 +1,4 @@
+<%@page import="data.dto.ZipcodeDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,38 +10,24 @@
 <link rel="shortcut icon" href="../image/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/postsearch.css">
 <title>멘도롱 또똣 :: 우편번호 보기</title>
-<script type="text/javascript">
-	window.onload = function() {
-		window.addEventListener("keydown", (e) => {
-			const key = document.getElementById(e.key)
-			console.log(key.nextSibling.nextSibling.nextSibling);
-			if (key) key.nextSibling.nextSibling.nextSibling.classList.add("pressed")
-		})
-		
-		window.addEventListener("keyup", (e) => {
-			const key = document.getElementById(e.key)
-			console.log(key.nextSibling.nextSibling.nextSibling);
-			if (key) key.nextSibling.nextSibling.nextSibling.classList.add("pressed")
-		})
-	}
-</script>
 </head>
 <body>
-<%
-	String key=request.getParameter("key");
-	if(key==null)
-	{
-		//검색폼
-	%>
 	<div class="popupPost">
 		<div class="popHead">
 			<form action="postsearch.jsp" method="get" id="searchForm" class="formSearch">
 				<fieldset class="postFld">
 					<div class="postSearch">
 						<div class="wrapAddress">
-							<input type="text" id="regionName" class="findRegion" name="regionName"
-							value="" autocomplete="off" required="required"
-							autofocus="autofocus">
+							<label class="fs">
+								<div class="ipWrapper">
+									<input type="text" id="regionName" 
+									class="findRegion" name="regionName"
+									value="" autocomplete="off" required="required"
+									autofocus="autofocus"
+									placeholder=" "></input>
+									<span class="placeholder show" label-value="예) 서초구 강남대로459 백암빌딩(구관)"></span>
+								</div>
+							</label>
 							<input type="hidden" name="key" value="result">
 							<button type="submit" class="btnSearch">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" 
@@ -49,12 +36,17 @@
 								  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
 								</svg>
 							</button>
-							<span class="placeholder show">예) 서초구 강남대로459 백암빌딩(구관)</span>
 						</div>
 					</div>
 				</fieldset>
 			</form>
 		</div>
+	<%
+	String key=request.getParameter("key");
+	if(key==null)
+	{
+		//검색폼
+	%>
 		<div class="popBody">
 			<div class="Postinfo">
 				<p class="infoWrite">아래와 같이 검색하세요.</p>
@@ -68,12 +60,6 @@
 				<span class="txtInfo">예) 강릉우체국사서함 1~100</span>
 			</div>
 		</div>
-		<div class="popupFoot">
-			<span class="innerFooter">
-				<strong class="ddoddot">멘도롱 또똣</strong>
-			</span>
-		</div>
-	</div>
 	<%}
 	else
 	{//결과
@@ -82,8 +68,46 @@
 		MemberDao dao=new MemberDao();
 		
 		//메서드 호출
-		List<>
-	}
+		List<ZipcodeDto> list=dao.getSearchDong(dong);
+		
+		//출력
+	%>
+		<div><b>검색결과</b></div>
+		<div class="wholeAddr">주소 전체</div>
+		<ul class="addrList">
+			<%
+			for(ZipcodeDto dto:list)
+			{
+				//보일때는 번지까지
+				String addr1="("+dto.getZipcode()+")"
+				+dto.getSido()+" "+dto.getGugun()
+				+" "+dto.getDong()+" "+dto.getRi()
+				+" "+dto.getBunji();
+				//실제 적용은 번지 제외
+				String addr2="("+dto.getZipcode()+")"
+				+dto.getSido()+" "+dto.getGugun()
+				+" "+dto.getDong()+" "+dto.getRi();
+			%>
+			<li>
+				<span class="postCode"><%=dto.getZipcode()%></span>
+				<dl class="addrShow">
+					<dt class="wrAddr">주소</dt>
+					<dd class="addrInfo">
+						<span class="txtAddr"><%=addr1%></span>
+					</dd>
+				</dl>	
+			</li>
+			<%}
+			%>
+		</ul>
+		<div class="addrjk"></div>
+	<%}
 %>
+		<div class="popupFoot">
+			<span class="innerFooter">
+				<strong class="ddoddot">멘도롱 또똣</strong>
+			</span>
+		</div>
+	</div>
 </body>
 </html>

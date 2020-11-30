@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.MemberDto;
+import data.dto.ZipcodeDto;
 import mysql.db.MysqlConnect;
 
 public class MemberDao {
@@ -229,5 +230,43 @@ public class MemberDao {
 			db.dbClose(conn, stmt, rs);
 		}	
 		return name;
+	}
+	
+	//동에 해당하는 주소 반환하는 메서드
+	public List<ZipcodeDto> getSearchDong(String dong)
+	{
+		List<ZipcodeDto> list=new Vector<ZipcodeDto>();
+		String sql="select zipcode,sido,gugun,dong, IFNULL(ri,' ') as ri, "
+				+ "IFNULL(bunji,' ') as bunji from zipcode "
+				+ "where dong like ?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, "%"+dong+"%");
+			//실행
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				dto.setRi(rs.getString("ri"));
+				dto.setBunji(rs.getString("bunji"));
+				//리스트에 추가
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		return list;
 	}
 }

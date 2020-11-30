@@ -6,21 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
-	span.barcode{
-		font-family: 'Libre Barcode 128 Text';
-		font-size: 30px;
-		font-weight: bold;
-	}
-</style>
 <%
 	MemberDao dao=new MemberDao();
 	
 	if((String)session.getAttribute("loginok") != "success")
 	{%>
 	<script type="text/javascript">
-		$(".infoMember").css("display", "none");	
+		$(".infoMember").hide();	
 	</script>
 	<%}
 %>
