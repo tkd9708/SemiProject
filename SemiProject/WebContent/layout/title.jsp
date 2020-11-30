@@ -54,9 +54,14 @@
             <s_if_var_logoImage>
               <img src="<%=url %>/image/title_no.png" class="img_logo">
             </s_if_var_logoImage>
-          </a>  
-        <a class="main_login">login</a>
-        <a class="main_mypage">mypage</a>
+          </a>
+        <!-- login.jsp가 빠져서 include 시킵니다 -->  
+        <!-- <a class="main_login">login</a>
+        <a class="main_mypage">mypage</a> -->
+        
+        <jsp:include page="login.jsp"/>
+        
+        <!-- login.jsp가 빠져서 include 시킵니다 -->
       </div>
 <!-- // box_header -->
 
