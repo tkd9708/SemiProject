@@ -169,4 +169,3 @@ function pasteHTML(filepath){
 }
 </script>
 </body>
-</html>

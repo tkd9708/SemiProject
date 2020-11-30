@@ -366,5 +366,6 @@ function getDetail(){
 	})
 	
 </script>
+
 </body>
 </html>

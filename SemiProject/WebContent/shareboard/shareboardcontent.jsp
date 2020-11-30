@@ -1,4 +1,3 @@
-
 <%@page import="data.dao.ShareBoardDao"%>
 <%@page import="data.dto.ShareBoardDto"%>
 <%@page import="java.io.File"%>
@@ -61,7 +60,7 @@
    <tr>
       <td colspan="2">
          <span style="color: gray;font-size: 9pt;">
-         조회수&nbsp; <%=dto.getReadcount() %>
+         조회수&nbsp; <%=dto.getLikes() %>
          </span>         
       </td>
    </tr>
@@ -77,4 +76,5 @@
    </tr>   
 </table>
 </body>
+
 </html>

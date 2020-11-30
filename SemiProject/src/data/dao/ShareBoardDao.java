@@ -163,8 +163,6 @@ public class ShareBoardDao {
          Connection conn=null;
          PreparedStatement pstmt=null;
          ResultSet rs=null;
-
-
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
@@ -178,8 +176,6 @@ public class ShareBoardDao {
             my.dbClose(conn, pstmt, rs);
          }
          return max;
-
-
       }
 
       public void updateReadcount(String num)
@@ -202,7 +198,5 @@ public class ShareBoardDao {
             my.dbClose(conn, pstmt);
          }
       }
-   }
-
-      
+}
 

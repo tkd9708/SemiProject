@@ -54,15 +54,6 @@ public class NoticeDto {
 		this.readcount = readcount;
 	}
 	   
-	   
-	
-	   
-
-	   
-	
-	   
- 
-	   
-
 
 }
+
