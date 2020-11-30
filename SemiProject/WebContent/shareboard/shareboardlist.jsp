@@ -1,5 +1,3 @@
-
-
 <%@page import="data.dto.ShareBoardDto"%>
 <%@page import="data.dao.ShareBoardDao"%>
 <%@page import="data.dto.NoticeDto"%>
@@ -255,9 +253,4 @@ html, body {
 	</div>
 </body>
 </html>
-
-
-
-
-
 
