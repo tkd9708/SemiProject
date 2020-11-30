@@ -36,6 +36,26 @@ MysqlConnect db = new MysqlConnect();
 		}
 	
 	}
+//delete
+	public void deleteContent()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	 
 

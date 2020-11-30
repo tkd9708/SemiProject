@@ -54,6 +54,10 @@ margin-bottom: -50px;
  color:tomato;
  font-size: 30pt
 }
+span.btnDel{
+cursor:pointer;
+}
+
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
@@ -190,10 +194,12 @@ function getDetail(){
 		dataType:"xml",
 		data:{"mem_id":mem_id},
 		success:function(data){
+
 			$(data).find("wish").each(function(){
-				$("#"+wday+".detail").text("");
+			
 				var content =$(this).find("content").text()+"<br>";
-				
+				var detailcontent ="<div >"+$(this).find("content").text()+"<span style='float:right; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+			
 				var wishday = $(this).find("wishday").text();
 			
 				var wday = wishday.replaceAll("-", "");
@@ -202,9 +208,9 @@ function getDetail(){
 					var xmlyear = split[0];
 					var xmlmonth = split[1];
 					var xmlday = split[2];
-					
+
 				
-					$("#"+wday+".detail").append(content);
+					$("#"+wday+".detail").append(detailcontent);
 					
 					
 			});
@@ -276,7 +282,7 @@ function getDetail(){
 			</h4>
         </div>
         <div class="modal-body">
-          <div class="detail"><span class="	glyphicon glyphicon-minus-sign"></span> </div>
+          <div class="detail"></div>
           
        </div>
       </div>
@@ -285,15 +291,15 @@ function getDetail(){
   
   <!-- 일정추가 모달 -->
  <div class="modal fade" id="addModal" role="dialog">
-    <div class="addmodal-dialog modal-lg">
-      <div class="addmodal-content" style="height:400px;width:600px">
-        <div class="addmodal-header">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="height:400px;width:600px">
+        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="addmodal_title" style="text-align: center" >
 		 	<b>일정추가</b>
 			</h4>
         </div>
-        <div class="addmodal-body">
+        <div class="modal-body">
         	<div class="addSchedule" align="center" >
         		<form action ="scheduleAdd.jsp" method="post" class="form-inline" >
         			<table class="table table-condensed">
@@ -334,6 +340,7 @@ function getDetail(){
 		var modal_day=$(this).attr("day");
 		var modal_month=$(this).attr("month");
 		var modal_year = $(this).attr("year");
+		$("div.modal-body div.detail").empty();
 		$("div.modal-body div.detail").attr("id",modal_year+modal_month+modal_day);
 		getDetail();
 		schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일"; 
@@ -343,6 +350,21 @@ function getDetail(){
 		$("input[name=content]").val("");
 		
 	})
+	
+	
+	$(document).on("click","span.btnDel",function(){
+		var ans = confirm("일정을 삭제하시겠습니까?");
+		if(ans){
+			//삭제 
+			
+			//getdetail()다시 불러오기
+			//getdata()
+		}
+		else{
+		window.history.back();	
+		}
+	})
+	
 </script>
 </body>
 </html>
