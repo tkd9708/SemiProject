@@ -5,6 +5,7 @@
 	width: 900px;
 } */
 div#wrapper {
+<<<<<<< HEAD
 	position: relative;
 }
 div#container {
@@ -43,6 +44,61 @@ footer {
 }
 a.btnbigpink {
 	color: black;
+=======
+	width: 100%;
+	height: inherit;
+}
+header, footer, nav, aside, section {
+	border: 1px solid #999;
+}
+header {
+	height: 50px;
+	background-color: red;
+	width: 100%;
+}
+nav {
+	background-color: goldenrod;
+	position: fixed;
+	width: 100%;
+	height: inherit;
+	z-index: 9999;
+}
+section {
+	background-color: green;
+	width: 604px;
+}
+aside {
+	background-color: goldenrod;
+	width: 100px;
+}
+footer {
+	height: 50px;
+	background-color: blue;
+	position: relative;
+	clear: both;
+}
+article {
+	width: 90%;
+	margin: 20px;
+	background-color: #999;
+}
+a.btnbigpink {
+	user-select: none;
+	border-radius: 10;
+	box-shadow: 0 1px 1px 1px rgba(150,200,150,0.3);
+	display: inline-block;
+	font-weight: 400;
+	outline: 0;
+	text-decoration: none;
+	cursor: pointer;
+	margin-bottom: 20px;
+	font-size: 16px;
+	padding: 10px 20px;
+	color: #777777;
+	background-color: #ffaa00;
+	border: 1px solid #cccccc;
+	line-height: normal;
+>>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
 }
 li {
 	float: left;

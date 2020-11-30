@@ -8,13 +8,20 @@
 String url=request.getContextPath();
 System.out.println(url);
 %>
-<link rel="stylesheet" type="text/css" href="<%=url%>/member/loginform.css">
+<link rel="stylesheet" type="text/css" href="<%=url%>/member/css/loginform.css">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 1등 여행사</title>
 </head>
 <body>
+<<<<<<< HEAD
 		<!-- 헤더시작 -->
 		<header>
+=======
+	
+	<!-- 헤더시작 -->
+	<header>
+		<div id="wrapper">
+>>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
 			<!-- 네비게이션 -->
 			<nav>
 				<ul class="mainList">
@@ -127,6 +134,7 @@ System.out.println(url);
 					</li>
 				</ul>
 			</nav>
+<<<<<<< HEAD
 		</header>
 		<!-- 콘텐츠부분 -->
 		
@@ -143,6 +151,36 @@ System.out.println(url);
 					<div class="inr">
 						<div class="textWrap">
 							<strong class="tit">맨도롱 또똣 회원</strong>
+=======
+		</div>
+	</header>
+	<!-- 콘텐츠부분 -->
+	<section>
+		<div id="container">
+			<div class="inr">
+				<div id="contents" class="contents">
+					<div class="signupWrap">
+						<div class="textWrap top">
+							<strong class="tit">회원가입</strong>
+							<p class="txt">
+							맨도롱 또똣에 오신 것을 환영합니다.<br>
+							맨도롱 또똣 회원이 되시면 더욱 다양한 혜택을 누리실 수 있습니다.
+							</p>
+						</div>
+						<div class="signupBox">
+							<div class="innerWrap">
+								<div class="inr">
+									<div class="textWrap">
+										<strong class="tit">맨도롱 또똣 회원</strong>
+									</div>
+									<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
+									<a href="index.jsp?main=member/reallogin.jsp" class="btnbigpink">로그인</a>
+								</div>
+								<div class="inr right">
+									<!-- 다른 회원가입 -->
+								</div>
+							</div>
+>>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
 						</div>
 						<a href="index.jsp?main=member/memberlogin.jsp" class="btnbigpink">회원가입</a>
 					</div>
@@ -152,6 +190,7 @@ System.out.println(url);
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		
 		<!-- 사이드바 -->
 		<aside>
@@ -161,5 +200,16 @@ System.out.println(url);
 		<footer>
 			(풋터)멘도롱 또똣(풋터)
 		</footer>
+=======
+	</section>
+	<!-- 사이드바 -->
+	<aside>
+		<p>aside</p>
+	</aside>
+	<!-- 풋터 -->
+	<footer>
+		(풋터)멘도롱 또똣(풋터)
+	</footer>
+>>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
 </body>
 </html>

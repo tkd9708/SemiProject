@@ -11,7 +11,6 @@ response.setHeader("Refresh","3;url=index.jsp");
 <title>맨도롱 또똣 :: 가고싶은제주맛집</title>
 </head>
 <body>
-<img alt="" src="image/s3.JPG">
 <h1>회원가입되었습니다</h1>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<%@page import="data.dto.MemberDto"%>
 <%@ page language="java" contentType="text/xml; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -10,7 +11,12 @@
 	String pass2=request.getParameter("pass2");
 	boolean samePw = false;
 	samePw = (pass1 != pass2) ? false : true;
+	
+	String pass1V=request.getParameter("pass1V");
+	MemberDto dto=new MemberDto();
+	boolean validPw = dto.isPwVal(pass1V);
 %>
 <data>
 	<samepw><%=samePw?"yes":"no"%></samepw>
+	<validpw><%=validPw?"yes":"no"%></validpw>
 </data>
