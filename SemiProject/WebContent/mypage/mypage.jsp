@@ -181,7 +181,7 @@ function drawCalendar(){ //달력 그리는 함수
 function getData(){
 	var mem_id = $("#mem_id").val();
 	$.ajax({
-		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
@@ -212,7 +212,7 @@ function getDetail(){
 	var mem_id = $("#mem_id").val();
 	
 	$.ajax({
-		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
@@ -246,7 +246,7 @@ function getlist(){
 	var wishday ="";
 	var mem_id = $("#mem_id").val();
 	$.ajax({
-		url: "getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+		url: "/mypage/getwishtoxml.jsp",  //@@@@@프로젝트때는 경로바꿔야함
 		type:"get",
 		dataType:"xml",
 		data:{"mem_id":mem_id},
@@ -369,8 +369,9 @@ function detailList(){
         </div>
         <div class="modal-body">
         	<div class="addSchedule" align="center" >
-        		<form action ="scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
+        		<form action ="/mypage/scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
         			<table class="table table-condensed">
+        			
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
         				<input type="hidden" name="mem_id" id="mem_id" value="test">
         				<tr>
@@ -436,7 +437,7 @@ function detailList(){
 		if(ans){
 			var num = $(this).attr("num");
 			$.ajax({
-				url: "deleteContent.jsp",  //@@@@@프로젝트때는경로바꿔야함
+				url: "/mypage/deleteContent.jsp",  //@@@@@프로젝트때는경로바꿔야함
 				type:"get",
 				dataType:"html",
 				data:{"num":num},
