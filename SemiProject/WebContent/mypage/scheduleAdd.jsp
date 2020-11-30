@@ -13,8 +13,6 @@
 <%
 //insert 메소드 호출
 dao.insertContent(dto);
-//@@@@@@@뒤로가기 추가@@@@@@@@@@2
+
+response.sendRedirect("mypage.jsp");//@@@@@@@@@@경로수정
 %>
-<script type="text/javascript">
-history.back();
-</script>

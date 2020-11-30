@@ -177,7 +177,7 @@ function getData(){
 					var xmlday = split[2];
 					
 					$("#"+wday).append(content);
-					
+				
 					
 			});
 		}
@@ -198,7 +198,7 @@ function getDetail(){
 			$(data).find("wish").each(function(){
 			
 				var content =$(this).find("content").text()+"<br>";
-				var detailcontent ="<div >"+$(this).find("content").text()+"<span style='float:right; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+				var detailcontent ="<div >"+$(this).find("content").text()+"<span num='"+$(this).find("num").text()+"'style='float:right; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
 			
 				var wishday = $(this).find("wishday").text();
 			
@@ -218,6 +218,7 @@ function getDetail(){
 		
 	})
 }
+
 
 
 //모달에 추가하기
@@ -301,7 +302,7 @@ function getDetail(){
         </div>
         <div class="modal-body">
         	<div class="addSchedule" align="center" >
-        		<form action ="scheduleAdd.jsp" method="post" class="form-inline" >
+        		<form action ="scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
         			<table class="table table-condensed">
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
         				<input type="hidden" name="mem_id" id="mem_id" value="test">
@@ -330,6 +331,7 @@ function getDetail(){
 
 	drawCalendar();
 	getData();
+	
 	$(document).on("click","#tbCalendarYM",function(){
 		
 		
@@ -355,10 +357,16 @@ function getDetail(){
 	$(document).on("click","span.btnDel",function(){
 		var ans = confirm("일정을 삭제하시겠습니까?");
 		if(ans){
-			//삭제 
-			
-			//getdetail()다시 불러오기
-			//getdata()
+			var num = $(this).attr("num");
+			$.ajax({
+				url: "deleteContent.jsp",  //@@@@@프로젝트때는 경로바꿔야함
+				type:"get",
+				dataType:"html",
+				data:{"num":num},
+				success:function(data){
+					getData();
+				}
+			})
 		}
 		else{
 		window.history.back();	

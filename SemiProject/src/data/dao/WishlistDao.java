@@ -37,7 +37,26 @@ MysqlConnect db = new MysqlConnect();
 	
 	}
 //delete
-	public void deleteContent()
+	public void deleteContent(String num) {
+	
+		String sql ="delete from wishlist where num=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,num);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt);
+		}
+		
+		
+	}
 	
 	
 	
