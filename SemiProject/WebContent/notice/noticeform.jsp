@@ -113,15 +113,15 @@ div.btn{
      <div class="btn">
        <tr>
           <td colspan="2" align="center">
-             <input type="button" value="등록"
+             <button type="button" 
               class="button"
                style="width: 100px;color: white;"
-               onclick="submitContents(this)">
+               onclick="submitContents(this)">등록</button>
                
-             <input type="button" value="목록"
+             <button type="button" 
               class="button"
                style="width: 100px;color: white;"
-               onclick="location.href='index.jsp?main=notice/noticelist.jsp'">  
+               onclick="location.href='index.jsp?main=notice/noticelist.jsp'">목록</button> 
           </td>             
        </tr>
       </div>
