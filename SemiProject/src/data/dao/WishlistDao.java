@@ -11,7 +11,7 @@ import data.dto.WishlistDto;
 import mysql.db.MysqlConnect;
 
 public class WishlistDao {
-MysqlConnect db = new MysqlConnect();
+	MysqlConnect db = new MysqlConnect();
 
 
 //insert 
@@ -36,9 +36,10 @@ MysqlConnect db = new MysqlConnect();
 		}
 	
 	}
-//delete
-	public void deleteContent(String num) {
 	
+	//delete
+	public void deleteContent(String num) {
+		
 		String sql ="delete from wishlist where num=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -55,27 +56,7 @@ MysqlConnect db = new MysqlConnect();
 			db.dbClose(conn, pstmt);
 		}
 		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
 
 }
+	

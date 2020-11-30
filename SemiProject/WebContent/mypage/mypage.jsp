@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-
 div.mypage_main{
 margin-top: 200px;
 }
@@ -23,7 +22,6 @@ border: 5px solid #FAAC58;
 td{
 width: 100px;
 background-color:  #F6E9DC;
-
 }
 td.nodate{
 height: 100px;
@@ -56,11 +54,9 @@ font-size:13pt
 div.calendar{
 margin-left: 150px;
 margin-right: 150px;
-
 }
 div.btnScheduleAdd{
 float:right;
-
 }
 span.btnScheduleAdd{
 margin-bottom: -50px;
@@ -97,6 +93,22 @@ z-index:1111;
 }
 .show {display: block;}
 
+}
+/*드롭다운메뉴*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.show {display: block;}
 
 </style>
 
@@ -107,8 +119,6 @@ z-index:1111;
  <script type="text/javascript">
  var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
  var date = new Date(); //today의 Date를 세어주는 역할
-
-
  function prevCalendar() {//이전 달
  	        // 이전 달을 today에 값을 저장하고
  	        //getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
@@ -120,8 +130,6 @@ z-index:1111;
  	           today = new Date( today.getFullYear(), today.getMonth() + 1, today.getDate());
  	            drawCalendar();//달력 cell 만들어 출력
  	}
-
-
 function drawCalendar(){ //달력 그리는 함수
 			var y = today.getFullYear(); //년
 			var m = today.getMonth(); //월
@@ -130,7 +138,6 @@ function drawCalendar(){ //달력 그리는 함수
 			var firstDate = new Date(y,m,1);
 			//일
 			var firstDay = firstDate.getDay();
-
 			//1-12월까지의 요일
 			var last = [31,28,31,30,31,30,31,31,30,31,30,31];
 			//윤년계산
@@ -150,7 +157,6 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			//년월 띄우기
 			 tbCalendarYM.innerHTML = y + "년 " +(m+1) + "월"; 
-
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -189,7 +195,6 @@ function drawCalendar(){ //달력 그리는 함수
 						
 						
 					}
-
 				}
 				calendar +="</tr>";
 				
@@ -197,7 +202,6 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			$("#calendarBody").html(calendar);
 }
-
 //String sessionId = (String)session.getAttribute("myid"); 
 //xml받아서 출력하기
 function getData(){
@@ -229,7 +233,6 @@ function getData(){
 		
 	})
 }
-
 function getDetail(){
 	var mem_id = $("#mem_id").val();
 	
@@ -239,7 +242,6 @@ function getDetail(){
 		dataType:"xml",
 		data:{"mem_id":mem_id},
 		success:function(data){
-
 			$(data).find("wish").each(function(){
 			
 				//var content =$(this).find("content").text()+"<br>";
@@ -299,14 +301,11 @@ function getlist(){
 	
 }
 
-
 function detailList(){
 	document.getElementById("myslist").classList.toggle("show");
 }
 
-
 //모달에 추가하기
-
 </script>
 
 </head>
@@ -425,7 +424,6 @@ function detailList(){
 
 
 <script type="text/javascript">
-
 	drawCalendar();
 	getData();
 	
