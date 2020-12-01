@@ -627,67 +627,67 @@ $(function(){
 <div class="jeju">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주">제주시</a>
 </div>
-<img id="btn_go_jeju" src="<%=url %>/image/land/jeju.png">
+<img id="btn_go_jeju" src="<%=url %>/image/land_s/jeju_s.png">
 
 <div class="jocheon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천">조천읍</a>
 </div>
-<img id="btn_go_jocheon" src="<%=url %>/image/land/jocheon.png">
+<img id="btn_go_jocheon" src="<%=url %>/image/land_s/jocheon_s.png">
 
 <div class="gujwa">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌">구좌읍</a>
 </div>
-<img id="btn_go_gujwa" src="<%=url %>/image/land/gujwa.png">
+<img id="btn_go_gujwa" src="<%=url %>/image/land_s/gujwa_s.png">
 
 <div class="sungsan">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=성산">성산읍</a>
 </div>
-<img id="btn_go_sungsan" src="<%=url %>/image/land/sungsan.png">
+<img id="btn_go_sungsan" src="<%=url %>/image/land_s/sungsan_s.png">
 
 <div class="pyoseon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=표선">표선면</a>
 </div>
-<img id="btn_go_pyoseon" src="<%=url %>/image/land/pyoseon.png">
+<img id="btn_go_pyoseon" src="<%=url %>/image/land_s/pyoseon_s.png">
 
 <div class="namwon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원">남원읍</a>
 </div>
-<img id="btn_go_namwon" src="<%=url %>/image/land/namwon.png">
+<img id="btn_go_namwon" src="<%=url %>/image/land_s/namwon_s.png">
 
 <div class="seogwipo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포">서귀포시</a>
 </div>
-<img id="btn_go_seogwipo" src="<%=url %>/image/land/seogwipo.png">
+<img id="btn_go_seogwipo" src="<%=url %>/image/land_s/seogwipo_s.png">
 
 <div class="andeok">
 <a  href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕">안덕면</a>
 </div>
-<img id="btn_go_andeok" src="<%=url %>/image/land/andeok.png">
+<img id="btn_go_andeok" src="<%=url %>/image/land_s/andeok_s.png">
 
 <div class="daejung">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정">대정읍</a>
 </div>
-<img id="btn_go_daejung" src="<%=url %>/image/land/daejung.png">
+<img id="btn_go_daejung" src="<%=url %>/image/land_s/daejung_s.png">
 
 <div class="hangyeong">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a>
 </div>
-<img id="btn_go_hangyeong" src="<%=url %>/image/land/hangyeong.png">
+<img id="btn_go_hangyeong" src="<%=url %>/image/land_s/hangyeong_s.png">
 
 <div class="hanrim">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림">한림읍</a>
 </div>
-<img id="btn_go_hanrim" src="<%=url %>/image/land/hanrim.png">
+<img id="btn_go_hanrim" src="<%=url %>/image/land_s/hanrim_s.png">
 
 <div class="aewol">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월">애월읍</a>
 </div>
-<img id="btn_go_aewol" src="<%=url %>/image/land/aewol.png">
+<img id="btn_go_aewol" src="<%=url %>/image/land_s/aewol_s.png">
 
 <div class="udo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도">우도</a>
 </div>
-<img id="btn_go_udo" src="<%=url %>/image/land/udo.png">
+<img id="btn_go_udo" src="<%=url %>/image/land_s/udo_s.png">
 </div>
 
 

@@ -825,18 +825,37 @@ function changeCategoryClass(el) {
 	
 	<!-- 일정 추가 modal -->
 	<div class="modal fade" id="foodModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="height:800px;width:600px">
+    <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
+      <div class="modal-content" style="height:250px;width:600px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 id="schedule_title" style="text-align: center" >
-			yyyy년m월 dd일	
+          <h4 id="addmodal_title" style="text-align: center" >
+		 	<b>일정추가</b>
 			</h4>
         </div>
         <div class="modal-body">
-          <div class="detail"></div>
-          
-       </div>
+        	<div class="addSchedule" align="center" >
+        		<form action ="mypage/scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
+        			<table class="modal_table table table-condensed">
+        			
+        			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
+        				<input type="hidden" name="mem_id" id="mem_id" value="test">
+        				<tr>
+        					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
+        					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" ></td>
+        				</tr>
+        				<tr>
+        					<td align="center" style="font-size: 13pt; background-color: white;border: 0px;">내용</td>
+        					<td align="center" style="background-color: white;border: 0px;"><input type="text" name="content" style="width:300px;"></td>
+        				</tr>
+        				
+        				<tr>
+        					<td colspan="2" align="center" style="background-color: white;border: 0px;"><button type="submit" class="btn_scheduleAdd btn btn-warning">일정추가</button>
+        					</td>
+        				</tr>
+        			</table>
+        		</form>
+        	</div>
       </div>
     </div>
   </div>
