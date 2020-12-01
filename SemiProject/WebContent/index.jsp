@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 또똣 :: 제주여행의모든것</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,11 +20,13 @@
 <style type="text/css">
 body { 
     -ms-overflow-style: none; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
 } 
 ::-webkit-scrollbar {
     display: none; 
 }
-
 
 div.layout div.title {
     position: absolute;
@@ -33,13 +36,17 @@ div.layout div.title {
 div.layout div.main {
     position: relative;
     z-index: 1;
+    height: 100%;
 }
+div.layout div.footer {
+    position: inherit;
+    z-index: 1;
+    bottom: 0;
+    padding: 30px 0;
 
 a {
 	cursor:pointer;
 }
-
-
 </style>
 
 </head>
@@ -49,17 +56,24 @@ a {
 	if(request.getParameter("main") != null){
 		mainPage = request.getParameter("main");
 	}
+	//System.out.println((String)session.getAttribute("myid"));
 %>
 <body>
+
 	<div class="layout">
 		<!-- 타이틀 부분 -->
 		<div class="title">
 			<jsp:include page="layout/title.jsp" />
 		</div>
 		<!-- 제주도 지도부분 -->
-		<div class="main">
+		<div class="main" id="main">
 			<jsp:include page="<%=mainPage%>" />
 		</div>
+	    <!-- footer부분 -->
+		<footer>
+		     <jsp:include page="layout/footer.jsp" />
+		</footer>
 	</div>
+		
 </body>
 </html>

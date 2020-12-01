@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0"/>
- 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+
 <style type="text/css">
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 body {
 	background-color: #7eb9e3;
-	height: 2000px;
 	margin: 0;
+	height: 100%;
 	
 }
 .jejuisland {
@@ -24,14 +25,16 @@ body {
     padding-top: 50px;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
-    position: absolute;
+    position: relative;
     z-index: -9;
+    display: block;
 }
 
 div.btn_go {
     padding-top: 50px;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
+    font-family: 'Jua';
 } 
 
 /*조천*/
@@ -53,7 +56,7 @@ div.btn_go {
 
 .jocheon a {
     top: 220px; 
-    font-size:25px;
+    font-size:30px;
     left: 870px; 
     z-index: 3;
     position: absolute;
@@ -80,7 +83,7 @@ div.btn_go {
 
 .seogwipo a{
     top: 470px; 
-    font-size:25px;
+    font-size:30px;
     left: 640px; 
     z-index: 3;
     position: absolute;
@@ -107,7 +110,7 @@ div.btn_go {
 
 .jeju a{
     top: 260px; 
-    font-size:25px;
+    font-size:30px;
     left: 710px; 
     z-index: 3;
     position: absolute;
@@ -134,7 +137,7 @@ div.btn_go {
 
 .gujwa a{
     top: 180px; 
-    font-size:25px;
+    font-size:30px;
     left: 1000px; 
     z-index: 3;
     position: absolute;
@@ -161,7 +164,7 @@ div.btn_go {
 
 .sungsan a{
     top: 320px; 
-    font-size:25px;
+    font-size:30px;
     left: 1070px; 
     z-index: 3;
     position: absolute;
@@ -188,7 +191,7 @@ div.btn_go {
 
 .pyoseon a{
     top: 370px; 
-    font-size:25px;
+    font-size:30px;
     left: 975px; 
     z-index: 3;
     position: absolute;
@@ -215,7 +218,7 @@ div.btn_go {
 
 .namwon a{
     top: 400px; 
-    font-size:25px;
+    font-size:30px;
     left: 820px; 
     z-index: 3;
     position: absolute;
@@ -242,7 +245,7 @@ div.btn_go {
 
 .andeok a{
     top: 500px; 
-    font-size:25px;
+    font-size:30px;
     left: 480px; 
     z-index: 3;
     position: absolute;
@@ -269,7 +272,7 @@ div.btn_go {
 
 .daejung a{
     top: 510px; 
-    font-size:25px;
+    font-size:30px;
     left: 390px; 
     z-index: 3;
     position: absolute;
@@ -296,7 +299,7 @@ div.btn_go {
 
 .hangyeong a{
     top: 430px; 
-    font-size:25px;
+    font-size:30px;
     left: 370px; 
     z-index: 3;
     position: absolute;
@@ -323,7 +326,7 @@ div.btn_go {
 
 .hanrim a{
     top: 370px; 
-    font-size:25px;
+    font-size:30px;
     left: 430px; 
     z-index: 3;
     position: absolute;
@@ -350,7 +353,7 @@ div.btn_go {
 
 .aewol a{
     top: 350px; 
-    font-size:25px;
+    font-size:30px;
     left: 530px; 
     z-index: 3;
     position: absolute;
@@ -377,7 +380,7 @@ div.btn_go {
 
 .udo a{
     top: 200px; 
-    font-size:25px;
+    font-size:30px;
     left: 1230px; 
     z-index: 3;
     position: absolute;
@@ -387,55 +390,55 @@ div.btn_go {
 
 .notice {
     position: relative;
-    top: 800px;
 }
 
 .shareboard {
     position: relative;
-    top: 800px;
 }
 
-.search {
-  width: 100%;
-  position: relative;
-  display: flex;
+div.container{
+    position: relative;
+    top: 100px;
+    width: 100vw;
+    margin: auto;
+    transition: transform 0.7s, opacity 1s;
+    opacity: 0;
+    padding-top: 100px;
+    padding-left: 400px;
 }
 
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
 }
 
-.searchTerm:focus{
-  color: #00B4CC;
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
 }
 
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
 }
 
-/*Resize the wrap to see the search bar change!*/
-.wrap{
-  width: 30%;
-  position: absolute;
-  top: 850px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
 }
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -555,7 +558,7 @@ $(function(){
 	};
 
 	function handleScroll() {
-	  const elems = document.querySelectorAll('.jejuisland,.btn_go,.wrap');
+	  const elems = document.querySelectorAll('.jejuisland,.btn_go,.container');
 	  elems.forEach(elem => {
 	    if (isElementUnderBottom(elem, -300)) {
 	      elem.style.opacity = "0";
@@ -574,10 +577,8 @@ $(function(){
 	String url = request.getContextPath();
 %>
 <body>
-
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+ 
    
 	<div class="slider">
 		<ul class="slides">
@@ -601,81 +602,92 @@ $(function(){
 				</div></li>
 		 </ul>
 	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
    <!-- 상단 슬라이드 부분 close -->
-   <div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
+ 
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" placeholder="검색할 단어를 입력해주세요" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</div>
 </div>
-<div class="btn_go">
-  
+
+<div class="btn_go"> 
 <div class="jeju">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주">제주시</a>
 </div>
-<img id="btn_go_jeju" src="<%=url %>/image/land/jeju.png">
+<img id="btn_go_jeju" src="<%=url %>/image/land_s/jeju_s.png">
 
 <div class="jocheon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천">조천읍</a>
 </div>
-<img id="btn_go_jocheon" src="<%=url %>/image/land/jocheon.png">
+<img id="btn_go_jocheon" src="<%=url %>/image/land_s/jocheon_s.png">
 
 <div class="gujwa">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌">구좌읍</a>
 </div>
-<img id="btn_go_gujwa" src="<%=url %>/image/land/gujwa.png">
+<img id="btn_go_gujwa" src="<%=url %>/image/land_s/gujwa_s.png">
 
 <div class="sungsan">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=성산">성산읍</a>
 </div>
-<img id="btn_go_sungsan" src="<%=url %>/image/land/sungsan.png">
+<img id="btn_go_sungsan" src="<%=url %>/image/land_s/sungsan_s.png">
 
 <div class="pyoseon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=표선">표선면</a>
 </div>
-<img id="btn_go_pyoseon" src="<%=url %>/image/land/pyoseon.png">
+<img id="btn_go_pyoseon" src="<%=url %>/image/land_s/pyoseon_s.png">
 
 <div class="namwon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원">남원읍</a>
 </div>
-<img id="btn_go_namwon" src="<%=url %>/image/land/namwon.png">
+<img id="btn_go_namwon" src="<%=url %>/image/land_s/namwon_s.png">
 
 <div class="seogwipo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포">서귀포시</a>
 </div>
-<img id="btn_go_seogwipo" src="<%=url %>/image/land/seogwipo.png">
+<img id="btn_go_seogwipo" src="<%=url %>/image/land_s/seogwipo_s.png">
 
 <div class="andeok">
 <a  href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕">안덕면</a>
 </div>
-<img id="btn_go_andeok" src="<%=url %>/image/land/andeok.png">
+<img id="btn_go_andeok" src="<%=url %>/image/land_s/andeok_s.png">
 
 <div class="daejung">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정">대정읍</a>
 </div>
-<img id="btn_go_daejung" src="<%=url %>/image/land/daejung.png">
+<img id="btn_go_daejung" src="<%=url %>/image/land_s/daejung_s.png">
 
 <div class="hangyeong">
-<a .href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a>
+<a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a>
 </div>
-<img id="btn_go_hangyeong" src="<%=url %>/image/land/hangyeong.png">
+<img id="btn_go_hangyeong" src="<%=url %>/image/land_s/hangyeong_s.png">
 
 <div class="hanrim">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림">한림읍</a>
 </div>
-<img id="btn_go_hanrim" src="<%=url %>/image/land/hanrim.png">
+<img id="btn_go_hanrim" src="<%=url %>/image/land_s/hanrim_s.png">
 
 <div class="aewol">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월">애월읍</a>
 </div>
-<img id="btn_go_aewol" src="<%=url %>/image/land/aewol.png">
+<img id="btn_go_aewol" src="<%=url %>/image/land_s/aewol_s.png">
 
 <div class="udo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도">우도</a>
 </div>
-<img id="btn_go_udo" src="<%=url %>/image/land/udo.png">
+<img id="btn_go_udo" src="<%=url %>/image/land_s/udo_s.png">
 </div>
 
 
@@ -694,5 +706,6 @@ window.addEventListener('scroll', handleScroll);
 <div class="shareboard">
 <button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'">공유게시판</button>
 </div>
+
 </body>
 </html>

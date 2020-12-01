@@ -1,0 +1,19 @@
+@charset "UTF-8";
+a.main_login, a.main_mypage {
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: 400;
+	position: relative;
+	display: inline-block;
+	color: #f4f4f4;
+	text-align: center;
+	border: 1px solid #ffaa00;
+	border-radius: 10;
+	background: #ffab00;
+	padding: 10px 20px;
+	font-size: 18px;
+	line-height: normal;
+	vertical-align: middle;
+	user-select: none;
+	outline: 0;
+}

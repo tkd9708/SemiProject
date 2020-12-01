@@ -1,0 +1,170 @@
+@charset "UTF-8"!important;
+
+body {
+	font-size: 18px;
+	line-height: 1.5;
+	color: #f4f4f4;
+}
+
+div {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+button {
+	border: 0;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+}
+
+.findRegion {
+	color: #f4f4f4!important;
+	width: 100%!important;
+	height: 100%;
+	padding-top: 6px!important;
+	border: 0!important;
+	font-size: 18px!important;
+	background-color: transparent!important;
+	outline: 0!important;
+	line-height: 1.5!important;
+	vertical-align: middle!important;
+	margin: 0!important;
+	padding: 0!important;
+}
+
+.wrapAddress {
+	margin: 0!important;
+	padding: 0!important;
+	display: block!important;
+	font-size: 18px!important;
+	line-height: 1.5!important;
+	color: #f4f4f4!important;
+	height: 100%;
+}
+
+.postSearch {
+	background-color: #ffaa00!important;
+	height: 50px!important;
+	padding: 0 70px 0 20px!important;
+	position: relative!important;
+	margin: 0!important;
+	display: block!important;
+	font-size: 18px!important;
+	line-height: 1.5!important;
+	color: #f4f4f4!important;
+}
+
+.postFld {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.formSearch {
+	border-bottom-color: #ded;
+	height: 50px;
+	border-bottom: 1px solid #343434;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.btnSearch {
+	background-color: #ffaa00;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 40px;
+	height: 50px;
+	cursor: pointer;
+}
+
+.imgPost {
+	display: block;
+	margin: 1px 15px 0 5px;
+}
+
+.placeholder .show {
+	display: block;
+}
+.placeholder {
+	color: #f3f3f3;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	cursor: text;
+	line-height: 2rem;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.Postinfo {
+	padding: 40px 30px;
+	background-color: #fff;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.infoWrite {
+	margin-top: 13px;
+	line-height: 2rem;
+	color: #ff9977;
+}
+
+.txtInfo {
+	color: #ffaa33;
+	display: block;
+	margin-top: 4px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.infoWrite2 {
+	margin-top: 10px;
+	line-height: 2rem;
+	color: #ff9975;
+}
+
+.popupFoot {
+	opacity: .7;
+	padding: 10px 0 20px;
+	font-size: 11px;
+	color: #f0f0f0;
+	text-align: center;;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+	display: block;
+}
+
+.innerFooter {
+	display: inline-block;
+}
+
+.ddoddot {
+	display: inline-block;
+	vertical-align: top;
+	width: 300px;
+	height: 10px;
+	margin-top: 10px;
+	font-weight: bolder;
+	font-size: 1rem;
+	color: #ff4400;
+}
+
+.pressed {
+	display: none;
+}
