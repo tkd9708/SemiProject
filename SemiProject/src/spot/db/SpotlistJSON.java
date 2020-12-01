@@ -49,7 +49,7 @@ public class SpotlistJSON {
 			JSONArray parse_item = (JSONArray)jsonObj.get("items");
 			
 			JSONObject obj;
-			System.out.println(parse_item.size());
+			//System.out.println(parse_item.size());
 			
 			for(int i=0; i<parse_item.size(); i++) {
 				SpotlistDto dto = new SpotlistDto();

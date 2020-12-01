@@ -23,7 +23,7 @@
 	//아이디에 해당하는 이름 얻기
 	String name=dao.getName(id);
 	
-	System.out.println(name);
+	//System.out.println(name);
 %>
 <body>
 <b><%=name%> 님</b>

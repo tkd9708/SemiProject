@@ -47,7 +47,7 @@ a {
 	if(request.getParameter("main") != null){
 		mainPage = request.getParameter("main");
 	}
-	System.out.println((String)session.getAttribute("myid"));
+	//System.out.println((String)session.getAttribute("myid"));
 %>
 <body>
 

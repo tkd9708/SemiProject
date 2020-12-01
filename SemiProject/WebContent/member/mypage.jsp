@@ -22,7 +22,7 @@ String url=request.getContextPath();
 		var mbList=document.getElementById("mbList");
 		mbList.setAttribute("hidden", "hidden");	
 		if("<%=idcf%>"=="admin") {
-			console.log("<%=idcf%>");
+			//console.log("<%=idcf%>");
 			mbList.removeAttribute("hidden");
 		}
 	}
