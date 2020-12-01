@@ -51,7 +51,7 @@ header, footer, nav, aside, section {
 }
 header {
 	height: 50px;
-	background-color: red;
+	background-color: #ffaa00;
 	width: 100%;
 }
 nav {
