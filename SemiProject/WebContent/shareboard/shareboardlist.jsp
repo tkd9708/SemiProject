@@ -29,6 +29,7 @@ div.container{
    position: absolute;
    top:  250px;
    left: 230px;
+   
  }
 
 input.button {
@@ -46,7 +47,7 @@ b {
 
 div.page {
    position: absolute;
-   top: 1150px;
+   top: 1250px;
    left: 200px;
 }
 
@@ -61,7 +62,10 @@ h2{
      position: absolute;
      top: 180px;
      left: 550px;
+    
  }
+ 
+
 
 th{
 text-align: center;
@@ -108,91 +112,51 @@ html, body {
   transform: translateY(-7px);
 }
 
-#shareout{
-   margin-top: 200px;
-}
 
 
-/*---------------------------------------------테이블 css--------------------------------------------------*/
-body {
-  font-family: 'lato', sans-serif;
-}
-div.container {
-  max-width: 1000px;
-  position: absolute;
-  left: 200px;
-  padding-left: 10px;
-  padding-right: 10px;
+/*----------------------------------------------테이블 css--------------------------------------------------*/
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
 }
 
-h2 {
-  font-size: 26px;
-  margin: 20px 0;
-  text-align: center;
-
+.styled-table thead tr {
+    background-color:  #ffad33;
+    color: white;
+    text-align: left;
+    border-radius: 5%;
+    
 }
 
-.responsive-table {
-  tr {
-    border-radius: 3px;
-    padding: 25px 30px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-  }
-  .table-header {
-    background-color:  #ffc266;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    border-radius: 15px;
-  }
-  .table-row {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
-    border-radius: 15px;
-  }
-  .col-1 {
-    flex-basis: 10%;
-  }
-  .col-2 {
-    flex-basis: 40%;
-  }
-  .col-3 {
-    flex-basis: 25%;
-  }
-  .col-4 {
-    flex-basis: 25%;
-  }
-  
-  @media all and (max-width: 767px) {
-    .table-header {
-      display: none;
-    }
-    .table-row{
-      
-    }
-    tr {
-      display: block;
-    }
-    .col {
-      
-      flex-basis: 100%;
-      
-    }
-    .col {
-      display: flex;
-      padding: 10px 0;
-      &:before {
-        color: #6C7A89;
-        padding-right: 10px;
-        content: attr(data-label);
-        flex-basis: 50%;
-        text-align: right;
-      }
-    }
-  }
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+   
 }
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #ffad33;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color:  #ffad33;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #ffad33;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
+
 
 
 
@@ -241,7 +205,7 @@ h2 {
 %>
 <body>
    
-   <div class="container" >
+   <div class="position" >
       <h2 >맛집 공유 게시판</h2><br><br><br><br>
    
    <div class="point">
@@ -254,20 +218,20 @@ h2 {
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
  %>
    <div class="container">
-      <div style="margin-left: -50px;">
-         <table class="responsive-table" >
-   
-            <tr class="table-header" >
-               <th width="50">id</th>
-               <th width="180">photo</th>
-               <th width="120">맛집</th>
-               <th width="150">추천 내용</th>
+     <div style="margin-left: -50px;">
+       <table class="styled-table" >
+         <thead>
+            <tr class="warning" >
+               <th width="50">ID</th>
+               <th width="180">PHOTO</th>
+               <th width="120">추천 맛집</th>
+               <th width="150">리뷰</th>
                <th width="70">별점</th>
                <th width="70">좋아요</th>
                <th width="70">찜하기</th>
-               <th width="80">작성일</th>
+               <th width="100">작성일</th>
             </tr>
-        
+         <thead>
             
             
             <%
@@ -288,7 +252,7 @@ h2 {
                 {%>
             
             <tbody>
-            <tr class="warning">
+            <tr class="active-row">
                <td style="vertical-align: middle;"
                   href="index.jsp?main=shareboard/shareboardcontent.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>&key=list">
                      <%=dto.getId()%></td>
@@ -328,7 +292,7 @@ h2 {
 
          </table>
          
-      <!--  <b>총 <span style="color: #ff9900;"><%=totalCount%></span> 개의 글이있습니다</b>  -->
+  
       </div>
    </div>
    

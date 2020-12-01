@@ -41,10 +41,10 @@
       left: 250px;
    }
    
-   /*별점 css*/
+   /*--------------------별점 css--------------------------------*/
  div.stars{
    position: absolute;
-   top: 493px;
+   top: 554px;
    left: 100px;
  
  }
@@ -99,7 +99,7 @@
     fill: #EFCE4A;
 }
 
-/*버튼 css*/
+/*--------------------------버튼 css--------------------------------------*/
 
 html, body {
   height: 100%;
@@ -149,6 +149,49 @@ div.btn{
    left: 300px;
 }
 
+div.btn_point{
+    position: absolute;
+    top: 630px;
+}
+
+/*--------------------------테이블 css--------------------------------------*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+.styled-table th {
+    background-color:  #ffad33;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table  th {
+    border-bottom: 1px solid white;
+}
+
+.styled-table  th:nth-of-type(even) {
+    background-color:  #ffad33;
+}
+
+.styled-table td:last-of-type {
+    border-bottom: 1px solid #ffad33;
+}
+
+.styled-table td.active-row {
+    font-weight: bold;
+    color: black;
+}
 
 
    
@@ -187,11 +230,11 @@ $(function(){
 <body>
 <div class="shareboardform">
 <fieldset style="width: 800px;">
-   <legend >공유하기</legend>
+   <h2>공유하기</h2>
    <form action="shareboard/shareboardaction.jsp" method="post" enctype="multipart/form-data">
-   <table class="table table-bordered">
+   <table class="styled-table">
          <tr>
-            <th bgcolor="#ffc34d"><span>추천맛집</span></th>
+            <th style="text-align: center;"><span>추천맛집</span></th>
             <td>
               <input type="text" name="subject" class="form-control"
                required="required" style="width: 200px;height: 30px;"
@@ -200,7 +243,7 @@ $(function(){
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>맛집주소</span></th>
+            <th style="text-align: center;"><span>맛집주소</span></th>
             <td>
               <input type="text" name="addr" class="form-control"
                required="required" style="width:600px;height: 30px;"
@@ -209,14 +252,14 @@ $(function(){
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>이미지</span></th>
+            <th style="text-align: center;"><span>이미지</span></th>
             <td>
               <input class="btn" type="file" name="photo" style="width: 600px;">
             </td>
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>내용</span></th>
+            <th style="text-align: center;"><span>내용</span></th>
             <td>
               <textarea class="form-control"
                rows="13" cols="70" maxlength="1500" name="content" style="resize: none;">
@@ -225,7 +268,7 @@ $(function(){
          </tr>
          
          <tr>
-           <th bgcolor="#ffc34d"><span>평가</span></th>
+           <th style="text-align: center;"><span>평가</span></th>
             <td>
                 <input type="hidden" id="sharestar" name="stars" value="0">               
            <!-- 별점 -->
@@ -273,14 +316,16 @@ $(function(){
         </div>
         </td> 
        </tr>  
-        <tr>
-          <td colspan="2" align="center">
+        
+        
+     
+      <div class="btn_point">
              <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
                
              <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
                onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
-          </td>             
-       </tr> 
+                     
+      </div>
        </table> 
     </form>
    </fieldset>
