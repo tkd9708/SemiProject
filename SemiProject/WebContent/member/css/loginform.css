@@ -20,12 +20,9 @@ div.signupBox {
 	position: relative;
 	left: 10%;
 }
-header, footer, nav, aside, section {
-	border: 1px solid #999;
-}
 .navHeader {
 	height: 50px;
-	background-color: red;
+	background-color: #ffaa00;
 	width: 100%;
 	margin-top: 70px;
 }
@@ -46,34 +43,33 @@ a.btnbigpink {
 	width: 100%;
 	height: inherit;
 }
-header, footer, nav, aside, section {
-	border: 1px solid #999;
-}
 header {
 	height: 50px;
 	background-color: #ffaa00;
 	width: 100%;
 }
 nav {
-	background-color: goldenrod;
+	background-color: #ffaa00;
 	position: fixed;
 	width: 100%;
 	height: inherit;
 	z-index: 9999;
 }
 section {
-	background-color: green;
 	width: 604px;
+	color: #ffa500;
 }
 aside {
 	background-color: #FFAA00;
 	width: 100px;
+	color: #f4f4f4;
 }
 footer {
 	height: 50px;
 	background-color: #ffaa00;
 	position: relative;
 	clear: both;
+	color: #f4f4f4;
 }
 article {
 	width: 90%;
@@ -92,10 +88,12 @@ a.btnbigpink {
 	margin-bottom: 20px;
 	font-size: 16px;
 	padding: 10px 20px;
-	color: #777777;
-	background-color: #ffaa00;
-	border: 1px solid #cccccc;
+	color: #f4f4f4;
+	background-color: rgba(255,190,0,.8);
+	border: 0;
 	line-height: normal;
+	display: inline-block;
+	text-align: center;
 }
 li {
 	float: left;
@@ -116,4 +114,7 @@ li:hover >ul{
 li>ul {
 	position: absolute;
 	left: -20px;
+}
+li>a {
+	color: #f4f4f4;
 }
