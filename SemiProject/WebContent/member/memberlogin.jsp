@@ -9,7 +9,6 @@ String url=request.getContextPath();
 /* System.out.println(url); */
 %>
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/memberlogin.css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/member/js/memberlogin.js"></script>
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 제주한달살기</title>
 </head>
@@ -27,7 +26,7 @@ String url=request.getContextPath();
 							<input type="text" title="아이디" name="id" id="id" 
 							autofocus="autofocus" required="required"
 							placeholder="아이디를 입력해 주세요."
-							class="inputText vPlaceholder" autocomplete="username">
+							class="inputText vPlaceholder1" autocomplete="username">
 							<b class="idcheck"></b>
 						</div>
 					</td>
@@ -38,7 +37,7 @@ String url=request.getContextPath();
 						<div class="formHolder password">
 							<input type="password" title="비밀번호"
 							placeholder="영문숫자기호 합해 8자이상"
-							class="pwText vPlaceholder"
+							class="pwText vPlaceholder1"
 							autocomplete="new-password" spellcheck="false"
 							id="pass" name="pass" required="required">
 							<span class="passChk" id="passChk"></span>
@@ -51,7 +50,7 @@ String url=request.getContextPath();
 						<div class="formHolder cfpassword">
 							<input type="password" title="비번확인"
 							placeholder="비밀번호 한번 더 입력"
-							class="cfpwText vPlaceholder"
+							class="cfpwText vPlaceholder1"
 							autocomplete="new-password"
 							spellcheck="false" required="required"
 							name="cfpass" id="cfpass">
@@ -89,7 +88,7 @@ String url=request.getContextPath();
 						<div class="formHolder name">
 							<input type="text" title="이름"
 							placeholder="이름을 입력해 주세요."
-							class="inputText vPlaceholder" required="required" name="name">
+							class="inputText vPlaceholder1" required="required" name="name">
 						</div>
 					</td>
 				</tr>
@@ -98,7 +97,7 @@ String url=request.getContextPath();
 					<td>
 						<div class="formHolder email">
 							<input type="text" placeholder="이메일입력(a@naver.com)"
-							class="inputText vPlaceholder"
+							class="inputText vPlaceholder1"
 							required="required" name="email" id="email">
 							<b class="emailChk"></b>
 						</div>
@@ -110,7 +109,7 @@ String url=request.getContextPath();
 						<div class="formHolder hp">
 							<input type="text" title="핸드폰"
 							placeholder="핸드폰을 입력해 주세요."
-							class="inputText vPlaceholder" name="hp">
+							class="inputText vPlaceholder1" name="hp">
 						</div>
 					</td>
 				</tr>
@@ -123,7 +122,9 @@ String url=request.getContextPath();
 							readonly="readonly"
 							required="required" name="address">
 							<button type="button" class="SearchPost" id="SearchPost">
-								주소검색
+								<span class="btnTxt">
+									주소검색
+								</span>
 							</button>
 							<br><br><br>
 							<input type="text" title="주소2"
@@ -133,10 +134,10 @@ String url=request.getContextPath();
 					</td>
 				</tr>
 				<tr>
-					<td class="regMemberBtn">
+					<td class="regMemberBtn" colspan="2">
 						<button type="button" class="btnbigpink"
 						id="btnSubmit">
-						회원가입</button>
+						<span class="btnTxt">회원가입</span></button>
 					</td>
 				</tr>
 			</tbody>

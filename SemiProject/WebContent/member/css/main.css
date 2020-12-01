@@ -29,4 +29,6 @@ button {
 	background-color: #ffaa00;
 	box-shadow: .03rem .02rem .01rem .02rem #ff5600;
 	color: #f4f4f4!important;
+	font-weight: bold!important;
+	text-shadow: .08rem .08rem 1rem gray;
 }

@@ -127,5 +127,9 @@ div.loginBtn {
 }
 
 div.loginform {
-	margin-top: 100px;
+	width: 33.3%;
+	margin: 0 auto;
+	margin-top: 16.65%;
+	/* display: flex;
+	justify-content: center; */
 }

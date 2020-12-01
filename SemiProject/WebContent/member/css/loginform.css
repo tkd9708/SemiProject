@@ -30,14 +30,14 @@ header, footer, nav, aside, section {
 	margin-top: 70px;
 }
 nav {
-	background-color: goldenrod;
+	background-color: #FFAA00;
 	height: 100%;
 }
 aside {
-	background-color: goldenrod;
+	background-color: #FFAA00;
 }
 footer {
-	background-color: blue;
+	background-color: #FFAA00;
 	position: relative;
 	width: 2000px;
 }
@@ -66,12 +66,12 @@ section {
 	width: 604px;
 }
 aside {
-	background-color: goldenrod;
+	background-color: #FFAA00;
 	width: 100px;
 }
 footer {
 	height: 50px;
-	background-color: blue;
+	background-color: #ffaa00;
 	position: relative;
 	clear: both;
 }

@@ -169,7 +169,7 @@ System.out.println(url);
 		</aside>
 		<!-- 풋터 -->
 		<footer>
-			(풋터)멘도롱 또똣(풋터)
+			멘도롱 또똣
 		</footer>
 </body>
 </html>
