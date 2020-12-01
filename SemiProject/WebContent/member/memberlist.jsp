@@ -9,12 +9,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 <%
 	MemberDao dao=new MemberDao();
 	
 	List<MemberDto> list=dao.getAllMembers();
 %>
+<script type="text/javascript">
+	$(function(){
+		$(".btnUpdate").click(function(e) {
+			saveNum=$(this).attr("data-num");
+			/* alert(saveNum); */
+			location.href="index.jsp?main=member/updateform.jsp?num="+saveNum;
+		});
+		$(".btnOut").click(function(e) {
+			location.href="index.jsp?main=member/deletepassform.jsp?id="+$(this).attr("data-id");
+		});
+	});
+</script>
+</head>
 <body>
 	<div class="forMargin">관리자 페이지
 	<h3><b>회원 명단</b></h3>
@@ -27,8 +39,8 @@
 				<span>
 					<b>아이디 : </b> <%=dto.getId()%> <br>
 					<b>이  름 : </b> <%=dto.getName()%> <br>
-					<button type="button" class="btnUpdate">정보수정</button><br>
-					<button type="button" class="btnOut">회원탈퇴</button><br>
+					<button type="button" class="btnUpdate" data-num="<%=dto.getNum()%>">정보수정</button><br>
+					<button type="button" class="btnOut" data-id="<%=dto.getId()%>">회원탈퇴</button><br>
 					<b>핸드폰 : </b> <%=dto.getHp()%> <br>
 					<b>주  소 : </b> <%=dto.getAddress()%> <br>
 					<b>이메일 : </b> <%=dto.getEmail()%> <br>

@@ -22,8 +22,8 @@ input.clsId, input.clsPass {
 	height: 4.5rem;
 	outline: 0;
 	transition: all 1000ms linear;
-	color: #777;
-	font-size: 100%;
+	color: #ffaa00;
+	font-size: 18px;
 	vertical-align: middle;
 	caret-color: #ffaa00;
 	background-color: transparent;

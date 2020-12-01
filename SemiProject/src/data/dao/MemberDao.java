@@ -269,4 +269,27 @@ public class MemberDao {
 		}
 		return list;
 	}
+	
+	//삭제하는 메서드
+	public void deleteMember(String id)
+	{
+		String sql="delete from member where id=?";
+		
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, id);
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt);
+		}
+	}
 }

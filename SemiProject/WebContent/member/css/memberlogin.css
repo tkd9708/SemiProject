@@ -92,3 +92,11 @@ button {
 .regForm {
 	width: 1000px;
 }
+
+svg.bi-eye {
+	fill: #ffaa00;
+}
+
+svg.bi-eye-slash {
+	fill: #aba;
+}

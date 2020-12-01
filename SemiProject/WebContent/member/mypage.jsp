@@ -47,8 +47,12 @@ String url=request.getContextPath();
 				</li>
 			</ul>
 		</nav>
-		<div>
-			<jsp:include page="../member/info.jsp"/>
+		<div id="container">
+			<div id="content">
+				<div class="myPage">
+					<jsp:include page="../member/info.jsp"/>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

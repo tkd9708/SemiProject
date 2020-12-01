@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.alert-info {
+	width: 33.3%;height: 50%;text-align: center;
+padding-top: 20px;
+background-color: rgba(255,200,0,.3);
+}
+
+.btnOutMem {
+	border: 0!important;
+	outline: 0!important;
+	background-color: #ffaa00!important;
+	color: #f4f4f4!important;
+}
+
+.passInput {
+	border: 0!important;
+	outline: 0!important;
+	color: #ffaa00!important;
+	caret-color: #ff5500!important;
+	border: .8px solid #ffa900!important;
+}
