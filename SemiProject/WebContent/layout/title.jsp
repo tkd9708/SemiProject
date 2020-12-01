@@ -13,6 +13,7 @@
       width: 100%;
       height: 100%;
   }
+
   #navbar{
       position: fixed;
       top: -200px;
@@ -42,6 +43,11 @@
   li.list {
       padding-right: 50px;
       font-family: 'Do Hyeon';
+      
+  }
+  li.list a {
+      color: #2b2b2b;
+      
   }
   
   .menu{
@@ -97,18 +103,19 @@
    .menu li a:hover, .menu ul li:hover a{
       color:#FFFFFF;
       text-decoration:none;
+      cursor: pointer;
    }
 
     .menu li ul{
-      background: #3f423e;
+      background: #9b9b9b;
       display:none; 
       height:40px;
       border:0px;
       position:absolute;
       width:100px;
       z-index:200;
-      opacity: 0.5;
       list-style: none;
+      opacity: 0.9;
       /*top:1em;
       /*left:0;*/
     }
@@ -144,7 +151,7 @@
     .menu li ul a:hover, .menu li ul li:hover a{
       background: rgb(171,171,171);
       border:0px;
-      color:#ffffff;
+      color:black;
       text-decoration:none;
     }
 
@@ -153,6 +160,13 @@
     }
   
 </style>
+<script type="text/javascript">
+$(function(){
+	$("li.list").on('mouseover',function(){
+	    $("li.list a").css('color','black');	
+	});
+});
+</script>
 </head>
 <%
     //프로젝트의 경로 구하기
@@ -170,10 +184,10 @@
               </s_if_var_logoImage>
             </a>
            </li>
-           <li class="list"><a class="main_login">login</a></li>
-           <li class="list"><a class="main_mypage">마이페이지</a></li>
-           <li class="list "><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
-           <li class="list">관광명소
+           <li class="list" id="list"><a class="main_login">login</a></li>
+           <li class="list" id="list"><a class="main_mypage">마이페이지</a></li>
+           <li class="list" id="list"><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
+           <li class="list" id="list">관광명소
              <ul>
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주">제주시</a></li>
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a></li>
