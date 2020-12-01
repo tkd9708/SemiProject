@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 또똣 :: 제주여행의모든것</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -27,7 +28,6 @@ body {
     display: none; 
 }
 
-
 div.layout div.title {
     position: absolute;
     top: 0px;
@@ -38,15 +38,15 @@ div.layout div.main {
     z-index: 1;
     height: 100%;
 }
-
 div.layout div.footer {
     position: inherit;
     z-index: 1;
     bottom: 0;
     padding: 30px 0;
+
+a {
+	cursor:pointer;
 }
-
-
 </style>
 
 </head>
@@ -56,8 +56,10 @@ div.layout div.footer {
 	if(request.getParameter("main") != null){
 		mainPage = request.getParameter("main");
 	}
+	//System.out.println((String)session.getAttribute("myid"));
 %>
 <body>
+
 	<div class="layout">
 		<!-- 타이틀 부분 -->
 		<div class="title">
