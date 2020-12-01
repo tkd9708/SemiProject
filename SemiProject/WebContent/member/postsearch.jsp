@@ -25,7 +25,7 @@
 									value="" autocomplete="off" required="required"
 									autofocus="autofocus"
 									placeholder=" "></input>
-									<span class="placeholder show" label-value="예) 서초구 강남대로459 백암빌딩(구관)"></span>
+									<span class="placeholder show" label-value="예) 서초구 강남대로459 백암빌딩"></span>
 								</div>
 							</label>
 							<input type="hidden" name="key" value="result">
@@ -49,7 +49,7 @@
 	%>
 		<div class="popBody">
 			<div class="Postinfo">
-				<p class="infoWrite">아래와 같이 검색하세요.</p>
+				<!-- <p class="infoWrite">아래와 같이 검색하세요.</p>
 				<p class="infoWrite">도로명 + 건물번호</p>
 				<span class="txtInfo">예) 강남대로 459,&nbsp;&nbsp;영동대로 220</span>
 				<p class="infoWrite2">지역명(동/리) + 번지</p>
@@ -57,7 +57,7 @@
 				<p class="infoWrite2">지역명(동/리) + 건물명(아파트명)</p>
 				<span class="txtInfo">예) 분당 주공,&nbsp;&nbsp;귤현동 힐타운11차</span>
 				<p class="infoWrite2">사서함명 + 번호</p>
-				<span class="txtInfo">예) 강릉우체국사서함 1~100</span>
+				<span class="txtInfo">예) 강릉우체국사서함 1~100</span> -->
 			</div>
 		</div>
 	<%}
