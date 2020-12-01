@@ -119,6 +119,7 @@ li>ul {
 }
 li>a {
 	color: #f4f4f4;
+	text-decoration: none!important;
 }
 
 .gridContainer {
