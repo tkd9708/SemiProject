@@ -1,3 +1,5 @@
+<%@page import="data.dto.MemberDto"%>
+<%@page import="data.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +20,9 @@ String url=request.getContextPath();
 	String idcf=(String)session.getAttribute("myid");
 	String loginok=(String)session.getAttribute("loginok");
 	System.out.println(loginok);
+	System.out.println(idcf);
+	MemberDao dao=new MemberDao();
+	MemberDto dto=dao.getData(idcf);
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -34,16 +39,24 @@ String url=request.getContextPath();
 <body>
 	<div class="showPage" id="showPage">
 		<nav>
-			<ul>
+			<ul class="firstUl">
 				<li>
-					<div class="mbList" id="mbList">
-						<a href="index.jsp?main=member/memberlist.jsp" class="ambList">회원 명단</a>
-					</div>				
+					<a href="index.jsp?main=member/memberlist.jsp" class="ambList">회원 명단</a>
 				</li>
 				<li>
-					<div class="myMenu1" id="myMenu1">
-						<a href="#">메뉴1</a>
-					</div>
+					<a href="#">내 정보 관리</a>
+					<ul>
+						<li>
+							<a class="menust subMenu1" id="subMenu1"
+							href="index.jsp?main=member/updateform.jsp?num=<%=dto.getNum()%>">
+							개인정보 수정</a>
+						</li>
+						<li>
+							<a class="menust subMenu2" id="subMenu2"
+							href="index.jsp?main=member/deletepassform.jsp?id=<%=dto.getId()%>">
+							회원탈퇴</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</nav>

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/info.css">
 <title>Insert title here</title>
 <%
 	MemberDao dao=new MemberDao();
@@ -39,7 +40,9 @@ SpotlistDao sdao=new SpotlistDao();
 	<div class="photoZone">
 		<!-- 이미지 출력할곳 -->
 		<div class="pZ">
-			<img id="showImg">
+			<div class="photoSize">
+				<img id="showImg">
+			</div>
 		</div>
 		<!-- 이미지 출력할곳 -->
 		<form action="member/photoaction.jsp" method="post"
