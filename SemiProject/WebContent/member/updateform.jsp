@@ -36,14 +36,16 @@
 			<h3>회원정보수정</h3>
 			<div class="gridContainer">
 				<div class="item">
+					<!-- hidden -->
+					<input type="hidden" name="num" value="<%=dto.getNum()%>">
+					<input type="hidden" name="id" value="<%=dto.getId()%>">
 					<b>아이디 : </b>
 					<b><%=dto.getId()%></b><br>
 				</div>
 				<div class="item">
 				<b>이 름 : </b>
 					<input type="text" name="name" class="txtName"
-					required="required" value="<%=dto.getName()%>"
-					data-num="<%=dto.getNum()%>" data-id="<%=dto.getId()%>"><br>
+					required="required" value="<%=dto.getName()%>"><br>
 				</div>
 				<div class="item">
 					<b>핸드폰 : </b>
