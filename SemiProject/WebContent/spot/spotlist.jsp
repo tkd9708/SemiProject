@@ -10,6 +10,12 @@
 <title>Insert title here</title>
 
 <style type="text/css">
+body {
+font-family: NanumBarunpen;
+letter-spacing: 2px;
+
+}
+
 	#areaTitle {
 		margin-left: 20px;
 		margin-bottom: 50px;
