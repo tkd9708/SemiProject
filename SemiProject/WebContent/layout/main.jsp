@@ -15,11 +15,12 @@
 
 <style type="text/css">
 body {
-	background-color: #7eb9e3;
+	/*background-color: #7eb9e3;*/
 	margin: 0;
 	height: 100%;
 	
 }
+
 .jejuisland {
     left:267px;
     padding-top: 50px;
@@ -34,21 +35,22 @@ div.btn_go {
     padding-top: 50px;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
-    font-family: 'Jua';
+    font-weight: bold;
+    font-size: 25px;
 } 
 
 /*조천*/
 #btn_go_jocheon{
-    top: 100px;
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_jocheon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -56,7 +58,6 @@ div.btn_go {
 
 .jocheon a {
     top: 220px; 
-    font-size:30px;
     left: 870px; 
     z-index: 3;
     position: absolute;
@@ -66,16 +67,16 @@ div.btn_go {
 
 /*서귀포*/
 #btn_go_seogwipo{
-    top: 100px;; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_seogwipo.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -83,7 +84,6 @@ div.btn_go {
 
 .seogwipo a{
     top: 470px; 
-    font-size:30px;
     left: 640px; 
     z-index: 3;
     position: absolute;
@@ -93,16 +93,16 @@ div.btn_go {
 
 /*제주*/
 #btn_go_jeju{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_jeju.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -110,7 +110,6 @@ div.btn_go {
 
 .jeju a{
     top: 260px; 
-    font-size:30px;
     left: 710px; 
     z-index: 3;
     position: absolute;
@@ -120,16 +119,16 @@ div.btn_go {
 
 /*구좌*/
 #btn_go_gujwa{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_gujwa.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -137,7 +136,6 @@ div.btn_go {
 
 .gujwa a{
     top: 180px; 
-    font-size:30px;
     left: 1000px; 
     z-index: 3;
     position: absolute;
@@ -147,16 +145,16 @@ div.btn_go {
 
 /*성산*/
 #btn_go_sungsan{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_sungsan.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -164,7 +162,6 @@ div.btn_go {
 
 .sungsan a{
     top: 320px; 
-    font-size:30px;
     left: 1070px; 
     z-index: 3;
     position: absolute;
@@ -174,16 +171,16 @@ div.btn_go {
 
 /*표선*/
 #btn_go_pyoseon{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_pyoseon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -191,7 +188,6 @@ div.btn_go {
 
 .pyoseon a{
     top: 370px; 
-    font-size:30px;
     left: 975px; 
     z-index: 3;
     position: absolute;
@@ -201,16 +197,16 @@ div.btn_go {
 
 /*남원*/
 #btn_go_namwon{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_namwon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -218,7 +214,6 @@ div.btn_go {
 
 .namwon a{
     top: 400px; 
-    font-size:30px;
     left: 820px; 
     z-index: 3;
     position: absolute;
@@ -228,16 +223,16 @@ div.btn_go {
 
 /*안덕*/
 #btn_go_andeok{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_andeok.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -245,7 +240,6 @@ div.btn_go {
 
 .andeok a{
     top: 500px; 
-    font-size:30px;
     left: 480px; 
     z-index: 3;
     position: absolute;
@@ -255,16 +249,16 @@ div.btn_go {
 
 /*대정*/
 #btn_go_daejung{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_daejung.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -272,7 +266,6 @@ div.btn_go {
 
 .daejung a{
     top: 510px; 
-    font-size:30px;
     left: 390px; 
     z-index: 3;
     position: absolute;
@@ -282,16 +275,16 @@ div.btn_go {
 
 /*한경*/
 #btn_go_hangyeong{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_hangyeong.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -299,7 +292,6 @@ div.btn_go {
 
 .hangyeong a{
     top: 430px; 
-    font-size:30px;
     left: 370px; 
     z-index: 3;
     position: absolute;
@@ -309,16 +301,16 @@ div.btn_go {
 
 /*한림*/
 #btn_go_hanrim{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_hanrim.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -326,7 +318,6 @@ div.btn_go {
 
 .hanrim a{
     top: 370px; 
-    font-size:30px;
     left: 430px; 
     z-index: 3;
     position: absolute;
@@ -336,16 +327,16 @@ div.btn_go {
 
 /*애월*/
 #btn_go_aewol{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px;
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_aewol.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -353,7 +344,6 @@ div.btn_go {
 
 .aewol a{
     top: 350px; 
-    font-size:30px;
     left: 530px; 
     z-index: 3;
     position: absolute;
@@ -363,16 +353,16 @@ div.btn_go {
 
 /*우도*/
 #btn_go_udo{
-    top: 100px; 
-    left: 267px; 
+    top: 95px; 
+    left: 262px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_udo.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 95px; 
+    left: 262px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -380,7 +370,6 @@ div.btn_go {
 
 .udo a{
     top: 200px; 
-    font-size:30px;
     left: 1230px; 
     z-index: 3;
     position: absolute;
@@ -399,24 +388,29 @@ div.btn_go {
 div.container{
     position: relative;
     top: 100px;
-    width: 100vw;
+    width: max-content;
     margin: auto;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
     padding-top: 100px;
-    padding-left: 400px;
+    margin-left: 400px;
+    margin-bottom: 100px;
 }
 
 #custom-search-input{
     padding: 3px;
-    border: solid 1px #E4E4E4;
+    border: solid 3px #ffa400;
     border-radius: 6px;
     background-color: #fff;
+    display: inline-block;
+    float: right;
+    height: 55px;
 }
 
 #custom-search-input input{
     border: 0;
     box-shadow: none;
+    display: inline-block;
 }
 
 #custom-search-input button{
@@ -439,6 +433,16 @@ div.container{
     font-size: 23px;
 }
 
+select.combobox{
+    display: inline-block;
+    width: 100px;
+    background-color: #fff;
+    float: left;
+    height: 55px;
+    margin-top: 1px;
+    border: solid 3px #ffa400; 
+    border-radius: 6px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -549,6 +553,9 @@ $(function(){
 		$("#btn_go_udo").removeClass("hover");
 	});
 	
+	$("div.btn_go").on('mouseover',function(){
+	    $(this).css('color','white');	
+	});
   });//function close
   
   function isElementUnderBottom(elem, triggerDiff) {
@@ -607,6 +614,13 @@ $(function(){
    <!-- 상단 슬라이드 부분 close -->
  
 <div class="container">
+ <div class="combo">
+            <select class="combobox">
+                <option value="all" selected="selected">전  체</option>
+                <option value="land">지  역</option>
+                <option value="spot">지역명소</option>
+             </select>
+         </div>
 	<div class="row">
         <div class="col-md-6">
             <div id="custom-search-input">
@@ -627,67 +641,67 @@ $(function(){
 <div class="jeju">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주">제주시</a>
 </div>
-<img id="btn_go_jeju" src="<%=url %>/image/land/jeju.png">
+<img id="btn_go_jeju" src="<%=url %>/image/land_s/jeju_s.png">
 
 <div class="jocheon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=조천">조천읍</a>
 </div>
-<img id="btn_go_jocheon" src="<%=url %>/image/land/jocheon.png">
+<img id="btn_go_jocheon" src="<%=url %>/image/land_s/jocheon_s.png">
 
 <div class="gujwa">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=구좌">구좌읍</a>
 </div>
-<img id="btn_go_gujwa" src="<%=url %>/image/land/gujwa.png">
+<img id="btn_go_gujwa" src="<%=url %>/image/land_s/gujwa_s.png">
 
 <div class="sungsan">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=성산">성산읍</a>
 </div>
-<img id="btn_go_sungsan" src="<%=url %>/image/land/sungsan.png">
+<img id="btn_go_sungsan" src="<%=url %>/image/land_s/sungsan_s.png">
 
 <div class="pyoseon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=표선">표선면</a>
 </div>
-<img id="btn_go_pyoseon" src="<%=url %>/image/land/pyoseon.png">
+<img id="btn_go_pyoseon" src="<%=url %>/image/land_s/pyoseon_s.png">
 
 <div class="namwon">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=남원">남원읍</a>
 </div>
-<img id="btn_go_namwon" src="<%=url %>/image/land/namwon.png">
+<img id="btn_go_namwon" src="<%=url %>/image/land_s/namwon_s.png">
 
 <div class="seogwipo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=서귀포">서귀포시</a>
 </div>
-<img id="btn_go_seogwipo" src="<%=url %>/image/land/seogwipo.png">
+<img id="btn_go_seogwipo" src="<%=url %>/image/land_s/seogwipo_s.png">
 
 <div class="andeok">
 <a  href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=안덕">안덕면</a>
 </div>
-<img id="btn_go_andeok" src="<%=url %>/image/land/andeok.png">
+<img id="btn_go_andeok" src="<%=url %>/image/land_s/andeok_s.png">
 
 <div class="daejung">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=대정">대정읍</a>
 </div>
-<img id="btn_go_daejung" src="<%=url %>/image/land/daejung.png">
+<img id="btn_go_daejung" src="<%=url %>/image/land_s/daejung_s.png">
 
 <div class="hangyeong">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a>
 </div>
-<img id="btn_go_hangyeong" src="<%=url %>/image/land/hangyeong.png">
+<img id="btn_go_hangyeong" src="<%=url %>/image/land_s/hangyeong_s.png">
 
 <div class="hanrim">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한림">한림읍</a>
 </div>
-<img id="btn_go_hanrim" src="<%=url %>/image/land/hanrim.png">
+<img id="btn_go_hanrim" src="<%=url %>/image/land_s/hanrim_s.png">
 
 <div class="aewol">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=애월">애월읍</a>
 </div>
-<img id="btn_go_aewol" src="<%=url %>/image/land/aewol.png">
+<img id="btn_go_aewol" src="<%=url %>/image/land_s/aewol_s.png">
 
 <div class="udo">
 <a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도">우도</a>
 </div>
-<img id="btn_go_udo" src="<%=url %>/image/land/udo.png">
+<img id="btn_go_udo" src="<%=url %>/image/land_s/udo_s.png">
 </div>
 
 
