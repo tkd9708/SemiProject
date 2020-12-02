@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/memberlist.css">
 <title>Insert title here</title>
 <%
 	MemberDao dao=new MemberDao();
@@ -42,7 +43,7 @@
 					<button type="button" class="btnUpdate" data-num="<%=dto.getNum()%>">정보수정</button><br>
 					<button type="button" class="btnOut" data-id="<%=dto.getId()%>">회원탈퇴</button><br>
 					<b>핸드폰 : </b> <%=dto.getHp()%> <br>
-					<b>주  소 : </b> <%=dto.getAddress()%> <br>
+					<b>주  소 : </b> <%=dto.getAddress()%>&nbsp;<%=dto.getAddrdetail()%> <br>
 					<b>이메일 : </b> <%=dto.getEmail()%> <br>
 					<b>가입일 : </b> <%=dto.getGaipday()%> <br>
 				</span>

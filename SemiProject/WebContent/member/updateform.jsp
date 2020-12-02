@@ -58,12 +58,12 @@
 					<b>주소 : </b>
 					<input type="text" name="address"
 					class="txtAddress"
-					readonly="readonly"
+					<%-- readonly="readonly" --%>
 					required="required" value="<%=dto.getAddress()%>"><br>
 					<button type="button" class="postSearch" id="btnpost">주소검색</button>
 					<br>
 					<input type="text" name="addrdetail"
-					class="txtAddrdetail" value="<%=dto.getAddrdetail()%>"><br>
+					class="txtAddrdetail" value="<%=dto.getAddrdetail()%>" required="required"><br>
 				</div>
 				<div class="item">
 					<b>이메일 : </b>

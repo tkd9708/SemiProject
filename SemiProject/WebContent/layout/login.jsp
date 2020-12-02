@@ -62,6 +62,6 @@
 <body>
 <a class="main_login" id="mainLogin">Login</a>
 <!-- <button class="main_login" id="mainLogin"><span class="RightbtnLogin"></span></button> -->
-<a class="main_mypage" href="index.jsp?main=member/mypage.jsp">mypage</a>
+<a class="main_mypage" href="member/beforemypageaction.jsp">mypage</a>
 </body>
 </html>

@@ -28,18 +28,14 @@ String url=request.getContextPath();
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function(){
-		<%
-		if((String)session.getAttribute("loginok")!="success")
-		{%>
-			alert("로그인을 해야 볼 수 있습니다. 로그인해주세요");
-			location.href="index.jsp";
-		<%}
-		%>
-		$("#ambList").hide();
+		$(".ambList").hide();
 		if("<%=idcf%>"=="admin") {
 			console.log("<%=idcf%>");
-			$("#ambList").show();
-		}		
+			$(".ambList").show();
+		}
+		else{
+			$("li").children("ul").css("left", "0px");
+		}
 	});
 </script>
 </head>
@@ -47,8 +43,8 @@ String url=request.getContextPath();
 	<div class="showPage" id="showPage">
 		<nav>
 			<ul class="firstUl">
-				<li>
-					<a href="index.jsp?main=member/memberlist.jsp" class="ambList">회원 명단</a>
+				<li class="ambList">
+					<a href="index.jsp?main=member/memberlist.jsp">회원 명단</a>
 				</li>
 				<li>
 					<a href="#">내 정보 관리</a>

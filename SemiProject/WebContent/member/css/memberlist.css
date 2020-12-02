@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
 div.forMargin {
-	display: flex;
-	justify-content: center;
+	margin-top: 100px;
 }
