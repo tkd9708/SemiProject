@@ -19,8 +19,8 @@ public class SpotlistDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, latitude, longitude, tag, introduction, thumbnail) "
-				+ "values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, addr, latitude, longitude, tag, introduction, thumbnail) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		conn = db.getConnection();
 		try {
@@ -30,11 +30,12 @@ public class SpotlistDao {
 			pstmt.setString(3, dto.getLabel1());
 			pstmt.setString(4, dto.getLabel2());
 			pstmt.setString(5, dto.getRoadaddr());
-			pstmt.setDouble(6, dto.getLatitude());
-			pstmt.setDouble(7, dto.getLongitude());
-			pstmt.setString(8, dto.getTag());
-			pstmt.setString(9, dto.getIntroduction());
-			pstmt.setString(10, dto.getThumbnail());
+			pstmt.setString(6, dto.getAddr());
+			pstmt.setDouble(7, dto.getLatitude());
+			pstmt.setDouble(8, dto.getLongitude());
+			pstmt.setString(9, dto.getTag());
+			pstmt.setString(10, dto.getIntroduction());
+			pstmt.setString(11, dto.getThumbnail());
 			
 			pstmt.execute();
 			
@@ -68,6 +69,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
@@ -110,6 +112,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
@@ -164,6 +167,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));

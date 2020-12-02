@@ -286,6 +286,7 @@ z-index:1111;
 
 </style>
 <%
+	request.setCharacterEncoding("utf-8");
 	String contentsid = request.getParameter("contentsid");
 	SpotlistDao dao = new SpotlistDao();
 	SpotlistDto dto = dao.getData(contentsid);
@@ -309,7 +310,7 @@ z-index:1111;
 	$(function(){
 		if(<%=spotSearch%>){
 			$(".sd_heart").addClass('color');
-		}
+		} 
 		
 		//searchPlaces(); return false;
 		
@@ -355,7 +356,7 @@ z-index:1111;
 			$.ajax({
 				type: "post",
 				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":<%=memNum%>, "star":$("#spotReviewStar").val(),
+				data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
 						"content":$("#srContent").val()},
 				url: "spot/insertspotreview.jsp",
 				success: function(data){
@@ -374,7 +375,7 @@ z-index:1111;
 		});
 		
 		$("#spotGoCal").click(function(){
-			if(<%=loginok.equals("success")%>){
+			if("<%=loginok%>" == "success"){ 
 				$.ajax({
 					type: "post",
 					dataType: "html",
@@ -431,12 +432,16 @@ z-index:1111;
 		<span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
 		<br><br>
 		<%
-		if(dto.getRoadaddr()){
+		if(dto.getRoadaddr()!=null){
 			%>
 			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
 			<%
 		}
 		else {
+			%>
+			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
+			<%
+		}
 		
 		%>
 		<br>
@@ -707,7 +712,7 @@ function getListItem(index, places) {
     itemStr += '<div style="display: inline-block; width: 30%; font-size: 30pt; color:red; '
     			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
     			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
-    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '"></div></div></div>';
+    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
     			
 
     el.innerHTML = itemStr;
@@ -1047,10 +1052,12 @@ function changeCategoryClass(el) {
 		
 		var space = $(this).attr("space");
 		var addr = $(this).attr("addr");
+		var category = $(this).attr("category");
 		var s = "";
 		s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
 		s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
 		s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
+		s += "<input type='hidden' id='sd_category' value='" + category + "'>";
 		s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
 		s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
 		//s += "</div>";
@@ -1061,12 +1068,12 @@ function changeCategoryClass(el) {
 	
 	$("#aroundGoCal").click(function(){
 		
-		if(<%=loginok.equals("success")%>){
+		if("<%=loginok%>" == "success"){
 			$.ajax({
 				type: "post",
 				dataType: "html",
 				url: "spot/insertaroundtocal.jsp",
-				data: {"wishday":$("#sd_wishday").val(), "aroundId":"<%=myid%>", "space":$("#sd_space").val(), "addr":$("#sd_addr").val()},
+				data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
 				success: function(data){
 
 					var heartidx = $("#sd_heartidx").val();
