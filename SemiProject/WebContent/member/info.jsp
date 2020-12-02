@@ -56,7 +56,7 @@ SpotlistDao sdao=new SpotlistDao();
 				</svg>
 				<input type="file" name="photo" id="photo" onchange="readUrl(this)">
 				<br>
-				<button type="submit" class="btnPhoto"></button>
+				<button type="submit" class="btnPhoto">사진저장</button>
 			</div>
 		</form>
 	</div>
