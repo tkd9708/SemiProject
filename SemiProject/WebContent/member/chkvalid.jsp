@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<%@page import="data.dao.MemberDao"%>
 <%@page import="data.dto.MemberDto"%>
 <%@ page language="java" contentType="text/xml; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -17,8 +18,13 @@
 	String pass1V=request.getParameter("pass1V");
 	MemberDto dto=new MemberDto();
 	boolean validPw = dto.isPwVal(pass1V);
+	
+	MemberDao dao=new MemberDao();
+	//메서드 호출
+	boolean findId=dao.isIdSearch(id);
 %>
 <data>
 	<samepw><%=samePw?"yes":"no"%></samepw>
 	<validpw><%=validPw?"yes":"no"%></validpw>
+	<sameid><%=findId?"yes":"no"%></sameid>
 </data>

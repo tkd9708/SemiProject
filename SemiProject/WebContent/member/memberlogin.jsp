@@ -97,7 +97,7 @@ String url=request.getContextPath();
 					<td>
 						<div class="formHolder email">
 							<input type="text" placeholder="이메일입력(a@naver.com)"
-							class="inputText vPlaceholder1"
+							class="inputText vPlaceholder1 txtEmail"
 							required="required" name="email" id="email">
 							<b class="emailChk"></b>
 						</div>
@@ -185,40 +185,6 @@ window.onload=function() {
 		$("b.idcheck").html("");
 	});
 	
-	//아이디 입력후 포커스가 벗어날때 아이디 체크하기
-	$("#id").blur(function(){
-		var id=$(this).val();//앞뒤공백제거
-		if(id.trim().length==0){
-			//alert("공백제거");
-			$(this).val('');
-			return;
-		}
-		$.ajax({
-			type: "get",
-			url:"member/idcheckxml.jsp",
-			dataType:"xml",
-			data:{"id":id},
-			success:function(data){
-				//alert($(data).text());
-				if($(data).text()=='yes'){
-					$("b.idcheck").html("이미 등록된 아이디입니다");
-					$("b.idcheck").css({
-						"color":"red",
-						"font-size":"14px"
-					});
-					$("#id").val("");
-				}
-				else{
-					$("b.idcheck").html("사용가능한 아이디입니다");
-					$("b.idcheck").css({
-						"color":"green",
-						"font-size":"14px"
-					});
-				}
-			}
-		});
-	});
-	
 	//이메일 입력시 메세지 지우기
 	$("#email").keydown(function(){
 		$("b.emailChk").html("");
@@ -265,18 +231,34 @@ window.onload=function() {
 		//코드로 입력체크 추가
 		var pass1V=$(".pwText").val();
 		var pass2V=$(".cfpwText").val();
-		alert(pass1V+"VS"+pass2V);
+		/* alert(pass1V+"VS"+pass2V); */
+		
+		var id=$("#id").val();
 		
 		var rtn = false;
 		
+		if(id.trim().length==0){
+			$("#id").val('');
+			$("b.idcheck").html("아이디를 입력하세요");
+			$("#id").focus();
+			return;
+		}
 		$.ajax({
 			type: "post",
 			url: "member/chkvalid.jsp",
 			dataType: "xml",
-			data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V},
+			data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V,"id":id},
 			async: false,
 			success: function(data){
-				if($(data).find("validpw").text()=="no"){
+				if($(data).find("sameid").text()=="yes"){
+					$("b.idcheck").html("이미 등록된 아이디입니다");
+					$("b.idcheck").css({
+						"color":"red",
+						"font-size":"14px"
+					});
+					$("#id").val("");
+				}
+				else if($(data).find("validpw").text()=="no"){
 					$("span.passChk").html("8자이상의 영문/숫자/특수문자 조합으로 입력하세요.");
 					$("span.passChk").css({
 						"color":"orange",

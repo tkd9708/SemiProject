@@ -5,15 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/login.css">
-<title>Insert title here</title>
-<%
-    //프로젝트의 경로 구하기
-    String url=request.getContextPath();
-	/* System.out.println((String)session.getAttribute("loginok")); */
-%>
 <script type="text/javascript">
 function MyAlert(){
-    this.render = function(modal){
+    this.make = function(modal){
         var winW = window.innerWidth;
         var winH = window.innerHeight;
         var modaloverlay = document.getElementById('modaloverlay');
@@ -21,7 +15,7 @@ function MyAlert(){
         var modalbox = document.getElementById('modalbox');
         modaloverlay.style.display = "block";
         modaloverlay.style.height = winH+"px";
-        modalbox.style.left = (winW/2) - (550 * .5)+"px";
+        modalbox.style.left = (winW/2) - (500 * .5)+"px";
         modalbox.style.top = "100px";
         modalbox.style.display = "block";
         document.getElementById('modalboxhead').innerHTML = "경고창";
@@ -76,12 +70,18 @@ var Alert = new MyAlert();
 			else
 			{
 			%>
-			Alert.render('로그인을 해야 볼 수 있습니다. 로그인을 해주세요.');
+			Alert.make('로그인을 해야 볼 수 있습니다. 로그인을 해주세요.');
 			<%}
 			%>
 		});
 	});
-</script>
+</script> 
+<title>Insert title here</title>
+<%
+    //프로젝트의 경로 구하기
+    String url=request.getContextPath();
+	/* System.out.println((String)session.getAttribute("loginok")); */
+%>
 </head>
 <body>
 <a class="main_login" id="mainLogin">Login</a>
