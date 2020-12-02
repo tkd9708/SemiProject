@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
+<link href="font/font.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
 <title>멘도롱 또똣 :: 제주여행의모든것</title>
@@ -37,12 +39,16 @@ div.layout div.main {
     position: relative;
     z-index: 1;
     height: 100%;
+    font-family: NanumBarunpen;
+    letter-spacing: 2px;
 }
 div.layout div.footer {
     position: inherit;
     z-index: 1;
     bottom: 0;
     padding: 30px 0;
+    font-family: NanumBarunpen;
+    letter-spacing: 1px;
 
 a {
 	cursor:pointer;

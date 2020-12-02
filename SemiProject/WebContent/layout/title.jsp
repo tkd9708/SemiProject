@@ -248,7 +248,7 @@ $(function(){
 <script type="text/javascript">
   $("a.main_login").click(function(e){
 	  e.preventDefault();
-	  location.href="<%=url%>/index.jsp?main=member/loginform.jsp";
+	  location.href="<%=url%>/index.jsp?main=member/reallogin.jsp";
   });
   
 

@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class MysqlConnect {
 	String driver = "com.mysql.jdbc.Driver";
-	String url = "jdbc:mysql://semiprojectdb.cwtgyuascams.ap-northeast-2.rds.amazonaws.com:3306/semiprojectDB";
+	String url = "jdbc:mysql://semiprojectdb.cwtgyuascams.ap-northeast-2.rds.amazonaws.com:3306/semiprojectDB ";
 	String id = "admin";
 	String pass = "12345678";
 	
