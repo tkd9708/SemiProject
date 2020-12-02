@@ -130,14 +130,23 @@ public class SpotlistDao {
 		return dto;
 	}
 	
-	public List<SpotlistDto> getList(int start, int perpage, String label2){
-		// 그룹변수의 내림차순, 같은 그룹인경우 step의 오름차순 출력
+	public List<SpotlistDto> getList(int start, int perpage, String label2, String select){
 		// limit로 시작번지와 몇개를 가져올지 바인딩
-		String sql = "select * from spotlist where label2 like '%" + label2 + "%' limit ?,?";
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = "";
+		
+		if(select.equals("평점")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by star desc, title asc limit ?,?";
+		}
+		else if(select.equals("좋아요")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by likes desc, title asc limit ?,?";
+		}
+		else if(select.equals("이름")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by title asc limit ?,?";
+		}
 		
 		conn = db.getConnection();
 		try {
