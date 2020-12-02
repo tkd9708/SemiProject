@@ -24,6 +24,7 @@ body {
     -ms-overflow-style: none; 
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     height: 100%;
 } 
 ::-webkit-scrollbar {

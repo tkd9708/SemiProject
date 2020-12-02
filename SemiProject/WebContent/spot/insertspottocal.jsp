@@ -1,4 +1,3 @@
-<%@page import="data.dao.MemberDao"%>
 <%@page import="data.dto.SpotlistDto"%>
 <%@page import="data.dao.SpotlistDao"%>
 <%@page import="data.dto.WishlistDto"%>
@@ -16,15 +15,13 @@
 	SpotlistDao sdao = new SpotlistDao();
 	SpotlistDto sdto = sdao.getData(spotId);
 	
-	MemberDao mdao = new MemberDao();
-	String memNum = mdao.getMemNum(myId);
 	
 	WishlistDao dao = new WishlistDao();
 	WishlistDto dto = new WishlistDto();
 	dto.setSpotId(spotId);
 	dto.setContent(content);
 	dto.setWishday(wishday);
-	dto.setMemNum(memNum);
+	dto.setMemId(myId);
 	
 	dao.insertSpot(dto);
 %>
