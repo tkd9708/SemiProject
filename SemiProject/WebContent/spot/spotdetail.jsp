@@ -1,3 +1,6 @@
+<%@page import="data.dao.WishlistDao"%>
+<%@page import="data.dao.MemberDao"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.SpotReviewDao"%>
@@ -9,9 +12,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -20,7 +24,7 @@
 		width: 500px;
 		height: 500px;
 		margin-left: 200px;
-		margin-top: 80px;
+		margin-top: 150px;
 		display: inline-block;
 	
 	}
@@ -178,6 +182,108 @@ a.info {
 	text-decoration: none;
 	color: #333;
 }
+div.modal-backdrop{
+z-index:0;}
+div.modal-content{
+margin-top:200px;
+z-index:1111;
+}
+
+
+/* 하트 */
+.sd_heart {
+    position: absolute;
+    margin: auto;
+    /* top: 0; */
+    right: 30px;
+    bottom: 30px;
+    /* left: 0; */
+    background-color: #babbbc;
+    height: 30px;
+    width: 30px;
+    transform: rotate(-45deg);
+  }
+  .sd_heart:after {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    top: 0;
+    left: 15px;
+  }
+  .sd_heart:before {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 30px;
+    height: 35px;
+    top: -20px;
+    left: 0;
+  }
+  
+  .sd_heartlist {
+    position: absolute;
+    margin: auto;
+    top: 0; 
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #babbbc;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg);
+  }
+  .sd_heartlist:after {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    top: 0;
+    left: 8px;
+  }
+  .sd_heartlist:before {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    top: -13px;
+    left: 0;
+  }
+
+  @keyframes beat {
+    50% {
+      transform: scale(1.6) rotate(-45deg);
+    }
+    100% {
+      transform: scale(1) rotate(-45deg);
+      }
+    }
+    .color
+    {
+      background-color: #e63d38;
+      animation-name: beat;
+      animation-duration: 1s;
+      anianimation-play-state: running;
+    }
+    
+    .color:before
+    {
+      background-color: #e63d38;
+    }
+    
+    .color:after
+    {
+      background-color: #e63d38;
+    }
+    
+
 </style>
 <%
 	String contentsid = request.getParameter("contentsid");
@@ -189,9 +295,22 @@ a.info {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	String myid = (String)session.getAttribute("myid");
+	String loginok = (String)session.getAttribute("loginok");
+	String today = sdf.format(new Date());
+	
+	MemberDao mdao = new MemberDao();
+	String memNum = mdao.getMemNum(myid);
+	
+	WishlistDao wdao = new WishlistDao();
+	boolean spotSearch = wdao.isSpotSearch(contentsid);
+	
 %>
 <script type="text/javascript">
 	$(function(){
+		if(<%=spotSearch%>){
+			$(".sd_heart").addClass('color');
+		}
+		
 		//searchPlaces(); return false;
 		
 		/* $("#srstarBox span").on("click",function(){
@@ -236,7 +355,7 @@ a.info {
 			$.ajax({
 				type: "post",
 				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":$("#srMemNum").val(), "star":$("#spotReviewStar").val(),
+				data: {"contentsid":"<%=contentsid%>", "memNum":<%=memNum%>, "star":$("#spotReviewStar").val(),
 						"content":$("#srContent").val()},
 				url: "spot/insertspotreview.jsp",
 				success: function(data){
@@ -245,10 +364,37 @@ a.info {
 			});
 		});
 		
-		$(document).on("click", ".foodHeart", function(){
-			$("#foodModal").modal();
+		/* $("div.sd_heart").click(function(){
+			$(".sd_heart:eq(0)").addClass('color');
+		}); */
+		
+		$("#spotHeart").click(function(){
+			$("#spotModal").modal();
+			
 		});
 		
+		$("#spotGoCal").click(function(){
+			if(<%=loginok.equals("success")%>){
+				$.ajax({
+					type: "post",
+					dataType: "html",
+					url: "spot/insertspottocal.jsp",
+					data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
+					success: function(data){
+						$(".sd_heart").addClass('color');
+						var a = confirm("Mypage로 이동하시겠습니까?");
+						if(a){
+							location.href="index.jsp?main=mypage/mypage.jsp";
+						} 
+						$("#spotModal").modal("hide");
+					
+					}
+				});
+			}
+			else {
+				alert("로그인이 필요한 서비스입니다.");
+			}
+		});
 	});
 </script>
 <body>
@@ -264,27 +410,40 @@ a.info {
 		<%
 	}
 	%>
-	<div class="thumbnailDetail">
-		<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
-		<span style="color: red; float: right; font-size: 30pt;" class="glyphicon glyphicon-heart-empty"></span>
-		<br><br>
-		<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;<%=dto.getTag() %></span><br>
-		<hr>
-		<b style="color: gray;"><%=dto.getIntroduction() %></b>
-		<br><br>
-		<span style="color: #F0CD58; font-size: 18px;">
+	<div class="thumbnailDetail" style="position: relative;">
+		<span style="color: #F0CD58; font-size: 30px;">
 			<%
         		for(int i=1; i<=5; i++){
         			if(i<=dto.getStar()){
-        				%>★<%
+        				%><span class="glyphicon glyphicon-star"></span><%
         			}
         			else {
-        				%>☆<%
+        				%><span class="glyphicon glyphicon-star-empty"></span><%
         			}
         		}
         	%>
-		</span><br><br>
+		</span>
+		<br><br>
+		<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
+		<br><br>
+		<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
+		<hr>
+		<span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
+		<br><br>
+		<%
+		if(dto.getRoadaddr()){
+			%>
+			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+			<%
+		}
+		else {
 		
+		%>
+		<br>
+		<!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
+			<span class="glyphicon glyphicon-heart-empty"></span> 
+		</div> -->
+		<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
 	</div>
 	<hr>
 	<br><br>
@@ -545,8 +704,11 @@ function getListItem(index, places) {
     }
                  
     itemStr += '  <span class="tel">' + places.phone  + '</span>' + '</a>';  
-    itemStr += '<div class="foodHeart" style="display: inline-block; cursor:pointer; width: 30%; font-size: 30pt; '
-    			+	'text-align: center; line-height: 150px; margin-right: 100px;">♡</div></div>';
+    itemStr += '<div style="display: inline-block; width: 30%; font-size: 30pt; color:red; '
+    			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
+    			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
+    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '"></div></div></div>';
+    			
 
     el.innerHTML = itemStr;
     el.className = 'item';
@@ -699,7 +861,6 @@ function changeCategoryClass(el) {
 		<form id="newSpotReview" action="spot/insertspotreview.jsp">
 			<br>
 			<b>작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="hidden" name="memNum" id="srMemNum" value="0">
 			<br><br>
 			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
@@ -786,7 +947,7 @@ function changeCategoryClass(el) {
 					%>
 						<tr>
 							<td style="text-align: center; vertical-align: middle">
-								<b><%=rdto.getMemNum() %></b><br>
+								<b><%=mdao.getData(rdto.getMemNum()).getId() %> 님</b><br>
 							</td>
 							<td style=" vertical-align: middle">
 							<%=rdto.getContent().replace("\n", "<br>") %>
@@ -823,41 +984,108 @@ function changeCategoryClass(el) {
 		
 	</div>
 	
-	<!-- 일정 추가 modal -->
-	<div class="modal fade" id="foodModal" role="dialog">
-    <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
-      <div class="modal-content" style="height:250px;width:600px">
+	<!-- around 일정 추가 modal -->
+	<div class="modal fade" id="aroundModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 400px;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 id="addmodal_title" style="text-align: center" >
-		 	<b>일정추가</b>
-			</h4>
+          <h4 class="modal-title">일정 추가</h4>
         </div>
         <div class="modal-body">
-        	<div class="addSchedule" align="center" >
-        		<form action ="mypage/scheduleAdd.jsp" method="post" class="form-inline" > <!-- 경로수정 -->
-        			<table class="modal_table table table-condensed">
-        			
-        			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
-        				<input type="hidden" name="mem_id" id="mem_id" value="test">
-        				<tr>
-        					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
-        					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" ></td>
-        				</tr>
-        				<tr>
-        					<td align="center" style="font-size: 13pt; background-color: white;border: 0px;">내용</td>
-        					<td align="center" style="background-color: white;border: 0px;"><input type="text" name="content" style="width:300px;"></td>
-        				</tr>
-        				
-        				<tr>
-        					<td colspan="2" align="center" style="background-color: white;border: 0px;"><button type="submit" class="btn_scheduleAdd btn btn-warning">일정추가</button>
-        					</td>
-        				</tr>
-        			</table>
-        		</form>
+        	<div style="margin-left: 10px; margin-right: 10px;">
+        		<div id="aroundModalInfo"></div>
+        		<br>
+          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+          		<input type="date" id="sd_wishday" value="<%=today%>">
         	</div>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-warning" id="aroundGoCal">추가</button>
+          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
+      
     </div>
   </div>
+  
+  <!-- spot 일정 추가 modal -->
+	<div class="modal fade" id="spotModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">일정 추가</h4>
+        </div>
+        <div class="modal-body">
+        	<div style="margin-left: 10px; margin-right: 10px;">
+        		<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getTitle() %></b>
+        		<br><br>
+        		<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+        		<br><br>
+          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+          		<input type="date" id="sd_spotwishday" value="<%=today%>">
+        	</div>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-warning" id="spotGoCal">추가</button>
+          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+<script type="text/javascript">
+
+	$(document).on("click", ".aroundHeart", function(){
+		$("#aroundModal").modal();
+		
+		var space = $(this).attr("space");
+		var addr = $(this).attr("addr");
+		var s = "";
+		s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
+		s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
+		s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
+		s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
+		s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
+		//s += "</div>";
+	
+		$("#aroundModalInfo").html(s);	
+		
+	});
+	
+	$("#aroundGoCal").click(function(){
+		
+		if(<%=loginok.equals("success")%>){
+			$.ajax({
+				type: "post",
+				dataType: "html",
+				url: "spot/insertaroundtocal.jsp",
+				data: {"wishday":$("#sd_wishday").val(), "aroundId":"<%=myid%>", "space":$("#sd_space").val(), "addr":$("#sd_addr").val()},
+				success: function(data){
+
+					var heartidx = $("#sd_heartidx").val();
+					$(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
+					var a = confirm("Mypage로 이동하시겠습니까?");
+					if(a){
+						location.href="index.jsp?main=mypage/mypage.jsp";
+					} 
+					$("#aroundModal").modal("hide");
+				}
+			});
+		}
+		else {
+			alert("로그인이 필요한 서비스입니다.");
+		}
+		
+	});
+</script>
+
+
 </body>
 </html>
