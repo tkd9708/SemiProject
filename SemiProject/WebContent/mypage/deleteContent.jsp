@@ -1,4 +1,3 @@
-
 <%@page import="com.sun.java.swing.plaf.windows.resources.windows"%>
 <%@page import="data.dao.WishlistDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,11 +6,9 @@
 <%
 //num
 String num = request.getParameter("num");
-
 //dao
 WishlistDao dao = new WishlistDao();
 dao.deleteContent(num);
-
 //response.sendRedirect("mypage.jsp");//@@@@@@@@@@경로수정
 %>
 <script type="text/javascript">
