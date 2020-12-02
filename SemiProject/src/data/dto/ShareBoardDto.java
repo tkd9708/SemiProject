@@ -13,7 +13,6 @@ public class ShareBoardDto {
 	private String photo;
 	private Timestamp writeday;
 	
-	
 	public String getNum() {
 		return num;
 	}
@@ -68,19 +67,8 @@ public class ShareBoardDto {
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+		
+	
+	
 }

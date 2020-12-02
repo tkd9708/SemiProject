@@ -9,6 +9,9 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <style type="text/css">
+scroll-behavior: smooth;
+
+
    th.td{
       padding: 6px;
       text-align: center;
@@ -220,7 +223,7 @@ $(function(){
         default:
            break;
         }
-        alert(idx);
+        //alert(idx);
         $("#sharestar").val(idx);   
      });
    
@@ -272,7 +275,7 @@ $(function(){
             <td>
                 <input type="hidden" id="sharestar" name="stars" value="0">               
            <!-- 별점 -->
-      <div class="stars">
+        <div class="stars">
         <input class="stars__checkbox" type="radio" id="first-star" name="star">
         <label class="stars__star" for="first-star">
             <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -326,7 +329,7 @@ $(function(){
                onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
                      
       </div>
-       </table> 
+     </table> 
     </form>
    </fieldset>
   </div>

@@ -19,7 +19,7 @@ public class NoticeAnswerDao {
      //insert
      public void insertShareAnswer(NoticedAnswerDto dto)
      {
-    	 String sql="insert into shareboardanswer (num,idx,id,memo,writeday) values (?,?,?,?,now())";
+    	 String sql="insert into noticedanswer (num,idx,id,memo,writeday) values (?,?,?,?,now())";
     	 Connection conn=null;
     	 PreparedStatement pstmt=null;
     	 conn=my.getConnection();
@@ -46,7 +46,7 @@ public class NoticeAnswerDao {
     	 Connection conn=null;
     	 PreparedStatement pstmt=null;
     	 ResultSet rs=null;
-    	 String sql="select * from shareboardanswer where num=?";
+    	 String sql="select * from noticeanswer where num=?";
     	 conn=my.getConnection();
     	 
     	 try {
@@ -79,7 +79,7 @@ public class NoticeAnswerDao {
      //댓글 삭제
      public void deleteAnswer(String idx)
      {
-    	 String sql="delete from answer where idx=?";
+    	 String sql="delete from noticeanswer where idx=?";
     	 Connection conn=null;
     	 PreparedStatement pstmt=null;
     	 conn=my.getConnection();
@@ -101,7 +101,7 @@ public class NoticeAnswerDao {
  	
      public String getMemo(String idx)
  	{
- 		String sql="select memo from shareboardanswer where idx=?";
+ 		String sql="select memo from noticeanswer where idx=?";
  		String memo="";
  		Connection conn=null;
  		PreparedStatement pstmt=null;
@@ -133,7 +133,7 @@ public class NoticeAnswerDao {
      //수정
      public void updateAnswer(String idx,String memo)
   	{
-  		String sql="select * from shareboardanswer set memo where idx=?";
+  		String sql="select * from noticeanswer set memo where idx=?";
    		Connection conn=null;
   		PreparedStatement pstmt=null;
   		conn=my.getConnection();
@@ -156,6 +156,8 @@ public class NoticeAnswerDao {
  		}
   		
   	}
+     
+     
      
 
 }

@@ -202,6 +202,29 @@ public class ShareBoardDao {
 				my.dbClose(conn, pstmt);
 			}
 		}
+		
+		//좋아요 증가
+	      public void updateLikes(String num)
+	      {
+	         String sql="update shareboard set likes=likes+1 where num=?";
+	         Connection conn=null;
+	         PreparedStatement pstmt=null;
+	         conn=my.getConnection();
+	         try {
+	            pstmt=conn.prepareStatement(sql);
+	            //바인딩 
+	            pstmt.setString(1, num);
+
+	            //실행 
+	            pstmt.execute();
+	         } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	         }finally {
+	            my.dbClose(conn, pstmt);
+	         }
+	      }
+	     
 	}
 
 		

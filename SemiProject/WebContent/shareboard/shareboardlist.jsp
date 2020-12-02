@@ -47,8 +47,8 @@ b {
 
 div.page {
    position: absolute;
-   top: 1250px;
-   left: 200px;
+   top: 210px;
+   left: 195px;
 }
 
 h2{
@@ -112,6 +112,21 @@ html, body {
   transform: translateY(-7px);
 }
 
+.btn_answer1{
+  position: relative;
+  top: 80px;
+  left: 7px;
+
+}
+
+.btn_answer2{
+  position: relative;
+  top: 90px;
+  left: 0px;
+
+}
+
+
 
 
 /*----------------------------------------------테이블 css--------------------------------------------------*/
@@ -140,7 +155,7 @@ html, body {
    
 }
 
-.styled-table tbody tr {
+ tbody tr {
     border-bottom: 1px solid #ffad33;
 }
 
@@ -149,7 +164,7 @@ html, body {
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #ffad33;
+    border-bottom: 1px solid #ffad33;
 }
 
 .styled-table tbody tr.active-row {
@@ -158,9 +173,156 @@ html, body {
 }
 
 
+.trtr{
+  border-bottom: 1px solid white;
+}
+
+
+span.likes{
+   font-size: 15px;
+   cursor: pointer;
+}
+
+.btn_cancel{
+   background: #8a8a8a;
+   color: white;
+
+}
+/*---------------------------리뷰 css--------------------------*/
+.review{
+   background: url('image/re.png') no-repeat  70px 50px;
+   background-size: 35px;
+   
+}
+
+/* -------------------하트 css ---------------------------------------*/
+.heart {
+    position: absolute;
+    margin: auto;
+     top: 0; 
+    right: 0;
+    bottom: 0;
+     left: 0; 
+    background-color: #babbbc;
+    height: 30px;
+    width: 30px;
+    transform: rotate(-45deg);
+  }
+  .heart:after {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    top: 0;
+    left: 15px;
+  }
+  .heart:before {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 30px;
+    height: 35px;
+    top: -20px;
+    left: 0;
+  }
+
+  @keyframes beat {
+    50% {
+      transform: scale(1.6) rotate(-45deg);
+    }
+    100% {
+      transform: scale(1) rotate(-45deg);
+      }
+    }
+    .color
+    {
+      background-color: #ff2033;
+      animation-name: beat;
+      animation-duration: 1s;
+      anianimation-play-state: running;
+    }
+    
+    .color:before
+    {
+      background-color: #ff2033;
+    }
+    
+    .color:after
+    {
+      background-color: #ff2033;
+    }
+
+/* -------------------별 css ---------------------------------------*/
+
+span.star {
+	font-size: 15pt; 
+	color: #F0CD58;
+	cursor: pointer;
+} 
+
+
+
 
 
 </style>
+<script type="text/javascript">
+//별 증가
+$(function(){
+	
+	 //별점
+	 $("#starBox span").on("click",function(){
+			var idx = $(this).index()+1;
+			$(".star").removeClass("glyphicon glyphicon-star-empty");
+					
+			for(var i=0; i<=idx; i++){
+				$(".star").eq(i).addClass("glyphicon glyphicon-star");
+			}
+			for(var i=idx; i<=5; i++){
+				$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
+			}
+			$("#spotReviewStar").val(idx);	// db에 저장할 값 input hidden에 값 넣어놓기
+		});
+   //좋아요 증가
+   
+   $(document).on("click",".likes",function(){
+         var num=$(this).attr("num");
+         //alert(likes);
+         $.ajax({
+            type:"get",
+            dataType:"html",
+            url:"shareboard/shareboardlikes.jsp",
+            data:{"num":num},
+            success:function(data){
+               location.reload();
+            }
+         });
+      });
+  
+   
+   $(document).on("click",".btn_answer2",function(){
+	     var state = $("#review").css("display");
+	     if(state=="none"){
+	        $("#review").show();
+	     }else{
+	        $("#review").hide();
+	     }
+	   });
+     
+
+    
+    //하트 
+  $("div.heart").click(function(){
+		$(".heart").addClass('color');
+	});
+
+
+    
+}); //function close
+
+</script>
 </head>
 <%
    ShareBoardDao db=new ShareBoardDao();
@@ -218,11 +380,11 @@ html, body {
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
  %>
    <div class="container">
-     <div style="margin-left: -50px;">
+     <div style="margin-left: -50px;" class="review1">
        <table class="styled-table" >
          <thead>
             <tr class="warning" >
-               <th width="50">ID</th>
+               <th width="80">ID</th>
                <th width="180">PHOTO</th>
                <th width="120">추천 맛집</th>
                <th width="150">리뷰</th>
@@ -258,14 +420,14 @@ html, body {
                      <%=dto.getId()%></td>
                <td style="text-align: center;">
                 <%
-				if(!dto.getPhoto().equals("no"))
-				{%>
-				<img src="shareboardsave/<%=dto.getPhoto() %>"
-					style="width: 320px; height: 230px;"
-					hspace="20" align="bottom">
-				<%}
-				%>
-				<br><br><%=dto.getAddr()%></td>
+            if(!dto.getPhoto().equals("no"))
+            {%>
+            <img src="shareboardsave/<%=dto.getPhoto() %>"
+               style="width: 320px; height: 230px;"
+               hspace="20" align="bottom">
+            <%}
+            %>
+            <br><br><%=dto.getAddr()%></td> 
                <td style="vertical-align: middle;"><%=dto.getSubject()%></td>
                <td style="vertical-align: middle;"><%=dto.getContent()%></td>
                <td style="text-align: center; line-height: 200px;">
@@ -282,13 +444,41 @@ html, body {
                %>
                </span>
                </td>
-               <td style="text-align: center; line-height: 200px;"><%=dto.getLikes()%></td>
-               <td style="text-align: center; line-height: 200px;">♥</td>
-               <td style="text-align: center; line-height: 200px;"><%=sdf.format(dto.getWriteday())%></td>
+               <td align="center"><span class="likes glyphicon glyphicon-thumbs-up"  num=<%=dto.getNum()%>>
+               </span><%=dto.getLikes()%></td>
+               
+               <td style="text-align: center; line-height: 200px;"><div style="position: relative;"><div class="heart"></div></div></td>
+            
+               <td style="text-align: center;vertical-align: center;"><%=sdf.format(dto.getWriteday())%><br>
+               <button type="button" class="btn_answer1 btn btn-warning">댓글(0)</button>
+               <button type="button" class="btn_answer2 btn btn-warning">댓글쓰기</button></td>
             </tr>
+               
+  
             </tbody>
+     
+            
+            <tr style="background-color: white;" id="review">
+              <td colspan="1">ID:&nbsp;<%=dto.getId() %></td>
+              <td colspan="7">
+               맛 평가
+              <div id="starBox" style="display: inline-block;">
+	          <span class="glyphicon glyphicon-star-empty star"></span>
+	          <span class="glyphicon glyphicon-star-empty star"></span>
+	          <span class="glyphicon glyphicon-star-empty star"></span>
+	          <span class="glyphicon glyphicon-star-empty star"></span>
+	          <span class="glyphicon glyphicon-star-empty star"></span>
+              </div>
+                <input class="form-control" placeholder="리뷰를 입력하세요"></input><br>
+                <button type="button" class="btn btn-warning" 
+                >리뷰</button>
+                <button type="button" class="btn_cancel btn btn-default">취소</button>
+              </td>
+            </tr>
+          
             <%}
                 %>
+                   
 
          </table>
          

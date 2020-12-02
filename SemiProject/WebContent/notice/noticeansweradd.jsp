@@ -24,7 +24,7 @@
    
    
    //보던 페이지로 이동해야한다
-   String go="../index.jsp?main=notice/noticelist.jsp?pageNum="+pageNum;
+   String go="../index.jsp?main=notice/noticecontent.jsp?pageNum="+pageNum;
    response.sendRedirect(go);
    
    
