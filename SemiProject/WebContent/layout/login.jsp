@@ -30,13 +30,14 @@
 		  <%
 		  if((String)session.getAttribute("loginok")=="success")
 		  {%>
-		  	$("a.main_login").text("Login");
+		  	$("a.main_login").text("Logout");
 		  	location.href="member/logoutaction.jsp";
 		  <%}
 		  else
 		  {
 		  %>
-		  location.href="index.jsp?main=member/loginform.jsp";
+		  	$("a.main_login").text("Login");
+		  	location.href="index.jsp?main=member/loginform.jsp";
 		  <%-- location.href="<%=url%>/index.jsp?main=member/loginform.jsp"; --%>
 		  <%}
 		  %>
