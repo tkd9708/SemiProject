@@ -12,6 +12,30 @@
 	/* System.out.println((String)session.getAttribute("loginok")); */
 %>
 <script type="text/javascript">
+function MyAlert(){
+    this.render = function(modal){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var modaloverlay = document.getElementById('modaloverlay');
+		      
+        var modalbox = document.getElementById('modalbox');
+        modaloverlay.style.display = "block";
+        modaloverlay.style.height = winH+"px";
+        modalbox.style.left = (winW/2) - (550 * .5)+"px";
+        modalbox.style.top = "100px";
+        modalbox.style.display = "block";
+        document.getElementById('modalboxhead').innerHTML = "경고창";
+        document.getElementById('modalboxbody').innerHTML = modal;
+        document.getElementById('modalboxfoot').innerHTML = '<button id="modalBtn" onclick="Alert.ok()">예</button>';
+    }
+	this.ok = function(){
+		document.getElementById('modalbox').style.display = "none";
+		document.getElementById('modaloverlay').style.display = "none";
+	}
+}
+
+var Alert = new MyAlert();
+
 	$(function(){
 		<%String loginok=(String)session.getAttribute("loginok");
 			String id=(String)session.getAttribute("myid");
@@ -41,27 +65,35 @@
 			  %>
 			  
 		  });
+		
+		$("a.main_mypage").click(function(e) {
+			<%
+			if(loginok=="success")
+			{	
+			%>
+				location.href="index.jsp?main=member/mypage.jsp";
+			<%}
+			else
+			{
+			%>
+			Alert.render('로그인을 해야 볼 수 있습니다. 로그인을 해주세요.');
+			<%}
+			%>
+		});
 	});
-	
-	
-	  
-	  <%-- $("button.main_login").click(function(e) {
-		  alert("확인");
-	  	if($(".RightbtnLogin").text()=="Login"){
-	  		$(".RightbtnLogin").text("Logout");
-		  	location.href="member/logoutaction.jsp";
-	  	}
-	  	else{
-	  		$(".RightbtnLogin").text("Login");
-	  		alert("로그아웃합니다");
-		  	location.href="<%=url%>/index.jsp?main=member/loginform.jsp";	  		
-	  	}
-	  }); --%>
 </script>
 </head>
 <body>
 <a class="main_login" id="mainLogin">Login</a>
-<!-- <button class="main_login" id="mainLogin"><span class="RightbtnLogin"></span></button> -->
-<a class="main_mypage" href="member/beforemypageaction.jsp">mypage</a>
+<a class="main_mypage">mypage</a>
+
+<div id="modaloverlay"></div>
+<div id="modalbox">
+  <div id="positionBox">
+    <div id="modalboxhead"></div>
+    <div id="modalboxbody"></div>
+    <div id="modalboxfoot"></div>
+  </div>
+</div>
 </body>
 </html>

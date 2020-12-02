@@ -14,7 +14,6 @@
 	boolean find=dao.isIdPassCheck(dto.getId(), dto.getPass());
 	//find가 true면 수정메서드호출후 memberlist 즉 목록이 나오도록 하고
 	//만약 false 면 script 코드로 alert 경고후 이전페이지로 가기
-	System.out.println(find);
 	if(find)
 	{
 		dao.updateMember(dto);
