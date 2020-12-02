@@ -29,7 +29,8 @@
 	div#spotList {
 		overflow: hidden;
 		margin-left: 200px;
-		margin-top: 100px;
+		margin-top: 180px;
+		margin-right: 130px;
 	}
 	
 	div.footer {
@@ -93,10 +94,31 @@
     transition: left .5s ease-in-out, right .5s ease-in-out;
 }
 	
+
+#spotListSelect {
+  width: 150px;
+  padding: .8em .5em;
+  font-family: inherit;
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #999;
+  border-radius: 0px;
+}
+
+#spotListSelect::-ms-expand {
+  /* for IE 11 */
+  display: none;
+}
 </style>
 <%
 	request.setCharacterEncoding("utf-8");
 	String area = request.getParameter("area");
+	String select = request.getParameter("select");
+	if(select == null){
+		select ="평점";
+	}
 	SpotlistDao dao = new SpotlistDao();
 	//List<SpotlistDto> list = dao.getList(area);
 	
@@ -138,7 +160,7 @@
 	// 총 50개일경우 1페이지는 50, 2페이지는 40
 	int no = totalCount-(currentPage - 1) * perPage;
 	
-	List<SpotlistDto> list = dao.getList(start, perPage, area);
+	List<SpotlistDto> list = dao.getList(start, perPage, area, select);
 %>
 <script type="text/javascript">
 
@@ -193,6 +215,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	$(function(){
 		
+		$("#spotListSelect").val("<%=select%>").prop("selected", true);
+		
 		//사진클릭하면 디테일로 값보내기
 		$(document).on("click","div.gotodetail",function(){
 			var contentsid=$(this).attr("contentsid"); 
@@ -203,16 +227,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		$(document).on("click", ".likesTD", function(){
 			var contentsid=$(this).attr("contentsid"); 
 			$.ajax({
-				type: "get",
+				type: "post",
 				url: "spot/spotupdateLikes.jsp",
 				dataType: "html",
-				data: {"contentsid" : contentsid, "pageNum" : <%=currentPage%>, "area" : "<%=area%>"},
+				data: {"contentsid" : contentsid, "pageNum" : <%=currentPage%>, "area" : "<%=area%>", "select":"<%=select%>"},
 				success: function(data){
 					location.reload();
 				}
 			});
 		});
 		
+		$(".goToReview").click(function(){
+			//alert("클릭");
+			var contentsid=$(this).attr("contentsid");
+			location.href="index.jsp?main=spot/spotdetail.jsp?contentsid=" + contentsid + "#spotReview";
+		});
+		
+		$("#spotListSelect").change(function(){
+			//alert($(this).val());
+			location.href="index.jsp?main=spot/spotlist.jsp?area=" + "<%=area%>" + "&select=" + $(this).val() + "&pageNum=1";
+		});
 		
 		
 	}); //function 끝
@@ -236,7 +270,12 @@ document.addEventListener('DOMContentLoaded', function(){
     <!-- 슬라이드 끝 -->
 	<div id="spotList">
 		<br><br>
-		<h2><%=area %>의 명소 </h2>
+		<b style="font-size: 20pt;"><%=area %>의 명소 </b>
+		<select id="spotListSelect" style="float: right; margin-right: 70px;">
+			<option value="평점" selected="selected">평점순</option>
+			<option value="좋아요">좋아요순</option>
+			<option value="이름">이름순</option>
+		</select>
 		<br><br>
 		<%
         for (SpotlistDto dto : list){
@@ -299,8 +338,8 @@ document.addEventListener('DOMContentLoaded', function(){
         					<span class="glyphicon glyphicon-thumbs-up"></span><br>
         					<%=dto.getLikes() %>
         				</td>
-        				<td style="vertical-align: middle;" class="likesTD">
-        					<span class="glyphicon glyphicon-heart-empty" style="font-size: 20pt;"></span>
+        				<td style="vertical-align: middle;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
+        					<span class="glyphicon glyphicon-edit" style="font-size: 10pt;"></span>&nbsp;<b>리뷰</b>
         				</td>
         			</tr>
         		</table>
