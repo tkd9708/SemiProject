@@ -28,10 +28,17 @@ String url=request.getContextPath();
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function(){
-		$("#mbList").hide();
+		<%
+		if((String)session.getAttribute("loginok")!="success")
+		{%>
+			alert("로그인을 해야 볼 수 있습니다. 로그인해주세요");
+			location.href="index.jsp";
+		<%}
+		%>
+		$("#ambList").hide();
 		if("<%=idcf%>"=="admin") {
 			console.log("<%=idcf%>");
-			$("#mbList").show();
+			$("#ambList").show();
 		}		
 	});
 </script>

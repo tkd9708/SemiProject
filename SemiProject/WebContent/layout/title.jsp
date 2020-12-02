@@ -72,8 +72,8 @@
               <img src="<%=url %>/image/title_no.png" class="img_logo">
             </s_if_var_logoImage>
           </a>
-        <a class="main_login">login</a>
-        <a class="main_mypage">mypage</a>
+        <!-- <a class="main_login">login</a>
+        <a class="main_mypage">mypage</a> -->
       </div>
       <!-- // box_header -->
       

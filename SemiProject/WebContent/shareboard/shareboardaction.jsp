@@ -59,7 +59,7 @@
 		dto.setContent(content);
 		dto.setId(id);
 		dto.setSubject(subject);
-	;
+		
 		dto.setFiles(files);
 		
 		db.insertShare(dto);
