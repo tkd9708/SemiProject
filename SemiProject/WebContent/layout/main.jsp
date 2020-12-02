@@ -15,12 +15,11 @@
 
 <style type="text/css">
 body {
-	background-color: #7eb9e3;
+	/*background-color: #7eb9e3;*/
 	margin: 0;
 	height: 100%;
 	
 }
-<<<<<<< HEAD
 
 .jejuisland {
     left:267px;
@@ -376,6 +375,9 @@ div.btn_go {
     top: 95px; 
     left: 262px; 
 =======
+=======
+
+>>>>>>> branch 'feature/1' of https://github.com/tkd9708/SemiProject.git
 .jejuisland {
     left:267px;
     padding-top: 50px;
@@ -390,21 +392,22 @@ div.btn_go {
     padding-top: 50px;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
-    font-family: 'Jua';
+    font-weight: bold;
+    font-size: 25px;
 } 
 
 /*조천*/
 #btn_go_jocheon{
-    top: 100px;
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_jocheon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -412,7 +415,6 @@ div.btn_go {
 
 .jocheon a {
     top: 220px; 
-    font-size:30px;
     left: 870px; 
     z-index: 3;
     position: absolute;
@@ -422,16 +424,16 @@ div.btn_go {
 
 /*서귀포*/
 #btn_go_seogwipo{
-    top: 100px;; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_seogwipo.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -439,7 +441,6 @@ div.btn_go {
 
 .seogwipo a{
     top: 470px; 
-    font-size:30px;
     left: 640px; 
     z-index: 3;
     position: absolute;
@@ -449,16 +450,16 @@ div.btn_go {
 
 /*제주*/
 #btn_go_jeju{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_jeju.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -466,7 +467,6 @@ div.btn_go {
 
 .jeju a{
     top: 260px; 
-    font-size:30px;
     left: 710px; 
     z-index: 3;
     position: absolute;
@@ -476,16 +476,16 @@ div.btn_go {
 
 /*구좌*/
 #btn_go_gujwa{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_gujwa.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -493,7 +493,6 @@ div.btn_go {
 
 .gujwa a{
     top: 180px; 
-    font-size:30px;
     left: 1000px; 
     z-index: 3;
     position: absolute;
@@ -503,16 +502,16 @@ div.btn_go {
 
 /*성산*/
 #btn_go_sungsan{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_sungsan.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -520,7 +519,6 @@ div.btn_go {
 
 .sungsan a{
     top: 320px; 
-    font-size:30px;
     left: 1070px; 
     z-index: 3;
     position: absolute;
@@ -530,16 +528,16 @@ div.btn_go {
 
 /*표선*/
 #btn_go_pyoseon{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_pyoseon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -547,7 +545,6 @@ div.btn_go {
 
 .pyoseon a{
     top: 370px; 
-    font-size:30px;
     left: 975px; 
     z-index: 3;
     position: absolute;
@@ -557,16 +554,16 @@ div.btn_go {
 
 /*남원*/
 #btn_go_namwon{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_namwon.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -574,7 +571,6 @@ div.btn_go {
 
 .namwon a{
     top: 400px; 
-    font-size:30px;
     left: 820px; 
     z-index: 3;
     position: absolute;
@@ -584,16 +580,16 @@ div.btn_go {
 
 /*안덕*/
 #btn_go_andeok{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_andeok.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -601,7 +597,6 @@ div.btn_go {
 
 .andeok a{
     top: 500px; 
-    font-size:30px;
     left: 480px; 
     z-index: 3;
     position: absolute;
@@ -611,16 +606,16 @@ div.btn_go {
 
 /*대정*/
 #btn_go_daejung{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_daejung.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -628,7 +623,6 @@ div.btn_go {
 
 .daejung a{
     top: 510px; 
-    font-size:30px;
     left: 390px; 
     z-index: 3;
     position: absolute;
@@ -638,16 +632,16 @@ div.btn_go {
 
 /*한경*/
 #btn_go_hangyeong{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_hangyeong.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -655,7 +649,6 @@ div.btn_go {
 
 .hangyeong a{
     top: 430px; 
-    font-size:30px;
     left: 370px; 
     z-index: 3;
     position: absolute;
@@ -665,16 +658,16 @@ div.btn_go {
 
 /*한림*/
 #btn_go_hanrim{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_hanrim.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -682,7 +675,6 @@ div.btn_go {
 
 .hanrim a{
     top: 370px; 
-    font-size:30px;
     left: 430px; 
     z-index: 3;
     position: absolute;
@@ -692,16 +684,16 @@ div.btn_go {
 
 /*애월*/
 #btn_go_aewol{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px;
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_aewol.hover{
-    top: 100px; 
-    left: 267px; 
+    top: 93px; 
+    left: 260px; 
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -709,7 +701,6 @@ div.btn_go {
 
 .aewol a{
     top: 350px; 
-    font-size:30px;
     left: 530px; 
     z-index: 3;
     position: absolute;
@@ -719,17 +710,22 @@ div.btn_go {
 
 /*우도*/
 #btn_go_udo{
-    top: 100px; 
-    left: 267px; 
+    top: 95px; 
+    left: 262px; 
     position: absolute;
     z-index: 2; 
     visibility: hidden; 
 }
 
 #btn_go_udo.hover{
+<<<<<<< HEAD
     top: 100px; 
     left: 267px; 
 >>>>>>> branch 'Develop' of https://github.com/tkd9708/SemiProject.git
+=======
+    top: 95px; 
+    left: 262px; 
+>>>>>>> branch 'feature/1' of https://github.com/tkd9708/SemiProject.git
     position: absolute;
     z-index: 2; 
     visibility: visible; 
@@ -737,7 +733,6 @@ div.btn_go {
 
 .udo a{
     top: 200px; 
-    font-size:30px;
     left: 1230px; 
     z-index: 3;
     position: absolute;
@@ -756,24 +751,29 @@ div.btn_go {
 div.container{
     position: relative;
     top: 100px;
-    width: 100vw;
+    width: max-content;
     margin: auto;
     transition: transform 0.7s, opacity 1s;
     opacity: 0;
     padding-top: 100px;
-    padding-left: 400px;
+    margin-left: 400px;
+    margin-bottom: 100px;
 }
 
 #custom-search-input{
     padding: 3px;
-    border: solid 1px #E4E4E4;
+    border: solid 3px #ffa400;
     border-radius: 6px;
     background-color: #fff;
+    display: inline-block;
+    float: right;
+    height: 55px;
 }
 
 #custom-search-input input{
     border: 0;
     box-shadow: none;
+    display: inline-block;
 }
 
 #custom-search-input button{
@@ -796,6 +796,16 @@ div.container{
     font-size: 23px;
 }
 
+select.combobox{
+    display: inline-block;
+    width: 100px;
+    background-color: #fff;
+    float: left;
+    height: 55px;
+    margin-top: 1px;
+    border: solid 3px #ffa400; 
+    border-radius: 6px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -906,12 +916,10 @@ $(function(){
 		$("#btn_go_udo").removeClass("hover");
 	});
 	
-<<<<<<< HEAD
 	$("div.btn_go").on('mouseover',function(){
 	    $(this).css('color','white');	
 	});
-=======
->>>>>>> branch 'Develop' of https://github.com/tkd9708/SemiProject.git
+
   });//function close
   
   function isElementUnderBottom(elem, triggerDiff) {
@@ -970,6 +978,13 @@ $(function(){
    <!-- 상단 슬라이드 부분 close -->
  
 <div class="container">
+ <div class="combo">
+            <select class="combobox">
+                <option value="all" selected="selected">전  체</option>
+                <option value="land">지  역</option>
+                <option value="spot">지역명소</option>
+             </select>
+         </div>
 	<div class="row">
         <div class="col-md-6">
             <div id="custom-search-input">

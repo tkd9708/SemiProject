@@ -230,4 +230,70 @@ public class MemberDao {
 		}	
 		return name;
 	}
+	
+	public String getMemNum(String id)
+	{
+		String num="";
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs=null;
+		String sql="select num from member where id=?";
+		
+		
+		conn=db.getConnection();
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}	
+		return num;
+	}
+	
+	public MemberDto getData(String num)
+	{
+		MemberDto dto = new MemberDto();
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs=null;
+		String sql="select * from member where num=?";
+		
+		
+		conn=db.getConnection();
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
+				dto.setAddrdetail(rs.getString("addrdetail"));
+				dto.setEmail(rs.getString("email"));
+				dto.setHp(rs.getString("hp"));
+				dto.setGaipday(rs.getTimestamp("gaipday"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}	
+		return dto;
+	}
 }
