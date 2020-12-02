@@ -3,34 +3,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 또똣 :: 제주여행의모든것</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-	div.layout div.title {
-		height: 130px;
-		line-height: 130px;
-		margin-bottom: 30px;
-	}
-	 
-	div.layout div.login {
-	    text-align:right;
-		padding-right: 100px;
-		font-size: 20px;
-		
-	}
-	
-	div.layout div.main {
-		max-width: 100%;
-	}
+body { 
+    -ms-overflow-style: none; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} 
+::-webkit-scrollbar {
+    display: none; 
+}
+
+div.layout div.title {
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+div.layout div.main {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}
+div.layout div.footer {
+    position: inherit;
+    z-index: 1;
+    bottom: 0;
+    padding: 30px 0;
+
+a {
+	cursor:pointer;
+}
 </style>
 
 </head>
@@ -40,22 +56,24 @@
 	if(request.getParameter("main") != null){
 		mainPage = request.getParameter("main");
 	}
+	//System.out.println((String)session.getAttribute("myid"));
 %>
 <body>
 
-<div class="layout">
-   <!-- 타이틀 부분 -->
-   <div class="title">
-      <jsp:include page="layout/title.jsp"/>
-   </div>
-   <!-- 로그인 부분 -->
-   <div class="login">
-      <jsp:include page="layout/login.jsp"/>
-   </div>
-   <!-- 제주도 지도부분 -->
-   <div class="main">
-      <jsp:include page="<%=mainPage%>"/> 
-   </div>
-</div>
+	<div class="layout">
+		<!-- 타이틀 부분 -->
+		<div class="title">
+			<jsp:include page="layout/title.jsp" />
+		</div>
+		<!-- 제주도 지도부분 -->
+		<div class="main" id="main">
+			<jsp:include page="<%=mainPage%>" />
+		</div>
+	    <!-- footer부분 -->
+		<footer>
+		     <jsp:include page="layout/footer.jsp" />
+		</footer>
+	</div>
+		
 </body>
 </html>

@@ -7,6 +7,7 @@
     "outline": {
       
     },
+<<<<<<< HEAD
     "bootstrap": {
       
     }
@@ -16,3 +17,20 @@
     "jquery"
   ]
 }
+=======
+    "jscs": {
+      
+    },
+    "ckeditor4.4.x": {
+      
+    },
+    "jquery-ui1-12": {
+      
+    }
+  },
+  "libs": [
+    "browser",
+    "jquery"
+  ]
+}
+>>>>>>> branch 'Develop' of https://github.com/tkd9708/SemiProject.git
