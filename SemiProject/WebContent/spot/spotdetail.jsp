@@ -20,35 +20,35 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
-	.thumbnail {
-		width: 500px;
-		height: 500px;
-		margin-left: 200px;
-		margin-top: 150px;
-		display: inline-block;
-	
-	}
-	
-	div.thumbnailDetail {
-		display: inline-block;
-		margin-left: 100px;
-		width: 520px;
-		height: 500px;
-		vertical-align: bottom;
-	}
-	
-	div#spotReview {
-		margin-left: 200px;
-		margin-right: 200px;
-		height: 1000px;
-	}
-	
-	/* span.star {
-		font-size: 20pt; 
-		color: #F0CD58;
-		cursor: pointer;
-	} */
-	
+   .thumbnail {
+      width: 500px;
+      height: 500px;
+      margin-left: 200px;
+      margin-top: 150px;
+      display: inline-block;
+   
+   }
+   
+   div.thumbnailDetail {
+      display: inline-block;
+      margin-left: 100px;
+      width: 520px;
+      height: 500px;
+      vertical-align: bottom;
+   }
+   
+   div#spotReview {
+      margin-left: 200px;
+      margin-right: 200px;
+      height: 1000px;
+   }
+   
+   /* span.star {
+      font-size: 20pt; 
+      color: #F0CD58;
+      cursor: pointer;
+   } */
+   
    /*별점 css*/
  
 
@@ -99,9 +99,9 @@
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-	
-	/* 명소 지도  */
-	/* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+   
+   /* 명소 지도  */
+   /* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
@@ -179,8 +179,8 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
 a.info {
-	text-decoration: none;
-	color: #333;
+   text-decoration: none;
+   color: #333;
 }
 div.modal-backdrop{
 z-index:0;}
@@ -286,177 +286,181 @@ z-index:1111;
 
 </style>
 <%
-	String contentsid = request.getParameter("contentsid");
-	SpotlistDao dao = new SpotlistDao();
-	SpotlistDto dto = dao.getData(contentsid);
-	
-	SpotReviewDao rdao = new SpotReviewDao();
-	List<SpotReviewDto> list = rdao.getList(contentsid);
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
-	String myid = (String)session.getAttribute("myid");
-	String loginok = (String)session.getAttribute("loginok");
-	String today = sdf.format(new Date());
-	
-	MemberDao mdao = new MemberDao();
-	String memNum = mdao.getMemNum(myid);
-	
-	WishlistDao wdao = new WishlistDao();
-	boolean spotSearch = wdao.isSpotSearch(contentsid);
-	
+   String contentsid = request.getParameter("contentsid");
+   SpotlistDao dao = new SpotlistDao();
+   SpotlistDto dto = dao.getData(contentsid);
+   
+   SpotReviewDao rdao = new SpotReviewDao();
+   List<SpotReviewDto> list = rdao.getList(contentsid);
+   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+   
+   String myid = (String)session.getAttribute("myid");
+   String loginok = (String)session.getAttribute("loginok");
+   String today = sdf.format(new Date());
+   
+   MemberDao mdao = new MemberDao();
+   String memNum = mdao.getMemNum(myid);
+   
+   WishlistDao wdao = new WishlistDao();
+   boolean spotSearch = wdao.isSpotSearch(contentsid);
+   
 %>
 <script type="text/javascript">
-	$(function(){
-		if(<%=spotSearch%>){
-			$(".sd_heart").addClass('color');
-		}
-		
-		//searchPlaces(); return false;
-		
-		/* $("#srstarBox span").on("click",function(){
-			var idx = $(this).index()+1;
-			$(".star").removeClass("glyphicon glyphicon-star-empty");
-			
-			for(var i=0; i<=idx; i++){
-			   	$(".star").eq(i).addClass("glyphicon glyphicon-star");
-			}
-			for(var i=idx; i<=5; i++){
-			   	$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
-			}
-			$("#spotReviewStar").val(idx);	
-		}); */
-		
-		$(".stars__checkbox").on("click", function(){
-			var idx = $(this).index()/2;
-			switch (idx) {
-			case 0:
-				idx=5;
-				break;
-			case 1:
-				idx=4;
-				break;
-			case 2:
-				idx=3;
-				break;
-			case 3:
-				idx=2;
-				break;
-			case 4:
-				idx=1;
-				break;
-			default:
-				break;
-			}
-			//alert(idx);
-			$("#spotReviewStar").val(idx);	
-		});
-		
-		$("#btnInsertReview").click(function(){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":<%=memNum%>, "star":$("#spotReviewStar").val(),
-						"content":$("#srContent").val()},
-				url: "spot/insertspotreview.jsp",
-				success: function(data){
-					location.reload();
-				}
-			});
-		});
-		
-		/* $("div.sd_heart").click(function(){
-			$(".sd_heart:eq(0)").addClass('color');
-		}); */
-		
-		$("#spotHeart").click(function(){
-			$("#spotModal").modal();
-			
-		});
-		
-		$("#spotGoCal").click(function(){
-			if(<%=loginok.equals("success")%>){
-				$.ajax({
-					type: "post",
-					dataType: "html",
-					url: "spot/insertspottocal.jsp",
-					data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
-					success: function(data){
-						$(".sd_heart").addClass('color');
-						var a = confirm("Mypage로 이동하시겠습니까?");
-						if(a){
-							location.href="index.jsp?main=mypage/mypage.jsp";
-						} 
-						$("#spotModal").modal("hide");
-					
-					}
-				});
-			}
-			else {
-				alert("로그인이 필요한 서비스입니다.");
-			}
-		});
-	});
+   $(function(){
+      if(<%=spotSearch%>){
+         $(".sd_heart").addClass('color');
+      } 
+      
+      //searchPlaces(); return false;
+      
+      /* $("#srstarBox span").on("click",function(){
+         var idx = $(this).index()+1;
+         $(".star").removeClass("glyphicon glyphicon-star-empty");
+         
+         for(var i=0; i<=idx; i++){
+               $(".star").eq(i).addClass("glyphicon glyphicon-star");
+         }
+         for(var i=idx; i<=5; i++){
+               $(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
+         }
+         $("#spotReviewStar").val(idx);   
+      }); */
+      
+      $(".stars__checkbox").on("click", function(){
+         var idx = $(this).index()/2;
+         switch (idx) {
+         case 0:
+            idx=5;
+            break;
+         case 1:
+            idx=4;
+            break;
+         case 2:
+            idx=3;
+            break;
+         case 3:
+            idx=2;
+            break;
+         case 4:
+            idx=1;
+            break;
+         default:
+            break;
+         }
+         //alert(idx);
+         $("#spotReviewStar").val(idx);   
+      });
+      
+      $("#btnInsertReview").click(function(){
+         $.ajax({
+            type: "post",
+            dataType: "html",
+            data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
+                  "content":$("#srContent").val()},
+            url: "spot/insertspotreview.jsp",
+            success: function(data){
+               location.reload();
+            }
+         });
+      });
+      
+      /* $("div.sd_heart").click(function(){
+         $(".sd_heart:eq(0)").addClass('color');
+      }); */
+      
+      $("#spotHeart").click(function(){
+         $("#spotModal").modal();
+         
+      });
+      
+      $("#spotGoCal").click(function(){
+         if("<%=loginok%>" == "success"){ 
+            $.ajax({
+               type: "post",
+               dataType: "html",
+               url: "spot/insertspottocal.jsp",
+               data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
+               success: function(data){
+                  $(".sd_heart").addClass('color');
+                  var a = confirm("Mypage로 이동하시겠습니까?");
+                  if(a){
+                     location.href="index.jsp?main=mypage/mypage.jsp";
+                  } 
+                  $("#spotModal").modal("hide");
+               
+               }
+            });
+         }
+         else {
+            alert("로그인이 필요한 서비스입니다.");
+         }
+      });
+   });
 </script>
 <body>
-	<%
-	if(dto.getThumbnail() != null){
-		%>
-		<img class="thumbnail" src="<%=dto.getThumbnail()%>">
-		<%
-	}
-	else {
-		%>
-		<div class="thumbnail">썸네일 없음</div>
-		<%
-	}
-	%>
-	<div class="thumbnailDetail" style="position: relative;">
-		<span style="color: #F0CD58; font-size: 30px;">
-			<%
-        		for(int i=1; i<=5; i++){
-        			if(i<=dto.getStar()){
-        				%><span class="glyphicon glyphicon-star"></span><%
-        			}
-        			else {
-        				%><span class="glyphicon glyphicon-star-empty"></span><%
-        			}
-        		}
-        	%>
-		</span>
-		<br><br>
-		<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
-		<br><br>
-		<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
-		<hr>
-		<span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
-		<br><br>
-		<%
-		if(dto.getRoadaddr()){
-			%>
-			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
-			<%
-		}
-		else {
-		
-		%>
-		<br>
-		<!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
-			<span class="glyphicon glyphicon-heart-empty"></span> 
-		</div> -->
-		<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
-	</div>
-	<hr>
-	<br><br>
-	
-	<br><br>
-	
-	
-	<!-- 명소 주변 맛집 -->
-	<div style="margin-left: 200px; margin-right: 200px;">
-		<h2>명소 주변</h2><br>
-		<div class="map_wrap" style="text-align: center;">
+   <%
+   if(dto.getThumbnail() != null){
+      %>
+      <img class="thumbnail" src="<%=dto.getThumbnail()%>">
+      <%
+   }
+   else {
+      %>
+      <div class="thumbnail">썸네일 없음</div>
+      <%
+   }
+   %>
+   <div class="thumbnailDetail" style="position: relative;">
+      <span style="color: #F0CD58; font-size: 30px;">
+         <%
+              for(int i=1; i<=5; i++){
+                 if(i<=dto.getStar()){
+                    %><span class="glyphicon glyphicon-star"></span><%
+                 }
+                 else {
+                    %><span class="glyphicon glyphicon-star-empty"></span><%
+                 }
+              }
+           %>
+      </span>
+      <br><br>
+      <b style="font-size: 20pt;"><%=dto.getTitle() %></b>
+      <br><br>
+      <span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
+      <hr>
+      <span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
+      <br><br>
+      <%
+      if(dto.getRoadaddr()!=null){
+         %>
+         <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+         <%
+      }
+      else {
+         %>
+         <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
+         <%
+      }
+      
+      %>
+      <br>
+      <!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
+         <span class="glyphicon glyphicon-heart-empty"></span> 
+      </div> -->
+      <div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+   </div>
+   <hr>
+   <br><br>
+   
+   <br><br>
+   
+   
+   <!-- 명소 주변 맛집 -->
+   <div style="margin-left: 200px; margin-right: 200px;">
+      <h2>명소 주변</h2><br>
+      <div class="map_wrap" style="text-align: center;">
     <div id="map" style="width:80%;height:100%; position:relative;overflow:hidden; margin-left: 100px;"></div>
-	<ul id="category">
+   <ul id="category">
         <li id="FD6" data-order="0"> 
             <span class="category_bg restaurant"></span>
             음식점
@@ -471,11 +475,11 @@ z-index:1111;
         </li>     
      </ul>   
     <input type="hidden" value="<%=dto.getTitle() %>" id="keyword" size="15">
-	</div>
-	<br><br>
+   </div>
+   <br><br>
     <ul id="placesList"></ul>
     <div id="pagination"></div>
-	</div>
+   </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3e5d36ebdbe678f839591abd28e09be7&libraries=services"></script>
 <script>
@@ -502,8 +506,8 @@ var ps = new kakao.maps.services.Places(map);
 
 //지도에 마커를 표시합니다 ~~~~~~~~~~~~~~~~~~~~~~~~~~`
 var marker = new kakao.maps.Marker({
-	map: map, 
-	position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
+   map: map, 
+   position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
 });  
 
 var content = '<div class="wrap">' + 
@@ -529,14 +533,14 @@ var content = '<div class="wrap">' +
 //마커 위에 커스텀오버레이를 표시합니다
 //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 var overlay = new kakao.maps.CustomOverlay({
-	content: content,
-	map: map,
-	position: marker.getPosition()       
+   content: content,
+   map: map,
+   position: marker.getPosition()       
 });
 
 //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function() {
-	overlay.setMap(map);
+   overlay.setMap(map);
 });
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -551,7 +555,7 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 //~~~~~~~~~~~~~~~~~~~~~
 //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 function closeOverlay() {
-	overlay.setMap(null);     
+   overlay.setMap(null);     
 }
 // 지도에 idle 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'idle', searchPlaces);
@@ -587,11 +591,11 @@ function addEventHandle(target, type, callback) {
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
-	if (!currCategory) {
+   if (!currCategory) {
         return;
     }
-	
-	 // 커스텀 오버레이를 숨깁니다 
+   
+    // 커스텀 오버레이를 숨깁니다 
     placeOverlay.setMap(null);
 
     // 지도에 표시되고 있는 마커를 제거합니다
@@ -603,7 +607,7 @@ function searchPlaces() {
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
-	if (status === kakao.maps.services.Status.OK) {
+   if (status === kakao.maps.services.Status.OK) {
 
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         displayPlaces(data);
@@ -622,7 +626,7 @@ function placesSearchCB(data, status, pagination) {
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
 
-	// 몇번째 카테고리가 선택되어 있는지 얻어옵니다
+   // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
     var order = document.getElementById(currCategory).getAttribute('data-order');
     var listEl = document.getElementById('placesList'), 
@@ -638,7 +642,7 @@ function displayPlaces(places) {
     
     for ( var i=0; i<places.length; i++ ) {
 
-    	 // 마커를 생성하고 지도에 표시합니다
+        // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
@@ -660,14 +664,14 @@ function displayPlaces(places) {
             }); */
 
             kakao.maps.event.addListener(marker, 'click', function() {
-            	displayInfowindow(marker, place);
+               displayInfowindow(marker, place);
             });
             
             
             
             /* itemEl.onmouseover =  function () {
                 //displayInfowindow(marker, title);
-				displayPlaceInfo(place);
+            displayPlaceInfo(place);
             };
 
             itemEl.onmouseout =  function () {
@@ -678,7 +682,7 @@ function displayPlaces(places) {
         fragment.appendChild(itemEl);
 
     }
-	
+   
 
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
@@ -705,10 +709,10 @@ function getListItem(index, places) {
                  
     itemStr += '  <span class="tel">' + places.phone  + '</span>' + '</a>';  
     itemStr += '<div style="display: inline-block; width: 30%; font-size: 30pt; color:red; '
-    			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
-    			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
-    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '"></div></div></div>';
-    			
+             +   'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
+             //+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
+             + '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
+             
 
     el.innerHTML = itemStr;
     el.className = 'item';
@@ -819,21 +823,21 @@ function addCategoryClickEvent() {
 
 //카테고리를 클릭했을 때 호출되는 함수입니다
 function onClickCategory() {
-	var id = this.id, className = this.className;
+   var id = this.id, className = this.className;
 
  
  
- 	placeOverlay.setMap(null);
+    placeOverlay.setMap(null);
 
-	 if (className === 'on') {
-    	currCategory = '';
-     	changeCategoryClass();
-     	removeMarker();
- 	} else {
-     	currCategory = id;
-     	changeCategoryClass(this);
-     	searchPlaces();
- 	}
+    if (className === 'on') {
+       currCategory = '';
+        changeCategoryClass();
+        removeMarker();
+    } else {
+        currCategory = id;
+        changeCategoryClass(this);
+        searchPlaces();
+    }
 }
 
 //클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
@@ -851,26 +855,26 @@ function changeCategoryClass(el) {
  } 
 } 
 </script>
-	
-	<br><br><br><br><br><br><br><br><br>
-	<hr>
-	<br>
-	<!-- 명소 리뷰 -->
-	<div id="spotReview">
-		<h2>Review</h2>
-		<form id="newSpotReview" action="spot/insertspotreview.jsp">
-			<br>
-			<b>작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<br><br>
-			<!-- <div id="srstarBox" style="display: inline-block;">
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-			</div> -->
-			
-			                         
+   
+   <br><br><br><br><br><br><br><br><br>
+   <hr>
+   <br>
+   <!-- 명소 리뷰 -->
+   <div id="spotReview">
+      <h2>Review</h2>
+      <form id="newSpotReview" action="spot/insertspotreview.jsp">
+         <br>
+         <b>작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <br><br>
+         <!-- <div id="srstarBox" style="display: inline-block;">
+            <span class="glyphicon glyphicon-star-empty star"></span>
+            <span class="glyphicon glyphicon-star-empty star"></span>
+            <span class="glyphicon glyphicon-star-empty star"></span>
+            <span class="glyphicon glyphicon-star-empty star"></span>
+            <span class="glyphicon glyphicon-star-empty star"></span>
+         </div> -->
+         
+                                  
                                  
            <!-- 별점 -->
      <div class="stars">
@@ -916,76 +920,76 @@ function changeCategoryClass(el) {
         </label>
         </div>
         
-			<input type="hidden" name="star" id="spotReviewStar" value="0">
-			<br><br>
-			<textarea name="content" id="srContent" style="width: 500px; height: 100px; float: left;" class="form-control"></textarea>
-			<button type="button" id="btnInsertReview" style="height: 100px; width: 80px; margin-left: 10px;">작성</button>
-		</form>
-		<br><br><br>
-		
-		
-		<!-- 명소 리뷰 리스트 -->
-		<div id="spotReviewList">
-			<table class="table">
-				<tr style="text-align: center; vertical-align: middle" bgcolor="#efefef">
-					<td width="15%"><b>작성자</b></td>
-					<td width="50%"><b>review</b></td>
-					<td width="15%"><b>별점</b></td>
-					<td width="20%"><b>작성일</b></td>
-				</tr>
-				<%
-				if(rdao.getTotalCount(contentsid) == 0){
-					%>
-					<tr style="text-align: center;"><td colspan="4">등록된 review가 없습니다.</td></tr>
-					<%
-				}
-				else{
-					int total = 0;
-					for(SpotReviewDto rdto : list){
-					
-						total += rdto.getStar();
-					%>
-						<tr>
-							<td style="text-align: center; vertical-align: middle">
-								<b><%=mdao.getData(rdto.getMemNum()).getId() %> 님</b><br>
-							</td>
-							<td style=" vertical-align: middle">
-							<%=rdto.getContent().replace("\n", "<br>") %>
-							</td>
-							<td style="text-align: center; vertical-align: middle">
-								<span style="color: #F0CD58; font-size: 18px;">
-									<%
-	        						for(int i=1; i<=5; i++){
-	        							if(i<=rdto.getStar()){
-	        								%>★<%
-	        							}
-	        							else {
-	        								%>☆<%
-	        							}
-	        						}
-	        						%>
-								</span>
-							</td>
-							<td style="text-align: center; vertical-align: middle">
-								<%=sdf.format(rdto.getWriteday())%>
-							</td>
-						</tr>
-					<%
-					}
-					if(total > 0){
-						dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
-					}
-				
-				}
-				%>
-			
-			</table>
-		</div>
-		
-	</div>
-	
-	<!-- around 일정 추가 modal -->
-	<div class="modal fade" id="aroundModal" role="dialog">
+         <input type="hidden" name="star" id="spotReviewStar" value="0">
+         <br><br>
+         <textarea name="content" id="srContent" style="width: 500px; height: 100px; float: left;" class="form-control"></textarea>
+         <button type="button" id="btnInsertReview" style="height: 100px; width: 80px; margin-left: 10px;">작성</button>
+      </form>
+      <br><br><br>
+      
+      
+      <!-- 명소 리뷰 리스트 -->
+      <div id="spotReviewList">
+         <table class="table">
+            <tr style="text-align: center; vertical-align: middle" bgcolor="#efefef">
+               <td width="15%"><b>작성자</b></td>
+               <td width="50%"><b>review</b></td>
+               <td width="15%"><b>별점</b></td>
+               <td width="20%"><b>작성일</b></td>
+            </tr>
+            <%
+            if(rdao.getTotalCount(contentsid) == 0){
+               %>
+               <tr style="text-align: center;"><td colspan="4">등록된 review가 없습니다.</td></tr>
+               <%
+            }
+            else{
+               int total = 0;
+               for(SpotReviewDto rdto : list){
+               
+                  total += rdto.getStar();
+               %>
+                  <tr>
+                     <td style="text-align: center; vertical-align: middle">
+                        <b><%=mdao.getData(rdto.getMemNum()).getId() %> 님</b><br>
+                     </td>
+                     <td style=" vertical-align: middle">
+                     <%=rdto.getContent().replace("\n", "<br>") %>
+                     </td>
+                     <td style="text-align: center; vertical-align: middle">
+                        <span style="color: #F0CD58; font-size: 18px;">
+                           <%
+                             for(int i=1; i<=5; i++){
+                                if(i<=rdto.getStar()){
+                                   %>★<%
+                                }
+                                else {
+                                   %>☆<%
+                                }
+                             }
+                             %>
+                        </span>
+                     </td>
+                     <td style="text-align: center; vertical-align: middle">
+                        <%=sdf.format(rdto.getWriteday())%>
+                     </td>
+                  </tr>
+               <%
+               }
+               if(total > 0){
+                  dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
+               }
+            
+            }
+            %>
+         
+         </table>
+      </div>
+      
+   </div>
+   
+   <!-- around 일정 추가 modal -->
+   <div class="modal fade" id="aroundModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -995,16 +999,16 @@ function changeCategoryClass(el) {
           <h4 class="modal-title">일정 추가</h4>
         </div>
         <div class="modal-body">
-        	<div style="margin-left: 10px; margin-right: 10px;">
-        		<div id="aroundModalInfo"></div>
-        		<br>
-          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-          		<input type="date" id="sd_wishday" value="<%=today%>">
-        	</div>
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="aroundModalInfo"></div>
+              <br>
+                <span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" id="sd_wishday" value="<%=today%>">
+           </div>
         </div>
         <div class="modal-footer">
-        	<button type="button" class="btn btn-warning" id="aroundGoCal">추가</button>
-          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-warning" id="aroundGoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -1012,7 +1016,7 @@ function changeCategoryClass(el) {
   </div>
   
   <!-- spot 일정 추가 modal -->
-	<div class="modal fade" id="spotModal" role="dialog">
+   <div class="modal fade" id="spotModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -1022,18 +1026,18 @@ function changeCategoryClass(el) {
           <h4 class="modal-title">일정 추가</h4>
         </div>
         <div class="modal-body">
-        	<div style="margin-left: 10px; margin-right: 10px;">
-        		<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getTitle() %></b>
-        		<br><br>
-        		<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
-        		<br><br>
-          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-          		<input type="date" id="sd_spotwishday" value="<%=today%>">
-        	</div>
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getTitle() %></b>
+              <br><br>
+              <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+              <br><br>
+                <span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" id="sd_spotwishday" value="<%=today%>">
+           </div>
         </div>
         <div class="modal-footer">
-        	<button type="button" class="btn btn-warning" id="spotGoCal">추가</button>
-          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-warning" id="spotGoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -1042,48 +1046,50 @@ function changeCategoryClass(el) {
  
 <script type="text/javascript">
 
-	$(document).on("click", ".aroundHeart", function(){
-		$("#aroundModal").modal();
-		
-		var space = $(this).attr("space");
-		var addr = $(this).attr("addr");
-		var s = "";
-		s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
-		s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
-		s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
-		s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
-		s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
-		//s += "</div>";
-	
-		$("#aroundModalInfo").html(s);	
-		
-	});
-	
-	$("#aroundGoCal").click(function(){
-		
-		if(<%=loginok.equals("success")%>){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				url: "spot/insertaroundtocal.jsp",
-				data: {"wishday":$("#sd_wishday").val(), "aroundId":"<%=myid%>", "space":$("#sd_space").val(), "addr":$("#sd_addr").val()},
-				success: function(data){
+   $(document).on("click", ".aroundHeart", function(){
+      $("#aroundModal").modal();
+      
+      var space = $(this).attr("space");
+      var addr = $(this).attr("addr");
+      var category = $(this).attr("category");
+      var s = "";
+      s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
+      s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
+      s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
+      s += "<input type='hidden' id='sd_category' value='" + category + "'>";
+      s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
+      s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
+      //s += "</div>";
+   
+      $("#aroundModalInfo").html(s);   
+      
+   });
+   
+   $("#aroundGoCal").click(function(){
+      
+      if("<%=loginok%>" == "success"){
+         $.ajax({
+            type: "post",
+            dataType: "html",
+            url: "spot/insertaroundtocal.jsp",
+            data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
+            success: function(data){
 
-					var heartidx = $("#sd_heartidx").val();
-					$(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
-					var a = confirm("Mypage로 이동하시겠습니까?");
-					if(a){
-						location.href="index.jsp?main=mypage/mypage.jsp";
-					} 
-					$("#aroundModal").modal("hide");
-				}
-			});
-		}
-		else {
-			alert("로그인이 필요한 서비스입니다.");
-		}
-		
-	});
+               var heartidx = $("#sd_heartidx").val();
+               $(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
+               var a = confirm("Mypage로 이동하시겠습니까?");
+               if(a){
+                  location.href="index.jsp?main=mypage/mypage.jsp";
+               } 
+               $("#aroundModal").modal("hide");
+            }
+         });
+      }
+      else {
+         alert("로그인이 필요한 서비스입니다.");
+      }
+      
+   });
 </script>
 
 

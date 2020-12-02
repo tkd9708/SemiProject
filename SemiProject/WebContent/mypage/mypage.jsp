@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="data.dto.WishlistDto"%>
+<%@page import="data.dao.WishlistDao"%>
+<%@page import="data.dao.SpotlistDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -86,7 +90,7 @@ z-index:1111;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 300px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -103,7 +107,7 @@ z-index:1111;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 300px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -175,7 +179,7 @@ function drawCalendar(){ //달력 그리는 함수
 						}
 						
 						/* //일정 어떻게 넣쥥
-						var mem_id = $("#mem_id").val();
+						var memId = $("#memId").val();
 						var xmlyear = 0
 						var xmlmonth =0
 						var xmlday = 0
@@ -205,27 +209,61 @@ function drawCalendar(){ //달력 그리는 함수
 //String sessionId = (String)session.getAttribute("myid"); 
 //xml받아서 출력하기
 function getData(){
-	var mem_id = $("#mem_id").val();
+	var memId = $("#memId").val();
 	$.ajax({
 		url: "mypage/getwishtoxml.jsp",  
 		type:"get",
 		dataType:"xml",
-		data:{"mem_id":mem_id},
+		data:{"memId":memId},
 		success:function(data){
 			$(data).find("wish").each(function(){
 
-				var content ="✔"+$(this).find("content").text()+"<br>";
+				var content =$(this).find("content").text();
 				
 				var wishday = $(this).find("wishday").text();
-			
+				var spotId = $(this).find("spotId").text(); /////이거추가~~~~~~~~~~~~~~~~~`	
 				var wday = wishday.replaceAll("-", "");
 				var split = wishday.split("-");
-				
 					var xmlyear = split[0];
 					var xmlmonth = split[1];
 					var xmlday = split[2];
+					var aroundId =$(this).find("aroundId").text();
+					if(spotId!="0"){
+						
+						//System.out.println("spotlist");
+						$.ajax({
+							url: "mypage/getspottitle.jsp",  
+							type:"get",
+							dataType:"xml",
+							data:{"spotId":spotId},
+							success:function(data){
+								$(data).find("spot").each(function(){
+									var title =$(this).find("title").text();
+									$("#"+wday).append("🚩"+title+"<br>");
+								});
+							}
+							});
+					}
 					
-					$("#"+wday).append(content);
+					else 
+					{
+						if(aroundId!="0"){
+							var sp = content.split(",");
+							var category = sp[0];
+							if(category == "음식점"){
+								 $("#"+wday).append("🍔"+aroundId+"<br>");
+							} 
+							else if(category =="숙박")
+								{
+								$("#"+wday).append("🏡"+aroundId+"<br>");
+								}
+							else if(category =="카페"){
+								$("#"+wday).append("☕"+aroundId+"<br>");
+							}
+						}
+						else $("#"+wday).append("✔"+content+"<br>");
+						
+					}
 				
 					
 			});
@@ -234,82 +272,163 @@ function getData(){
 	})
 }
 function getDetail(){
-	var mem_id = $("#mem_id").val();
+	var memId = $("#memId").val();
 	
 	$.ajax({
 		url: "mypage/getwishtoxml.jsp",  
 		type:"get",
 		dataType:"xml",
-		data:{"mem_id":mem_id},
+		data:{"memId":memId},
 		success:function(data){
 			$(data).find("wish").each(function(){
-			
-				//var content =$(this).find("content").text()+"<br>";
-				var detailcontent ="<div style='font-size:13pt; margin-left:20px;' >✔&nbsp;"+$(this).find("content").text()+"<span num='"+$(this).find("num").text()+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+		
+				var content =$(this).find("content").text();
 			
 				var wishday = $(this).find("wishday").text();
-			
+				var aroundId =$(this).find("aroundId").text();
 				var wday = wishday.replaceAll("-", "");
 				var split = wishday.split("-");
-				
+				var num =$(this).find("num").text();
 					var xmlyear = split[0];
 					var xmlmonth = split[1];
 					var xmlday = split[2];
-					
-					//if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
-					$("#"+wday+".detail").append(detailcontent);
-					
-					
+					var spotId = $(this).find("spotId").text();
+					if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
+					if(content=="0"){
+						
+						$.ajax({
+							url: "mypage/getspottitle.jsp",  
+							type:"get",
+							dataType:"xml",
+							data:{"spotId":spotId},
+							success:function(data){
+								$(data).find("spot").each(function(){
+									var title =$(this).find("title").text();
+									
+									$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;"+title+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+									
+								});
+							}
+							});
+					}
+					else {
+						
+					var detailcontent="";
+						
+							if(aroundId!="0"){
+								var sp = content.split(",");
+								var category = sp[0];
+								if(category == "음식점"){
+									 detailcontent="🍔 &nbsp;"+aroundId;
+								} 
+								else if(category =="숙박")
+									{
+									 detailcontent="🏡 &nbsp;"+aroundId;
+									}
+								else if(category =="카페"){;
+									 detailcontent="☕ &nbsp;"+aroundId;
+								}
+							}
+							else detailcontent="✔"+content;
+							
+							var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+							$("#"+wday+".detail").append(print);
+						
+						
+						
+					}
 			});
 		}
 		
 	})
 }
-function getlist(){
+
+function getsmalllist(){
 	var s="";
-	var content="";
-	var wishday ="";
-	var mem_id = $("#mem_id").val();
+	<%
+	String memId = (String)session.getAttribute("myid");
+	WishlistDao dao = new WishlistDao();
+	List<WishlistDto>list = dao.getList(memId);
+	for(WishlistDto dto : list){
+	%>
+	
+	var content = "<%=dto.getContent()%>";
+	var wishday = "<%=dto.getWishday()%>";
+	var title = "<%=dto.getTitle()%>";
+	var subject = "<%=dto.getSubject()%>";
+	var aroundId ="<%=dto.getAroundId()%>";
+	if(title!="0"){
+		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+title+"</span><br>";
+	}
+	else if(subject!="0"){
+		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+subject+"</span><br>";
+	}
+	else if(aroundId!="0"){
+		var split = aroundId.split(",");
+		var around = split[0];
+		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+around+"</span><br>";
+		}
+	else {
+		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+content+"</span><br>";
+	}
+	
+	
+	<%}%>
+	$("#myslist").html(s);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getSpot(spotId){
+	 /*여기수정~~~~~~~~~~~~~~~~~~*/
 	$.ajax({
-		url: "mypage/getwishtoxml.jsp",  
+		url: "mypage/getspottitle.jsp",  
 		type:"get",
 		dataType:"xml",
-		data:{"mem_id":mem_id},
+		data:{"spotId":spotId},
 		success:function(data){
-			$(data).find("wish").each(function(){
-				
-			
-			 content +="<span style='float: left;'>"+$(this).find("wishday").text()+"</span><span style='float: right'>"+$(this).find("content").text()+"</span><br>";
-			
-			//wishday +="<b>"+ $(this).find("wishday").text()+"</b><br>";
-			
-				//s = "<span>"+wishday+"<br>"+content+"</span>";
-				var wday = wishday.replaceAll("-", "");
-				var split = wishday.split("-");
-				
-					var xmlyear = split[0];
-					var xmlmonth = split[1];
-					var xmlday = split[2];
-					
-					$("#myslist").html(content);
-				
-					
+			$(data).find("spot").each(function(){
+
+				var title ="✔"+$(this).find("title").text()+"<br>";
+				return title;				
 			});
 		}
 		
 	})
-	
 }
+
 
 function detailList(){
 	document.getElementById("myslist").classList.toggle("show");
 }
 
 //모달에 추가하기
+
 </script>
 
 </head>
 <body>
+<%
+String sessionId = (String)session.getAttribute("myid");
+
+%>
+
+
 <div class="mypage_main">
 <h1>마이페이지</h1>
 <div class="calendar">
@@ -326,7 +445,7 @@ function detailList(){
 			&nbsp;&nbsp;
 			<div class="slist" style="display: inline-block;">
 			<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" style="text-decoration: none; color:#424242; font-size: 16pt;" ></a>
-			  <div id="myslist" class="dropdown-content" style="width: 200px; padding:10px; background-color:#F6E9DC; border:3px solid ">
+			  <div id="myslist" class="dropdown-content" style="width: 300px; padding:10px; background-color:#F6E9DC; border:3px solid ">
 				<!-- <a href="#home">Home</a><br>
 		    	<a href="#about">About</a><br>
 		    	<a href="#contact">Contact</a> -->
@@ -400,7 +519,7 @@ function detailList(){
         			<table class="modal_table table table-condensed">
         			
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
-        				<input type="hidden" name="mem_id" id="mem_id" value="test">
+        				<input type="hidden" name="memId" id="memId" value="<%=sessionId%>">
         				<tr>
         					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
         					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" ></td>
@@ -424,12 +543,14 @@ function detailList(){
 
 
 <script type="text/javascript">
-	drawCalendar();
+
+drawCalendar();
 	getData();
 	
 	$(document).on("click","div.btnSchedulelist",function(e){
-		 getlist();
-		if(!e.target.matches('.dropbtn')){
+		 //getlist();
+		getsmalllist();
+		 if(!e.target.matches('.dropbtn')){
 			var dropdowns = document.getElementsByClassName("dropdown-content");
 			var i;
 			for(i=0;i<dropdowns.length;i++){
@@ -480,7 +601,7 @@ function detailList(){
 	$(document).on("click","label",function(){
 		getData();
 	})
-	
+
 	
 </script>
 </div>

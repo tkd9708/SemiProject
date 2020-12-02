@@ -4,13 +4,14 @@ import java.sql.Date;
 
 public class WishlistDto {
 	private String num;
-	private String memNum;
+	private String memId;
 	private String spotId;
 	private String shareNum;
 	private String aroundId;
 	private String content;
 	private String wishday;
-	
+	private String title;
+	private String subject;
 	
 	public String getNum() {
 		return num;
@@ -18,11 +19,11 @@ public class WishlistDto {
 	public void setNum(String num) {
 		this.num = num;
 	}
-	public String getMemNum() {
-		return memNum;
+	public String getMemId() {
+		return memId;
 	}
-	public void setMemNum(String memNum) {
-		this.memNum = memNum;
+	public void setMemId(String memId) {
+		this.memId= memId;
 	}
 	public String getSpotId() {
 		return spotId;
@@ -54,5 +55,19 @@ public class WishlistDto {
 	public void setWishday(String wishday) {
 		this.wishday = wishday;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	
+	
 	
 }
