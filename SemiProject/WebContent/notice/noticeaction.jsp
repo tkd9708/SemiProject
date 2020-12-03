@@ -20,9 +20,10 @@
 	NoticeDao db=new NoticeDao();
 	
 	MultipartRequest multi=null;
-	String realFolder=getServletContext().getRealPath("/noticesave");
+	String realFolder=getServletContext().getRealPath("/save");
 	int uploadSize=1024*1024*2;
 	
+	//System.out.println(realFolder);
 	try{
 		multi=new MultipartRequest(request,realFolder,
 				uploadSize,"utf-8",new DefaultFileRenamePolicy());

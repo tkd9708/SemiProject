@@ -6,9 +6,20 @@
 	String pageNum = request.getParameter("pageNum");
 	String contentsid = request.getParameter("contentsid");
 	String area = request.getParameter("area");
+	String search = request.getParameter("search");
+	String selSearch = request.getParameter("selSearch");
 	String select = request.getParameter("select");
+	if(selSearch == null){
+		selSearch = "no";
+	}
 	SpotlistDao dao = new SpotlistDao();
 	dao.updateLikes(contentsid);
 	
-	response.sendRedirect("../index.jsp?main=spot/spotlist.jsp?area=a" + area + "&pageNum=" + pageNum + "&select" + select);
+	if(area.equals("no")){
+		response.sendRedirect("../index.jsp?main=spot/spotsearch.jsp?search=" + search + "&selSearch=" + selSearch+ "&pageNum=" + pageNum);
+	}
+	else if(search.equals("no")){
+		response.sendRedirect("../index.jsp?main=spot/spotlist.jsp?area=" + area + "&pageNum=" + pageNum + "&select" + select);
+	}
+	
 %>
