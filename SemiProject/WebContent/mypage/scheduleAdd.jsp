@@ -13,5 +13,6 @@
 <%
 //insert 메소드 호출
 dao.insertContent(dto);
-response.sendRedirect("../index.jsp?main=mypage/mypage.jsp");
+
+response.sendRedirect("../index.jsp?main=mypage/mypage.jsp");//@@@@@@@@@@경로수정
 %>

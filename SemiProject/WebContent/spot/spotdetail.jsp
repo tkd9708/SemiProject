@@ -99,9 +99,9 @@
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-	
-	/* 명소 지도  */
-	/* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+   
+   /* 명소 지도  */
+   /* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
@@ -179,8 +179,8 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
 a.info {
-	text-decoration: none;
-	color: #333;
+   text-decoration: none;
+   color: #333;
 }
 div.modal-backdrop{
 z-index:0;}
@@ -461,7 +461,7 @@ z-index:1111;
 		<h2>명소 주변</h2><br>
 		<div class="map_wrap" style="text-align: center;">
     <div id="map" style="width:80%;height:100%; position:relative;overflow:hidden; margin-left: 100px;"></div>
-	<ul id="category">
+   <ul id="category">
         <li id="FD6" data-order="0"> 
             <span class="category_bg restaurant"></span>
             음식점
@@ -476,11 +476,11 @@ z-index:1111;
         </li>     
      </ul>   
     <input type="hidden" value="<%=dto.getTitle() %>" id="keyword" size="15">
-	</div>
-	<br><br>
+   </div>
+   <br><br>
     <ul id="placesList"></ul>
     <div id="pagination"></div>
-	</div>
+   </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00e1b2682405c666548115f5a38b8163&libraries=services"></script>
 <script>
@@ -507,8 +507,8 @@ var ps = new kakao.maps.services.Places(map);
 
 //지도에 마커를 표시합니다 ~~~~~~~~~~~~~~~~~~~~~~~~~~`
 var marker = new kakao.maps.Marker({
-	map: map, 
-	position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
+   map: map, 
+   position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
 });  
 
 var content = '<div class="wrap">' + 
@@ -534,14 +534,14 @@ var content = '<div class="wrap">' +
 //마커 위에 커스텀오버레이를 표시합니다
 //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 var overlay = new kakao.maps.CustomOverlay({
-	content: content,
-	map: map,
-	position: marker.getPosition()       
+   content: content,
+   map: map,
+   position: marker.getPosition()       
 });
 
 //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function() {
-	overlay.setMap(map);
+   overlay.setMap(map);
 });
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -556,7 +556,7 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 //~~~~~~~~~~~~~~~~~~~~~
 //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 function closeOverlay() {
-	overlay.setMap(null);     
+   overlay.setMap(null);     
 }
 // 지도에 idle 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'idle', searchPlaces);
@@ -592,11 +592,11 @@ function addEventHandle(target, type, callback) {
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
-	if (!currCategory) {
+   if (!currCategory) {
         return;
     }
-	
-	 // 커스텀 오버레이를 숨깁니다 
+   
+    // 커스텀 오버레이를 숨깁니다 
     placeOverlay.setMap(null);
 
     // 지도에 표시되고 있는 마커를 제거합니다
@@ -608,7 +608,7 @@ function searchPlaces() {
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
-	if (status === kakao.maps.services.Status.OK) {
+   if (status === kakao.maps.services.Status.OK) {
 
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         displayPlaces(data);
@@ -627,7 +627,7 @@ function placesSearchCB(data, status, pagination) {
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
 
-	// 몇번째 카테고리가 선택되어 있는지 얻어옵니다
+   // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
     var order = document.getElementById(currCategory).getAttribute('data-order');
     var listEl = document.getElementById('placesList'), 
@@ -643,7 +643,7 @@ function displayPlaces(places) {
     
     for ( var i=0; i<places.length; i++ ) {
 
-    	 // 마커를 생성하고 지도에 표시합니다
+        // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
@@ -665,14 +665,14 @@ function displayPlaces(places) {
             }); */
 
             kakao.maps.event.addListener(marker, 'click', function() {
-            	displayInfowindow(marker, place);
+               displayInfowindow(marker, place);
             });
             
             
             
             /* itemEl.onmouseover =  function () {
                 //displayInfowindow(marker, title);
-				displayPlaceInfo(place);
+            displayPlaceInfo(place);
             };
 
             itemEl.onmouseout =  function () {
@@ -683,7 +683,7 @@ function displayPlaces(places) {
         fragment.appendChild(itemEl);
 
     }
-	
+   
 
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
@@ -713,8 +713,7 @@ function getListItem(index, places) {
     			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
     			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
     			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
-    			
-
+    		
     el.innerHTML = itemStr;
     el.className = 'item';
 
@@ -824,21 +823,21 @@ function addCategoryClickEvent() {
 
 //카테고리를 클릭했을 때 호출되는 함수입니다
 function onClickCategory() {
-	var id = this.id, className = this.className;
+   var id = this.id, className = this.className;
 
  
  
- 	placeOverlay.setMap(null);
+    placeOverlay.setMap(null);
 
-	 if (className === 'on') {
-    	currCategory = '';
-     	changeCategoryClass();
-     	removeMarker();
- 	} else {
-     	currCategory = id;
-     	changeCategoryClass(this);
-     	searchPlaces();
- 	}
+    if (className === 'on') {
+       currCategory = '';
+        changeCategoryClass();
+        removeMarker();
+    } else {
+        currCategory = id;
+        changeCategoryClass(this);
+        searchPlaces();
+    }
 }
 
 //클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
@@ -856,7 +855,7 @@ function changeCategoryClass(el) {
  } 
 } 
 </script>
-	
+
 	<br><br><br><br><br><br><br><br><br>
 	<hr>
 	<br>
@@ -875,7 +874,6 @@ function changeCategoryClass(el) {
 				<span class="glyphicon glyphicon-star-empty star"></span>
 			</div> -->
 			
-			                         
                                  
            <!-- 별점 -->
      <div class="stars" style="margin-left: 50px;">
@@ -920,7 +918,7 @@ function changeCategoryClass(el) {
             </svg>
         </label>
         </div>
-        
+
 			<input type="hidden" name="star" id="spotReviewStar" value="0">
 			<br><br>
 			<textarea name="content" id="srContent" style="height: 150px;" class="form-control"></textarea>
@@ -999,16 +997,16 @@ function changeCategoryClass(el) {
           <h4 class="modal-title">일정 추가</h4>
         </div>
         <div class="modal-body">
-        	<div style="margin-left: 10px; margin-right: 10px;">
-        		<div id="aroundModalInfo"></div>
-        		<br>
-          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-          		<input type="date" id="sd_wishday" value="<%=today%>">
-        	</div>
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="aroundModalInfo"></div>
+              <br>
+                <span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" id="sd_wishday" value="<%=today%>">
+           </div>
         </div>
         <div class="modal-footer">
-        	<button type="button" class="btn btn-warning" id="aroundGoCal">추가</button>
-          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-warning" id="aroundGoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -1016,7 +1014,7 @@ function changeCategoryClass(el) {
   </div>
   
   <!-- spot 일정 추가 modal -->
-	<div class="modal fade" id="spotModal" role="dialog">
+   <div class="modal fade" id="spotModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -1026,18 +1024,18 @@ function changeCategoryClass(el) {
           <h4 class="modal-title">일정 추가</h4>
         </div>
         <div class="modal-body">
-        	<div style="margin-left: 10px; margin-right: 10px;">
-        		<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getTitle() %></b>
-        		<br><br>
-        		<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
-        		<br><br>
-          		<span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-          		<input type="date" id="sd_spotwishday" value="<%=today%>">
-        	</div>
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getTitle() %></b>
+              <br><br>
+              <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+              <br><br>
+                <span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" id="sd_spotwishday" value="<%=today%>">
+           </div>
         </div>
         <div class="modal-footer">
-        	<button type="button" class="btn btn-warning" id="spotGoCal">추가</button>
-          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-warning" id="spotGoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       

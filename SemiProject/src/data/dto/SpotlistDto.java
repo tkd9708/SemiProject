@@ -1,6 +1,7 @@
 package data.dto;
 
 public class SpotlistDto {
+
 	private String contentsid;
 	private String title;
 	private String label1;
