@@ -20,11 +20,11 @@ public class MysqlConnect {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Mysql µå¶óÀÌ¹ö ¿À·ù : " + e.getMessage());
+			System.out.println("Mysql ë“œë¼ì´ë²„ ì˜¤ë¥˜ : " + e.getMessage());
 		}
 	}
 	
-	// mysql ¿¬°á
+	// mysql ì—°ê²°
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
@@ -32,7 +32,7 @@ public class MysqlConnect {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("ÄÄÇ»ÅÍ mysql ¿¬°á ½ÇÆĞ : " + e.getMessage());
+			System.out.println("ì»´í“¨í„° mysql ì—°ê²° ì‹¤íŒ¨ : " + e.getMessage());
 		}
 		
 		return conn;

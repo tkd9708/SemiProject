@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
 <style type="text/css">
+
 body {
    /*background-color: #7eb9e3;*/
    /*background-image: url("image/wave2.png");*/
