@@ -250,4 +250,102 @@ public class SpotlistDao {
 		}
 		
 	}
+	
+	// 검색 list
+	public List<SpotlistDto> getSearchList(int start, int perpage, String selSearch, String search){
+		// limit로 시작번지와 몇개를 가져올지 바인딩
+		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		if(selSearch.equals("all")) {
+			sql = "select * from spotlist where label1 like '%" + search + "%' or label2 like '%" + search + "%' or title like '%" + search
+					+ "%' or roadaddr like '%" + search + "%' or addr like '%" + search + "%' or tag like '%" + search + "%' order by title asc limit ?,?";
+		}
+		else if(selSearch.equals("land")) {
+			sql = "select * from spotlist where label2 like '%" + search + "%' order by title asc limit ?,?";
+		}
+		else if(selSearch.equals("spot")) {
+			sql = "select * from spotlist where title like '%" + search + "%' order by title asc limit ?,?";
+		}
+		else if(selSearch.equals("tag")) {
+			sql = "select * from spotlist where tag like '%" + search + "%' order by title asc limit ?,?";
+		}
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SpotlistDto dto = new SpotlistDto();
+				dto.setContentsid(rs.getString("contentsid"));
+				dto.setIntroduction(rs.getString("introduction"));
+				dto.setLabel1(rs.getString("label1"));
+				dto.setLabel2(rs.getString("label2"));
+				dto.setLatitude(rs.getDouble("latitude"));
+				dto.setLongitude(rs.getDouble("longitude"));
+				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setTag(rs.getString("tag"));
+				dto.setThumbnail(rs.getString("thumbnail"));
+				dto.setTitle(rs.getString("title"));
+				dto.setStar(rs.getInt("star"));
+				dto.setLikes(rs.getInt("likes"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	
+	// 검색 리스트 갯수
+	public int getSearchTotalCount(String selSearch, String search) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		if(selSearch.equals("all")) {
+			sql = "select count(*) from spotlist where label1 like '%" + search + "%' or label2 like '%" + search + "%' or title like '%" + search
+					+ "%' or roadaddr like '%" + search + "%' or addr like '%" + search + "%' or tag like '%" + search + "%'";
+		}
+		else if(selSearch.equals("land")) {
+			sql = "select count(*) from spotlist where label2 like '%" + search + "%'";
+		}
+		else if(selSearch.equals("spot")) {
+			sql = "select count(*) from spotlist where title like '%" + search + "%'";
+		}
+		else if(selSearch.equals("tag")) {
+			sql = "select count(*) from spotlist where tag like '%" + search + "%'";
+		}
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		
+		return total;
+	}
 }

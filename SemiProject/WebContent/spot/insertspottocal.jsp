@@ -10,7 +10,7 @@
 	String wishday = request.getParameter("wishday");
 	String spotId = request.getParameter("spotId");
 	String myId = request.getParameter("myId");
-	String content = "no";
+	String content = "0";
 	
 	SpotlistDao sdao = new SpotlistDao();
 	SpotlistDto sdto = sdao.getData(spotId);

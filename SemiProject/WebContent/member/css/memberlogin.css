@@ -2,8 +2,6 @@
 
 .btnbigpink {
 	cursor: pointer;
-<<<<<<< HEAD
-=======
 }
 
 span.putBieye {
@@ -12,9 +10,9 @@ span.putBieye {
 }
 
 div.toolTip {
-	background-color: orange;
+	background-color: #8cc63f;
 	padding: .4rem .4rem .4rem .4rem;
-	position: absolute;
+	position: relative;
 	color: #f4f4f4;
 	text-align: center;
 	z-index: 1;
@@ -29,5 +27,83 @@ div.toolTip p {
 
 span.putBieye:hover div.toolTip {
 	visibility: visible;
->>>>>>> branch 'feature/5' of https://github.com/tkd9708/SemiProject.git
+	margin-left: 5px;
+	margin-top: 10px;
 }
+
+div.regWrap {
+	margin:auto;
+	margin-top: 150px;
+	position: relative;
+	max-width: 700px;
+	margin-bottom: 100px;
+    
+}
+div.regWrap form input {
+	
+	margin-bottom: 10px;
+	width: 400px;
+	height: 45px;
+	display: inline-block;
+	box-shadow: 0 0.1rem 0 rgba(200,200,40,.5);
+	border-radius: 3px 3px 3px 3px;/*.3rem단위에서 3px단위로 변경*/
+	border-top-color: #ffa50b;
+	border-right-color: #ffa50b;
+	border-bottom-color: #ffa50b;
+	border-left-color: #ffa50b;
+	margin-top: 10px;
+	background-color: transparent;
+	border: 1px solid #ffa50b;
+	padding: 10px;
+}
+
+span.putBieye {
+	display: inline-flex;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+
+form {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 90px;
+}
+
+div.name_hp {
+	border: 1px solid black;
+}
+
+b.emailChk,b.idcheck,span.passChk {
+	width:100px;
+	white-space:nowrap;
+	display: block;
+	margin-left: 65px;
+}
+span.glyphicon {
+	font-size: 20px;
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 10px;
+}
+#cfpass, #addr{
+	margin-left: 58px;
+}
+h1 {
+	margin-left: 200px;
+}
+
+button.btnbigpink {
+	width: 150px;
+	height: 50px;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 30px;
+	text-align: center;
+	margin-left: 180px;
+	background-color: #8cc63f;
+	color: #fff;
+}
+#post {
+     width: 20px;	
+}
+

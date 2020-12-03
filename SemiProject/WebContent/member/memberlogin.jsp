@@ -9,7 +9,7 @@ String url=request.getContextPath();
 /* System.out.println(url); */
 %>
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/memberlogin.css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/member/js/memberlogin.js"></script>
+<!-- <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/memberlogin.js"></script> -->
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 제주한달살기</title>
 </head>
@@ -17,37 +17,27 @@ String url=request.getContextPath();
 <div class="regWrap">
 	<form action="member/insertaction.jsp" method="post"
 		class="regForm" name="memberform" id="myRegfrm">
-		<table class="tType">
-			<caption><h3>회원 가입</h3></caption>
-			<tbody>
-				<tr>
-					<th>아이디</th>
-					<td>
+          <h1>회원가입</h1>
+                       
 						<div class="formHolder id">
+						    <span class="glyphicon glyphicon-user"></span>
 							<input type="text" title="아이디" name="id" id="id" 
 							autofocus="autofocus" required="required"
 							placeholder="아이디를 입력해 주세요."
 							class="inputText vPlaceholder" autocomplete="username">
 							<b class="idcheck"></b>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
+
+                        
 						<div class="formHolder password">
+						<span class="glyphicon glyphicon-lock"></span>
 							<input type="password" title="비밀번호"
-							placeholder="영문숫자기호 합해 8자이상"
+							placeholder="비밀번호는 영문숫자기호 합해 8자이상 입니다"
 							class="pwText vPlaceholder"
 							autocomplete="new-password" spellcheck="false"
 							id="pass" name="pass" required="required">
 							<span class="passChk" id="passChk"></span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호 확인</th>
-					<td>
+
 						<div class="formHolder cfpassword">
 							<input type="password" title="비번확인"
 							placeholder="비밀번호 한번 더 입력"
@@ -56,7 +46,7 @@ String url=request.getContextPath();
 							spellcheck="false" required="required"
 							name="cfpass" id="cfpass">
 							<span class="putBieye" id="putBieye">
-							<svg width="1em" height="1em" 
+							<svg width="16px" height="16px" 
 							viewBox="0 0 16 16" class="bi bi-eye" 
 							fill="currentColor" 
 							xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +54,7 @@ String url=request.getContextPath();
   								<path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z"/>
   								<path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
 							</svg>
-							<svg width="1em" height="1em" 
+							<svg width="16px" height="16px" 
 							viewBox="0 0 16 16" 
 							class="bi bi-eye-slash" 
 							fill="currentColor" 
@@ -81,66 +71,49 @@ String url=request.getContextPath();
 								</div>
 							</span>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td>
-						<div class="formHolder name">
+
+						
+                        
+						<div class="formHolder email">
+						<span class="glyphicon glyphicon-envelope"></span>
+							<input type="text" placeholder="이메일입력(a@naver.com)"
+							class="inputText vPlaceholder"
+							required="required" name="email" id="email">
+							<b class="emailChk"></b></div>
+						</div>
+                        
+                        <div class="formHolder name">
+                        <span class="glyphicon glyphicon-leaf"></span>
 							<input type="text" title="이름"
 							placeholder="이름을 입력해 주세요."
 							class="inputText vPlaceholder" required="required" name="name">
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td>
-						<div class="formHolder email">
-							<input type="text" placeholder="이메일입력(a@naver.com)"
-							class="inputText vPlaceholder"
-							required="required" name="email" id="email">
-							<b class="emailChk"></b>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>핸드폰</th>
-					<td>
-						<div class="formHolder hp">
+						
+						
+						<div class="formHolder hp" id="hp">
+						<span class="glyphicon glyphicon-phone"></span>
 							<input type="text" title="핸드폰"
 							placeholder="핸드폰을 입력해 주세요."
 							class="inputText vPlaceholder" name="hp">
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td>
+                        
+                        
 						<div class="formHolder address">
+						<span class="glyphicon glyphicon-home"></span>
 							<input type="text" title="주소1"
 							class="inputText vPlaceholder"
 							readonly="readonly"
 							required="required" name="address">
-							<button type="button" class="SearchPost" id="SearchPost">
-								주소검색
+							<button type="button" class="SearchPost" id="SearchPost" style="background-color:transparent;border: none;" ><img id="post" src="image/post.png">
 							</button>
-							<br><br><br>
 							<input type="text" title="주소2"
 							placeholder="상세주소를 입력해 주세요."
-							class="inputText vPlaceholder" name="addrdetail">
+							class="inputText vPlaceholder" name="addrdetail" id="addr">
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="regMemberBtn">
+                        
 						<button type="button" class="btnbigpink"
 						id="btnSubmit">
 						회원가입</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	</form>
 </div>
 <script type="text/javascript">
