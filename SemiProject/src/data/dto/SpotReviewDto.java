@@ -9,6 +9,7 @@ public class SpotReviewDto {
 	private String content;
 	private Timestamp writeday;
 	private int star;
+	private int likes;
 	
 	public String getNum() {
 		return num;
@@ -46,7 +47,12 @@ public class SpotReviewDto {
 	public void setStar(int star) {
 		this.star = star;
 	}
-	
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 	
 	
 }

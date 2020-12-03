@@ -1,5 +1,3 @@
-
-
 <%@page import="data.dto.NoticeDto"%>
 <%@page import="data.dao.NoticeDao"%>
 <%@page import="java.util.List"%>
@@ -33,16 +31,6 @@ div.container{
 
  }
 
-/* input.button {
-    margin: 0 auto;
-    margin-top: 0;
-    margin-left: 1170px;
-    width: 100px;
-    color: white;
-} */
-
-
-
 div.page {
    /* margin: 0 auto;
    width: 200px; */
@@ -51,59 +39,6 @@ div.page {
    text-align: center;
    
 }
-/* 
-h2{
-    margin: 0 auto;
-    width: 200px; 
-    margin-top: 150px;
-   
-}
- */
-
-/*버튼 css*/
-/* 
-html, body {
-  height: 100%;
-} */
-
-/* .wrap {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
- */
-/* .button {
-  width: 35px;
-  height: 35px;
-  /* font-family: 'Roboto', sans-serif; */
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #ffc34d;
-  border: none;
-  border-radius: 45px;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-  
- } */
- 
- /* div.point{
-  position: relative;
-  top: -30px;
-  right: -830px;
- } */
-  
-
-/* 
-.button:hover {
-  background-color: #ffaa00;
-
-  transform: translateY(-7px);
-} */
 
 .btn_notice:hover {
   transform: translateY(-7px);
@@ -112,10 +47,6 @@ html, body {
 /*--------------------------테이블 css--------------------------------------*/
 .styled-table {
     border-collapse: collapse;
-    /* margin: 25px 0; */
-    /* font-size: 0.9em; */
-    /* font-family: sans-serif; */
-   /*  min-width: 300px; */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     
 }
@@ -131,18 +62,6 @@ html, body {
     border-bottom: 1px dotted #ddd;
 }
 
-/* .styled-table  th {
-    border-bottom: 1px solid #ffad33;
-}
-
-.styled-table  th:nth-of-type(even) {
-    background-color:  #ffad33;
-}
-
-.styled-table td:last-of-type {
-    border-bottom: 1px solid #ffad33;
-} */
-
 .styled-table td.active-row {
     font-weight: bold;
     color: black;
@@ -150,22 +69,6 @@ html, body {
 
 
 </style>
-<script type="text/javascript">
-	$(function(){
-		$(".nt_star").click(function(){
-			$.ajax({
-				type: "get",
-				dataType: "html",
-				url: "notice/updateStar.jsp",
-				data: {"num": $(this).attr("num")},
-				success: function(){
-					location.reload();
-				}
-			});
-		});
-	});
-</script>
-</head>
   <%
    NoticeDao db=new NoticeDao();
    //페이징 처리에 필요한 변수들   
@@ -206,7 +109,39 @@ html, body {
    //각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
    int no=totalCount-((currentPage-1)*perPage);
    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+   
+   String loginok = (String)session.getAttribute("loginok");
+   String myid = (String)session.getAttribute("myid");
 %>
+<script type="text/javascript">
+	$(function(){
+		$(".nt_star").click(function(){
+			<%
+			if(myid.equals("admin")){
+				%>
+				$.ajax({
+					type: "get",
+					dataType: "html",
+					url: "notice/updateStar.jsp",
+					data: {"num": $(this).attr("num")},
+					success: function(){
+						location.reload();
+					}
+				});
+				<%
+			}
+			else{
+				%>
+				alert("관리자만 접근 가능합니다.");
+				<%
+			}
+			%>
+			
+		});
+	});
+</script>
+</head>
+
 <body>
  
    
@@ -216,8 +151,15 @@ html, body {
    		<!-- <input type="button" value="+" class="button" style="color: white; float: right; font-style: bold;"
  			onclick="location.href='index.jsp?main=notice/noticeform.jsp'"> -->
 
-		<span class="glyphicon glyphicon-plus btn_notice" style="cursor: pointer; float: right; font-size: 20pt;"
+		<%
+			if(loginok!=null && myid.equals("admin")){
+				%>
+				<span class="glyphicon glyphicon-plus btn_notice" style="cursor: pointer; float: right; font-size: 20pt;"
 			onclick="location.href='index.jsp?main=notice/noticeform.jsp'"></span>
+				<%
+			}
+		%>
+		
    		<br><br><br>
       	<table class="styled-table" style="width: 100%">
         	<thead>
