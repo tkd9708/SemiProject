@@ -3,6 +3,7 @@
 <%
 	//로그인 상태 세션 삭제
 	session.removeAttribute("loginok");
+	session.setAttribute("loginok", null);
 	//index 로 이동
 	response.sendRedirect("../index.jsp");
 %>

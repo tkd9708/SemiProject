@@ -69,7 +69,47 @@
 		MemberDao dao=new MemberDao();
 		
 		//메서드 호출
-		List<ZipcodeDto> list=dao.getSearchDong(regionName);
+		//List<ZipcodeDto> list=dao.getSearchDong(regionName);
+		
+		int totalCount = dao.getTotalCount(regionName);
+		System.out.println(totalCount);
+		int perPage = 13; //한페이지당 보여질 글의 갯수
+		int perBlock = 1; //한블럭당 출력할 페이지의 갯수
+		
+		int totalPage;//총 페이지의 갯수
+		int startPage;//각 블럭당 시작할 페이지번호
+		int endPage;//각 블럭당 끝 페이지번호
+		int start;//각 블럭당 불러올 글의 시작번호
+		int end;//각 블럭당 불러올 글의 끝번호
+		int currentPage;//현재 보여질 페이지 번호
+		
+		//현재 페이지 번호 구하기
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null)
+			currentPage = 1;//페이지번호가 없을경우 무조건 1페이지로 간다
+		else
+			currentPage = Integer.parseInt(pageNum);
+		//총 페이지 구하기(예: 총글수가 9 이구 한페이지당 2개씩 볼경우)
+		totalPage=totalCount/perPage+(totalCount%perPage>0?1:0);
+		//시작페이지와 끝페이지구하기
+		//예:한페이지당 3개만 볼경우 현재 페이지가 2라면 sp:1, ep:3
+		//현재 페이지가 7라면 sp:7, ep:9
+		startPage=(currentPage-1)/perBlock*perBlock+1;
+		endPage=startPage+perBlock-1;
+		//마지막 블럭은 endPage 를 totalPage 로 해놔야 한다
+		if(endPage>totalPage)
+			endPage=totalPage;
+		
+		//각 페이지에서 불러올 글번호 구하기
+		//예 : 1페이지: 1~2,2페이지 : 3~4....
+		start=(currentPage-1)*perPage+1;
+		end=start+perPage-1;
+		//마지막 글번호는 총 글수와 같은 번호라야 한다
+		if(end>totalCount)
+			end=totalCount;
+		
+		//최종 페이지에 해당하는 방명록 글 가져오기
+		List<ZipcodeDto>list=dao.getList(start, end, regionName);
 		
 		//출력
 	%>
@@ -103,7 +143,42 @@
 			<%}
 			%>
 		</ul>
-		<div class="addrPage"></div>
+		<div class="addrPage">
+			<div class="addrPgIn">
+				<%
+				//이전
+				if(startPage>1)
+				{%>
+					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=startPage-1%>&regionName='<%=regionName%>'&key=result">
+						<span class="glyphicon glyphicon-arrow-left"></span>
+					</a>	
+				<%}
+				
+				for(int i=startPage;i<=endPage;i=i+1)
+				{
+					//이동할 페이지
+					String url =request.getServerName()+":"+request.getLocalPort()+request.getContextPath()+"/member/postsearch.jsp?pageNum="+i+"&regionName='"+regionName+"'&key=result";
+					System.out.println(url);
+					if(i==currentPage)
+					{%>
+						<a href="<%=url%>" class="currPage"><%=i%></a>	
+					<%}
+					else
+					{%>
+						<a href="<%=url%>" class="otherPage"><%=i%></a>
+					<%}
+				}
+				
+				//다음
+				if(endPage<totalPage)
+				{%>
+					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=endPage+1%>&regionName='<%=regionName%>'&key=result">
+						<span class="glyphicon glyphicon-arrow-right"></span>
+					</a>
+				<%}
+				%>
+			</div>
+		</div>
 	<%}
 %>
 		<div class="popupFoot">
