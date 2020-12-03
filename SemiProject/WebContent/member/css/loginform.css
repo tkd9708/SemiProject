@@ -71,7 +71,6 @@ footer {
 	/* height: 50px; */
 	background-color: #ffaa00;
 	color: #f4f4f4;
-	width: 1400px;
 }
 article {
 	width: 90%;
@@ -129,4 +128,8 @@ li>a {
 		'menu main main main main main'
 		'menu footer footer footer footer footer';
 	padding: 10px;
+	margin-top: 4%;
+}
+li>a:hover {
+	color: #ff7700;
 }

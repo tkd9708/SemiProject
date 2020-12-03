@@ -22,9 +22,13 @@
 	MemberDao dao=new MemberDao();
 	//메서드 호출
 	boolean findId=dao.isIdSearch(id);
+	
+	String email=request.getParameter("email");
+	boolean findEmail=dao.isEmailSearch(email);
 %>
 <data>
 	<samepw><%=samePw?"yes":"no"%></samepw>
 	<validpw><%=validPw?"yes":"no"%></validpw>
 	<sameid><%=findId?"yes":"no"%></sameid>
+	<sameemail><%=findEmail?"yes":"no"%></sameemail>
 </data>

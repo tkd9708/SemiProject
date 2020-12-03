@@ -185,45 +185,14 @@ window.onload=function() {
 		$("b.idcheck").html("");
 	});
 	
-	//이메일 입력시 메세지 지우기
-	$("#email").keydown(function(){
-		$("b.emailChk").html("");
-	});
-	
-	//이메일 입력후 포커스가 벗어날때 이메일 체크하기
-	$("#email").blur(function(){
-		var email=$(this).val();
-		if(email.length!=0){
-			$.ajax({
-				type: "get",
-				url:"member/emailcheckxml.jsp",
-				dataType:"xml",
-				data:{"email":email},
-				success:function(data){
-					/*alert($(data).text());*/
-					if($(data).text()=='yes'){
-						$("b.emailChk").html("이미 등록된 이메일입니다");
-						$("b.emailChk").css({
-							"color":"red",
-							"font-size":"14px"
-						});
-						$("#email").val("");
-					}
-					else{
-						$("b.emailChk").html("사용가능한 이메일입니다");
-						$("b.emailChk").css({
-							"color":"green",
-							"font-size":"14px"
-						});
-					}
-				}
-			});
-		}
-	});
-	
 	//비밀번호 입력시 메세지 지우기
 	$("#cfpass").keydown(function(){
 		$(".passChk").html("");
+	});
+	
+	//이메일 입력시 메세지 지우기
+	$("#email").keydown(function(){
+		$("b.emailChk").html("");
 	});
 	
 	$("#btnSubmit").click(function(e) {
@@ -234,20 +203,36 @@ window.onload=function() {
 		/* alert(pass1V+"VS"+pass2V); */
 		
 		var id=$("#id").val();
+		var email=$(".txtEmail").val();
 		
 		var rtn = false;
 		
 		if(id.trim().length==0){
 			$("#id").val('');
 			$("b.idcheck").html("아이디를 입력하세요");
+			$("b.idcheck").css({
+				"color":"#ffaa00",
+				"font-size":"14px"
+			});
 			$("#id").focus();
+			return;
+		}
+		
+		if(email.trim().length==0){
+			$("#email").val('');
+			$("b.emailChk").html("이메일을 입력하세요");
+			$("b.emailChk").css({
+				"color":"#ffaa00",
+				"font-size":"14px"
+			});
+			$("#email").focus();
 			return;
 		}
 		$.ajax({
 			type: "post",
 			url: "member/chkvalid.jsp",
 			dataType: "xml",
-			data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V,"id":id},
+			data: {"pass1V":pass1V,"pass1":pass1V,"pass2":pass2V,"id":id,"email":email},
 			async: false,
 			success: function(data){
 				if($(data).find("sameid").text()=="yes"){
@@ -278,6 +263,15 @@ window.onload=function() {
 					});
 					$("#cfpass").val("");
 					$("#cfpass").focus();
+				}
+				else if($(data).find("sameemail").text()=="yes"){
+					$("b.emailChk").html("이미 등록된 이메일입니다");
+					$("b.emailChk").css({
+						"color":"red",
+						"font-size":"14px"
+					});
+					$("#email").val("");
+					$("#email").focus();
 				}
 				else{
 					$("#myRegfrm").submit();

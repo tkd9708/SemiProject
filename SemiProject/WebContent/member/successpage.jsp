@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/successpage.css">
 <%--
 만약 자바코드로 해야할 상황일경우
 response.setHeader("Refresh","3;url=index.jsp");
