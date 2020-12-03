@@ -4,17 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import data.dto.SpotReviewDto;
 import data.dto.WishlistDto;
 import mysql.db.MysqlConnect;
 
 public class WishlistDao {
-	MysqlConnect db = new MysqlConnect();
+   MysqlConnect db = new MysqlConnect();
 
-	// ÁÖº¯¸í¼Ò insert
+	// ì£¼ë³€ëª…ì†Œ insert
 	public void insertAround(WishlistDto dto) {
 		String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
 		Connection conn = null;
@@ -62,7 +60,7 @@ public class WishlistDao {
 
 	}
 
-	// ÂòÇÑ ¸í¼ÒÀÎÁö È®ÀÎ
+	// ì°œí•œ ëª…ì†Œì¸ì§€ í™•ì¸
 	public boolean isSpotSearch(String contentsid) {
 		boolean find = false;
 		Connection conn = null;
@@ -204,7 +202,7 @@ public class WishlistDao {
 		return list;
 	}
 	
-	//review°¡Á®¿À±â
+	//reviewê°€ì ¸ì˜¤ê¸°
 	
 	public List<SpotReviewDto>getMyreviews(String memNum){
 		
@@ -242,7 +240,7 @@ public class WishlistDao {
 	}
 	
 	
-	//ÃÖ½Å¸®ºäÃâ·Â
+	//ìµœì‹ ë¦¬ë·°ì¶œë ¥
 public List<SpotReviewDto>getRecentreviews(String memNum){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();

@@ -93,7 +93,9 @@ public class SpotlistJSON {
 				dto.setLabel1((String)parse_region1cd.get("label"));
 				dto.setLabel2((String)parse_region2cd.get("label"));
 				dto.setRoadaddr((String)obj.get("roadaddress"));
+				dto.setAddr((String)obj.get("address"));
 				
+				//System.out.println((String)obj.get("title"));
 				list.add(dto);
 				
 			}
