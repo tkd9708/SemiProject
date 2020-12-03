@@ -286,3 +286,60 @@ ul.addrList {
 	display: block;
 	line-height: normal;
 }
+
+.addrPgIn {
+	position: relative;
+	width: 25%;
+	margin: auto;
+	line-height: 52px;
+	color: #c4c4c4;
+	text-align: center;
+	padding: 0;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #ffaa00;
+}
+
+a:focus, a:hover {
+	text-decoration: none;
+	color: #ff8800;
+}
+
+.prevPage {
+	left: 0;
+}
+
+.pageArrow {
+	position: absolute;
+	top: 0;
+	width: 50px;
+	height: 52px;
+}
+
+.imgLeft {
+	display: block;
+	margin: 15px auto 0;
+	width: 12px;
+	height: 16px;
+	text-align: center;
+	color: #ffaa00;
+}
+
+.nextPage {
+	right: 0;
+}
+
+.imgRight {
+	display: block;
+	margin: 15px auto 0;
+	width: 12px;
+	height: 16px;
+	text-align: center;
+}
+
+.inShowNum {
+	text-shadow: .1rem .1rem .3rem #fd1c0f;
+}

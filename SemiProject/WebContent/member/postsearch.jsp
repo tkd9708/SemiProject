@@ -7,6 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="shortcut icon" href="../image/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/postsearch.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/postsearch.js" ></script> 
@@ -149,8 +157,8 @@
 				//이전
 				if(startPage>1)
 				{%>
-					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=startPage-1%>&regionName='<%=regionName%>'&key=result">
-						<span class="glyphicon glyphicon-arrow-left"></span>
+					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=startPage-1%>&regionName=<%=regionName%>&key=result" class="prevPage pageArrow">
+						<span class="glyphicon glyphicon-arrow-left imgLeft"></span>
 					</a>	
 				<%}
 				
@@ -161,19 +169,19 @@
 					System.out.println(url);
 					if(i==currentPage)
 					{%>
-						<a href="<%=url%>" class="currPage"><%=i%></a>	
+						<a href="<%=url%>" class="currPage"><span class="showNum">&nbsp;<span class="inShowNum"><%=i%></span></span>&nbsp;/&nbsp;<%=totalPage%></span></a>	
 					<%}
 					else
 					{%>
-						<a href="<%=url%>" class="otherPage"><%=i%></a>
+						<a href="<%=url%>" class="otherPage"><span><%=i%></span></a>
 					<%}
 				}
 				
 				//다음
 				if(endPage<totalPage)
 				{%>
-					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=endPage+1%>&regionName='<%=regionName%>'&key=result">
-						<span class="glyphicon glyphicon-arrow-right"></span>
+					<a href="<%=request.getContextPath()%>/member/postsearch.jsp?pageNum=<%=endPage+1%>&regionName=<%=regionName%>&key=result" class="nextPage pageArrow">
+						<span class="glyphicon glyphicon-arrow-right imgRight"></span>
 					</a>
 				<%}
 				%>
