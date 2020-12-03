@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.dto.SpotReviewDto;
 import data.dto.WishlistDto;
@@ -12,7 +14,7 @@ import mysql.db.MysqlConnect;
 public class WishlistDao {
    MysqlConnect db = new MysqlConnect();
 
-	// 주변명소 insert
+	// 二쇰�紐낆냼 insert
 	public void insertAround(WishlistDto dto) {
 		String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
 		Connection conn = null;
@@ -60,7 +62,7 @@ public class WishlistDao {
 
 	}
 
-	// 찜한 명소인지 확인
+	// 李쒗븳 紐낆냼�씤吏� �솗�씤
 	public boolean isSpotSearch(String contentsid) {
 		boolean find = false;
 		Connection conn = null;
@@ -202,7 +204,7 @@ public class WishlistDao {
 		return list;
 	}
 	
-	//review가져오기
+	//review媛��졇�삤湲�
 	
 	public List<SpotReviewDto>getMyreviews(String memNum){
 		
@@ -240,7 +242,7 @@ public class WishlistDao {
 	}
 	
 	
-	//최신리뷰출력
+	//理쒖떊由щ럭異쒕젰
 public List<SpotReviewDto>getRecentreviews(String memNum){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
