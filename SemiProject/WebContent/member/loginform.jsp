@@ -119,7 +119,7 @@ System.out.println(url);
 							<li class="mainMenu">
 								<a href="">나의 여행</a>
 								<ul>
-									<li><a>나의 여행일정</a></li>
+									<li><a href="member/mypage.jsp">나의 여행일정</a></li>
 									<li><a>찜한 여행</a></li>
 									<li><a>나의 리뷰</a></li>
 									<li><a>방문 여행지</a></li>
