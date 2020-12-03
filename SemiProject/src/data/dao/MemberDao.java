@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.MemberDto;
+import data.dto.ZipcodeDto;
 import mysql.db.MysqlConnect;
 
 public class MemberDao {
@@ -231,6 +232,193 @@ public class MemberDao {
 		return name;
 	}
 	
+	//동에 해당하는 주소 반환하는 메서드
+	public List<ZipcodeDto> getSearchDong(String dong)
+	{
+		List<ZipcodeDto> list=new Vector<ZipcodeDto>();
+		String sql="select zipcode,sido,gugun,dong, IFNULL(ri,' ') as ri, "
+				+ "IFNULL(bunji,' ') as bunji from zipcode "
+				+ "where dong like ?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, "%"+dong+"%");
+			//실행
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				dto.setRi(rs.getString("ri"));
+				dto.setBunji(rs.getString("bunji"));
+				//리스트에 추가
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	//삭제하는 메서드
+	public void deleteMember(String id)
+	{
+		String sql="delete from member where id=?";
+		
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, id);
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt);
+		}
+	}
+	
+	//id 에 해당하는 dto 반환
+	public MemberDto getData(String id)
+	{
+		MemberDto dto=new MemberDto();
+		
+		Connection conn=null;
+		
+		Statement stmt=null;
+		
+		ResultSet rs=null;
+		
+		String sql="select * from member where id='"+id+"'";
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				//dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
+				dto.setAddrdetail(rs.getString("addrdetail"));
+				dto.setEmail(rs.getString("email"));
+				dto.setHp(rs.getString("hp"));
+				dto.setGaipday(rs.getTimestamp("gaipday"));
+				/*
+				 * String email1=rs.getString("email").substring(0, 3); String
+				 * email2=rs.getString("email").substring(4,rs.getString("email").length());
+				 * dto.setEmail1(email1); dto.setEmail2(email2); String
+				 * hp1=rs.getString("hp").substring(0, 3); String
+				 * hp2=rs.getString("hp").substring(4,8); String
+				 * hp3=rs.getString("hp").substring(9,rs.getString("hp").length());
+				 * dto.setHp1(hp1); dto.setHp2(hp2); dto.setHp3(hp3);
+				 */
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	//num 에 해당하는 dto 반환
+	public MemberDto getDataByNum(String num)
+	{
+		MemberDto dto=new MemberDto();
+		
+		Connection conn=null;
+		
+		Statement stmt=null;
+		
+		ResultSet rs=null;
+		
+		String sql="select * from member where num="+num;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				//dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
+				dto.setAddrdetail(rs.getString("addrdetail"));
+				dto.setEmail(rs.getString("email"));
+				dto.setHp(rs.getString("hp"));
+				dto.setGaipday(rs.getTimestamp("gaipday"));
+				
+				
+				/*
+				 * String email1=rs.getString("email").substring(0, 3); String
+				 * email2=rs.getString("email").substring(4,rs.getString("email").length());
+				 * dto.setEmail1(email1); dto.setEmail2(email2); String
+				 * hp1=rs.getString("hp").substring(0, 3); String
+				 * hp2=rs.getString("hp").substring(4,8); String
+				 * hp3=rs.getString("hp").substring(9,rs.getString("hp").length());
+				 * dto.setHp1(hp1); dto.setHp2(hp2); dto.setHp3(hp3);
+				 */
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	//수정-이름,핸드폰,이메일,주소만 수정
+	public void updateMember(MemberDto dto)
+	{
+//		String sql="update member set name=?,hp=?,email=?,address=?," +
+//				"addrdetail=? where num=?";
+		String sql="update member set name='"+dto.getName()+"',hp='"+dto.getHp()+"',email='"+dto.getEmail()+"',address='"+dto.getAddress()+"',addrdetail='"+dto.getAddrdetail()+"' where num="+dto.getNum();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		Statement stmt=null;
+		
+		conn=db.getConnection();
+//			conn=db.getGangsaConnection();
+		try {
+				stmt=conn.createStatement();
+				stmt.execute(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, stmt);
+		}
+	}
+	
 	public String getMemNum(String id)
 	{
 		String num="";
@@ -260,40 +448,7 @@ public class MemberDao {
 		return num;
 	}
 	
-	public MemberDto getData(String num)
-	{
-		MemberDto dto = new MemberDto();
-		Connection conn=null;
-		PreparedStatement pstmt = null;
-		
-		ResultSet rs=null;
-		String sql="select * from member where num=?";
-		
-		
-		conn=db.getConnection();
-		
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, num);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				dto.setNum(rs.getString("num"));
-				dto.setId(rs.getString("id"));
-				dto.setPass(rs.getString("pass"));
-				dto.setName(rs.getString("name"));
-				dto.setAddress(rs.getString("address"));
-				dto.setAddrdetail(rs.getString("addrdetail"));
-				dto.setEmail(rs.getString("email"));
-				dto.setHp(rs.getString("hp"));
-				dto.setGaipday(rs.getTimestamp("gaipday"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			db.dbClose(conn, pstmt, rs);
-		}	
-		return dto;
-	}
+	
+	
+	
 }

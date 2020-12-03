@@ -213,7 +213,7 @@ public class WishlistDao {
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from spotreview where memNum=?";
+		String sql ="select * from spotreview where memNum=? order by num desc";
 		
 		conn=db.getConnection();
 		try {
@@ -291,7 +291,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				title = rs.getString("title");
-				System.out.println(title);
+				//System.out.println(title);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

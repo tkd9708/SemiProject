@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.btnMemUpdate {
+	color: #f4f4f4;
+	background-color: #ffaa00;
+	border: 0;
+	outline: 0;
+	padding: 12px 16px;
+}
+.updateWrite {
+	margin: 40px auto 60px;
+	position: relative;
+	padding: 0;
+	font-size: 16px;
+	letter-spacing: -0.03em;
+	line-height: normal;
+}
+h3 {
+	position: relative;
+	width: auto;
+	padding: 5px 0 15px;
+	font-size: 35px;
+	font-weight: bold;
+	color: #ffaa00;
+	display: inline-block;
+}
+.bi-pencil {
+	fill: orange;	
+}
+.gridContainer {
+	display: grid;
+	grid-template-columns: auto auto;
+	padding: 10px;
+}
+.item {
+	background-color: rgba(255,220,0,.08);
+	border: .06em solid rgba(150,150,150,.8);
+	padding: 20px;
+	font-size: 18px;
+	text-align: center;
+}
