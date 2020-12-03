@@ -16,6 +16,35 @@ letter-spacing: 2px;
 
 }
 
+	#areaTitle {
+		margin-left: 20px;
+		margin-bottom: 50px;
+	}
+	
+	div.detail {
+		cursor:pointer;
+		float: left;
+		width: 330px;
+		height: 540px;
+		text-align: center;
+		margin-bottom: 50px;
+		margin-right: 70px;
+		box-shadow: 2px 2px 2px 2px #ddd;
+	}
+	
+	div#spotList {
+		overflow: hidden;
+		margin-left: 200px;
+		margin-top: 180px;
+		margin-right: 130px;
+	}
+	
+	div.footer {
+    	text-align: center;
+	}
+
+}
+
    #areaTitle {
       margin-left: 20px;
       margin-bottom: 50px;
@@ -69,8 +98,8 @@ letter-spacing: 2px;
         padding: 0;
         margin: 0;
     }
-   
-   .rollimgs li{
+
+	.rollimgs li{
     position: absolute;
     width: 100%;
     height: 600px;
@@ -99,7 +128,6 @@ letter-spacing: 2px;
 .rollimgs.reverse li.nextroll{
     transition: left .5s ease-in-out, right .5s ease-in-out;
 }
-   
 
 #spotListSelect {
   width: 150px;
@@ -168,94 +196,96 @@ letter-spacing: 2px;
    
    List<SpotlistDto> list = dao.getList(start, perPage, area, select);
 %>
+  
 <script type="text/javascript">
 
 let banner = {
        rollId: null,
        interval: 2000,
 
-       //롤링 배너 초기화
-       rollInit: function (newinterval) {
-           if(parseInt(newinterval) > 0){
-               this.interval = newinterval;
-           }
-           //현재 배너
-           let firstitem = document.querySelector('.rollimgs li');
-           if(firstitem){
-               firstitem.classList.add('currentroll');
-           }
-           //다음 배너
-           let seconditem = document.querySelectorAll('.rollimgs li')[1];
-           if(seconditem){
-               seconditem.classList.add('nextroll');
-           }
-           //이전 배너
-           document.querySelector('.rollimgs li:last-child').classList.add('prevroll');
-           this.rollId = setInterval(this.rollNext, this.interval);//롤링 인터벌 호출
-       },
-       
-       //다음 배너 롤링
-       rollNext: function () {
-           if(document.querySelector('.prevroll')){
-               document.querySelector('.prevroll').classList.remove('prevroll');
-           }
-           if(document.querySelector('.currentroll')){
-               document.querySelector('.currentroll').classList.add('prevroll');
-               document.querySelector('.currentroll').classList.remove('currentroll');
-           }
-           if(document.querySelector('.nextroll')){
-               document.querySelector('.nextroll').classList.add('currentroll');
-               document.querySelector('.nextroll').classList.remove('nextroll');
-           }
-       //다음 이미지 있으면 다음 롤링 이미지로 선택, 없으면 첫번째 이미지를 롤링 이미지로 지정
-           if(document.querySelector('.currentroll').nextElementSibling){
-               document.querySelector('.currentroll').nextElementSibling.classList.add('nextroll');
-           }else{
-               document.querySelector('.rollimgs li').classList.add('nextroll');
-           }
-       }
-   }
+	    //롤링 배너 초기화
+	    rollInit: function (newinterval) {
+	        if(parseInt(newinterval) > 0){
+	            this.interval = newinterval;
+	        }
+	        //현재 배너
+	        let firstitem = document.querySelector('.rollimgs li');
+	        if(firstitem){
+	            firstitem.classList.add('currentroll');
+	        }
+	        //다음 배너
+	        let seconditem = document.querySelectorAll('.rollimgs li')[1];
+	        if(seconditem){
+	            seconditem.classList.add('nextroll');
+	        }
+	        //이전 배너
+	        document.querySelector('.rollimgs li:last-child').classList.add('prevroll');
+	        this.rollId = setInterval(this.rollNext, this.interval);//롤링 인터벌 호출
+	    },
+	    
+	    //다음 배너 롤링
+	    rollNext: function () {
+	        if(document.querySelector('.prevroll')){
+	            document.querySelector('.prevroll').classList.remove('prevroll');
+	        }
+	        if(document.querySelector('.currentroll')){
+	            document.querySelector('.currentroll').classList.add('prevroll');
+	            document.querySelector('.currentroll').classList.remove('currentroll');
+	        }
+	        if(document.querySelector('.nextroll')){
+	            document.querySelector('.nextroll').classList.add('currentroll');
+	            document.querySelector('.nextroll').classList.remove('nextroll');
+	        }
+	    //다음 이미지 있으면 다음 롤링 이미지로 선택, 없으면 첫번째 이미지를 롤링 이미지로 지정
+	        if(document.querySelector('.currentroll').nextElementSibling){
+	            document.querySelector('.currentroll').nextElementSibling.classList.add('nextroll');
+	        }else{
+	            document.querySelector('.rollimgs li').classList.add('nextroll');
+	        }
+	    }
+	}
+
 document.addEventListener('DOMContentLoaded', function(){
     banner.rollInit(4000); // 배너 롤링
 });
 
-   $(function(){
-      
-      $("#spotListSelect").val("<%=select%>").prop("selected", true);
-      
-      //사진클릭하면 디테일로 값보내기
-      $(document).on("click","div.gotodetail",function(){
-         var contentsid=$(this).attr("contentsid"); 
-         location.href="index.jsp?main=spot/spotdetail.jsp?contentsid="+contentsid;
-      });
-      
-      // 좋아요 클릭
-      $(document).on("click", ".likesTD", function(){
-         var contentsid=$(this).attr("contentsid"); 
-         $.ajax({
-            type: "post",
-            url: "spot/spotupdateLikes.jsp",
-            dataType: "html",
-            data: {"contentsid" : contentsid, "pageNum" : <%=currentPage%>, "area" : "<%=area%>", "select":"<%=select%>", "search":"no"},
-            success: function(data){
-               location.reload();
-            }
-         });
-      });
-      
-      $(".goToReview").click(function(){
-         //alert("클릭");
-         var contentsid=$(this).attr("contentsid");
-         location.href="index.jsp?main=spot/spotdetail.jsp?contentsid=" + contentsid + "#spotReview";
-      });
-      
-      $("#spotListSelect").change(function(){
-         //alert($(this).val());
-         location.href="index.jsp?main=spot/spotlist.jsp?area=" + "<%=area%>" + "&select=" + $(this).val() + "&pageNum=1";
-      });
-      
-      
-   }); //function 끝
+	$(function(){
+		
+		$("#spotListSelect").val("<%=select%>").prop("selected", true);
+		
+		//사진클릭하면 디테일로 값보내기
+		$(document).on("click","div.gotodetail",function(){
+			var contentsid=$(this).attr("contentsid"); 
+			location.href="index.jsp?main=spot/spotdetail.jsp?contentsid="+contentsid;
+		});
+		
+		// 좋아요 클릭
+		$(document).on("click", ".likesTD", function(){
+			var contentsid=$(this).attr("contentsid"); 
+			$.ajax({
+				type: "post",
+				url: "spot/spotupdateLikes.jsp",
+				dataType: "html",
+				data: {"contentsid" : contentsid, "pageNum" : <%=currentPage%>, "area" : "<%=area%>", "select":"<%=select%>", "search":"no"},
+				success: function(data){
+					location.reload();
+				}
+			});
+		});
+		
+		$(".goToReview").click(function(){
+			//alert("클릭");
+			var contentsid=$(this).attr("contentsid");
+			location.href="index.jsp?main=spot/spotdetail.jsp?contentsid=" + contentsid + "#spotReview";
+		});
+		
+		$("#spotListSelect").change(function(){
+			//alert($(this).val());
+			location.href="index.jsp?main=spot/spotlist.jsp?area=" + "<%=area%>" + "&select=" + $(this).val() + "&pageNum=1";
+		});
+		
+		
+	}); //function 끝
 </script>
 </head>
 <body>
@@ -285,113 +315,114 @@ document.addEventListener('DOMContentLoaded', function(){
       <br><br>
       <%
         for (SpotlistDto dto : list){
-           %>
-           <div class="detail">
-           <div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
-              <%
-              if(dto.getThumbnail() == null){
-              %>
-                 <div style="width: 330px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
-              <%
-              }
-              else {
-              %>
-                 <img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
-              <%
-              }
-              %>
-              <div style="width: 330px; margin-top: 20px;">
-                 <b style="font-size: 13pt;"><%=dto.getTitle() %></b>
-              </div>
-              <br>
-              <div style="color: #F0CD58; font-size: 18px;">
-                 <%
-                 for(int i=1; i<=5; i++){
-                    if(i<=dto.getStar()){
-                       %>★<%
-                    }
-                    else {
-                       %>☆<%
-                    }
-                 }
-                 %>
-              </div>
-              <br>
-              <div style="color: #aaa;">
-               <%=dto.getLabel1() %> > <%=dto.getLabel2() %>
-            </div>
-              <div style="margin-top: 20px; color:#ff7f00; height: 30px;">
-              <b>
-              <%
-              String[] tags = dto.getTag().split(",");
-              for(int i=0; i<tags.length; i++){
-            	  if(i == 12){
-            		  break;
-            	  }
-                 %>
-                 #<%=tags[i] %>&nbsp;&nbsp;
-                 <%   
-                 if((i+1)%4 == 0){
-                    %><br><%
-                 }
-                 
-              }
-              %>
-              </b>
-              </div>
-              </div><!-- gotodetail 끝 -->
-              <br><br>
-              <table class="table table-bordered" style="table-layout: fixed">
-                 <tr height="70px;">
-                    <td style="vertical-align: middle;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
-                       <span class="glyphicon glyphicon-thumbs-up"></span><br>
-                       <%=dto.getLikes() %>
-                    </td>
-                    <td style="vertical-align: middle;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
-                       <span class="glyphicon glyphicon-edit" style="font-size: 10pt;"></span>&nbsp;<b>리뷰</b>
-                    </td>
-                 </tr>
-              </table>
-           </div> 
-           <%
+
+        	%>
+        	<div class="detail">
+        	<div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
+        		<%
+        		if(dto.getThumbnail() == null){
+        		%>
+        			<div style="width: 330px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
+        		<%
+        		}
+        		else {
+        		%>
+        			<img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
+        		<%
+        		}
+        		%>
+        		<div style="width: 330px; margin-top: 20px;">
+        			<b style="font-size: 13pt;"><%=dto.getTitle() %></b>
+        		</div>
+        		<br>
+        		<div style="color: #F0CD58; font-size: 18px;">
+        			<%
+        			for(int i=1; i<=5; i++){
+        				if(i<=dto.getStar()){
+        					%>★<%
+        				}
+        				else {
+        					%>☆<%
+        				}
+        			}
+        			%>
+        		</div>
+        		<br>
+        		<div style="color: #aaa;">
+					<%=dto.getLabel1() %> > <%=dto.getLabel2() %>
+				</div>
+        		<div style="margin-top: 20px; color:#ff7f00; height: 30px;">
+        		<b>
+        		<%
+        		String[] tags = dto.getTag().split(",");
+        		for(int i=0; i<tags.length; i++){
+        			if(i == 12){
+        				break;
+        			}
+        			%>
+        			#<%=tags[i] %>&nbsp;&nbsp;
+        			<%	
+        			if((i+1)%4 == 0){
+        				%><br><%
+        			}
+        			
+        		}
+        		%>
+        		</b>
+        		</div>
+        		</div><!-- gotodetail 끝 -->
+        		<br><br>
+        		<table class="table table-bordered" style="table-layout: fixed">
+        			<tr height="70px;">
+        				<td style="vertical-align: middle;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
+        					<span class="glyphicon glyphicon-thumbs-up"></span><br>
+        					<%=dto.getLikes() %>
+        				</td>
+        				<td style="vertical-align: middle;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
+        					<span class="glyphicon glyphicon-edit" style="font-size: 10pt;"></span>&nbsp;<b>리뷰</b>
+        				</td>
+        			</tr>
+        		</table>
+        	</div> 
+        	<%
         }
         %>
-           
-   </div> <!-- spotList 끝 -->
-   <div class="footer">
-      <ul class="pagination">
-      <%
-         if(startPage > 1){
-            %>
-            <li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=startPage - 1%>&select=<%=select%>">이전</a></li>
-            <%
-         }   
-      
-         for(int i=startPage; i<=endPage; i++){
-            // 이동할 페이지 추가
-            String url = "index.jsp?main=spot/spotlist.jsp?area=" + area + "&pageNum=" + i + "&select=" + select;
-            
-            if(i==currentPage){
-               %>
-               <li class="active"><a href="<%=url%>"><%=i %></a></li>
-               <%
-            }
-            else {
-               %>
-               <li><a href="<%=url%>"><%=i %></a></li>
-               <%
-            }
-            
-         }
-      
-         // 다음 버튼
-         if(endPage < totalPage){
-            %>
-            <li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=endPage + 1%>&select=<%=select%>">다음</a></li>
-            <%
-         }
-         %>
-         </ul>
-   </div>
+        	
+	</div> <!-- spotList 끝 -->
+	<div class="footer">
+		<ul class="pagination">
+		<%
+			if(startPage > 1){
+				%>
+				<li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=startPage - 1%>&select=<%=select%>">이전</a></li>
+				<%
+			}	
+		
+			for(int i=startPage; i<=endPage; i++){
+				// 이동할 페이지 추가
+				String url = "index.jsp?main=spot/spotlist.jsp?area=" + area + "&pageNum=" + i + "&select=" + select;
+				
+				if(i==currentPage){
+					%>
+					<li class="active"><a href="<%=url%>"><%=i %></a></li>
+					<%
+				}
+				else {
+					%>
+					<li><a href="<%=url%>"><%=i %></a></li>
+					<%
+				}
+				
+			}
+		
+			// 다음 버튼
+			if(endPage < totalPage){
+				%>
+				<li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=endPage + 1%>&select=<%=select%>">다음</a></li>
+				<%
+			}
+			%>
+			</ul>
+	</div>
 </body>
 </html>

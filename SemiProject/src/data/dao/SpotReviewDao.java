@@ -59,6 +59,7 @@ public class SpotReviewDao {
 				dto.setNum(rs.getString("num"));
 				dto.setStar(rs.getInt("star"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setLikes(rs.getInt("likes"));
 				
 				list.add(dto);
 			}
@@ -97,5 +98,26 @@ public class SpotReviewDao {
 		}
 		
 		return total;
+	}
+	
+	public void updateLikes(String num)
+	{
+		String sql="update spotreview set likes=likes+1 where num=?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩 
+			pstmt.setString(1, num);
+
+			//실행 
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt);
+		}
 	}
 }

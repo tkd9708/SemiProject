@@ -241,7 +241,9 @@ function getData(){
 				var content =$(this).find("content").text();
 				
 				var wishday = $(this).find("wishday").text();
-				var spotId = $(this).find("spotId").text(); /////이거추가~~~~~~~~~~~~~~~~~`	
+				var spotId = $(this).find("spotId").text(); 
+				var shareNum =$(this).find("shareNum").text();
+				
 				var wday = wishday.replaceAll("-", "");
 				var split = wishday.split("-");
 					var xmlyear = split[0];

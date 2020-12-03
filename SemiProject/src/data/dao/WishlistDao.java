@@ -206,19 +206,21 @@ public class WishlistDao {
 	
 	//review가져오기
 	
-	public List<SpotReviewDto>getMyreviews(String memNum){
+	public List<SpotReviewDto>getMyreviews(String memNum,int start, int end){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from spotreview where memNum=? order by num desc";
+		String sql ="select * from spotreview where memNum=? order by num desc limit ?,?";
 		
 		conn=db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memNum);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				SpotReviewDto dto = new SpotReviewDto();
@@ -303,6 +305,65 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 		return title;
 	}
 	
+	//내가쓴리뷰 갯수구하기
+	public int getTotalCount(String memNum) {
+		int tot=0;
+		String sql = "select count(*) from spotreview where memNum=?";
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				tot = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		
+		return tot;
+	}
+	
+
+	public String getShareSubject(String shareNum) {
+		String subject="";
+		String sql = "select subject from spotlist where shareNum = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		conn=db.getConnection();
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, shareNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				subject = rs.getString("title");
+				//System.out.println(title);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+	
+		return subject ;
+	}
+	
+	
+	
+	
 	
 	
 }
+
+

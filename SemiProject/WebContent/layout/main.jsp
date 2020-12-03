@@ -14,13 +14,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
 <style type="text/css">
-body { 
-    -ms-overflow-style: none; 
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    height: 100%;
-} 
+
+body {
+   /*background-color: #7eb9e3;*/
+   /*background-image: url("image/wave2.png");*/
+   background-repeat:no-repeat;
+   background-size:cover;
+   background-position: 0px 800px;
+   margin: 0;
+   height: 100%;
+   
+}
 
 .jejuisland {
     left:267px;
@@ -39,6 +43,14 @@ div.btn_go {
     font-weight: bold;
     font-size: 25px;
 } 
+
+div.btn_go a{
+    z-index: 3;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 4px 2px gray;
+}
 
 /*조천*/
 #btn_go_jocheon{
@@ -60,10 +72,6 @@ div.btn_go {
 .jocheon a {
     top: 220px; 
     left: 870px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*서귀포*/
@@ -86,10 +94,6 @@ div.btn_go {
 .seogwipo a{
     top: 470px; 
     left: 640px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*제주*/
@@ -112,10 +116,6 @@ div.btn_go {
 .jeju a{
     top: 260px; 
     left: 710px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*구좌*/
@@ -138,10 +138,6 @@ div.btn_go {
 .gujwa a{
     top: 180px; 
     left: 1000px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*성산*/
@@ -164,10 +160,6 @@ div.btn_go {
 .sungsan a{
     top: 320px; 
     left: 1070px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*표선*/
@@ -190,10 +182,6 @@ div.btn_go {
 .pyoseon a{
     top: 370px; 
     left: 975px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*남원*/
@@ -216,10 +204,6 @@ div.btn_go {
 .namwon a{
     top: 400px; 
     left: 820px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*안덕*/
@@ -242,10 +226,6 @@ div.btn_go {
 .andeok a{
     top: 500px; 
     left: 480px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*대정*/
@@ -268,10 +248,6 @@ div.btn_go {
 .daejung a{
     top: 510px; 
     left: 390px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*한경*/
@@ -320,10 +296,6 @@ div.btn_go {
 .hanrim a{
     top: 370px; 
     left: 430px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*애월*/
@@ -349,7 +321,6 @@ div.btn_go {
     z-index: 3;
     position: absolute;
     text-decoration: none;
-    color: #fff;
 }
 
 /*우도*/
@@ -372,10 +343,6 @@ div.btn_go {
 .udo a{
     top: 200px; 
     left: 1230px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 .notice {
@@ -445,197 +412,213 @@ select.combobox{
     border-radius: 6px;
 }
 </style>
+<%
+   // 프로젝트 경로 구하기
+   String url = request.getContextPath();
+%>
 <script type="text/javascript">
 $(function(){
-	$(document).ready(function(){
-	  $(".slider").slider({
-		  full_width: true,
-	      height : 800, 
-	      interval: 4000,
-	      indicators: false
-	  });
-	});
-	//제주도 버튼 움직이는 함수들
-	//조천
-	$("div.jocheon").hover(function(){
-	    $("#btn_go_jocheon").addClass("hover");
-	},function(){
-		$("#btn_go_jocheon").removeClass("hover");
+	$(".btn_search").click(function(){
+		var selSearch = $("#selSearch option:selected").val();
+		var search = $("#main_search").val();
+		
+		if(search.trim() == ""){
+			alert("검색할 단어를 입력해주세요.");
+		}
+		else {
+
+			location.href = "<%=url%>/index.jsp?main=spot/spotsearch.jsp?search=" + search + "&selSearch=" + selSearch;
+		}
+		//alert($("#selSearch option:selected").val());
 	});
 	
-	//서귀포
-	$("div.seogwipo").hover(function(){
-	    $("#btn_go_seogwipo").addClass("hover");
-	},function(){
-		$("#btn_go_seogwipo").removeClass("hover");
-	});
 	
-	//제주
-	$("div.jeju").hover(function(){
-	    $("#btn_go_jeju").addClass("hover");
-	},function(){
-		$("#btn_go_jeju").removeClass("hover");
-	});
-	
-	//구좌
-	$("div.gujwa").hover(function(){
-	    $("#btn_go_gujwa").addClass("hover");
-	},function(){
-		$("#btn_go_gujwa").removeClass("hover");
-	});
-	
-	//성산
-	$("div.sungsan").hover(function(){
-	    $("#btn_go_sungsan").addClass("hover");
-	},function(){
-		$("#btn_go_sungsan").removeClass("hover");
-	});
-	
-	//표선
-	$("div.pyoseon").hover(function(){
-	    $("#btn_go_pyoseon").addClass("hover");
-	},function(){
-		$("#btn_go_pyoseon").removeClass("hover");
-	});
-	
-	//남원
-	$("div.namwon").hover(function(){
-	    $("#btn_go_namwon").addClass("hover");
-	},function(){
-		$("#btn_go_namwon").removeClass("hover");
-	});
-	
-	//안덕
-	$("div.andeok").hover(function(){
-	    $("#btn_go_andeok").addClass("hover");
-	},function(){
-		$("#btn_go_andeok").removeClass("hover");
-	});
-	
-	//대정
-	$("div.daejung").hover(function(){
-	    $("#btn_go_daejung").addClass("hover");
-	},function(){
-		$("#btn_go_daejung").removeClass("hover");
-	});
-	
-	//대정
-	$("div.daejung").hover(function(){
-	    $("#btn_go_daejung").addClass("hover");
-	},function(){
-		$("#btn_go_daejung").removeClass("hover");
-	});
-	
-	//한경
-	$("div.hangyeong").hover(function(){
-	    $("#btn_go_hangyeong").addClass("hover");
-	},function(){
-		$("#btn_go_hangyeong").removeClass("hover");
-	});
-	
-	//한림
-	$("div.hanrim").hover(function(){
-	    $("#btn_go_hanrim").addClass("hover");
-	},function(){
-		$("#btn_go_hanrim").removeClass("hover");
-	});
-	
-	//애월
-	$("div.aewol").hover(function(){
-	    $("#btn_go_aewol").addClass("hover");
-	},function(){
-		$("#btn_go_aewol").removeClass("hover");
-	});
-	
-	//우도
-	$("div.udo").hover(function(){
-	    $("#btn_go_udo").addClass("hover");
-	},function(){
-		$("#btn_go_udo").removeClass("hover");
-	});
-	
-	$("div.btn_go").on('mouseover',function(){
-	    $(this).css('color','white');	
-	});
+   $(document).ready(function(){
+     $(".slider").slider({
+        full_width: true,
+         height : 800, 
+         interval: 4000,
+         indicators: false
+     });
+   });
+   //제주도 버튼 움직이는 함수들
+   //조천
+   $("div.jocheon").hover(function(){
+       $("#btn_go_jocheon").addClass("hover");
+   },function(){
+      $("#btn_go_jocheon").removeClass("hover");
+   });
+   
+   //서귀포
+   $("div.seogwipo").hover(function(){
+       $("#btn_go_seogwipo").addClass("hover");
+   },function(){
+      $("#btn_go_seogwipo").removeClass("hover");
+   });
+   
+   //제주
+   $("div.jeju").hover(function(){
+       $("#btn_go_jeju").addClass("hover");
+   },function(){
+      $("#btn_go_jeju").removeClass("hover");
+   });
+   
+   //구좌
+   $("div.gujwa").hover(function(){
+       $("#btn_go_gujwa").addClass("hover");
+   },function(){
+      $("#btn_go_gujwa").removeClass("hover");
+   });
+   
+   //성산
+   $("div.sungsan").hover(function(){
+       $("#btn_go_sungsan").addClass("hover");
+   },function(){
+      $("#btn_go_sungsan").removeClass("hover");
+   });
+   
+   //표선
+   $("div.pyoseon").hover(function(){
+       $("#btn_go_pyoseon").addClass("hover");
+   },function(){
+      $("#btn_go_pyoseon").removeClass("hover");
+   });
+   
+   //남원
+   $("div.namwon").hover(function(){
+       $("#btn_go_namwon").addClass("hover");
+   },function(){
+      $("#btn_go_namwon").removeClass("hover");
+   });
+   
+   //안덕
+   $("div.andeok").hover(function(){
+       $("#btn_go_andeok").addClass("hover");
+   },function(){
+      $("#btn_go_andeok").removeClass("hover");
+   });
+   
+   //대정
+   $("div.daejung").hover(function(){
+       $("#btn_go_daejung").addClass("hover");
+   },function(){
+      $("#btn_go_daejung").removeClass("hover");
+   });
+   
+   //대정
+   $("div.daejung").hover(function(){
+       $("#btn_go_daejung").addClass("hover");
+   },function(){
+      $("#btn_go_daejung").removeClass("hover");
+   });
+   
+   //한경
+   $("div.hangyeong").hover(function(){
+       $("#btn_go_hangyeong").addClass("hover");
+   },function(){
+      $("#btn_go_hangyeong").removeClass("hover");
+   });
+   
+   //한림
+   $("div.hanrim").hover(function(){
+       $("#btn_go_hanrim").addClass("hover");
+   },function(){
+      $("#btn_go_hanrim").removeClass("hover");
+   });
+   
+   //애월
+   $("div.aewol").hover(function(){
+       $("#btn_go_aewol").addClass("hover");
+   },function(){
+      $("#btn_go_aewol").removeClass("hover");
+   });
+   
+   //우도
+   $("div.udo").hover(function(){
+       $("#btn_go_udo").addClass("hover");
+   },function(){
+      $("#btn_go_udo").removeClass("hover");
+   });
+   
+   $("div.btn_go").on('mouseover',function(){
+       $(this).css('color','white');   
+   });
   });//function close
   
   function isElementUnderBottom(elem, triggerDiff) {
-	  const { top } = elem.getBoundingClientRect();
-	  const { innerHeight } = window;
-	  return top > innerHeight + (triggerDiff || 0);
-	};
+     const { top } = elem.getBoundingClientRect();
+     const { innerHeight } = window;
+     return top > innerHeight + (triggerDiff || 0);
+   };
 
-	function handleScroll() {
-	  const elems = document.querySelectorAll('.jejuisland,.btn_go,.container');
-	  elems.forEach(elem => {
-	    if (isElementUnderBottom(elem, -300)) {
-	      elem.style.opacity = "0";
-	      elem.style.transform = 'translateY(100px)';
-	    } else {
-	      elem.style.opacity = "1";
-	      elem.style.transform = 'translateY(0px)';
-	    }
-	  });
-	};
+   function handleScroll() {
+     const elems = document.querySelectorAll('.jejuisland,.btn_go,.container');
+     elems.forEach(elem => {
+       if (isElementUnderBottom(elem, -300)) {
+         elem.style.opacity = "0";
+         elem.style.transform = 'translateY(100px)';
+       } else {
+         elem.style.opacity = "1";
+         elem.style.transform = 'translateY(0px)';
+       }
+     });
+   };
 
 </script>
 </head>
-<%
-	// 프로젝트 경로 구하기
-	String url = request.getContextPath();
-%>
 <body>
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
  
    
-	<div class="slider">
-		<ul class="slides">
-			<li><img src="image/udo1.jpg">
-				<div class="caption right-align">
-					<h1>맨도롱 또똣</h1>
-					<h5 class="indigo-text text-lighten-1">
-					기분좋게 따뜻한</h5>
-				</div></li>
-			<li><img src="image/jeju2.jpg">
-				<div class="caption left-align">
-					<h1>올레</h1>
-					<h5 class="light grey-text text-lighten-3">
-					집 앞까지 이어지는 작은 골목길</h5>
-				</div></li>
-		    <li><img src="image/jeju1.jpg">
-				<div class="caption center-align">
-					<h1 style="color: #84c3ec;">인사리</h1>
-					<h5 class="light grey-text text-lighten-3">
-					외로움의 벗이 되는 것</h5>
-				</div></li>
-		 </ul>
-	</div>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <div class="slider">
+      <ul class="slides">
+         <li><img src="image/udo1.jpg">
+            <div class="caption right-align">
+               <h1>맨도롱 또똣</h1>
+               <h5 class="indigo-text text-lighten-1">
+               기분좋게 따뜻한</h5>
+            </div></li>
+         <li><img src="image/jeju2.jpg">
+            <div class="caption left-align">
+               <h1>올레</h1>
+               <h5 class="light grey-text text-lighten-3">
+               집 앞까지 이어지는 작은 골목길</h5>
+            </div></li>
+          <li><img src="image/jeju1.jpg">
+            <div class="caption center-align">
+               <h1 style="color: #84c3ec;">인사리</h1>
+               <h5 class="light grey-text text-lighten-3">
+               외로움의 벗이 되는 것</h5>
+            </div></li>
+       </ul>
+   </div>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
    <!-- 상단 슬라이드 부분 close -->
  
 <div class="container">
  <div class="combo">
-            <select class="combobox">
+            <select class="combobox" id="selSearch">
                 <option value="all" selected="selected">전  체</option>
                 <option value="land">지  역</option>
                 <option value="spot">지역명소</option>
+                <option value="tag">태그</option>
              </select>
          </div>
-	<div class="row">
+   <div class="row">
         <div class="col-md-6">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="검색할 단어를 입력해주세요" />
+                    <input type="text" class="form-control input-lg" id="main_search" placeholder="검색할 단어를 입력해주세요" />
                     <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
+                        <button class="btn btn-info btn-lg btn_search" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
                 </div>
             </div>
         </div>
-	</div>
+   </div>
 </div>
 
 <div class="btn_go"> 
