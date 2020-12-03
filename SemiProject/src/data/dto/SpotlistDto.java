@@ -6,6 +6,7 @@ public class SpotlistDto {
 	private String label1;
 	private String label2;
 	private String roadaddr;
+	private String addr;
 	private Double latitude;
 	private Double longitude;
 	private String tag;
@@ -13,6 +14,7 @@ public class SpotlistDto {
 	private String thumbnail;
 	private int star;
 	private int likes;
+	
 	public String getContentsid() {
 		return contentsid;
 	}
@@ -42,6 +44,12 @@ public class SpotlistDto {
 	}
 	public void setRoadaddr(String roadaddr) {
 		this.roadaddr = roadaddr;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 	public Double getLatitude() {
 		return latitude;
@@ -85,8 +93,6 @@ public class SpotlistDto {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	
-	
 	
 	
 }

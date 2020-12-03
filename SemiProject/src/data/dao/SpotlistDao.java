@@ -19,8 +19,8 @@ public class SpotlistDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, latitude, longitude, tag, introduction, thumbnail) "
-				+ "values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, addr, latitude, longitude, tag, introduction, thumbnail) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		conn = db.getConnection();
 		try {
@@ -30,11 +30,12 @@ public class SpotlistDao {
 			pstmt.setString(3, dto.getLabel1());
 			pstmt.setString(4, dto.getLabel2());
 			pstmt.setString(5, dto.getRoadaddr());
-			pstmt.setDouble(6, dto.getLatitude());
-			pstmt.setDouble(7, dto.getLongitude());
-			pstmt.setString(8, dto.getTag());
-			pstmt.setString(9, dto.getIntroduction());
-			pstmt.setString(10, dto.getThumbnail());
+			pstmt.setString(6, dto.getAddr());
+			pstmt.setDouble(7, dto.getLatitude());
+			pstmt.setDouble(8, dto.getLongitude());
+			pstmt.setString(9, dto.getTag());
+			pstmt.setString(10, dto.getIntroduction());
+			pstmt.setString(11, dto.getThumbnail());
 			
 			pstmt.execute();
 			
@@ -68,6 +69,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
@@ -110,6 +112,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
@@ -130,14 +133,23 @@ public class SpotlistDao {
 		return dto;
 	}
 	
-	public List<SpotlistDto> getList(int start, int perpage, String label2){
-		// 그룹변수의 내림차순, 같은 그룹인경우 step의 오름차순 출력
+	public List<SpotlistDto> getList(int start, int perpage, String label2, String select){
 		// limit로 시작번지와 몇개를 가져올지 바인딩
-		String sql = "select * from spotlist where label2 like '%" + label2 + "%' limit ?,?";
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = "";
+		
+		if(select.equals("평점")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by star desc, title asc limit ?,?";
+		}
+		else if(select.equals("좋아요")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by likes desc, title asc limit ?,?";
+		}
+		else if(select.equals("이름")) {
+			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by title asc limit ?,?";
+		}
 		
 		conn = db.getConnection();
 		try {
@@ -155,6 +167,7 @@ public class SpotlistDao {
 				dto.setLatitude(rs.getDouble("latitude"));
 				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setRoadaddr(rs.getString("roadaddr"));
+				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
