@@ -2,7 +2,6 @@
 
 body {
 	font-size: 18px;
-	color: #f4f4f4;
 }
 
 button {
@@ -10,6 +9,13 @@ button {
 	vertical-align: middle;
 	margin: 0;
 	padding: 0;
+	background-color: transparent;
+	outline-color: #ffab00;
+}
+
+::selection {
+	background: #ffaa00;
+	color: #0099a4;
 }
 
 .wrapAddress {
@@ -188,4 +194,78 @@ svg {
 
 svg:hover {
 	fill: #ff4400;
+}
+
+.postCode {
+	color: #ff5500!important;
+}
+
+li.addrRoll {
+	position: relative;
+	padding: 14px;
+	background-color: #fff;
+	border-top: .056rem solid #cccccc;
+	border-left: .056rem solid #e0e0e0;
+	border-right: .056rem solid #e0e0e0;
+	border-bottom: 0 none;
+}
+
+li {
+	list-style: none;
+	margin: 0;
+	font-size: 15px;
+	line-height: normal;
+}
+dt.wrAddr {
+	display: inline-block;
+	float: left;
+	border: .056rem solid #ffaa00;
+	border-radius: 50%;
+	width: 40px;
+	height: 30px;
+	margin-top: 5px;
+	font-size: 12px;
+	line-height: normal;
+	color: #f4f4f4;
+	background-color: #ffa800;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+}
+
+dt.wrAddr span {
+	display: inline-block;
+	margin-top: 15%;
+}
+
+dd.addrInfo {
+	margin-top: 0;
+	padding-left: 8px;
+	display: block;
+}
+
+span.txtAddr {
+	display: block;
+	padding-top: 0;
+	border-top: 0 none;
+	padding-right: 0;
+	position: relative;
+	padding: 5px 50px 8px 0;
+	word-break: break-all;
+	padding-left: 10px;
+}
+
+button.optAddress {
+	cursor: pointer;
+	text-align: left;
+	color: #444;
+	padding-right: 8px;
+	word-break: break-all;
+}
+
+ul.addrList {
+	margin: 0;
+	padding: 0;
+	margin-top: -1px;
 }

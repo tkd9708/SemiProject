@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="../image/favicon.ico">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/postsearch.css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/member/js/postsearch.js" ></script> 
 <title>멘도롱 또똣 :: 우편번호 보기</title>
 </head>
 <body>
@@ -63,12 +64,12 @@
 	<%}
 	else
 	{//결과
-		String dong=request.getParameter("dong");
+		String regionName=request.getParameter("regionName");
 		//dao 선언
 		MemberDao dao=new MemberDao();
 		
 		//메서드 호출
-		List<ZipcodeDto> list=dao.getSearchDong(dong);
+		List<ZipcodeDto> list=dao.getSearchDong(regionName);
 		
 		//출력
 	%>
@@ -88,19 +89,21 @@
 				+dto.getSido()+" "+dto.getGugun()
 				+" "+dto.getDong()+" "+dto.getRi();
 			%>
-			<li>
+			<li class="addrRoll">
 				<span class="postCode"><%=dto.getZipcode()%></span>
 				<dl class="addrShow">
-					<dt class="wrAddr">주소</dt>
+					<dt class="wrAddr"><span>주소</span></dt>
 					<dd class="addrInfo">
-						<span class="txtAddr"><%=addr1%></span>
+						<button class="optAddress" onclick="select('<%=addr2%>')">
+							<span class="txtAddr"><%=addr1%></span>
+						</button>
 					</dd>
 				</dl>	
 			</li>
 			<%}
 			%>
 		</ul>
-		<div class="addrjk"></div>
+		<div class="addrPage"></div>
 	<%}
 %>
 		<div class="popupFoot">

@@ -17,9 +17,9 @@
 		<input type="hidden" name="id" value="<%=id%>">
 		<b>가입시 입력한 비밀번호를 넣어주세요</b><br><br>
 		<input type="password" name="pass"
-		required="required" autofocus="autofocus">
+		required="required" autofocus="autofocus" class="passInput">
 		
-		<button type="submit" class="btn btn-danger">회원탈퇴</button>
+		<button type="submit" class="btnOut">회원탈퇴</button>
 	</form>
 </div>
 </body>
