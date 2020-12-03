@@ -40,7 +40,7 @@
 	div#spotReview {
 		margin-left: 200px;
 		margin-right: 200px;
-		height: 1000px;
+		margin-bottom: 200px;
 	}
 	
 	/* span.star {
@@ -482,7 +482,7 @@ z-index:1111;
     <div id="pagination"></div>
 	</div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3e5d36ebdbe678f839591abd28e09be7&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00e1b2682405c666548115f5a38b8163&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -862,10 +862,10 @@ function changeCategoryClass(el) {
 	<br>
 	<!-- 명소 리뷰 -->
 	<div id="spotReview">
-		<h2>Review</h2>
+		<h2><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Review</h2>
 		<form id="newSpotReview" action="spot/insertspotreview.jsp">
 			<br>
-			<b>작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<b style="margin-left: 60px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<br><br>
 			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
@@ -878,7 +878,7 @@ function changeCategoryClass(el) {
 			                         
                                  
            <!-- 별점 -->
-     <div class="stars">
+     <div class="stars" style="margin-left: 50px;">
         <input class="stars__checkbox" type="radio" id="sd_first-star" name="star">
         <label class="stars__star" for="sd_first-star">
             <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -923,68 +923,67 @@ function changeCategoryClass(el) {
         
 			<input type="hidden" name="star" id="spotReviewStar" value="0">
 			<br><br>
-			<textarea name="content" id="srContent" style="width: 500px; height: 100px; float: left;" class="form-control"></textarea>
-			<button type="button" id="btnInsertReview" style="height: 100px; width: 80px; margin-left: 10px;">작성</button>
+			<textarea name="content" id="srContent" style="height: 150px;" class="form-control"></textarea>
+			<button type="button" class="btn btn-warning" id="btnInsertReview" style="float: right; margin-top: 10px;">작성</button>
 		</form>
-		<br><br><br>
+		<br><br><br><br><br>
 		
 		
 		<!-- 명소 리뷰 리스트 -->
 		<div id="spotReviewList">
-			<table class="table">
-				<tr style="text-align: center; vertical-align: middle" bgcolor="#efefef">
-					<td width="15%"><b>작성자</b></td>
-					<td width="50%"><b>review</b></td>
-					<td width="15%"><b>별점</b></td>
-					<td width="20%"><b>작성일</b></td>
-				</tr>
-				<%
-				if(rdao.getTotalCount(contentsid) == 0){
-					%>
-					<tr style="text-align: center;"><td colspan="4">등록된 review가 없습니다.</td></tr>
-					<%
-				}
-				else{
-					int total = 0;
-					for(SpotReviewDto rdto : list){
-					
-						total += rdto.getStar();
-					%>
-						<tr>
-							<td style="text-align: center; vertical-align: middle">
-								<b><%=mdao.getData(rdto.getMemNum()).getId() %> 님</b><br>
-							</td>
-							<td style=" vertical-align: middle">
-							<%=rdto.getContent().replace("\n", "<br>") %>
-							</td>
-							<td style="text-align: center; vertical-align: middle">
-								<span style="color: #F0CD58; font-size: 18px;">
-									<%
-	        						for(int i=1; i<=5; i++){
-	        							if(i<=rdto.getStar()){
-	        								%>★<%
-	        							}
-	        							else {
-	        								%>☆<%
-	        							}
-	        						}
-	        						%>
-								</span>
-							</td>
-							<td style="text-align: center; vertical-align: middle">
-								<%=sdf.format(rdto.getWriteday())%>
-							</td>
-						</tr>
-					<%
-					}
-					if(total > 0){
-						dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
-					}
-				
-				}
+			<%
+			if(rdao.getTotalCount(contentsid) == 0){
 				%>
-			
-			</table>
+				<div style="text-align: center;">
+					<h2>😢 등록된 review가 없습니다.</h2>
+				</div>
+				<%
+			}
+			else{
+				int total = 0;
+				for(SpotReviewDto rdto : list){
+					total += rdto.getStar();
+					%>
+					<br><br>
+					<hr>
+					<div style="margin-left: 100px; margin-right: 100px;">
+						<table>
+							<tr>
+								<td valign="top">
+									<span style="color: #F0CD58; font-size: 18px;">
+									<%
+	        							for(int i=1; i<=5; i++){
+	        								if(i<=rdto.getStar()){
+	        									%>★<%
+	        								}
+	        								else {
+	        									%>☆<%
+	        								}
+	        							}
+	        						%>
+									</span>
+								</td>
+								<td style="padding-left: 50px;">
+									<b style="font-size: 15pt;"><%=rdto.getContent().replace("\n", "<br>") %></b>
+								</td>
+							</tr>
+						</table>
+						
+						
+						<br><br>
+						<div style="float: right;">
+							<b><%=mdao.getData(rdto.getMemNum()).getId() %></b> | <%=sdf.format(rdto.getWriteday())%>
+							 | <a style="cursor:pointer;" href="spot/updateLikes.jsp">추천&nbsp;<%=rdto.getLikes() %></a>
+						</div>
+					</div>
+					
+					<%
+				}
+				if(total > 0){
+					dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
+				}
+			}
+			%>
 		</div>
 		
 	</div>

@@ -411,8 +411,27 @@ select.combobox{
     border-radius: 6px;
 }
 </style>
+<%
+   // 프로젝트 경로 구하기
+   String url = request.getContextPath();
+%>
 <script type="text/javascript">
 $(function(){
+	$(".btn_search").click(function(){
+		var selSearch = $("#selSearch option:selected").val();
+		var search = $("#main_search").val();
+		
+		if(search.trim() == ""){
+			alert("검색할 단어를 입력해주세요.");
+		}
+		else {
+
+			location.href = "<%=url%>/index.jsp?main=spot/spotsearch.jsp?search=" + search + "&selSearch=" + selSearch;
+		}
+		//alert($("#selSearch option:selected").val());
+	});
+	
+	
    $(document).ready(function(){
      $(".slider").slider({
         full_width: true,
@@ -546,10 +565,6 @@ $(function(){
 
 </script>
 </head>
-<%
-   // 프로젝트 경로 구하기
-   String url = request.getContextPath();
-%>
 <body>
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
  
@@ -582,19 +597,20 @@ $(function(){
  
 <div class="container">
  <div class="combo">
-            <select class="combobox">
+            <select class="combobox" id="selSearch">
                 <option value="all" selected="selected">전  체</option>
                 <option value="land">지  역</option>
                 <option value="spot">지역명소</option>
+                <option value="tag">태그</option>
              </select>
          </div>
    <div class="row">
         <div class="col-md-6">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="검색할 단어를 입력해주세요" />
+                    <input type="text" class="form-control input-lg" id="main_search" placeholder="검색할 단어를 입력해주세요" />
                     <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
+                        <button class="btn btn-info btn-lg btn_search" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
