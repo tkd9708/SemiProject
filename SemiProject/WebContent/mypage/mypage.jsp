@@ -237,19 +237,17 @@ function getData(){
 		data:{"memId":memId},
 		success:function(data){
 			$(data).find("wish").each(function(){
-
 				var content =$(this).find("content").text();
-				
 				var wishday = $(this).find("wishday").text();
 				var spotId = $(this).find("spotId").text(); 
 				var shareNum =$(this).find("shareNum").text();
-				
 				var wday = wishday.replaceAll("-", "");
 				var split = wishday.split("-");
-					var xmlyear = split[0];
-					var xmlmonth = split[1];
-					var xmlday = split[2];
-					var aroundId =$(this).find("aroundId").text();
+				var xmlyear = split[0];
+				var xmlmonth = split[1];
+				var xmlday = split[2];
+				var aroundId =$(this).find("aroundId").text();
+		
 					if(spotId!="0"){
 						
 						//System.out.println("spotlist");
@@ -267,9 +265,7 @@ function getData(){
 							});
 					}
 					
-					else 
-					{
-						if(aroundId!="0"){
+					else if(aroundId!="0"){
 							var sp = content.split(",");
 							var category = sp[0];
 							if(category == "음식점"){
@@ -283,10 +279,23 @@ function getData(){
 								$("#"+wday).append("☕"+aroundId+"<br>");
 							}
 						}
-						else $("#"+wday).append("✔"+content+"<br>");
+					else if(shareNum!="0"){
+						$.ajax({
+							url:"mypage/getsharesubject.jsp",
+							type:"get",
+							dataType:"xml",
+							data:{"shareNum":shareNum},
+							success:function(data){
+								$(data).find("share").each(function(){
+									var subject = $(this).find("subject").text();
+									$("#"+wday).append("🤞"+subject+"<br>");
+								});
+							}
+						});
 						
 					}
-				
+			else $("#"+wday).append("✔"+content+"<br>");
+			
 					
 			});
 		}
@@ -304,8 +313,9 @@ function getDetail(){
 			$(data).find("wish").each(function(){
 		
 				var content =$(this).find("content").text();
-		
+				var shareNum =$(this).find("shareNum").text();
 				var wishday = $(this).find("wishday").text();
+				//alert(shareNum);
 				var aroundId =$(this).find("aroundId").text();
 				var wday = wishday.replaceAll("-", "");
 				var split = wishday.split("-");
@@ -315,7 +325,7 @@ function getDetail(){
 					var xmlday = split[2];
 					var spotId = $(this).find("spotId").text();
 					if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
-					if(content=="0"){
+					if(spotId!="0"){
 						
 						$.ajax({
 							url: "mypage/getspottitle.jsp",  
@@ -332,11 +342,8 @@ function getDetail(){
 							}
 							});
 					}
-					else {
-						
-					var detailcontent="";
-						
-							if(aroundId!="0"){
+					else if(aroundId!="0"){
+								var detailcontent="";
 								var sp = content.split(",");
 								var category = sp[0];
 								if(category == "음식점"){
@@ -349,15 +356,33 @@ function getDetail(){
 								else if(category =="카페"){;
 									 detailcontent="☕ &nbsp;"+aroundId;
 								}
+								
+											
 							}
-							else detailcontent="✔"+content;
-							
-							var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
-							$("#"+wday+".detail").append(print);
-						
-						
-						
+				else if(shareNum!="0"){
+					//alert("ㅇㅇ");
+					$.ajax({
+						url:"mypage/getsharesubject.jsp",
+						type:"get",
+						dataType:"xml",
+						data:{"shareNum":shareNum},
+						success:function(data){
+							$(data).find("share").each(function(){
+								var subject = $(this).find("subject").text();
+								//alert(subject);
+								$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🤞&nbsp;<a href='index.jsp?main=shareboard/shareboardlist.jsp?num="+shareNum+"'>"+subject+"</a>"+
+										"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+							});
 					}
+				});
+				
+			}
+			else{
+				detailcontent="✔"+content;
+				var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+				$("#"+wday+".detail").append(print);
+				
+			}
 			});
 		}
 		

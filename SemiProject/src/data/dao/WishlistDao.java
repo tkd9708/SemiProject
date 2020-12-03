@@ -335,7 +335,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 
 	public String getShareSubject(String shareNum) {
 		String subject="";
-		String sql = "select subject from spotlist where shareNum = ?";
+		String sql = "select subject from shareboard where shareNum = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
