@@ -1,11 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+</head>
+
 <style type="text/css">
-   div.noticeform{
+div.noticeform{
       margin-left: 200px; 
       margin-right: 200px; 
       margin-top: 150px;
@@ -46,15 +52,12 @@ div.btn{
    position: absolute;
    left: 300px;
 }
-   
 </style>
-<script src="<%=request.getContextPath()%>/se2/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=request.getContextPath()%>/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script></head>
-
 <body>
+
 <div class="noticeform">
 	<fieldset>
-   		<legend><h2>공지사항 작성</h2></legend>
+   		<legend><h2>공지사항 수정</h2></legend>
    		<form action="notice/noticeaction.jsp" method="post" enctype="multipart/form-data" name="f">
     		<table class="table table-bordered">
        			<tr>
@@ -128,7 +131,7 @@ function submitContents(elClickedObj) {
 
 }
 
-// textArea에 이미지 첨부
+// textArea에 이미지 첨부.
 
 function pasteHTML(filepath){
     var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
@@ -137,3 +140,4 @@ function pasteHTML(filepath){
 }
 </script>
 </body>
+</html>
