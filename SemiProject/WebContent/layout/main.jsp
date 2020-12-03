@@ -14,12 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
 <style type="text/css">
-body {
-	/*background-color: #7eb9e3;*/
-	margin: 0;
-	height: 100%;
-	
-}
+body { 
+    -ms-overflow-style: none; 
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+} 
 
 .jejuisland {
     left:267px;

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.dto.SpotReviewDto;
 import data.dto.WishlistDto;
 import mysql.db.MysqlConnect;
 
@@ -15,7 +16,7 @@ public class WishlistDao {
 
 	// 주변명소 insert
 	public void insertAround(WishlistDto dto) {
-		String sql = "insert into wishlist (memId, spotId, shareNum, aroundId, content,wishday) values (?,0,0,?,?,?)";
+		String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -39,7 +40,7 @@ public class WishlistDao {
 
 	// spot insert
 	public void insertSpot(WishlistDto dto) {
-		String sql = "insert into wishlist (memId, spotId, shareNum, aroundId, content,wishday) values (?,?,0,0,?,?)";
+		String sql = "insert into wishlist (memId, spotId,content,wishday) values (?,?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -185,9 +186,9 @@ public class WishlistDao {
 					}
 				
 				
-				System.out.println(dto.getTitle());
+				//System.out.println(dto.getTitle());
 				//System.out.println(dto.getSubject());
-				System.out.println(dto.getWishday());
+				//System.out.println(dto.getWishday());
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -203,29 +204,105 @@ public class WishlistDao {
 		return list;
 	}
 	
+	//review가져오기
 	
-	//spot 이름받기
-	public WishlistDto getspotTitle(String contensid) {
-		String sql = "select s.title w.wishday from spotlist s, wishlist w where s.contentsid=?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		WishlistDto dto = new WishlistDto();
+	public List<SpotReviewDto>getMyreviews(String memNum){
 		
-		conn = db.getConnection();
+		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
+		Connection conn = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		
+		String sql ="select * from spotreview where memNum=?";
+		
+		conn=db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, contensid);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				dto.setTitle(rs.getString("title"));
+			pstmt.setString(1, memNum);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				SpotReviewDto dto = new SpotReviewDto();
+				dto.setContent(rs.getString("content"));
+				dto.setNum(rs.getString("num"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setStar(rs.getInt("star"));
+				dto.setMemNum(rs.getString("memNum"));
+				dto.setContentsid(rs.getString("contentsid"));
+				list.add(dto);
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			db.dbClose(conn, pstmt, rs);
 		}
-		return dto;
+		
+		return list;
 	}
+	
+	
+	//최신리뷰출력
+public List<SpotReviewDto>getRecentreviews(String memNum){
+		
+		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
+		Connection conn = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		
+		String sql ="select * from spotreview where memNum= ? order by num desc limit 0,4";
+		conn=db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memNum);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				SpotReviewDto dto = new SpotReviewDto();
+				dto.setContent(rs.getString("content"));
+				dto.setNum(rs.getString("num"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setStar(rs.getInt("star"));
+				dto.setMemNum(rs.getString("memNum"));
+				dto.setContentsid(rs.getString("contentsid"));
+				list.add(dto);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	public String getSpottitle(String contentsid) {
+		String title="";
+		String sql = "select title from spotlist where contentsid = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		conn=db.getConnection();
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentsid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				title = rs.getString("title");
+				System.out.println(title);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+	
+		return title;
+	}
+	
 	
 	
 }
