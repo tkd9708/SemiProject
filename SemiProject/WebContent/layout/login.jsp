@@ -34,7 +34,8 @@ var Alert = new MyAlert();
 		<%
 		String loginok=(String)session.getAttribute("loginok");
 		String id=(String)session.getAttribute("myid");
-		System.out.println("현재 로그인한 상태는 " + loginok + "입니다\n 로그인한 아이디는 "+id+" 입니다.");%>
+		System.out.println("현재 로그인한 상태는 " + loginok + "입니다\n 로그인한 아이디는 "+id+" 입니다.");
+		%>
 		if("<%=loginok%>" == "success"){
 			$(".main_login").text("Logout");
 		}
@@ -45,7 +46,7 @@ var Alert = new MyAlert();
 		$("a.main_login").click(function(e){
 			  e.preventDefault();
 			  <%
-			  if(loginok=="success")
+			  if(loginok!=null && loginok=="success")
 			  {%>
 			  	/* $("a.main_login").text("Logout"); */
 			  	location.href="member/logoutaction.jsp";
@@ -63,7 +64,7 @@ var Alert = new MyAlert();
 		
 		$("a.main_mypage").click(function(e) {
 			<%
-			if(loginok=="success")
+			if(loginok!=null && loginok=="success")
 			{	
 			%>
 				location.href="index.jsp?main=member/mypage.jsp";

@@ -11,6 +11,53 @@ System.out.println(url);
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/loginform.css">
 <meta charset="UTF-8">
 <title>맨도롱 또똣 :: 1등 여행사</title>
+<script type="text/javascript">
+function MyAlert(){
+    this.make = function(modal){
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var modaloverlay = document.getElementById('modaloverlay');
+		      
+        var modalbox = document.getElementById('modalbox');
+        modaloverlay.style.display = "block";
+        modaloverlay.style.height = winH+"px";
+        modalbox.style.left = (winW/2) - (500 * .5)+"px";
+        modalbox.style.top = "100px";
+        modalbox.style.display = "block";
+        document.getElementById('modalboxhead').innerHTML = "경고창";
+        document.getElementById('modalboxbody').innerHTML = modal;
+        document.getElementById('modalboxfoot').innerHTML = '<button id="modalBtn" onclick="Alert.ok()">예</button>';
+    }
+	this.ok = function(){
+		document.getElementById('modalbox').style.display = "none";
+		document.getElementById('modaloverlay').style.display = "none";
+	}
+}
+
+var Alert = new MyAlert();
+
+	$(function(){
+		<%
+		String loginok=(String)session.getAttribute("loginok");
+		String id=(String)session.getAttribute("myid");
+		System.out.println("현재 로그인한 상태는 " + loginok + "입니다\n 로그인한 아이디는 "+id+" 입니다.");
+		%>
+		$("a.aMypage").click(function(e) {
+			<%
+			if(loginok!=null && loginok=="success")
+			{	
+			%>
+				location.href="index.jsp?main=member/mypage.jsp";
+			<%}
+			else
+			{
+			%>
+			Alert.make('로그인을 해야 볼 수 있습니다. 로그인을 해주세요.');
+			<%}
+			%>
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="gridContainer">
@@ -119,7 +166,7 @@ System.out.println(url);
 							<li class="mainMenu">
 								<a href="">나의 여행</a>
 								<ul>
-									<li><a href="member/mypage.jsp">나의 여행일정</a></li>
+									<li><a href="index.jsp?main=member/mypage.jsp" class="aMypage">나의 여행일정</a></li>
 									<li><a>찜한 여행</a></li>
 									<li><a>나의 리뷰</a></li>
 									<li><a>방문 여행지</a></li>
@@ -172,6 +219,15 @@ System.out.println(url);
 			<footer class="item4">
 				멘도롱 또똣
 			</footer>
+	</div>
+	
+	<div id="modaloverlay"></div>
+	<div id="modalbox">
+		<div id="positionBox">
+	    	<div id="modalboxhead"></div>
+		    <div id="modalboxbody"></div>
+		    <div id="modalboxfoot"></div>
+		</div>
 	</div>
 </body>
 </html>
