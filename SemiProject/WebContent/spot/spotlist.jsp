@@ -69,7 +69,7 @@ letter-spacing: 2px;
         padding: 0;
         margin: 0;
     }
-	
+
 	.rollimgs li{
     position: absolute;
     width: 100%;
@@ -99,8 +99,7 @@ letter-spacing: 2px;
 .rollimgs.reverse li.nextroll{
     transition: left .5s ease-in-out, right .5s ease-in-out;
 }
-	
-
+  
 #spotListSelect {
   width: 150px;
   padding: .8em .5em;
@@ -168,6 +167,7 @@ letter-spacing: 2px;
 	
 	List<SpotlistDto> list = dao.getList(start, perPage, area, select);
 %>
+  
 <script type="text/javascript">
 
 let banner = {
@@ -215,6 +215,7 @@ let banner = {
 	        }
 	    }
 	}
+
 document.addEventListener('DOMContentLoaded', function(){
     banner.rollInit(4000); // 배너 롤링
 });
