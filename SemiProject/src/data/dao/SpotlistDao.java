@@ -12,6 +12,7 @@ import data.dto.SpotlistDto;
 import mysql.db.MysqlConnect;
 
 public class SpotlistDao {
+
 	MysqlConnect db = new MysqlConnect();
 	
 	// insert
@@ -134,20 +135,20 @@ public class SpotlistDao {
 	}
 	
 	public List<SpotlistDto> getList(int start, int perpage, String label2, String select){
-		// limit·Î ½ÃÀÛ¹øÁö¿Í ¸î°³¸¦ °¡Á®¿ÃÁö ¹ÙÀÎµù
+		// limitë¡œ ì‹œì‘ë²ˆì§€ì™€ ëª‡ê°œë¥¼ ê°€ì ¸ì˜¬ì§€ ë°”ì¸ë”©
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		
-		if(select.equals("ÆòÁ¡")) {
+		if(select.equals("í‰ì ")) {
 			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by star desc, title asc limit ?,?";
 		}
-		else if(select.equals("ÁÁ¾Æ¿ä")) {
+		else if(select.equals("ì¢‹ì•„ìš”")) {
 			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by likes desc, title asc limit ?,?";
 		}
-		else if(select.equals("ÀÌ¸§")) {
+		else if(select.equals("ì´ë¦„")) {
 			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by title asc limit ?,?";
 		}
 		
@@ -251,9 +252,9 @@ public class SpotlistDao {
 		
 	}
 	
-	// °Ë»ö list
+	// ê²€ìƒ‰ list
 	public List<SpotlistDto> getSearchList(int start, int perpage, String selSearch, String search){
-		// limit·Î ½ÃÀÛ¹øÁö¿Í ¸î°³¸¦ °¡Á®¿ÃÁö ¹ÙÀÎµù
+		// limitë¡œ ì‹œì‘ë²ˆì§€ì™€ ëª‡ê°œë¥¼ ê°€ì ¸ì˜¬ì§€ ë°”ì¸ë”©
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -310,7 +311,7 @@ public class SpotlistDao {
 	}
 	
 	
-	// °Ë»ö ¸®½ºÆ® °¹¼ö
+	// ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸ ê°¯ìˆ˜
 	public int getSearchTotalCount(String selSearch, String search) {
 		int total = 0;
 		Connection conn = null;
