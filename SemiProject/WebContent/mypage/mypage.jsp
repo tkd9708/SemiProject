@@ -1,3 +1,4 @@
+<%@page import="com.sun.org.apache.xerces.internal.util.HTTPInputSource"%>
 <%@page import="data.dto.SpotReviewDto"%>
 <%@page import="data.dto.SpotlistDto"%>
 <%@page import="data.dao.MemberDao"%>
@@ -14,11 +15,13 @@
 <title>Insert title here</title>
 <style type="text/css">
 
+.modal-backdrop{height:100%; }
+
 div.mypage_main{
 margin-top: 200px;
 }
 span.date{
-	border-radius: 30px;
+   border-radius: 30px;
     border: 5px solid white;
     background-color: white;
 }
@@ -34,17 +37,33 @@ td.nodate{
 height: 100px;
 vertical-align: top;
 border-bottom: 1px solid gray;
-/*border: 1px solid gray;*/
+border: 1px solid gray;
 }
 td.date{
 height: 150px;
 vertical-align: top;
-/*border: 1px solid gray;*/
-border-bottom: 1px solid gray;
+border: 1px solid gray;
+/*border-bottom: 1px solid gray;*/
 cursor:pointer;
 padding-top: 10px;
 padding-left: 10px;
+}
+td.date:last-of-type span.date, td.dateTitle:last-of-type {
+color: #4d55e9; 
+}
+td.date:first-of-type span.date, td.dateTitle:first-of-type{
+color: #e63d38; 
+}
 
+#calendarBody tr:last-of-type {
+border-bottom:5px solid gray;
+}
+
+#tbCalendarYM {
+font-size: 36px;
+}
+h2 {
+font-size: 45px;
 }
 td.date:hover{
 font-style: italic;
@@ -53,11 +72,11 @@ font-weight: bold;
 td.dateTitle{
 text-align:center;
 height:30px;
-background-color: #FAAC58;
+/*background-color: #FAAC58;*/
 text-align:center ;
 color:#424242;
 font-size:13pt;
-border-top: 1px solid gray;
+border-bottom: 5px solid gray;
 }
 div.calendar{
 margin-left: 150px;
@@ -82,29 +101,19 @@ margin-top:200px;
 z-index:1111;
 
 }
-
-/*드롭다운메뉴*/
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 300px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.show {display: block;}
+div.btnSchedulelist{
+float: left;
 
 }
-/*드롭다운메뉴*/
-.dropdown {
-  position: relative;
-  display: inline-block;
+
 }
+span.btnSchedulelist{
+cursor: pointer;
+}
+
+a { text-decoration:none; color: black}
+a:hover { text-decoration:none }
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -119,12 +128,25 @@ z-index:1111;
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%String memId = (String)session.getAttribute("myid");
+
+WishlistDao dao = new WishlistDao();
+List<WishlistDto>list = dao.getList(memId);
+
+%>
+
+
  <script type="text/javascript">
- var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
+ var today = new Date(); //오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
  var date = new Date(); //today의 Date를 세어주는 역할
+ var content = "";
+ var wishday = "";
+ var title = "";
+ var subject = "";
+ var aroundId ="";
+ var spotId="";
+ var shareNum="";
+ 
  function prevCalendar() {//이전 달
  	        // 이전 달을 today에 값을 저장하고
  	        //getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
@@ -162,7 +184,9 @@ function drawCalendar(){ //달력 그리는 함수
 			var dNum = 1;
 			
 			//년월 띄우기
-			 tbCalendarYM.innerHTML = y+"년"+(m+1)+"월"; 
+
+			 tbCalendarYM.innerHTML = y+"년&nbsp;"+(m+1)+"월"; 
+  
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -208,240 +232,219 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			$("#calendarBody").html(calendar);
 }
-//String sessionId = (String)session.getAttribute("myid"); 
-//xml받아서 출력하기
+
+
 function getData(){
-	var memId = $("#memId").val();
-	$.ajax({
-		url: "mypage/getwishtoxml.jsp",  
-		type:"get",
-		dataType:"xml",
-		data:{"memId":memId},
-		success:function(data){
-			$(data).find("wish").each(function(){
-
-				var content =$(this).find("content").text();
-				
-				var wishday = $(this).find("wishday").text();
-				var spotId = $(this).find("spotId").text(); /////이거추가~~~~~~~~~~~~~~~~~`	
-				var wday = wishday.replaceAll("-", "");
-				var split = wishday.split("-");
-					var xmlyear = split[0];
-					var xmlmonth = split[1];
-					var xmlday = split[2];
-					var aroundId =$(this).find("aroundId").text();
-					if(spotId!="0"){
-						
-						//System.out.println("spotlist");
-						$.ajax({
-							url: "mypage/getspottitle.jsp",  
-							type:"get",
-							dataType:"xml",
-							data:{"spotId":spotId},
-							success:function(data){
-								$(data).find("spot").each(function(){
-									var title =$(this).find("title").text();
-									$("#"+wday).append("🚩"+title+"<br>");
-								});
-							}
-							});
-					}
-					
-					else 
-					{
-						if(aroundId!="0"){
-							var sp = content.split(",");
-							var category = sp[0];
-							if(category == "음식점"){
-								 $("#"+wday).append("🍔"+aroundId+"<br>");
-							} 
-							else if(category =="숙박")
-								{
-								$("#"+wday).append("🏡"+aroundId+"<br>");
-								}
-							else if(category =="카페"){
-								$("#"+wday).append("☕"+aroundId+"<br>");
-							}
-						}
-						else $("#"+wday).append("✔"+content+"<br>");
-						
-					}
-				
-					
-			});
-		}
-		
-	})
-}
-function getDetail(){
-	var memId = $("#memId").val();
-	
-	$.ajax({
-		url: "mypage/getwishtoxml.jsp",  
-		type:"get",
-		dataType:"xml",
-		data:{"memId":memId},
-		success:function(data){
-			$(data).find("wish").each(function(){
-		
-				var content =$(this).find("content").text();
-			
-				var wishday = $(this).find("wishday").text();
-				var aroundId =$(this).find("aroundId").text();
-				var wday = wishday.replaceAll("-", "");
-				var split = wishday.split("-");
-				var num =$(this).find("num").text();
-					var xmlyear = split[0];
-					var xmlmonth = split[1];
-					var xmlday = split[2];
-					var spotId = $(this).find("spotId").text();
-					if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
-					if(content=="0"){
-						
-						$.ajax({
-							url: "mypage/getspottitle.jsp",  
-							type:"get",
-							dataType:"xml",
-							data:{"spotId":spotId},
-							success:function(data){
-								$(data).find("spot").each(function(){
-									var title =$(this).find("title").text();
-									
-									$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;"+title+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
-									
-								});
-							}
-							});
-					}
-					else {
-						
-					var detailcontent="";
-						
-							if(aroundId!="0"){
-								var sp = content.split(",");
-								var category = sp[0];
-								if(category == "음식점"){
-									 detailcontent="🍔 &nbsp;"+aroundId;
-								} 
-								else if(category =="숙박")
-									{
-									 detailcontent="🏡 &nbsp;"+aroundId;
-									}
-								else if(category =="카페"){;
-									 detailcontent="☕ &nbsp;"+aroundId;
-								}
-							}
-							else detailcontent="✔"+content;
-							
-							var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
-							$("#"+wday+".detail").append(print);
-						
-						
-						
-					}
-			});
-		}
-		
-	})
-}
-
-function getsmalllist(){
-	var s="";
 	<%
-	String memId = (String)session.getAttribute("myid");
-	WishlistDao dao = new WishlistDao();
-	List<WishlistDto>list = dao.getList(memId);
+		for(WishlistDto dto : list){
+	%>
+		content = "<%=dto.getContent()%>";
+		wishday = "<%=dto.getWishday()%>";
+		title = "<%=dto.getTitle()%>";
+		subject = "<%=dto.getSubject()%>";
+		aroundId ="<%=dto.getAroundId()%>";
+
+		var wday = wishday.replaceAll("-", "");
+		var split = wishday.split("-");
+		var xmlyear = split[0];
+		var xmlmonth = split[1];
+		var xmlday = split[2];
+		
+		if(title!="0"){$("#"+wday).append("🚩"+title+"<br>");}
+		if(aroundId!="0"){
+			var sp = content.split(",");
+			var category = sp[0];
+			if(category == "음식점"){
+				 $("#"+wday).append("🍔"+aroundId+"<br>");
+			} 
+			else if(category =="숙박")
+				{
+				$("#"+wday).append("🏡"+aroundId+"<br>");
+				}
+			else if(category =="카페"){
+				$("#"+wday).append("☕"+aroundId+"<br>");
+			}
+		}
+		if(subject!="0"){
+			$("#"+wday).append("🤞"+subject+"<br>");
+		}
+		if(subject=="0"&&title=="0"&&aroundId=="0") $("#"+wday).append("✔"+content+"<br>");
+		
+		
+<%}%>
+}
+
+function getList(){
+	
+	var s="";
+	var wishday="";
+	var prewishday="0";
+	var w="";
+	$("#listModal").modal();
+	<%
 	for(WishlistDto dto : list){
 	%>
-	
 	var content = "<%=dto.getContent()%>";
-	var wishday = "<%=dto.getWishday()%>";
+	wishday = "<%=dto.getWishday()%>";
+	w = wishday;
 	var title = "<%=dto.getTitle()%>";
 	var subject = "<%=dto.getSubject()%>";
 	var aroundId ="<%=dto.getAroundId()%>";
+	if(prewishday!="0"){
+		if(prewishday == w){
+			w="";
+		}
+	}
+	
 	if(title!="0"){
-		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+title+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
 	}
 	else if(subject!="0"){
-		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+subject+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
 	}
 	else if(aroundId!="0"){
 		var split = aroundId.split(",");
 		var around = split[0];
-		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+around+"</span><br>";
-		}
-	else {
-		s +="<span style='float: left;'>"+wishday+"</span><span style='float: right'>"+content+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+around+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
 	}
+	else {
+		s +="<span style='float: left; font-weight: bold;' class='wishday'>"+w+"</span><span style='float: right'>"+content+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
+	}
+	
 	
 	
 	<%}%>
 	$("#myslist").html(s);
+	
+	
+}
+function getDetail(){
+	
+	
+	<%
+	for(WishlistDto dto : list){
+%>
+	content = "<%=dto.getContent()%>";
+	wishday = "<%=dto.getWishday()%>";
+	title = "<%=dto.getTitle()%>";
+	subject = "<%=dto.getSubject()%>";
+	aroundId ="<%=dto.getAroundId()%>";
+	spotId="<%=dto.getSpotId()%>";
+	var num ="<%=dto.getNum()%>";
+	var wday = wishday.replaceAll("-", "");
+	var split = wishday.split("-");
+	var xmlyear = split[0];
+	var xmlmonth = split[1];
+	var xmlday = split[2];
+	var detailcontent="";
+	if(title!="0"){
+
+		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
+				"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+				
+		
+	}
+	if(aroundId!="0"){
+		var sp = content.split(",");
+		var category = sp[0];
+		if(category == "음식점"){
+			 detailcontent="🍔 &nbsp;"+aroundId;
+		} 
+		else if(category =="숙박")
+			{
+			 detailcontent="🏡 &nbsp;"+aroundId;
+			}
+		else if(category =="카페"){
+			 detailcontent="☕ &nbsp;"+aroundId;
+		}
+		var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+		$("#"+wday+".detail").append(print);
+	}
+	if(subject!="0"){
+		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🤞&nbsp;<a href='index.jsp?main=shareboard/shareboardlist.jsp?num="+shareNum+"'>"+subject+"</a>"+
+				"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+	
+	}
+	if(subject=="0"&&title=="0"&&aroundId=="0") {
+		detailcontent="✔"+content;
+		var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+		$("#"+wday+".detail").append(print);
+	}
+	
+<%}%>
+
 }
 
-
-function detailList(){
-	document.getElementById("myslist").classList.toggle("show");
-}
-
-//모달에 추가하기
 
 </script>
 
 </head>
 <body>
 <%
-String sessionId = (String)session.getAttribute("myid");
+String loginok = (String)session.getAttribute("loginok");
 
-%>
+if(loginok!=null){
+
+	%>	
 
 
 <div class="mypage_main">
-<h1>마이페이지</h1>
+
 	<div class="calendar">
 	<!-- 일정추가버튼 -->
 	<div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus"></span></div>
 
 
-	<h2 style="font-weight:bold">나의 리뷰</h2>
+	<h2 style="font-weight:bold">나의 일정</h2>
+	<br>
+	<br>
+	
 	<table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
 	    <caption style="text-align:left">       
-	     <!--일정 리스트버튼-->
-			<div class="btnSchedulelist">
-				<b style="float:left;">나의 일정</b>
-				&nbsp;&nbsp;
-				<div class="slist" style="display: inline-block;">
-				<a class=" dropbtn btnSchedulelist glyphicon glyphicon-th-list" role="button" aria-expanded="false" onclick="detailList()" style="text-decoration: none; color:#424242; font-size: 16pt;" ></a>
-				  <div id="myslist" class="dropdown-content" style="width: 300px; padding:10px; background-color:#F6E9DC; border:3px solid ">
-					<!-- <a href="#home">Home</a><br>
-			    	<a href="#about">About</a><br>
-			    	<a href="#contact">Contact</a> -->
-				  </div>
-				</div>
-				
-			</div>
+	     
 	</caption>
 	    <thead>
-	    <tr ><!-- label은 마우스로 클릭을 편하게 해줌 -->
+	    <tr >
+	    	<td>
+	    		<!--일정 리스트버튼-->
+				<div class="btnSchedulelist">
+					<div class="slist" style="display: inline-block;">
+						<span class="btnSchedulelist glyphicon glyphicon-th-list" style="font-size: 16pt;" ></span>
+					</div>
+					
+				</div>
+	    	
+	    	</td>
+	    
+	    
+	    <!-- label은 마우스로 클릭을 편하게 해줌 -->
 	        <td style="background-color:white;color:black">
 	        	<label onclick="prevCalendar()" style=" font-size: 20pt;cursor:pointer;float:right" class="	glyphicon glyphicon-menu-left"></label>	
 	        </td>	
-	        <td align="center" id="tbCalendarYM" colspan="5" style="background-color: white;color:black;font-weight:bold">
+	        <td align="center" id="tbCalendarYM" colspan="3" style="background-color: white;color:black;font-weight:bold">
 	        	<b>yyyy m</b>
 	        </td>
-	        <td style="background-color:white;color:black">	
+	        <td style="background-color:white;color:black;"colspan="2">	
 	        	<label onclick="nextCalendar()" style="font-size: 20pt; cursor:pointer" class="glyphicon glyphicon-menu-right" ></label>
 	        	
 	        </td>
 	    </tr>
 	    <tr>
-	        <td class="dateTitle" ><b>일</b></td>
-	        <td class="dateTitle" ><b>월</b></td>
-	        <td class="dateTitle" ><b>화</b></td>
-	        <td class="dateTitle" ><b>수</b></td>
-	        <td class="dateTitle" ><b>목</b></td>
-	        <td class="dateTitle" ><b>금</b></td>
-	        <td class="dateTitle"><b>토</b></td>
+	        <td class="dateTitle" ><b>일&nbsp;SUN</b></td>
+	        <td class="dateTitle" ><b>월&nbsp;MON</b></td>
+	        <td class="dateTitle" ><b>화&nbsp;TUE</b></td>
+	        <td class="dateTitle" ><b>수&nbsp;WED</b></td>
+	        <td class="dateTitle" ><b>목&nbsp;THU</b></td>
+	        <td class="dateTitle" ><b>금&nbsp;FRI</b></td>
+	        <td class="dateTitle"><b>토&nbsp;SAT</b></td>
 	    </tr> 
 	    </thead>
 	    <tbody id="calendarBody">
@@ -451,21 +454,22 @@ String sessionId = (String)session.getAttribute("myid");
 	<!-- 나의 리뷰 -->
 	<div class="myreview">
 		<h2 style="font-weight:bold">나의 리뷰</h2>
-		<br><br>
-		<span style="float:right"><a href ="index.jsp?main=mypage/myreview.jsp" >전체보기</a></span>
+		
 	
 		<%
 			MemberDao mdao = new MemberDao();
-			String memNum = mdao.getMemNum(sessionId);
+			String memNum = mdao.getMemNum(memId);
 			WishlistDao wdao = new WishlistDao();
 			List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);
 			SpotlistDao sddao = new SpotlistDao();
 			%>
-			<table class="myreview table table-condensed" >
+			<table class="myreview table table-condensed" style="width:90%;margin:auto" >
+			<caption><span style="float:right"><a href ="index.jsp?main=mypage/myreview.jsp" >전체보기</a></span></caption>
 					<tr>	
-						<th>관광지</th>
-						<th>리뷰</th>
-						<th>별점</th>
+						<th style="font-size:15pt;text-align:center;">관광지</th>
+						
+						<th style="font-size:15pt;text-align:center;">리뷰</th>
+						<th style="font-size:15pt;text-align:center;">별점</th>
 					</tr>
 		<%
 		for(SpotReviewDto srdto: srlist){
@@ -475,17 +479,19 @@ String sessionId = (String)session.getAttribute("myid");
 			
 		%>	
 			<tr>
-				<td style="text-align:left">
+				<td style="text-align:center; padding-left:20px; ">
 					<a href ="index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>">
 					<span class="title"><%=title%></span>
 					</a>
 				</td>
-				<td>
+				
+				
+				<td style="text-align:left; padding-left:20px; ">
 					<a href ="index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid %>#spotReview">
 					<span class="reviewcontent"><%=srdto.getContent() %></span>
 					</a>
 				</td>
-				<td>
+				<td style="text-align:center; padding-left:20px; ">
 					<span class="reviewstar" style="color: #F0CD58">
 					<% for(int i=1; i<=5; i++){
                                 if(i<=srdto.getStar()){
@@ -504,10 +510,37 @@ String sessionId = (String)session.getAttribute("myid");
 		</table>
 	</div>
 	<hr>
-	<button type="button" class="btn btn-danger btn-sm"><b>회원탈퇴</b></button>  
-	<button type="button" class="btn btn-info btn-sm"><b>회원정보수정</b></button>
+	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'"><b>회원탈퇴</b></button>  
+	<button type="button" class="btn btn-info btn-sm" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'"><b>회원정보수정</b></button>
 
 </div>
+
+	
+<%
+} else {
+%>
+<script>
+location.href = "index.jsp";
+</script>
+<%
+} %>
+<!-- 일정 목록 모달 -->
+<div class="modal fade" id="listModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
+      <div class="modal-content" style="width:350px">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="text-align: center" >
+				<b>일정 목록</b>	
+			</h4>
+        </div>
+        <div class="modal-body" style="padding: 30px;">
+          <div id="myslist"></div>
+          
+       </div>
+      </div>
+    </div>
+  </div>
 
 	<!-- 상세일정모달 -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -516,12 +549,12 @@ String sessionId = (String)session.getAttribute("myid");
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="schedule_title" style="text-align: center" >
-			yyyy년m월 dd일	
+			<b>yyyy년m월 dd일</b>	
 			</h4>
         </div>
         <div class="modal-body">
-          <div class="detail"></div>
-          
+          <div class="detail">
+          </div>
        </div>
       </div>
     </div>
@@ -543,10 +576,10 @@ String sessionId = (String)session.getAttribute("myid");
         			<table class="modal_table table table-condensed">
         			
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
-        				<input type="hidden" name="memId" id="memId" value="<%=sessionId%>">
+        				<input type="hidden" name="memId" id="memId" value="<%=memId%>">
         				<tr>
         					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
-        					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" ></td>
+        					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" style="width:300px" ></td>
         				</tr>
         				<tr>
         					<td align="center" style="font-size: 13pt; background-color: white;border: 0px;">내용</td>
@@ -567,24 +600,13 @@ String sessionId = (String)session.getAttribute("myid");
 
 
 <script type="text/javascript">
-
-drawCalendar();
-	getData();
+	drawCalendar();
 	
-	$(document).on("click","div.btnSchedulelist",function(e){
-		 //getlist();
-		getsmalllist();
-		 if(!e.target.matches('.dropbtn')){
-			var dropdowns = document.getElementsByClassName("dropdown-content");
-			var i;
-			for(i=0;i<dropdowns.length;i++){
-				var openDropdown = dropdowns[i];
-				if(openDropdown.classList.contains('show')){
-					openDropdown.classList.remove('show');
-				}
-			}
-		}
-		
+	//getdata();
+	getData();
+
+	$(document).on("click","span.btnSchedulelist",function(e){
+		getList();		
 	})
 	
 	$(document).on("click","td.date",function(){
