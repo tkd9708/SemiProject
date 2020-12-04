@@ -24,30 +24,38 @@
 }
 
 div.container{
-	position: absolute;
-	left: 230px;
+	margin: 0 auto;
+	width: 1000px;
+	
+	
+
  }
 
 input.button {
-	position: absolute;
-	left: 700px;
+    margin: 0 auto;
+    margin-top: 0;
+    margin-left: 1170px;
+    width: 100px;
+    color: white;
 }
 
-b {
-	position: absolute;
-	left: 50px;
-}
+
 
 div.page {
-	position: absolute;
-	top: 700px;
-	left: 200px;
+	margin: 0 auto;
+	width: 200px;
+	margin-left: 450px;
+	margin-top: 300px;
+	
 }
 
 h2{
-    position: absolute;
+    margin: 0 auto;
+    width: 200px; 
+    margin-top: 150px;
+   
 	
-	left: 200px;
+	
 }
 
 th{
@@ -99,6 +107,45 @@ html, body {
   transform: translateY(-7px);
 }
 
+/*--------------------------테이블 css--------------------------------------*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+.styled-table th {
+    background-color:  #ffad33;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table  th {
+    border-bottom: 1px solid #ffad33;
+}
+
+.styled-table  th:nth-of-type(even) {
+    background-color:  #ffad33;
+}
+
+.styled-table td:last-of-type {
+    border-bottom: 1px solid #ffad33;
+}
+
+.styled-table td.active-row {
+    font-weight: bold;
+    color: black;
+}
+
 
 </style>
 </head>
@@ -147,8 +194,8 @@ html, body {
 	<h2>공지사항</h2><br><br><br><br>
 	
 	<input type="button" value="게시물등록"
-		class="button"
-		style="width: 100px; margin-left: 200px; color: white;"
+		class="button" style="color: white;"
+	
 		onclick="location.href='index.jsp?main=notice/noticeform.jsp'">
 
 	<br>
@@ -157,15 +204,14 @@ html, body {
  	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
  %>
 	<div class="container">
-		<div style="margin-left: -50px;">
-			<table class="table table-hover" style="width: 800px;">
+		<table class="styled-table" style="width: 800px;">
 			<thead>
 				<tr class="active" >
-					<th width="80">번호</th>
-					<th width="400">제 목</th>
-					<th width="80">작성자</th>
-					<th width="80">조회수</th>
-					<th width="80">작성일</th>
+					<th style="text-align: center;" width="80">#</th>
+					<th style="text-align: center;" width="400">제 목</th>
+					<th style="text-align: center;" width="80">작성자</th>
+					<th style="text-align: center;" width="80">조회수</th>
+					<th style="text-align: center;" width="120">작성일</th>
 				</tr>
 			<thead>
 				
@@ -188,24 +234,20 @@ html, body {
  	 	 	 	{%>
  	 	 	
 				<tbody>
-				<tr class="warning">
-					<td align="center"><%=no-- %></td>
-					<td><a style="color: black;"
+				<tr class="active-row">
+					<td style="text-align: center;"align="center"><%=no-- %></td>
+					<td><a style="color: black;" style="text-align: left;"
 						href="index.jsp?main=notice/noticecontent.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>&key=list">
 							<%=dto.getSubject()%></a></td>
-					<td align="center"><%=dto.getId()%></td>
-					<td align="center"><%=dto.getReadcount()%></td>
-					<td align="center"><%=sdf.format(dto.getWriteday())%></td>
+					<td style="text-align: center;"align="center"><%=dto.getId()%></td>
+					<td style="text-align: center;"align="center"><%=dto.getReadcount()%></td>
+					<td style="text-align: center;"align="center"><%=sdf.format(dto.getWriteday())%></td>
 				</tr>
 				</tbody>
 				<%}
                 %>
-
 			</table>
-			
-		
-		</div>
-	</div>
+	 </div>
 	
 
 

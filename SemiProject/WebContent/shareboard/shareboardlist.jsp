@@ -1,208 +1,217 @@
 <%@page import="data.dto.ShareBoardDto"%>
 <%@page import="data.dao.ShareBoardDao"%>
-
 <%@page import="java.util.List"%>
-
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Vector"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 <style type="text/css">
-scroll-behavior: smooth;
- 
-#cl-dashboard {
-   display: none;
+div.smain h2{
+      margin-left: 880px;
+      margin-top: 150px;
+       
 }
 
 
-div.container{
-   position: absolute;
-   top:  250px;
-   left: 230px;
-   
- }
-
-input.button {
-   position: absolute;
-   left: 700px;
+div.shareboard{
+      display: flex;
+      max-width: 1000px;
+      height: 330px;
+      margin: auto;
+      margin-top: 50px;
+      border-top: 5px solid #ffc266;
+      border-bottom: 2px solid #ffc266;
+      
 }
 
-b {
-   position: absolute;
-   left: 50px;
-   
-   text-align: center;
+div.image_star{
+     flex-basis: 400px;
+  
+     height: 100%;
+
+     
+     
+}
+
+div.content_addr{
+     flex-basis: 400px;
+     flex-wrap : wrap;
+     padding-left: 25px;
+     padding-top: 25px;
+     height: 100%;
+     font-size: 14px;
+     color: grey;
+}
+
+div.subject{
+     padding-bottom: 10px;
+
+
+}
+
+div.addr{
+     padding-bottom: 10px
+
 }
 
 
-div.page {
-   position: absolute;
-   top: 210px;
-   left: 195px;
-}
-
-h2{
-    position: absolute;
-    top: 150px;
-    left: 200px;
-}
-
- 
- div.point{
-     position: absolute;
-     top: 180px;
-     left: 550px;
+div.id_writeday{
+    display: inline-block;
+    padding-top: 120px;
     
- }
- 
-
-
-th{
-text-align: center;
-}
-
-/*----------------------------------------------버튼 css--------------------------------------------------*/
-
-html, body {
-  height: 100%;
-}
-
-.wrap {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button {
-  width: 140px;
-  height: 55px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 600;
-  color: #000;
-  background-color: #ffc34d;
-  border: none;
-  border-radius: 45px;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-  
- }
-
-  
-  
-
-
-.button:hover {
-  background-color: #ffaa00;
-
-  transform: translateY(-7px);
-}
-
-.btn_answer1{
-  position: relative;
-  top: 80px;
-  left: 7px;
-
-}
-
-.btn_answer2{
-  position: relative;
-  top: 90px;
-  left: 0px;
 
 }
 
 
-
-
-/*----------------------------------------------테이블 css--------------------------------------------------*/
-
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+div.userimg img{
+    width: 350px;
+    margin-left: 25px;
+    padding-top: 10px;
+    height: 250px;
+    
     
 }
 
-.styled-table thead tr {
-    background-color:  #ffad33;
-    color: white;
-    text-align: left;
-    border-radius: 5%;
+div.userstar{
+    margin-top: 15px;
+    margin-left: 25px;
+    font-size: 20px;
+} 
+
+
+div.likes_heart{
     
+     display: flex;
+     flex: 1;
+     flex-direction: column;
+     padding-right: 20px;
+     height: 100%;
+
+     float: right;
+
+
 }
 
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
+div.likes{
+    margin-top: 20px;
+    margin-left: 100px;
+    font-size: 20px;
+    
+  
+
+}
+
+div.heart{
+    margin-top: 80px;
+    
+    margin-left: 100px;
+
+
+}
+
+/*-------------------댓글창-------------------*/
+
+div.sreview_rere{
+ 
+   margin-top: 10px;
+   margin-left: 460px;
+   margin-bottom: 20px;
+   padding-bottom: 20px;
+   border-bottom: 1px solid #ffc266;
+   max-width: 1000px;
+ 
+
+}
+
+
+div.sreview_list{
+ 
+   margin-top: 20px;
+   margin-left: 460px;
+   margin-bottom: 20px;
+   padding-bottom: 20px;
+   border-bottom: 1px solid #ffc266;
+   max-width: 1000px;
+ 
+
+}
+
+
+
+
+div.sreview{
+ 
+   margin-top: 20px;
+   margin-left: 460px;
+   margin-bottom: 20px;
+   padding-bottom: 40px;
+   border-bottom: 1px solid #ffc266;
+   max-width: 1000px;
+ 
+
+}
+
    
-}
+ div.sreview_id  {
+     padding-bottom: 10px;
+ }
+ 
+ 
+div.sreview_memo{
+    
+    display: block;
+    padding-bottom: 10px;
 
- tbody tr {
-    border-bottom: 1px solid #ffad33;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color:  #ffad33;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 1px solid #ffad33;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
+ 
 }
 
 
-.trtr{
-  border-bottom: 1px solid white;
+
+
+
+
+
+input.form-control{
+ 
+    display: block;
+    padding-bottom: 10px;
+  
 }
 
 
-span.likes{
-   font-size: 15px;
-   cursor: pointer;
+div.page{
+   margin-left: 880px;
 }
 
-.btn_cancel{
-   background: #8a8a8a;
-   color: white;
+span.memo_plus{
+    float: right;
+    cursor: pointer;
+}
 
-}
-/*---------------------------리뷰 css--------------------------*/
-.review{
-   background: url('image/re.png') no-repeat  70px 50px;
-   background-size: 35px;
-   
-}
+
+
+
+
+
 
 /* -------------------하트 css ---------------------------------------*/
 .heart {
-    position: absolute;
-    margin: auto;
-     top: 0; 
+    top: 0; 
     right: 0;
     bottom: 0;
-     left: 0; 
+    left: 0; 
     background-color: #babbbc;
     height: 30px;
     width: 30px;
@@ -237,6 +246,7 @@ span.likes{
       transform: scale(1) rotate(-45deg);
       }
     }
+    
     .color
     {
       background-color: #ff2033;
@@ -254,40 +264,255 @@ span.likes{
     {
       background-color: #ff2033;
     }
+    
+    
+/*----------------------------------------------버튼 css--------------------------------------------------*/
 
-/* -------------------별 css ---------------------------------------*/
+div.review_enter_btn{
+    float: right;
+}
 
-span.star {
-	font-size: 15pt; 
-	color: #F0CD58;
-	cursor: pointer;
-} 
+/*댓글(),댓글쓰기 버튼 css*/
+div.review_btn{
+   margin-bottom: 22px;
+   
+   margin-left: 40px;
+
+ 
+
+}
+
+/*수정 삭제 버튼 */
+
+div.update_del_btn{
+    margin-left: 60px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+}
+
+/*맛집공유 버튼 css*/
+ div.point{
+  margin-left: 1300px;
+  padding-top: 50px;
+     
+     
+    
+ }
+
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 140px;
+  height: 55px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+ }
+ 
+ .button1 {
+  width: 66px;
+  height: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  
+ }
+ 
+  .button2 {
+  width: 66px;
+  height: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  
+ }
+
+  
+  
+
+
+.button:hover {
+  background-color: #ffaa00;
+
+  transform: translateY(-7px);
+}
+
+.button1:hover {
+  background-color: #ffaa00;
+
+  transform: translateY(-7px);
+}
+
+.button2:hover {
+  background-color: #ffaa00;
+
+  transform: translateY(-7px);
+}
 
 
 
 
 
+
+
+
+
+   /*--------------------별점 css--------------------------------*/
+ div.stars{
+  float: left;
+
+  
+
+ 
+ }
+ 
+ 
+
+.stars{
+    display: flex;
+    flex-wrap: wrap;
+
+    flex-direction: row-reverse;
+    justify-content: center;
+
+}
+
+.stars__star-icon{
+    stroke:#EFCE4A;
+    stroke-width: 2px;
+    fill: transparent;
+    transition: .1s all;
+}
+
+.stars__star{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.stars__checkbox{
+    position: absolute;
+    top: -9999px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.stars__star:hover > .stars__star-icon{
+    fill: #EFCE4A;
+}
+
+.stars__star:hover ~ .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
+
+.stars__checkbox:checked + .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
+
+.stars__checkbox:checked ~ .stars__star > .stars__star-icon {
+    fill: #EFCE4A;
+}
+
+
+/*modal 창 열림 css*/
+
+div.modal-backdrop{
+z-index:0;}
+div.modal-content{
+margin-top:200px;
+z-index:1111;
+}
+
+    
+    
 </style>
+<%
+String id=(String)session.getAttribute("myid");
+
+String loginok=(String)session.getAttribute("loginok");
+
+
+
+%>
+
 <script type="text/javascript">
-//별 증가
+
 $(function(){
 	
-	 //별점
-	 $("#starBox span").on("click",function(){
-			var idx = $(this).index()+1;
-			$(".star").removeClass("glyphicon glyphicon-star-empty");
-					
-			for(var i=0; i<=idx; i++){
-				$(".star").eq(i).addClass("glyphicon glyphicon-star");
-			}
-			for(var i=idx; i<=5; i++){
-				$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
-			}
-			$("#spotReviewStar").val(idx);	// db에 저장할 값 input hidden에 값 넣어놓기
-		});
-   //좋아요 증가
-   
-   $(document).on("click",".likes",function(){
+   //리뷰 별점
+   $(".stars__checkbox").on("click", function(){
+        var idx = $(this).index()/2;
+        switch (idx) {
+        case 0:
+           idx="5";
+           break;
+        case 1:
+           idx="4";
+           break;
+        case 2:
+           idx="3";
+           break;
+        case 3:
+           idx="2";
+           break;
+        case 4:
+           idx="1";
+           break;
+        default:
+           break;
+        }
+        //alert(idx);
+        $("#sharestar").val(idx);   
+     });
+      
+	 
+	 
+	 //좋아요 증가
+     $(document).on("click",".likes",function(){
          var num=$(this).attr("num");
          //alert(likes);
          $.ajax({
@@ -301,29 +526,156 @@ $(function(){
          });
       });
   
-   
-   $(document).on("click",".btn_answer2",function(){
-	     var state = $("#review").css("display");
-	     if(state=="none"){
-	        $("#review").show();
-	     }else{
-	        $("#review").hide();
-	     }
-	   });
+
      
 
+
     
-    //하트 
-  $("div.heart").click(function(){
-		$(".heart").addClass('color');
-	});
+    
+    //하트 버튼 클릭시 스케줄 모달
+    
+    $("div.heart").click(function(){
+      //alert("ggg");
+    
+     var num= $(this).attr("num");
+     var subject=$(this).attr("subject");
+     var addr=$(this).attr("addr");
+         $(this).addClass('color');
+         $("#sharemodal").modal();
+         
+         var s = "";
+         
+         s+="<h2 id='modalnum' num='"+num+"'>"+num+"</h2>";
+         s+="<h2>"+subject+"</h2>";
+         s+="<h2>"+addr+"</h2>";
+         
+         
+         $("#Info").html(s);
+         
+         
+      });
+    
+   //하트 버튼 클릭 스케줄 모달
+    $(document).on("click","#aoCal",function(){
+        if(<%=loginok!=null%>){
+           var num=$("#modalnum").attr("num");
+           $.ajax({
+             type:"post",
+             dataType:"html",
+             url:"shareboard/insertshareboard.jsp",
+             data:{"num":num,"wishday":$("#wishday").val(),"myid":"<%=id%>"},
+             success:function(data){
+                $("#sharemodal").modal("hide");
+             }
+             
+           });
+        }else{
+           alert("로그인이 필요합니다");
+        }
+        
+     });
+
+
+    
+    
+    
+    //댓글 버튼
+    $(".sreview").hide();
+    $(".sreview_list").hide();
+    $(".sreview_rere").hide();
+
+    
+    $(".button1").click(function(){
+    	//alert($(this).parent().parent().parent().next().html());
+
+    	$(this).parent().parent().parent().next().toggle();
+    	
+      });
+    
+    $(".button2").click(function(){
+    	//alert($(this).parent().parent().parent().next().html());
+
+    	$(this).parent().parent().parent().next().next().toggle();
+    	
+      });
+    
+    $(".memo_plus").click(function(){
+    	//alert($(this).parent().parent().parent().next().html());
+
+    	$(this).parent().parent().next().toggle();
+    	
+      });
+      
+    
+   /*  $(".button2").click(function(){
+    	//alert($(this).parent().parent().parent().next().find(".sreview").html());
+    
+    	$(this).parent().parent().parent().next().find(".sreview_list").toggle();
+    	
+      });
+     */
+     
+     
+     
+    //댓글 추가
+    $(document).on("click",".btn_submit",function(){
+        var num=$(this).attr("num");
+        var id=$(this).attr("id1");          
+        var content=$("#content").val();
+          alert(content);
+         $.ajax({
+          type:"get",
+          dataType:"html",
+          url:"shareboard/insertshareboardanswer.jsp",
+          data:{"num":num,"id":id,"content":content},
+          success:function(data){
+             $("#content").val("");
+          }
+       });  
+       
+     });
+     
+     
+     
+     //게시글 수정(modal)
+     $(document).on("click",".btn_update",function(){
+        var writeday=$(this).attr("writeday");
+        var content=$(this).attr("content");
+        var photo=$(this).attr("photo");
+        var star=$(this).attr("star");
+        //alert(별);
+        $("#shareupdate").modal();
+        var s="";
+        s="추천맛집:&nbsp;<input type='text'><br><br>"
+        s+="맛집주소:&nbsp;<input type='text'><br><br>"
+        s+="이미지:&nbsp;<input type='file'><br>"
+        s+="내용:&nbsp;<input type='text' style='width:100px;height:200px;'>"
+   		
+
+ 
+        
+        
+        
+        $("#Infoupdate").html(s);
+        
+         
+     });
+    
+
+
+   
+    
+
+
+    
 
 
     
 }); //function close
 
 </script>
-</head>
+
+
 <%
    ShareBoardDao db=new ShareBoardDao();
    //페이징 처리에 필요한 변수들   
@@ -364,132 +716,327 @@ $(function(){
    List<ShareBoardDto> list=db.getList(startNum,endNum);
    //각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
    no=totalCount-((currentPage-1)*perPage);
+   
+   
+   
+   
 %>
-<body>
-   
-   <div class="position" >
-      <h2 >맛집 공유 게시판</h2><br><br><br><br>
-   
-   <div class="point">
-   <input type="button" value="맛집공유" style="color: white;"
-      class="button" onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
+
+
+ 
+  <!--게시판 제목 -->
+    <div class="smain">
+       <h2 >맛집 공유 게시판</h2>
     </div>
-   <br>
-   <br>
-   <%
-    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
- %>
-   <div class="container">
-     <div style="margin-left: -50px;" class="review1">
-       <table class="styled-table" >
-         <thead>
-            <tr class="warning" >
-               <th width="80">ID</th>
-               <th width="180">PHOTO</th>
-               <th width="120">추천 맛집</th>
-               <th width="150">리뷰</th>
-               <th width="70">별점</th>
-               <th width="70">좋아요</th>
-               <th width="70">찜하기</th>
-               <th width="100">작성일</th>
-            </tr>
-         <thead>
-            
-            
-            <%
-       if(totalCount==0)
-        {%>
-
-            <tr align="center" height="400">
-               <td colspan="8"><b>공유된 맛집이 없습니다</b></td>
-            </tr>
-
-       <%}
-              
-        %>
-
-
-            <%
-               for(ShareBoardDto dto:list)
-                {%>
-            
-            <tbody>
-            <tr class="active-row">
-               <td style="vertical-align: middle;"
-                  href="index.jsp?main=shareboard/shareboardcontent.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>&key=list">
-                     <%=dto.getId()%></td>
-               <td style="text-align: center;">
-                <%
-            if(!dto.getPhoto().equals("no"))
-            {%>
-            <img src="shareboardsave/<%=dto.getPhoto() %>"
-               style="width: 320px; height: 230px;"
-               hspace="20" align="bottom">
-            <%}
-            %>
-            <br><br><%=dto.getAddr()%></td> 
-               <td style="vertical-align: middle;"><%=dto.getSubject()%></td>
-               <td style="vertical-align: middle;"><%=dto.getContent()%></td>
-               <td style="text-align: center; line-height: 200px;">
-               <span style="color: #F0CD58; font-size: 18px;">
-               <%
-              for(int i=1; i<=5; i++){
-                 if(i<=Integer.parseInt(dto.getStar())){
-                    %>★<%
-                 }
-                 else {
-                    %>☆<%
-                 }
-                 }
-               %>
-               </span>
-               </td>
-               <td align="center"><span class="likes glyphicon glyphicon-thumbs-up"  num=<%=dto.getNum()%>>
-               </span><%=dto.getLikes()%></td>
-               
-               <td style="text-align: center; line-height: 200px;"><div style="position: relative;"><div class="heart"></div></div></td>
-            
-               <td style="text-align: center;vertical-align: center;"><%=sdf.format(dto.getWriteday())%><br>
-               <button type="button" class="btn_answer1 btn btn-warning">댓글(0)</button>
-               <button type="button" class="btn_answer2 btn btn-warning">댓글쓰기</button></td>
-            </tr>
-               
-  
-            </tbody>
-     
-            
-            <tr style="background-color: white;" id="review">
-              <td colspan="1">ID:&nbsp;<%=dto.getId() %></td>
-              <td colspan="7">
-               맛 평가
-              <div id="starBox" style="display: inline-block;">
-	          <span class="glyphicon glyphicon-star-empty star"></span>
-	          <span class="glyphicon glyphicon-star-empty star"></span>
-	          <span class="glyphicon glyphicon-star-empty star"></span>
-	          <span class="glyphicon glyphicon-star-empty star"></span>
-	          <span class="glyphicon glyphicon-star-empty star"></span>
-              </div>
-                <input class="form-control" placeholder="리뷰를 입력하세요"></input><br>
-                <button type="button" class="btn btn-warning" 
-                >리뷰</button>
-                <button type="button" class="btn_cancel btn btn-default">취소</button>
-              </td>
-            </tr>
-          
-            <%}
-                %>
-                   
-
-         </table>
-         
-  
-      </div>
+  <!-- 제목 close-->  
+ 
+ 
+   <!-- 맛집 공유 버튼  -->
+   <div class="point">
+      <input type="button" value="맛집공유" style="color: white;"class="button" 
+      onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
    </div>
+   <!-- 맛집 공유 버튼 close -->
+ 
+
+<!-- 전체 div -->
+<div class="main">
+    
+    <%
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh-mm");
    
+    for(ShareBoardDto dto : list){
+	%>   
 
 
-    <!-- 페이징처리 -->
-     <div style="width: 700px;" class=page >
+	   	
+	<!-- shardboard 부분 -->
+  	<div class="shareboard">
+                 
+        
+        
+        <!-- 이미지+stat 묶음 div -->
+        <div class="image_star">
+              
+              <!-- 이미지부분 -->
+              <div class="userimg">
+                  <div>
+                  <%
+                  if(!dto.getPhoto().equals("no"))
+                  {%>
+                  <img src="shareboardsave/<%=dto.getPhoto() %>">
+                  <%}
+                  %>
+                 </div>
+             </div><!-- 이미지부분 close -->
+                     
+                       
+             <!-- 별 -->
+             <div class="userstar">
+                  <div class="starcount">맛집점수:
+                     <span style="color: #F0CD58; font-size: 18px;">
+                                 <%
+                                 for(int i=1; i<=5; i++){
+                                 if(i<=Integer.parseInt(dto.getStar())){
+                                 %>★<%
+                                 }
+                                 else {
+                                 %>☆<%
+                                 }
+                                 }
+                                 %>
+                          
+                     </span>
+                  </div>
+            </div>
+            <!-- 별 close-->
+       </div>
+       <!-- 이미지+stat 묶음 div close -->      
+    
+            
+            
+         
+                     
+                     
+                   
+      <!-- 주소 내용  -->
+      <div class="content_addr">
+                       
+           <div class="subject_addr_content">
+            <div class="subject"><%=dto.getSubject()%></div>
+            <br>
+            <div class="addr">주소:<%=dto.getAddr()%></div>
+            <br>
+            <div class="contnet"><%=dto.getContent()%></div>
+           </div>
+        
+            
+          <div class="id_writeday">
+            <div class="userid">ID:<%=dto.getId()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일:&nbsp;<%=sdf.format(dto.getWriteday())%></div>
+            <%-- <div class="userwriteday"><%=sdf.format(dto.getWriteday())%></div> --%>
+          </div>
+              
+      </div>
+      <!-- 주소 내용 close -->
+                     
+                     
+                 
+                 
+    
+     <!-- 좋아요 찜하기(하트) 댓글버튼,게시글 수정 삭제 -->
+    <div class="likes_heart">
+                  
+         <!-- 좋아요 -->
+         <div class="likes">
+            <span class="likes glyphicon glyphicon-thumbs-up"  num=<%=dto.getNum()%>>
+            </span><%=dto.getLikes()%>
+         </div>
+         <!-- 좋아요 close -->
+                  
+         <!-- 찜하기(하트) -->    
+         <div class="heart" num="<%=dto.getNum() %>" subject="<%=dto.getSubject() %>"
+                                 addr="<%=dto.getAddr() %>"></div>
+         <!-- 찜하기(하트) close -->       
+         
+          <!--게시글 수정 삭제 버튼-->
+         <div class="update_del_btn">
+             <button type="button" class="btn_update btn btn-info" style="color: white;"
+             writeday="<%=sdf.format(dto.getWriteday()) %>"
+             content="<%=dto.getContent()%>"  photo="<%=dto.getPhoto()%>"
+             star="<%=dto.getStar()%>">수정</button>
+             <button type="button" class="btn_delete btn btn-success" style="color: white;">삭제</button>
+         </div>
+         <!-- 게시글 수정 삭제 버튼 close -->
+                
+         
+         
+         
+         <!-- 댓글버튼-->
+         <div class="review_btn">
+             <button type="button" class="button2" style="color: white;">댓글(0)</button>
+             <button type="button" class="button1" style="color: white;">댓글쓰기</button>
+         </div>
+         <!-- 댓글버튼 close -->
+	   	          
+	</div>
+    <!-- 좋아요 찜하기(하트) 댓글버튼,게시글 수정 삭제 close--> 
+	   	
+  </div>
+  <!-- shareboard close -->
+
+ 	    
+
+
+
+<!-- 댓글 전체 -->
+
+     <!-- 댓글 입력창-->
+     <div class="sreview" >
+ 	       
+ 	    <div class="sreview_id">ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>
+ 	     
+ 	     
+ 	    <div class="sreview_memo"> 
+ 	       <input class="form-control" placeholder="리뷰를 입력하세요" style="width: 800px" id="content" >
+ 	          <div class="review_enter_btn">
+                 <button type="button" class="btn_submit btn btn-warning"
+                 num="<%=dto.getNum() %>" id="<%=dto.getId() %>" subject=<%=dto.getSubject() %>
+                 addr=<%=dto.getAddr() %> photo=<%=dto.getPhoto() %> likes=<%=dto.getLikes() %> 
+                 star="<%=dto.getStar() %> " content="<%=dto.getContent()%>" id1="<%=id%>">등록</button>
+              </div>
+ 	     </div> 
+ 	    
+ 	    
+ 	    <div class="stars"> 
+ 	    <input class="stars__checkbox" type="radio" id="first-star" name="star">
+        <label class="stars__star" for="first-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="second-star" name="star">
+        <label class="stars__star" for="second-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="third-star" name="star">
+        <label class="stars__star" for="third-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="fourth-star" name="star">
+        <label class="stars__star" for="fourth-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        <input class="stars__checkbox" type="radio" id="fifth-star" name="star">
+        <label class="stars__star" for="fifth-star">
+            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
+                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
+                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
+            </svg>
+        </label>
+        평점:&nbsp;
+       </div>
+ 	    
+ 	 </div>
+   <!-- 댓글 입력창 close-->
+     
+      <!-- 댓글목록-->
+     <div class="sreview_list">
+ 	     <div>
+ 	     
+ 	     <%
+ 	     for(ShareBoardDto sdto : list){
+ 	    	 %>
+ 	         ID:&nbsp;<%=sdto.getId()%>
+ 	         <br>
+ 	         <%=sdto.getStar()%>
+ 	         <br>
+ 	         <%=sdto.getContent()%> 
+ 	       <span class="memo_plus glyphicon glyphicon-plus" ></span>
+ 	    	 
+ 	    	 <%
+ 	     }
+ 	     %>
+ 	       
+ 	     
+ 	     </div>
+     </div>
+     
+     <!-- 댓글창 close-->
+     
+     <!-- 댓글 댓글 입력창-->
+     <div class="sreview_rere">
+     
+        <div><img src="image/review.png" style="width: 30px;height: 30px;"></div>
+ 	     
+ 	     
+ 	    <div class="sreview_memo"> <input class="form-control" placeholder="댓글을 입력하세요" style="width: 800px"> </div> 
+ 	   
+     </div>
+     <!-- 댓글 댓글 입력창 close--> 
+
+
+
+  <%
+	   
+	   
+   }
+    
+    
+ %>
+ <!-- 하트 클릭->스케줄 일정 추가 modal -->
+   <div class="modal fade" id="sharemodal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">일정 추가</h4>
+        </div>
+        <div class="modal-body">
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="Info"></div>
+              <br>
+              
+                <span class="glyphicon glyphicon-calendar" style="color: #aaa"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" id="wishday">
+           </div>
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-warning" id="aoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+    <!-- 게시판 원글 수정 -->
+  <div class="modal fade" id="shareupdate" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">공유맛집추천 수정</h4>
+        </div>
+        <div class="modal-body">
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="Infoupdate"></div>
+              <br>
+              
+                
+                
+           </div>
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-warning" id="aoCal">추가</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+ 
+ 
+<!-- 페이징처리 -->
+  <div style="width: 700px;" class=page >
     <ul class="pagination">
     <!-- 이전(첫블럭이 아니면 보이게하기) -->
    <%
@@ -522,8 +1069,13 @@ $(function(){
     <%}
     %>    
     </ul>   
-   </div>
-   </div>
+  </div>
+<!-- 페이징처리 close-->
+
+</div>
+<!-- 전체 div close -->
+
+
 </body>
 
 </html>

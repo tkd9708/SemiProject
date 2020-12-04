@@ -6,12 +6,26 @@
 <title>Insert title here</title>
 <style type="text/css">
    div.noticeform{
-      position: absolute;
-      left: 250px;
+      margin: 0 auto;
+      width: 1000px;
+      margin-top: 100px;
+      
+
+  
+      
         
    }
    
-   th{
+   div.h2point{
+      margin: 0 auto;
+      width: 200px;
+      margin-top: 100px;
+      margin-left: 800px;
+    
+   
+   }
+   
+   th,td{
    text-align: center;
    
    }
@@ -66,6 +80,45 @@ div.btn{
    position: absolute;
    left: 300px;
 }
+
+/*--------------------------테이블 css--------------------------------------*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+.styled-table th {
+    background-color:  #ffad33;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table  th {
+    border-bottom: 1px solid white;
+}
+
+.styled-table  th:nth-of-type(even) {
+    background-color:  #ffad33;
+}
+
+.styled-table td:last-of-type {
+    border-bottom: 1px solid #ffad33;
+}
+
+.styled-table td.active-row {
+    font-weight: bold;
+    color: black;
+}
    
    
  
@@ -74,24 +127,30 @@ div.btn{
 </style>
 <script src="<%=request.getContextPath()%>/noticesmarteditor/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=request.getContextPath()%>/noticesmarteditor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script></head>
+
+
 <body>
+
+<div class="h2point">
+<h2>공지사항 작성</h2>
+</div>
+
 <div class="noticeform">
 <fieldset style="width: 800px;">
-   <legend>공지사항 작성</legend>
    <form action="notice/noticeaction.jsp"
      method="post" enctype="multipart/form-data"
       name="f">
-    <table class="table table-bordered">
+    <table class="styled-table">
        <tr >
-          <th width="100" bgcolor="#ffc34d">작성자</th>
+          <th style="text-align: center;">작성자</th>
           <td>
              <input type="text" class="form-control"
-               style="width: 120px;" required="required"
-               name="id" placeholder="작정자">                  
+               style="width: 200px;" required="required"
+               name="id" placeholder="작성자">                  
           </td>
        </tr >
        <tr >
-          <th width="100" bgcolor="#ffc34d">제 목</th>
+          <th style="text-align: center;">제 목</th>
           <td>
              <input type="text" class="form-control"
                style="width: 300px;" required="required"
@@ -100,7 +159,7 @@ div.btn{
        </tr>
        
        <tr >
-          <th width="100" bgcolor="#ffc34d" align="center">내용</th>
+          <th style="text-align: center; vertical-align: middle;">내용</th>
           <td>
             <textarea class="form-control"              
               style="width:100%; height:300px; display:none;"
@@ -125,6 +184,8 @@ div.btn{
   </fieldset>
 
 </div>
+
+
 <script type="text/javascript">
 var oEditors = [];
 

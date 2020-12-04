@@ -11,44 +11,35 @@
 <style type="text/css">
 scroll-behavior: smooth;
 
-
+   div.subject{
+      margin-top: 100px;
+   }
+   
    th.td{
       padding: 6px;
       text-align: center;
    
    }
-   .usersubmit{
-      position: relative;
-      left: 150px;
-      margin-top:50px;
-      width: 100px;
-      height: 50px;
-      border-color: #f8c990;
-      background: #ff9933;
-      color: white;
-   }
-   .btn_cancel{
-      position: relative;
-      left: 200px;
-      margin-top:50px;
-      width: 100px;
-      height: 50px;
-      border-color: #e5e5e5;
-      background: white;
-      
-   }
-
    
    div.shareboardform{
-      position: absolute;
-      left: 250px;
+      margin-left: 600px;
+      margin-top: 150px;
+      
    }
+   
+  h2{
+      width:150px;
+      margin-left: 320px;
+  }
+  
+  div.share_btn{
+     margin-left: 250px;
+  }
+
    
    /*--------------------별점 css--------------------------------*/
  div.stars{
-   position: absolute;
-   top: 554px;
-   left: 100px;
+   float: left;
  
  }
  
@@ -133,29 +124,15 @@ html, body {
   
  }
  
- div.point{
-  position: relative;
-  top: -30px;
-  right: -830px;
- }
-  
-
-
 .button:hover {
   background-color: #ffaa00;
 
   transform: translateY(-7px);
 }
 
-div.btn{
-   position: absolute;
-   left: 300px;
-}
 
-div.btn_point{
-    position: absolute;
-    top: 630px;
-}
+
+
 
 /*--------------------------테이블 css--------------------------------------*/
 .styled-table {
@@ -206,19 +183,19 @@ $(function(){
         var idx = $(this).index()/2;
         switch (idx) {
         case 0:
-           idx=5;
+           idx="5";
            break;
         case 1:
-           idx=4;
+           idx="4";
            break;
         case 2:
-           idx=3;
+           idx="3";
            break;
         case 3:
-           idx=2;
+           idx="2";
            break;
         case 4:
-           idx=1;
+           idx="1";
            break;
         default:
            break;
@@ -226,14 +203,24 @@ $(function(){
         //alert(idx);
         $("#sharestar").val(idx);   
      });
-   
+ 
 }); //function close
 </script>
 </head>
 <body>
+<%
+   String id=(String)session.getAttribute("myid");
+   
+   String loginok=(String)session.getAttribute("loginok");
+   if(loginok.equals("success")){%>
+
+
+
+
+
 <div class="shareboardform">
-<fieldset style="width: 800px;">
-   <h2>공유하기</h2>
+<h2>공유하기</h2>
+<fieldset style="width: 800px;;">
    <form action="shareboard/shareboardaction.jsp" method="post" enctype="multipart/form-data">
    <table class="styled-table">
          <tr>
@@ -319,19 +306,21 @@ $(function(){
         </div>
         </td> 
        </tr>  
-        
-        
-     
-      <div class="btn_point">
+       
+     </table> 
+      
+      
+      <div class="share_btn">
              <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
                
              <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
-               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
-                     
+               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">      
       </div>
-     </table> 
     </form>
    </fieldset>
+       <%}else {%>
+       <b>먼저 로그인을 해주세요</b>
+    <%}%>
   </div>
 </body>
 </html>
