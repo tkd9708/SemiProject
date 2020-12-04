@@ -1,8 +1,10 @@
 <%@page import="data.dto.SpotlistDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.SpotlistDao"%>
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,34 +18,6 @@ letter-spacing: 2px;
 
 }
 
-	#areaTitle {
-		margin-left: 20px;
-		margin-bottom: 50px;
-	}
-	
-	div.detail {
-		cursor:pointer;
-		float: left;
-		width: 330px;
-		height: 540px;
-		text-align: center;
-		margin-bottom: 50px;
-		margin-right: 70px;
-		box-shadow: 2px 2px 2px 2px #ddd;
-	}
-	
-	div#spotList {
-		overflow: hidden;
-		margin-left: 200px;
-		margin-top: 180px;
-		margin-right: 130px;
-	}
-	
-	div.footer {
-    	text-align: center;
-	}
-
-}
 
    #areaTitle {
       margin-left: 20px;
@@ -56,9 +30,10 @@ letter-spacing: 2px;
       width: 330px;
       height: 540px;
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 80px;
       margin-right: 70px;
-      box-shadow: 2px 2px 2px 2px #ddd;
+      /* box-shadow: 2px 2px 2px 2px #ddd; */
+      border: 1px solid #eee;
    }
    
    div#spotList {
@@ -306,16 +281,16 @@ document.addEventListener('DOMContentLoaded', function(){
     <!-- 슬라이드 끝 -->
    <div id="spotList">
       <br><br>
-      <b style="font-size: 20pt;"><%=area %>의 명소 </b>
+      <b style="font-size: 30pt;"><%=area %>의 명소 </b>
       <select id="spotListSelect" style="float: right; margin-right: 70px;">
          <option value="평점" selected="selected">평점순</option>
          <option value="좋아요">좋아요순</option>
          <option value="이름">이름순</option>
       </select>
-      <br><br>
+      <br><br><br>
       <%
         for (SpotlistDto dto : list){
-
+			String title = URLDecoder.decode(dto.getTitle(), "utf-8");
         	%>
         	<div class="detail">
         	<div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
@@ -332,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function(){
         		}
         		%>
         		<div style="width: 330px; margin-top: 20px;">
-        			<b style="font-size: 13pt;"><%=dto.getTitle() %></b>
+        			<b style="font-size: 13pt;"><%=title %></b>
         		</div>
         		<br>
         		<div style="color: #F0CD58; font-size: 18px;">
@@ -372,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function(){
         		</div>
         		</div><!-- gotodetail 끝 -->
         		<br><br>
-        		<table class="table table-bordered" style="table-layout: fixed">
+        		<table class="table table-bordered" style="table-layout: fixed; border: 1px solid #eee; width: 100%;">
         			<tr height="70px;">
         				<td style="vertical-align: middle;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
         					<span class="glyphicon glyphicon-thumbs-up"></span><br>
@@ -394,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		<%
 			if(startPage > 1){
 				%>
-				<li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=startPage - 1%>&select=<%=select%>">이전</a></li>
+				<li><a style="color:green;" href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=startPage - 1%>&select=<%=select%>">◀</a></li>
 				<%
 			}	
 		
@@ -402,23 +377,16 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 이동할 페이지 추가
 				String url = "index.jsp?main=spot/spotlist.jsp?area=" + area + "&pageNum=" + i + "&select=" + select;
 				
-				if(i==currentPage){
-					%>
-					<li class="active"><a href="<%=url%>"><%=i %></a></li>
-					<%
-				}
-				else {
-					%>
-					<li><a href="<%=url%>"><%=i %></a></li>
-					<%
-				}
+				%>
+				<li><a style="color:<%=currentPage==i?"orange":"green"%>" href="<%=url%>"><%=i %></a></li>
+				<%
 				
 			}
 		
 			// 다음 버튼
 			if(endPage < totalPage){
 				%>
-				<li><a href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=endPage + 1%>&select=<%=select%>">다음</a></li>
+				<li><a style="color:green;" href="index.jsp?main=spot/spotlist.jsp?area=<%=area %>&pageNum=<%=endPage + 1%>&select=<%=select%>">▶</a></li>
 				<%
 			}
 			%>
