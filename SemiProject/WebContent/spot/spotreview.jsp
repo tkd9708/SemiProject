@@ -300,7 +300,7 @@
 								</td>
 								<td valign="top" style="width:10%;">
 									<%
-									if(myid.equals(mdao.getData(rdto.getMemNum()).getId())){
+									if(myid.equals(mdao.getDataByNum(rdto.getMemNum()).getId())){
 										%>
 										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-pencil upReview"
 											num="<%=rdto.getNum()%>"></span>
@@ -315,7 +315,7 @@
 						
 						<br><br>
 						<div style="float: right;">
-							<b><%=mdao.getData(rdto.getMemNum()).getId() %></b> | <%=sdf.format(rdto.getWriteday())%>
+							<b><%=mdao.getDataByNum(rdto.getMemNum()).getId() %></b> | <%=sdf.format(rdto.getWriteday())%>
 							  | <span style="cursor:pointer;" num="<%=rdto.getNum()%>" class="review_likes">&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>추천&nbsp;<%=rdto.getLikes() %></span>
 						</div>
 					</div>

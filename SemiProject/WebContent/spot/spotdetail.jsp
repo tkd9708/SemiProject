@@ -308,7 +308,7 @@ z-index:1111;
 	String memNum = mdao.getMemNum(myid);
 	
 	WishlistDao wdao = new WishlistDao();
-	boolean spotSearch = wdao.isSpotSearch(contentsid);
+	boolean spotSearch = wdao.isSpotSearch(contentsid, myid);
 	
 %>
 <script type="text/javascript">
@@ -348,7 +348,7 @@ function InitializeM()
 
 	$(function(){
 		
-		if(<%=spotSearch%>){
+		if(<%=spotSearch%>  && <%=loginok != null%>){
 			$(".sd_heart").addClass('color');
 		} 
 		

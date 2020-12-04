@@ -337,6 +337,7 @@ function getDetail(){
 	title = "<%=dto.getTitle()%>";
 	subject = "<%=dto.getSubject()%>";
 	aroundId ="<%=dto.getAroundId()%>";
+	spotId="<%=dto.getSpotId()%>";
 	var num ="<%=dto.getNum()%>";
 	var wday = wishday.replaceAll("-", "");
 	var split = wishday.split("-");

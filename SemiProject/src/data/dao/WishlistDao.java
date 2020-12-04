@@ -63,18 +63,19 @@ public class WishlistDao {
 	}
 
 	// ���� ������� Ȯ��
-	public boolean isSpotSearch(String contentsid) {
+	public boolean isSpotSearch(String contentsid, String id) {
 		boolean find = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from wishlist where spotId = ?";
+		String sql = "select * from wishlist where spotId = ? and memId = ?";
 		conn = db.getConnection();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, contentsid);
+			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {

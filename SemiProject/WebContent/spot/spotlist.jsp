@@ -13,8 +13,7 @@
 
 <style type="text/css">
 body {
-font-family: NanumBarunpen;
-letter-spacing: 2px;
+font-family: SCDream5;
 
 }
 
