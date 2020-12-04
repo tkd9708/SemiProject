@@ -183,13 +183,13 @@
 </script>
 </head>
 <body>
-<h2><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Review</h2>
+<h1 style="font-weight: 900;"><b>Review&nbsp;&nbsp;</b><span class="glyphicon glyphicon-pencil"></span></h1>
 		<br><br>
 		<form id="newSpotReview" action="spot/insertspotreview.jsp">
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 20%;">
-						<b style="margin-left: 60px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<b style="margin-left: 20px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<br><br>
 			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
@@ -201,7 +201,7 @@
 			
                                  
            <!-- 별점 -->
-     <div class="stars" style="margin-left: 50px;">
+     <div class="stars" style="margin-left: 10px;">
         <input class="stars__checkbox" type="radio" id="sd_first-star" name="star">
         <label class="stars__star" for="sd_first-star">
             <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -277,7 +277,7 @@
 					%>
 					<br><br>
 					<hr>
-					<div style="margin-left: 100px; margin-right: 100px;">
+					<div style="margin-left: 50px; margin-right: 50px;">
 						<table style="width: 100%">
 							<tr>
 								<td valign="top" style="width:10%">
@@ -295,7 +295,7 @@
 									</span>
 								</td>
 								<td style="padding-left: 50px; width:80%">
-									<b style="font-size: 15pt;"><%=rdto.getContent().replace("\n", "<br>") %></b>
+									<p style="font-size: 12pt;"><%=rdto.getContent().replace("\n", "<br>") %></p>
 									
 								</td>
 								<td valign="top" style="width:10%;">

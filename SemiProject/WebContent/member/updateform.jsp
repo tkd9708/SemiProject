@@ -11,6 +11,7 @@
 <%
    //num 읽기
    String num=request.getParameter("num");
+String memId = (String)session.getAttribute("myid");
 System.out.println(num);
    //db로부터 getData 호출후 폼안에 값 넣어주기
    MemberDao dao=new MemberDao();
@@ -78,6 +79,8 @@ System.out.println(num);
 		  			required="required" autocomplete="new-password"><br>
 	  			</div>
 	  			<div class="item">
+	  			<button type="button" class="btnMemUpdate" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'">
+					회원탈퇴</button>
 					<button type="submit" class="btnMemUpdate">
 					회원정보수정</button>
 				</div>
