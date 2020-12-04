@@ -509,8 +509,8 @@ if(loginok!=null){
 		</table>
 	</div>
 	<hr>
-	<button type="button" class="btn btn-danger btn-sm"><b>회원탈퇴</b></button>  
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'"><b>회원정보수정</b></button>
+	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'"><b>회원탈퇴</b></button>  
+	<button type="button" class="btn btn-info btn-sm" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'"><b>회원정보수정</b></button>
 
 </div>
 
