@@ -20,8 +20,8 @@ public class SpotlistDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, addr, latitude, longitude, tag, introduction, thumbnail) "
-				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into spotlist(contentsid, title, label1, label2, roadaddr, addr, latitude, longitude, tag, introduction, img, thumbnail) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		conn = db.getConnection();
 		try {
@@ -36,7 +36,8 @@ public class SpotlistDao {
 			pstmt.setDouble(8, dto.getLongitude());
 			pstmt.setString(9, dto.getTag());
 			pstmt.setString(10, dto.getIntroduction());
-			pstmt.setString(11, dto.getThumbnail());
+			pstmt.setString(11, dto.getImg());
+			pstmt.setString(12, dto.getThumbnail());
 			
 			pstmt.execute();
 			
@@ -72,6 +73,7 @@ public class SpotlistDao {
 				dto.setRoadaddr(rs.getString("roadaddr"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
+				dto.setImg(rs.getString("img"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
 				dto.setStar(rs.getInt("star"));
@@ -115,6 +117,7 @@ public class SpotlistDao {
 				dto.setRoadaddr(rs.getString("roadaddr"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
+				dto.setImg(rs.getString("img"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
 				dto.setStar(rs.getInt("star"));
@@ -170,6 +173,7 @@ public class SpotlistDao {
 				dto.setRoadaddr(rs.getString("roadaddr"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
+				dto.setImg(rs.getString("img"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
 				dto.setStar(rs.getInt("star"));
@@ -293,6 +297,7 @@ public class SpotlistDao {
 				dto.setRoadaddr(rs.getString("roadaddr"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setTag(rs.getString("tag"));
+				dto.setImg(rs.getString("img"));
 				dto.setThumbnail(rs.getString("thumbnail"));
 				dto.setTitle(rs.getString("title"));
 				dto.setStar(rs.getInt("star"));

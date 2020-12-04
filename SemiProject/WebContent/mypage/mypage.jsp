@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 .modal-backdrop{height:100%; }
 
 div.mypage_main{
@@ -98,18 +99,31 @@ z-index:0;}
 div.modal-content{
 margin-top:200px;
 z-index:1111;
+
 }
 div.btnSchedulelist{
 float: left;
+
+}
+
 }
 span.btnSchedulelist{
 cursor: pointer;
 }
 
-
 a { text-decoration:none; color: black}
 a:hover { text-decoration:none }
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 300px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.show {display: block;}
 
 </style>
 
@@ -170,7 +184,9 @@ function drawCalendar(){ //달력 그리는 함수
 			var dNum = 1;
 			
 			//년월 띄우기
+
 			 tbCalendarYM.innerHTML = y+"년&nbsp;"+(m+1)+"월"; 
+  
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -227,7 +243,7 @@ function getData(){
 		title = "<%=dto.getTitle()%>";
 		subject = "<%=dto.getSubject()%>";
 		aroundId ="<%=dto.getAroundId()%>";
-		
+
 		var wday = wishday.replaceAll("-", "");
 		var split = wishday.split("-");
 		var xmlyear = split[0];

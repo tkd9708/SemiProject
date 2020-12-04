@@ -291,7 +291,7 @@ $(function(){
 			 dataType: "html",
 			 url: "member/logoutaction.jsp",
 			 success: function(data){
-				 location.reload();
+				 location.href="index.jsp?main=layout/main.jsp";
 			 }
 		  });
 	  }

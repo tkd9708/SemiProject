@@ -231,7 +231,7 @@ div.page {
    			<%
     		if(startPage>1)
     		{%>
-      			<li><a href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=startPage-1%>">◀</a></li> 
+      			<li><a style="color:green;" href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=startPage-1%>">◀</a></li> 
     		<%}
     
     		for(int i=startPage;i<=endPage;i++)
@@ -244,7 +244,7 @@ div.page {
     		
     		if(endPage<totalPage)
     		{%>
-      			<li><a href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=endPage+1%>">▶</a></li> 
+      			<li><a style="color:green;" href="index.jsp?main=notice/noticelist.jsp?pageNum=<%=endPage+1%>">▶</a></li> 
     		<%}
     		%>    
     		</ul>   

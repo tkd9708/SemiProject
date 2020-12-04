@@ -14,7 +14,7 @@ import mysql.db.MysqlConnect;
 public class WishlistDao {
 	MysqlConnect db = new MysqlConnect();
 
-	// ÁÖº¯¸í¼Ò insert
+	// ï¿½Öºï¿½ï¿½ï¿½ï¿½ insert
 	public void insertAround(WishlistDto dto) {
 		String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
 		Connection conn = null;
@@ -62,7 +62,7 @@ public class WishlistDao {
 
 	}
 
-	// ÂòÇÑ ¸í¼ÒÀÎÁö È®ÀÎ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public boolean isSpotSearch(String contentsid) {
 		boolean find = false;
 		Connection conn = null;
@@ -207,7 +207,7 @@ public class WishlistDao {
 		return list;
 	}
 	
-	//review°¡Á®¿À±â
+	//reviewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public List<SpotReviewDto>getMyreviews(String memNum,int start, int end){
 		
@@ -247,7 +247,7 @@ public class WishlistDao {
 	}
 	
 	
-	//ÃÖ½Å¸®ºäÃâ·Â
+	//ï¿½Ö½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public List<SpotReviewDto>getRecentreviews(String memNum){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
@@ -309,7 +309,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	}
 	
 	
-	//³»°¡¾´¸®ºä °¹¼ö±¸ÇÏ±â
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public int getTotalCount(String memNum) {
 		int tot=0;
 		String sql = "select count(*) from spotreview where memNum=?";
@@ -364,10 +364,5 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	}
 	
 	
-	
-	
-	
-	
 }
-
 
