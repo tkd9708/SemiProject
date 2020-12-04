@@ -18,6 +18,7 @@
 
 div.mypage_main{
 margin-top: 200px;
+margin-bottom: 200px;
 }
 span.date{
    border-radius: 30px;
@@ -46,6 +47,7 @@ border: 1px solid gray;
 cursor:pointer;
 padding-top: 10px;
 padding-left: 10px;
+padding-right: 10px;
 }
 td.date:last-of-type span.date, td.dateTitle:last-of-type {
 color: #4d55e9; 
@@ -87,8 +89,9 @@ float:right;
 span.btnScheduleAdd{
 margin-bottom: -50px;
  cursor:pointer;
- color:#FAAC58;
- font-size: 30pt
+ background-color:#FAAC58;
+ font-size: 15pt;
+ padding: 10px;
 }
 span.btnDel{
 cursor:pointer;
@@ -104,6 +107,7 @@ float: left;
 }
 span.btnSchedulelist{
 cursor: pointer;
+width: 20pt;
 }
 
 
@@ -188,21 +192,24 @@ function drawCalendar(){ //달력 그리는 함수
 							tdClass="";
 						}
 						
-						/* //일정 어떻게 넣쥥
+						
 						var memId = $("#memId").val();
 						var xmlyear = 0
 						var xmlmonth =0
 						var xmlday = 0
-						var content = 0; */
-						//dNum 일의 자리 앞에 0넣기
+						var content = 0; 
 						dNum=dNum+"";
+						dMon=m+1+"";
 					if(dNum.length==1){
 						dNum = "0"+dNum;
 					}
+					if(dMon.length==1){
+						dMon="0"+dMon;
+					}
 				
-						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'day='"+dNum+"'>"
+						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
 						+"<span class='date"+" "+tdClass+"' day="+dNum+">"+dNum+"</span>"
-						+"<div id='"+y+(m+1)+dNum+"'></div>"
+						+"<div id='"+y+dMon+dNum+"' style='margin-top:10px;margin-bottom:5px'></div>"
 						+"</td>"
 						
 						dNum++;
@@ -260,16 +267,18 @@ function getData(){
 
 function getList(){
 	
-	var s="";
+	var s ="<div>";
 	var wishday="";
 	var prewishday="0";
+
 	var w="";
 	$("#listModal").modal();
 	<%
 	for(WishlistDto dto : list){
 	%>
+	
 	var content = "<%=dto.getContent()%>";
-	wishday = "<%=dto.getWishday()%>";
+	wishday = "<span style='color: #F0CD58' class='glyphicon glyphicon-ok'></span>&nbsp;<%=dto.getWishday()%>";
 	w = wishday;
 	var title = "<%=dto.getTitle()%>";
 	var subject = "<%=dto.getSubject()%>";
@@ -277,16 +286,18 @@ function getList(){
 	if(prewishday!="0"){
 		if(prewishday == w){
 			w="";
+		}else{
+			s+="</div>";
+			s+="<div class='line' style='margin-top:15px'>";
 		}
 	}
-	
 	if(title!="0"){
 		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
 	else if(subject!="0"){
-		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
+		s +="<span style='float: left; font-weight: bold; 'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
@@ -302,10 +313,11 @@ function getList(){
 		prewishday=wishday;
 		//alert(pre);
 	}
-	
+
 	
 	
 	<%}%>
+	s+="</div>";
 	$("#myslist").html(s);
 	
 	
@@ -321,6 +333,7 @@ function getDetail(){
 	title = "<%=dto.getTitle()%>";
 	subject = "<%=dto.getSubject()%>";
 	aroundId ="<%=dto.getAroundId()%>";
+	spotId="<%=dto.getSpotId()%>";
 	var num ="<%=dto.getNum()%>";
 	var wday = wishday.replaceAll("-", "");
 	var split = wishday.split("-");
@@ -328,6 +341,7 @@ function getDetail(){
 	var xmlmonth = split[1];
 	var xmlday = split[2];
 	var detailcontent="";
+	
 	if(title!="0"){
 
 		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
@@ -383,14 +397,14 @@ if(loginok!=null){
 
 	<div class="calendar">
 	<!-- 일정추가버튼 -->
-	<div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus"></span></div>
+	<div class="btnScheduleAdd"><span class="btnScheduleAdd">일정추가하기</span></div>
 
 
 	<h2 style="font-weight:bold">나의 일정</h2>
 	<br>
 	<br>
 	
-	<table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
+	<table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%; margin-bottom: 200px;">
 	    <caption style="text-align:left">       
 	     
 	</caption>
@@ -400,7 +414,7 @@ if(loginok!=null){
 	    		<!--일정 리스트버튼-->
 				<div class="btnSchedulelist">
 					<div class="slist" style="display: inline-block;">
-						<span class="btnSchedulelist glyphicon glyphicon-th-list" style="font-size: 16pt;" ></span>
+						<span class="btnSchedulelist glyphicon glyphicon-th-list" style="font-size: 25pt;" ></span>
 					</div>
 					
 				</div>
@@ -510,7 +524,7 @@ location.href = "index.jsp";
 <!-- 일정 목록 모달 -->
 <div class="modal fade" id="listModal" role="dialog">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
-      <div class="modal-content" style="width:350px">
+      <div class="modal-content" style="width:450px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 style="text-align: center" >
