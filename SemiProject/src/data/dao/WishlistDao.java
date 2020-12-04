@@ -155,6 +155,9 @@ public class WishlistDao {
 				dto.setContent(rs.getString("content"));
 				dto.setWishday(rs.getString("wishday"));
 				dto.setAroundId(rs.getString("aroundId"));
+				dto.setSpotId(rs.getString("spotId"));
+				dto.setShareNum(rs.getString("shareNum"));
+				dto.setNum(rs.getString("num"));
 				if(!rs.getString("spotId").equals("0")) {
 					String tsql = "select title from spotlist where contentsid=? ";
 					PreparedStatement tpstmt = null;
@@ -304,6 +307,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	
 		return title;
 	}
+	
 	
 	//³»°¡¾´¸®ºä °¹¼ö±¸ÇÏ±â
 	public int getTotalCount(String memNum) {

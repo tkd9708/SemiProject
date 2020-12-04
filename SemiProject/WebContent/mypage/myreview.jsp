@@ -111,6 +111,12 @@ a:hover { text-decoration:none }
 %>
 </head>
 <body>
+<%
+String loginok = (String)session.getAttribute("loginok");
+
+if(loginok!=null){
+
+	%>	
 
 
 	<div class="myreview">
@@ -209,6 +215,13 @@ a:hover { text-decoration:none }
 		
 		
 	</div>
-
+<%
+} else {
+%>
+<script>
+location.href = "index.jsp";
+</script>
+<%
+} %>
 </body>
 </html>

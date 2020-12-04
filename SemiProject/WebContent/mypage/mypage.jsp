@@ -114,10 +114,25 @@ a:hover { text-decoration:none }
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
+<%String memId = (String)session.getAttribute("myid");
+
+WishlistDao dao = new WishlistDao();
+List<WishlistDto>list = dao.getList(memId);
+
+%>
+
 
  <script type="text/javascript">
  var today = new Date(); //오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
  var date = new Date(); //today의 Date를 세어주는 역할
+ var content = "";
+ var wishday = "";
+ var title = "";
+ var subject = "";
+ var aroundId ="";
+ var spotId="";
+ var shareNum="";
+ 
  function prevCalendar() {//이전 달
  	        // 이전 달을 today에 값을 저장하고
  	        //getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
@@ -201,176 +216,162 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			$("#calendarBody").html(calendar);
 }
-//String sessionId = (String)session.getAttribute("myid"); 
-//xml받아서 출력하기
+
+
 function getData(){
-	var memId = $("#memId").val();
-	$.ajax({
-		url: "mypage/getwishtoxml.jsp",  
-		type:"get",
-		dataType:"xml",
-		data:{"memId":memId},
-		success:function(data){
-			$(data).find("wish").each(function(){
-				var content =$(this).find("content").text();
-				var wishday = $(this).find("wishday").text();
-				var spotId = $(this).find("spotId").text(); 
-				var shareNum =$(this).find("shareNum").text();
-				var wday = wishday.replaceAll("-", "");
-				var split = wishday.split("-");
-				var xmlyear = split[0];
-				var xmlmonth = split[1];
-				var xmlday = split[2];
-				var aroundId =$(this).find("aroundId").text();
+	<%
+		for(WishlistDto dto : list){
+	%>
+		content = "<%=dto.getContent()%>";
+		wishday = "<%=dto.getWishday()%>";
+		title = "<%=dto.getTitle()%>";
+		subject = "<%=dto.getSubject()%>";
+		aroundId ="<%=dto.getAroundId()%>";
 		
-					if(spotId!="0"){
-						
-						//System.out.println("spotlist");
-						$.ajax({
-							url: "mypage/getspottitle.jsp",  
-							type:"get",
-							dataType:"xml",
-							data:{"spotId":spotId},
-							success:function(data){
-								$(data).find("spot").each(function(){
-									var title =$(this).find("title").text();
-									$("#"+wday).append("🚩"+title+"<br>");
-								});
-							}
-							});
-					}
-					
-					else if(aroundId!="0"){
-							var sp = content.split(",");
-							var category = sp[0];
-							if(category == "음식점"){
-								 $("#"+wday).append("🍔"+aroundId+"<br>");
-							} 
-							else if(category =="숙박")
-								{
-								$("#"+wday).append("🏡"+aroundId+"<br>");
-								}
-							else if(category =="카페"){
-								$("#"+wday).append("☕"+aroundId+"<br>");
-							}
-						}
-					else if(shareNum!="0"){
-						$.ajax({
-							url:"mypage/getsharesubject.jsp",
-							type:"get",
-							dataType:"xml",
-							data:{"shareNum":shareNum},
-							success:function(data){
-								$(data).find("share").each(function(){
-									var subject = $(this).find("subject").text();
-									$("#"+wday).append("🤞"+subject+"<br>");
-								});
-							}
-						});
-						
-					}
-			else $("#"+wday).append("✔"+content+"<br>");
-			
-					
-			});
+		var wday = wishday.replaceAll("-", "");
+		var split = wishday.split("-");
+		var xmlyear = split[0];
+		var xmlmonth = split[1];
+		var xmlday = split[2];
+		
+		if(title!="0"){$("#"+wday).append("🚩"+title+"<br>");}
+		if(aroundId!="0"){
+			var sp = content.split(",");
+			var category = sp[0];
+			if(category == "음식점"){
+				 $("#"+wday).append("🍔"+aroundId+"<br>");
+			} 
+			else if(category =="숙박")
+				{
+				$("#"+wday).append("🏡"+aroundId+"<br>");
+				}
+			else if(category =="카페"){
+				$("#"+wday).append("☕"+aroundId+"<br>");
+			}
 		}
+		if(subject!="0"){
+			$("#"+wday).append("🤞"+subject+"<br>");
+		}
+		if(subject=="0"&&title=="0"&&aroundId=="0") $("#"+wday).append("✔"+content+"<br>");
 		
-	})
+		
+<%}%>
+}
+
+function getList(){
+	
+	var s="";
+	var wishday="";
+	var prewishday="0";
+	var w="";
+	$("#listModal").modal();
+	<%
+	for(WishlistDto dto : list){
+	%>
+	var content = "<%=dto.getContent()%>";
+	wishday = "<%=dto.getWishday()%>";
+	w = wishday;
+	var title = "<%=dto.getTitle()%>";
+	var subject = "<%=dto.getSubject()%>";
+	var aroundId ="<%=dto.getAroundId()%>";
+	if(prewishday!="0"){
+		if(prewishday == w){
+			w="";
+		}
+	}
+	
+	if(title!="0"){
+		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
+	}
+	else if(subject!="0"){
+		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
+	}
+	else if(aroundId!="0"){
+		var split = aroundId.split(",");
+		var around = split[0];
+		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+around+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
+	}
+	else {
+		s +="<span style='float: left;' class='wishday'>"+w+"</span><span style='float: right'>"+content+"</span><br>";
+		prewishday=wishday;
+		//alert(pre);
+	}
+	
+	
+	
+	<%}%>
+	$("#myslist").html(s);
+	
+	
 }
 function getDetail(){
-	var memId = $("#memId").val();
-	$.ajax({
-		url: "mypage/getwishtoxml.jsp",  
-		type:"get",
-		dataType:"xml",
-		data:{"memId":memId},
-		success:function(data){
-			$(data).find("wish").each(function(){
+	
+	
+	<%
+	for(WishlistDto dto : list){
+%>
+	content = "<%=dto.getContent()%>";
+	wishday = "<%=dto.getWishday()%>";
+	title = "<%=dto.getTitle()%>";
+	subject = "<%=dto.getSubject()%>";
+	aroundId ="<%=dto.getAroundId()%>";
+	var num ="<%=dto.getNum()%>";
+	var wday = wishday.replaceAll("-", "");
+	var split = wishday.split("-");
+	var xmlyear = split[0];
+	var xmlmonth = split[1];
+	var xmlday = split[2];
+	var detailcontent="";
+	if(title!="0"){
+
+		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
+				"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+				
 		
-				var content =$(this).find("content").text();
-				var shareNum =$(this).find("shareNum").text();
-				var wishday = $(this).find("wishday").text();
-				//alert(shareNum);
-				var aroundId =$(this).find("aroundId").text();
-				var wday = wishday.replaceAll("-", "");
-				var split = wishday.split("-");
-				var num =$(this).find("num").text();
-					var xmlyear = split[0];
-					var xmlmonth = split[1];
-					var xmlday = split[2];
-					var spotId = $(this).find("spotId").text();
-					if(detailcontent=="") detailcontent="<div style='font-size:16pt; margin-left:20px;'>저장된 일정이 없습니다.</div>";	
-					if(spotId!="0"){
-						
-						$.ajax({
-							url: "mypage/getspottitle.jsp",  
-							type:"get",
-							dataType:"xml",
-							data:{"spotId":spotId},
-							success:function(data){
-								$(data).find("spot").each(function(){
-									var title =$(this).find("title").text();
-									$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
-									"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
-									
-								});
-							}
-							});
-					}
-					else if(aroundId!="0"){
-								var detailcontent="";
-								var sp = content.split(",");
-								var category = sp[0];
-								if(category == "음식점"){
-									 detailcontent="🍔 &nbsp;"+aroundId;
-								} 
-								else if(category =="숙박")
-									{
-									 detailcontent="🏡 &nbsp;"+aroundId;
-									}
-								else if(category =="카페"){;
-									 detailcontent="☕ &nbsp;"+aroundId;
-								}
-								
-											
-							}
-				else if(shareNum!="0"){
-					//alert("ㅇㅇ");
-					$.ajax({
-						url:"mypage/getsharesubject.jsp",
-						type:"get",
-						dataType:"xml",
-						data:{"shareNum":shareNum},
-						success:function(data){
-							$(data).find("share").each(function(){
-								var subject = $(this).find("subject").text();
-								//alert(subject);
-								$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🤞&nbsp;<a href='index.jsp?main=shareboard/shareboardlist.jsp?num="+shareNum+"'>"+subject+"</a>"+
-										"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
-							});
-					}
-				});
-				
+	}
+	if(aroundId!="0"){
+		var sp = content.split(",");
+		var category = sp[0];
+		if(category == "음식점"){
+			 detailcontent="🍔 &nbsp;"+aroundId;
+		} 
+		else if(category =="숙박")
+			{
+			 detailcontent="🏡 &nbsp;"+aroundId;
 			}
-			else{
-				detailcontent="✔"+content;
-				var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
-				$("#"+wday+".detail").append(print);
-				
-			}
-			});
+		else if(category =="카페"){
+			 detailcontent="☕ &nbsp;"+aroundId;
 		}
-		
-	})
+		var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+		$("#"+wday+".detail").append(print);
+	}
+	if(subject!="0"){
+		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🤞&nbsp;<a href='index.jsp?main=shareboard/shareboardlist.jsp?num="+shareNum+"'>"+subject+"</a>"+
+				"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
+	
+	}
+	if(subject=="0"&&title=="0"&&aroundId=="0") {
+		detailcontent="✔"+content;
+		var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
+		$("#"+wday+".detail").append(print);
+	}
+	
+<%}%>
+
 }
-//모달에 추가하기
+
 
 </script>
 
 </head>
 <body>
 <%
-String sessionId = (String)session.getAttribute("myid");
 String loginok = (String)session.getAttribute("loginok");
 
 if(loginok!=null){
@@ -440,7 +441,7 @@ if(loginok!=null){
 	
 		<%
 			MemberDao mdao = new MemberDao();
-			String memNum = mdao.getMemNum(sessionId);
+			String memNum = mdao.getMemNum(memId);
 			WishlistDao wdao = new WishlistDao();
 			List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);
 			SpotlistDao sddao = new SpotlistDao();
@@ -535,8 +536,8 @@ location.href = "index.jsp";
 			</h4>
         </div>
         <div class="modal-body">
-          <div class="detail"></div>
-          
+          <div class="detail">
+          </div>
        </div>
       </div>
     </div>
@@ -558,7 +559,7 @@ location.href = "index.jsp";
         			<table class="modal_table table table-condensed">
         			
         			<!-- @@@@@@@@@@@@@@@@@@@@input value 세션 아이디로 수정하기@@@@@@@@@@@@@@@@@@@@@@ -->
-        				<input type="hidden" name="memId" id="memId" value="<%=sessionId%>">
+        				<input type="hidden" name="memId" id="memId" value="<%=memId%>">
         				<tr>
         					<td align="center" style="font-size: 13pt; background-color: white; border: 0px;border-top:0px">날짜</td>
         					<td align="center" style="background-color: white;border: 0px;"><input name="wishday" type="date" style="width:300px" ></td>
@@ -583,61 +584,12 @@ location.href = "index.jsp";
 
 <script type="text/javascript">
 	drawCalendar();
+	
+	//getdata();
 	getData();
 
 	$(document).on("click","span.btnSchedulelist",function(e){
-		
-		var s="";
-		var wishday="";
-		var prewishday="0";
-		var w="";
-		$("#listModal").modal();
-		<%
-		String memId = (String)session.getAttribute("myid");
-		WishlistDao dao = new WishlistDao();
-		List<WishlistDto>list = dao.getList(memId);
-		for(WishlistDto dto : list){
-		%>
-		var content = "<%=dto.getContent()%>";
-		wishday = "<%=dto.getWishday()%>";
-		w = wishday;
-		var title = "<%=dto.getTitle()%>";
-		var subject = "<%=dto.getSubject()%>";
-		var aroundId ="<%=dto.getAroundId()%>";
-		if(prewishday!="0"){
-			if(prewishday == w){
-				w="";
-			}
-		}
-		
-		if(title!="0"){
-			s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
-			prewishday=wishday;
-			//alert(pre);
-		}
-		else if(subject!="0"){
-			s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
-			prewishday=wishday;
-			//alert(pre);
-		}
-		else if(aroundId!="0"){
-			var split = aroundId.split(",");
-			var around = split[0];
-			s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+around+"</span><br>";
-			prewishday=wishday;
-			//alert(pre);
-		}
-		else {
-			s +="<span style='float: left;' class='wishday'>"+w+"</span><span style='float: right'>"+content+"</span><br>";
-			prewishday=wishday;
-			//alert(pre);
-		}
-		
-		
-		
-		<%}%>
-		$("#myslist").html(s);
-		
+		getList();		
 	})
 	
 	$(document).on("click","td.date",function(){
