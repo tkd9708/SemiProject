@@ -17,7 +17,7 @@ public class NoticeDao {
 	//insert
 	public void insertNotice(NoticeDto dto)
 	{
-		String sql="insert into noticeboard (id,subject,content,files,writeday) values (?,?,?,?,now())";
+		String sql="insert into noticeboard (id,subject,content,writeday) values (?,?,?,now())";
 				
 				
 		Connection conn=null;
@@ -29,7 +29,28 @@ public class NoticeDao {
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
-			pstmt.setString(4, dto.getFiles());
+
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			my.dbClose(conn, pstmt);
+		}
+	}
+	
+	public void deleteNotice(String num)
+	{
+		String sql="delete from noticeboard where num=?";
+				
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		conn=my.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, num);
 
 			//실행
 			pstmt.execute();
@@ -88,12 +109,10 @@ public class NoticeDao {
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
-				dto.setFiles(rs.getString("files"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadcount(rs.getInt("readcount"));
-				
-
-
+				dto.setStar(rs.getInt("star"));
+		
 			}
 
 		} catch (SQLException e) {
@@ -106,11 +125,12 @@ public class NoticeDao {
 
 	}
 	
+	
 	//페이징처리한 리스트 목록 반환
 	public List<NoticeDto> getList(int start,int end)
 	{
 		List<NoticeDto> list=new ArrayList<NoticeDto>();
-		String sql="select * from noticeboard orders limit ?,?";
+		String sql="select * from noticeboard order by star desc, writeday desc limit ?,?";
 				   
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -131,10 +151,9 @@ public class NoticeDao {
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
-				dto.setFiles(rs.getString("files"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReadcount(rs.getInt("readcount"));
-
+				dto.setStar(rs.getInt("star"));
 
 				//list에 추가
 				list.add(dto);
@@ -184,6 +203,28 @@ public class NoticeDao {
 			pstmt=conn.prepareStatement(sql);
 			//바인딩 
 			pstmt.setString(1, num);
+
+			//실행 
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			my.dbClose(conn, pstmt);
+		}
+	}
+	
+	public void updateStar(String num, int up)
+	{
+		String sql = "update noticeboard set star = ? where num=?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		conn=my.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩 
+			pstmt.setInt(1, up);
+			pstmt.setString(2, num);
 
 			//실행 
 			pstmt.execute();

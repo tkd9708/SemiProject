@@ -14,8 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
 
 <style type="text/css">
+
 body {
    /*background-color: #7eb9e3;*/
+   /*background-image: url("image/wave2.png");*/
+   background-repeat:no-repeat;
+   background-size:cover;
+   background-position: 0px 800px;
    margin: 0;
    height: 100%;
    
@@ -39,6 +44,14 @@ div.btn_go {
     font-size: 25px;
 } 
 
+div.btn_go a{
+    z-index: 3;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 4px 2px gray;
+}
+
 /*조천*/
 #btn_go_jocheon{
     top: 93px; 
@@ -59,10 +72,6 @@ div.btn_go {
 .jocheon a {
     top: 220px; 
     left: 870px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*서귀포*/
@@ -85,10 +94,6 @@ div.btn_go {
 .seogwipo a{
     top: 470px; 
     left: 640px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*제주*/
@@ -111,10 +116,6 @@ div.btn_go {
 .jeju a{
     top: 260px; 
     left: 710px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*구좌*/
@@ -137,10 +138,6 @@ div.btn_go {
 .gujwa a{
     top: 180px; 
     left: 1000px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*성산*/
@@ -163,10 +160,6 @@ div.btn_go {
 .sungsan a{
     top: 320px; 
     left: 1070px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*표선*/
@@ -189,10 +182,6 @@ div.btn_go {
 .pyoseon a{
     top: 370px; 
     left: 975px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*남원*/
@@ -215,10 +204,6 @@ div.btn_go {
 .namwon a{
     top: 400px; 
     left: 820px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*안덕*/
@@ -241,10 +226,6 @@ div.btn_go {
 .andeok a{
     top: 500px; 
     left: 480px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*대정*/
@@ -267,10 +248,6 @@ div.btn_go {
 .daejung a{
     top: 510px; 
     left: 390px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*한경*/
@@ -319,10 +296,6 @@ div.btn_go {
 .hanrim a{
     top: 370px; 
     left: 430px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 /*애월*/
@@ -348,7 +321,6 @@ div.btn_go {
     z-index: 3;
     position: absolute;
     text-decoration: none;
-    color: #fff;
 }
 
 /*우도*/
@@ -371,10 +343,6 @@ div.btn_go {
 .udo a{
     top: 200px; 
     left: 1230px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
 }
 
 .notice {
@@ -444,8 +412,28 @@ select.combobox{
     border-radius: 6px;
 }
 </style>
+<%
+   // 프로젝트 경로 구하기
+   String url = request.getContextPath();
+%>
 <script type="text/javascript">
 $(function(){
+	
+	$(".btn_search").click(function(){
+		var selSearch = $("#selSearch option:selected").val();
+		var search = $("#main_search").val();
+		
+		if(search.trim() == ""){
+			alert("검색할 단어를 입력해주세요.");
+		}
+		else {
+
+			location.href = "<%=url%>/index.jsp?main=spot/spotsearch.jsp?search=" + search + "&selSearch=" + selSearch;
+		}
+		//alert($("#selSearch option:selected").val());
+	});
+	
+	
    $(document).ready(function(){
      $(".slider").slider({
         full_width: true,
@@ -579,10 +567,6 @@ $(function(){
 
 </script>
 </head>
-<%
-   // 프로젝트 경로 구하기
-   String url = request.getContextPath();
-%>
 <body>
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
  
@@ -615,19 +599,20 @@ $(function(){
  
 <div class="container">
  <div class="combo">
-            <select class="combobox">
+            <select class="combobox" id="selSearch">
                 <option value="all" selected="selected">전  체</option>
                 <option value="land">지  역</option>
                 <option value="spot">지역명소</option>
+                <option value="tag">태그</option>
              </select>
          </div>
    <div class="row">
         <div class="col-md-6">
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="검색할 단어를 입력해주세요" />
+                    <input type="text" class="form-control input-lg" id="main_search" placeholder="검색할 단어를 입력해주세요" />
                     <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
+                        <button class="btn btn-info btn-lg btn_search" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>

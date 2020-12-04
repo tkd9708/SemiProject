@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.frmUpdate {	
+    margin-top: 150px;
+    margin-left: 37%;
+    margin-bottom: 100px;
+}
+.btnMemUpdate {
+	color: #f4f4f4;
+	background-color: #ffaa00;
+	border: 0;
+	outline: 0;
+	margin: auto;
+}
+.updateWrite {
+	margin: auto;
+	font-size: 16px;
+	letter-spacing: -0.03em;
+	line-height: normal;
+}
+h3 {
+	width: auto;
+	padding: 5px 0 15px;
+	font-size: 35px;
+	color: black;
+	display: inline-block;
+}
+.bi-pencil {
+	fill: orange;	
+}
+.gridContainer {
+	width: 500px;
+}
+.item {
+	border: .06em solid rgba(150,150,150,.8);
+	padding-left:20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 18px;
+	text-align: center;
+
+	
+}
+.item b {
+	padding-left:20px;
+	padding-top: 20px;
+}
+.item input{
+    float: right;
+    margin-right: 50px;
+    width: 310px;
+    font-size: 20px;
+    margin-top: -5px;
+}

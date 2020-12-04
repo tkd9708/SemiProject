@@ -1,3 +1,4 @@
+
 package util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -19,9 +20,9 @@ public class DownLoadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = getServletContext().getRealPath("/noticesave");
+		String path = getServletContext().getRealPath("/save");
 		String filename = request.getParameter("clip");
-		File file = new File(path + "\\" + filename);
+		File file = new File(path + "/" + filename);
 		System.out.println("파일경로 : " + file);
 		
 		setHeaderType(response, file); // 파일이름설정

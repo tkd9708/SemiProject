@@ -14,7 +14,7 @@ import mysql.db.MysqlConnect;
 public class WishlistDao {
    MysqlConnect db = new MysqlConnect();
 
-   // Ï£ºÎ “ÔÖÏÜå insert
+   //  ÷∫     insert
    public void insertAround(WishlistDto dto) {
       String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
       Connection conn = null;
@@ -61,42 +61,21 @@ public class WishlistDao {
       }
 
    }
-   
-         // share insert
-      public void insertShare(WishlistDto dto) {
-         String sql = "insert into wishlist (memId, shareNum,wishday,content) values (?,?,?,0)";
-         Connection conn = null;
-         PreparedStatement pstmt = null;
-         
-         conn = db.getConnection();
-         try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, dto.getMemId());
-            pstmt.setString(2, dto.getShareNum());
-            pstmt.setString(3, dto.getWishday());
-            
-            pstmt.execute();
-         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-         }finally {
-            db.dbClose(conn, pstmt);
-         }
-      }      
 
-   // ◊›úÌïú “ÔÖÏÜå ù∏◊Ÿ   ôï ù∏
-   public boolean isSpotSearch(String contentsid) {
+   //              »Æ  
+   public boolean isSpotSearch(String contentsid, String id) {
       boolean find = false;
       Connection conn = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
 
-      String sql = "select * from wishlist where spotId = ?";
+      String sql = "select * from wishlist where spotId = ? and memId = ?";
       conn = db.getConnection();
 
       try {
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, contentsid);
+         pstmt.setString(2, id);
          rs = pstmt.executeQuery();
 
          if (rs.next()) {
@@ -177,6 +156,9 @@ public class WishlistDao {
             dto.setContent(rs.getString("content"));
             dto.setWishday(rs.getString("wishday"));
             dto.setAroundId(rs.getString("aroundId"));
+            dto.setSpotId(rs.getString("spotId"));
+            dto.setShareNum(rs.getString("shareNum"));
+            dto.setNum(rs.getString("num"));
             if(!rs.getString("spotId").equals("0")) {
                String tsql = "select title from spotlist where contentsid=? ";
                PreparedStatement tpstmt = null;
@@ -226,21 +208,23 @@ public class WishlistDao {
       return list;
    }
    
-   //reviewÍ∞  †∏ ò§Í∏ 
+   //review      
    
-   public List<SpotReviewDto>getMyreviews(String memNum){
+   public List<SpotReviewDto>getMyreviews(String memNum,int start, int end){
       
       List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
       Connection conn = null;
       PreparedStatement pstmt =null;
       ResultSet rs = null;
       
-      String sql ="select * from spotreview where memNum=?";
+      String sql ="select * from spotreview where memNum=? order by num desc limit ?,?";
       
       conn=db.getConnection();
       try {
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, memNum);
+         pstmt.setInt(2, start);
+         pstmt.setInt(3, end);
          rs=pstmt.executeQuery();
          while(rs.next()) {
             SpotReviewDto dto = new SpotReviewDto();
@@ -264,7 +248,7 @@ public class WishlistDao {
    }
    
    
-   //◊‚úÏã†Î¶¨Î∑∞Ï∂úÎ†•
+   // ÷Ω≈∏      
 public List<SpotReviewDto>getRecentreviews(String memNum){
       
       List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
@@ -313,7 +297,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
          rs=pstmt.executeQuery();
          if(rs.next()) {
             title = rs.getString("title");
-            System.out.println(title);
+            //System.out.println(title);
          }
       } catch (SQLException e) {
          // TODO Auto-generated catch block
@@ -325,9 +309,115 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
       return title;
    }
    
-         
+   
+   //                œ± 
+   public int getTotalCount(String memNum) {
+      int tot=0;
+      String sql = "select count(*) from spotreview where memNum=?";
+      Connection conn =null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
       
+      conn = db.getConnection();
+      try {
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, memNum);
+         rs = pstmt.executeQuery();
+         if(rs.next()) {
+            tot = rs.getInt(1);
+         }
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         db.dbClose(conn, pstmt, rs);
+      }
+      
+      
+      return tot;
+   }
    
+
+   public String getShareSubject(String shareNum) {
+      String subject="";
+      String sql = "select subject from shareboard where shareNum = ?";
+      Connection conn = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      conn=db.getConnection();
+      try {
+         
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, shareNum);
+         rs=pstmt.executeQuery();
+         if(rs.next()) {
+            subject = rs.getString("title");
+            //System.out.println(title);
+         }
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         db.dbClose(conn, pstmt, rs);
+      }
    
+      return subject ;
+   }
    
+   public int getWishTotalCount(String memId, String category) {
+      int tot=0;
+      String sql = "";
+      Connection conn =null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      if(category.equals("around")) {
+         sql = "select count(*) from wishlist where aroundid != '0' or sharenum!='0' and memid=?";
+      }
+      else if(category.equals("spot")) {
+         sql = "select count(*) from wishlist where spotId != '0' and memid=?";
+      }
+      else if(category.equals("my")) {
+         sql = "select count(*) from wishlist where aroundid = '0' and sharenum='0' and spotid='0' and memid=?";
+      }
+      
+      conn = db.getConnection();
+      try {
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, memId);
+         rs = pstmt.executeQuery();
+         if(rs.next()) {
+            tot = rs.getInt(1);
+         }
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         db.dbClose(conn, pstmt, rs);
+      }
+      
+      
+      return tot;
+   }
+   // share insert
+   public void insertShare(WishlistDto dto) {
+      String sql = "insert into wishlist (memId, shareNum,wishday,content) values (?,?,?,0)";
+      Connection conn = null;
+      PreparedStatement pstmt = null;
+      
+      conn = db.getConnection();
+      try {
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, dto.getMemId());
+         pstmt.setString(2, dto.getShareNum());
+         pstmt.setString(3, dto.getWishday());
+         
+         pstmt.execute();
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         db.dbClose(conn, pstmt);
+      }
+   }      
+
 }

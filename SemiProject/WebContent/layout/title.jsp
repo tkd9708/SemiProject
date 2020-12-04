@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style type="text/css">
   html, body{
       margin: 0;
@@ -21,8 +19,13 @@
       transition: top 0.5s;
       background-color: #FFF;
       border-radius: 0;
-      
+        
   } 
+  
+  .navbar{
+        box-shadow: 5px 5px 10px #9d9d9d;
+        
+  }
   div.header{
       position:relative;
       width: 100vw;  
@@ -40,9 +43,14 @@
   a.main_login, a.main_mypage{
       float: right;
   }
+  
+  a.main_logout{
+      float: right;
+  }
+  
   li.list {
       padding-right: 50px;
-      font-family: 'Do Hyeon';
+      font-family: SCDream5;
       
   }
   li.list a {
@@ -171,6 +179,9 @@ $(function(){
 <%
     //프로젝트의 경로 구하기
     String url=request.getContextPath();
+	String loginok = (String)session.getAttribute("loginok");
+	String myid = (String)session.getAttribute("myid");
+
 %>
 <body>
 <!-- box_header -->
@@ -184,8 +195,19 @@ $(function(){
               </s_if_var_logoImage>
             </a>
            </li>
-           <li class="list" id="list"><a class="main_login">login</a></li>
-           <li class="list" id="list"><a class="main_mypage">마이페이지</a></li>
+           <%
+           if(loginok!=null){
+        	   %>
+        	   <li class="list" id="list"><a class="main_logout">LOGOUT</a></li>
+           		<li class="list" id="list"><a class="main_mypage">Mypage</a></li>
+        	   <%
+           }
+           else {
+				%>
+        	   <li class="list" id="list"><a class="main_login">LOGIN</a></li>
+        	   <%
+           }
+           %>
            <li class="list" id="list"><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
            <li class="list" id="list">관광명소
              <ul>
@@ -219,8 +241,19 @@ $(function(){
               </s_if_var_logoImage>
             </a>
            </li>
-           <li class="list"><a class="main_login">login</a></li>
-           <li class="list"><a class="main_mypage">마이페이지</a></li>
+           <%
+           if(loginok!=null){
+        	   %>
+        	   <li class="list" id="list"><a class="main_logout">LOGOUT</a></li>
+           		<li class="list"><a class="main_mypage">Mypage</a></li>
+        	   <%
+           }
+           else {
+				%>
+        	   <li class="list" id="list"><a class="main_login">LOGIN</a></li>
+        	   <%
+           }
+           %>
            <li class="list"><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
            <li class="list">관광명소
              <ul>
@@ -251,6 +284,21 @@ $(function(){
 	  location.href="<%=url%>/index.jsp?main=member/reallogin.jsp";
   });
   
+  $("a.main_logout").click(function(e){
+	  e.preventDefault();
+	  /* location.href="<%=url%>/index.jsp?main=member/logoutform.jsp"; */
+	  var a = confirm("정말 로그아웃 하시겠습니까?");
+	  if(a){ 
+		  $.ajax({
+			 type: "get",
+			 dataType: "html",
+			 url: "member/logoutaction.jsp",
+			 success: function(data){
+				 location.href="index.jsp?main=layout/main.jsp";
+			 }
+		  });
+	  }
+  });
 
   $("a.main_mypage").click(function(e){
 	  e.preventDefault();

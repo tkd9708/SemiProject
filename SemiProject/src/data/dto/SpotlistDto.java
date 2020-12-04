@@ -1,15 +1,18 @@
 package data.dto;
 
 public class SpotlistDto {
+
 	private String contentsid;
 	private String title;
 	private String label1;
 	private String label2;
 	private String roadaddr;
+	private String addr;
 	private Double latitude;
 	private Double longitude;
 	private String tag;
 	private String introduction;
+	private String img;
 	private String thumbnail;
 	private int star;
 	private int likes;
@@ -43,6 +46,12 @@ public class SpotlistDto {
 	public void setRoadaddr(String roadaddr) {
 		this.roadaddr = roadaddr;
 	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -67,6 +76,12 @@ public class SpotlistDto {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -85,7 +100,6 @@ public class SpotlistDto {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	
 	
 	
 	

@@ -476,9 +476,51 @@ String id=(String)session.getAttribute("myid");
 String loginok=(String)session.getAttribute("loginok");
 
 
+   ShareBoardDao db=new ShareBoardDao();
+//페이징 처리에 필요한 변수들   
+int totalCount = db.getTotalCount();
+	int perPage = 10; // 한페이지당 보여질 글의 갯수
+	int perBlock = 5; // 한블럭당 출력할 페이지의 갯수
+	int totalPage; // 총 페이지의 갯수
+	int startPage; // 각 블럭당 시작 페이지 번호
+	int endPage; // 각 블럭당 끝페이지 번호
+	int start; // 각 블럭당 불러올 글의 시작번호
+	int end; // 각 블럭당 글의 끝번호
+	int currentPage; // 현재 보여질 페이지 번호
+	
+//현재 페이지 번호 구하기
+	String pageNum = request.getParameter("pageNum");
+	if(pageNum == null)
+		currentPage = 1; // 페이지 번호가 없을경우 무조건 1페이지로 간다.
+	else
+		currentPage = Integer.parseInt(pageNum);
+		
+	// 총 페이지 구하기 
+	// 나머지가 있을 경우에는 1페이지 더 추가 (예 : 총글수가 9이고 한페이지당 2개씩 볼 경우)
+	totalPage = totalCount/perPage + (totalCount % perPage > 0 ? 1 : 0);
+	
+	// 시작페이지와 끝페이지 구하기
+	// 예 : 한페이지당 3개만 볼 경우 현재 페이지가 2라면 startPage: 1, endPage: 3
+	// 현재 페이지가 7이라면 startPage: 7, endPage: 9
+	startPage = (currentPage - 1) / perBlock * perBlock + 1;
+	endPage = startPage + perBlock - 1;
+	// 마지막 블럭은 endPage를 totalPage로 해놔야 한다.
+	if(endPage > totalPage)
+		endPage = totalPage;
+	
+	// mysql은 첫 글이 0번이므로 +1 안해도됨 (오라클은 1번)
+	start = (currentPage-1) * perPage;
 
+List<ShareBoardDto> list=db.getList(start, perPage);
+//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
+int no=totalCount-((currentPage-1)*perPage);
+   
+   no=totalCount-((currentPage-1)*perPage);
+   
+   
+   
+   
 %>
-
 <script type="text/javascript">
 
 $(function(){
@@ -661,7 +703,29 @@ $(function(){
          
      });
     
-
+	$(".button2").click(function(){
+		var regroup = $(this).attr("regroup");
+		//alert(regroup);
+		$.ajax({
+			type: "get",
+			url: "shareboard/shareboardxml.jsp",
+			dataType: "xml",
+			data: {"regroup":regroup},
+			success: function(data){
+				var s ="";
+				$(data).find("dto").each(function(i, element) {
+					s+="<div>ID:"+$(this).find("id").text();
+					s += "<br>" + $(this).find("content").text();
+					s += "<br><b style='float: right; color:gray;'>" + $(this).find("writeday").text();
+					s += "<span style='float: right;'>+</span>"
+					
+					
+					s += "</b></div><br><hr>";
+				});
+				$(".sreview_list").html(s);
+			}
+		});
+	});
 
    
     
@@ -676,54 +740,11 @@ $(function(){
 </script>
 
 
-<%
-   ShareBoardDao db=new ShareBoardDao();
-   //페이징 처리에 필요한 변수들   
-   int totalCount=db.getTotalCount(); //총 글의 갯수
-   int perPage=3; //한페이지당 보여지는 글의 갯수
-   int perBlock=5; //한블럭당 보여지는 페이지번호의 수
-   int currentPage;//현재페이지,만약 널값이면 1로 줌
-   int totalPage; //총 페이지의 갯수
-   int startNum;//한페이지당 보여지는 시작번호
-   int endNum;//한페이지당 보여지는 끝번호
-   int startPage; //한 블럭당 보여지는 시작페이지번호
-   int endPage; //한 블럭당 보여지는 끝페이지번호
-   int no; //게시글에 붙일 시작번호
-   
-   //현재 페이지
-   if(request.getParameter("pageNum")!=null)
-      currentPage=Integer.parseInt(request.getParameter("pageNum"));
-   else
-      currentPage=1;
-   //총 페이지수
-   totalPage=(totalCount/perPage)+(totalCount%perPage>0?1:0);
-   //각 페이지에 보여질 시작번호와 끝번호 구하기
-   startNum=(currentPage-1)*perPage+1;
-   endNum=startNum+perPage-1;
-   //예를 들어 모두 45개의 글이 있을경우
-     //마지막 페이지는 endnum 이 45 가 되야함
-     if(endNum>totalCount)
-   endNum=totalCount;
-   
-   //각 블럭에 보여질 시작 페이지번호와 끝 페이지 번호 구하기
-   startPage= (currentPage-1)/perBlock*perBlock+1;
-   endPage=startPage+perBlock-1;
-   //예를 들어 총 34페이지일경우
-   //마지막 블럭은 30-34 만 보여야함
-   if(endPage>totalPage)
-      endPage=totalPage;
-   
-   List<ShareBoardDto> list=db.getList(startNum,endNum);
-   //각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
-   no=totalCount-((currentPage-1)*perPage);
-   
-   
-   
-   
-%>
+</head>
+
+<body>
 
 
- 
   <!--게시판 제목 -->
     <div class="smain">
        <h2 >맛집 공유 게시판</h2>
@@ -828,7 +849,7 @@ $(function(){
                   
          <!-- 좋아요 -->
          <div class="likes">
-            <span class="likes glyphicon glyphicon-thumbs-up"  num=<%=dto.getNum()%>>
+            <span class="likes glyphicon glyphicon-thumbs-up"  num="<%=dto.getNum()%>">
             </span><%=dto.getLikes()%>
          </div>
          <!-- 좋아요 close -->
@@ -853,7 +874,7 @@ $(function(){
          
          <!-- 댓글버튼-->
          <div class="review_btn">
-             <button type="button" class="button2" style="color: white;">댓글(0)</button>
+             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(0)</button>
              <button type="button" class="button1" style="color: white;">댓글쓰기</button>
          </div>
          <!-- 댓글버튼 close -->
@@ -868,7 +889,7 @@ $(function(){
 
 
 
-<!-- 댓글 전체 -->
+
 
      <!-- 댓글 입력창-->
      <div class="sreview" >
@@ -880,8 +901,8 @@ $(function(){
  	       <input class="form-control" placeholder="리뷰를 입력하세요" style="width: 800px" id="content" >
  	          <div class="review_enter_btn">
                  <button type="button" class="btn_submit btn btn-warning"
-                 num="<%=dto.getNum() %>" id="<%=dto.getId() %>" subject=<%=dto.getSubject() %>
-                 addr=<%=dto.getAddr() %> photo=<%=dto.getPhoto() %> likes=<%=dto.getLikes() %> 
+                 num="<%=dto.getNum() %>" id="<%=dto.getId() %>" subject="<%=dto.getSubject() %>"
+                 addr="<%=dto.getAddr() %>" photo="<%=dto.getPhoto() %>" likes="<%=dto.getLikes() %>" 
                  star="<%=dto.getStar() %> " content="<%=dto.getContent()%>" id1="<%=id%>">등록</button>
               </div>
  	     </div> 
@@ -936,9 +957,9 @@ $(function(){
      
       <!-- 댓글목록-->
      <div class="sreview_list">
- 	     <div>
+ 	     <div >
  	     
- 	     <%
+ 	     <%-- <%
  	     for(ShareBoardDto sdto : list){
  	    	 %>
  	         ID:&nbsp;<%=sdto.getId()%>
@@ -951,7 +972,7 @@ $(function(){
  	    	 <%
  	     }
  	     %>
- 	       
+ 	        --%>
  	     
  	     </div>
      </div>

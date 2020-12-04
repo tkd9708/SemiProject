@@ -7,9 +7,9 @@ public class NoticeDto {
 	   private String id;
 	   private String subject;
 	   private String content;
-	   private String files;
 	   private Timestamp writeday;
 	   private int readcount;
+	   private int star;
 	   
 	public String getNum() {
 		return num;
@@ -26,6 +26,12 @@ public class NoticeDto {
 	public String getSubject() {
 		return subject;
 	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
@@ -34,12 +40,6 @@ public class NoticeDto {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getFiles() {
-		return files;
-	}
-	public void setFiles(String files) {
-		this.files = files;
 	}
 	public Timestamp getWriteday() {
 		return writeday;

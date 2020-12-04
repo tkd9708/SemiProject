@@ -156,6 +156,43 @@ public class ShareBoardDao {
          return list;
       }
 
+      public List<ShareBoardDto> getReviewList(int regroup)
+      {
+         List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
+         String sql="select * from shareboard where regroup=? and relevel!=0 order by restep asc";
+                  
+         Connection conn=null;
+         PreparedStatement pstmt=null;
+         ResultSet rs=null;
+         conn=my.getConnection();
+
+         try {
+            pstmt=conn.prepareStatement(sql);
+            //바인딩
+            pstmt.setInt(1, regroup);
+            //실행
+            rs=pstmt.executeQuery();
+            while(rs.next())
+            {
+               ShareBoardDto dto=new ShareBoardDto();
+               dto.setNum(rs.getString("num"));
+               dto.setId(rs.getString("id"));
+               dto.setContent(rs.getString("content"));
+               dto.setStar(rs.getString("star"));
+               dto.setWriteday(rs.getTimestamp("writeday"));
+                     
+
+               //list에 추가
+               list.add(dto);
+            }
+         } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }finally {
+            my.dbClose(conn, pstmt, rs);
+         }
+         return list;
+      }
       public int getMaxNum()
       {
          int max=0;
