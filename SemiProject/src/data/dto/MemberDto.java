@@ -74,10 +74,10 @@ public class MemberDto {
 	{
 		boolean validPass = false;
 		
-		final String pattern1 = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9°¡-ÆR¤¡-¤¾¤¿-¤Ó])[A-Za-z0-9[^A-Za-z0-9¤¡-¤¾¤¿-¤Ó°¡-ÆR]]{8,}$";
+		final String pattern1 = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9ê°€-í£ã„±-ã…ã…-ã…£])[A-Za-z0-9[^A-Za-z0-9ã„±-ã…ã…-ã…£ê°€-í£]]{8,}$";
 		Matcher match;
 		
-		//Æ¯¼ö¹®ÀÚ,¿µ¹®,¼ıÀÚ Á¶ÇÕ(8ÀÚ¸® ÀÌ»ó)
+		//Ã†Â¯Â¼Ã¶Â¹Â®Ã€Ãš,Â¿ÂµÂ¹Â®,Â¼Ã½Ã€Ãš ÃÂ¶Ã‡Ã•(8Ã€ÃšÂ¸Â® Ã€ÃŒÂ»Ã³)
 		match = Pattern.compile(pattern1).matcher(pass);
 		
 		if(match.find())

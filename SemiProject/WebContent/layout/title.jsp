@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style type="text/css">
   html, body{
       margin: 0;
@@ -21,8 +19,13 @@
       transition: top 0.5s;
       background-color: #FFF;
       border-radius: 0;
-      
+        
   } 
+  
+  .navbar{
+        box-shadow: 5px 5px 10px #9d9d9d;
+        
+  }
   div.header{
       position:relative;
       width: 100vw;  
@@ -47,7 +50,7 @@
   
   li.list {
       padding-right: 50px;
-      font-family: 'Do Hyeon';
+      font-family: SCDream5;
       
   }
   li.list a {
@@ -291,7 +294,7 @@ $(function(){
 			 dataType: "html",
 			 url: "member/logoutaction.jsp",
 			 success: function(data){
-				 location.reload();
+				 location.href="index.jsp?main=layout/main.jsp";
 			 }
 		  });
 	  }

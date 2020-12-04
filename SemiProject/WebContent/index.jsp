@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="font/font.css" rel="stylesheet" type="text/css" />
+<link href="font/SCDream5.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
 <title>멘도롱 또똣 :: 제주여행의모든것</title>
@@ -35,12 +35,13 @@ div.layout div.title {
     position: absolute;
     top: 0px;
     z-index: 3;
+    font-family: SCDream5;
 }
 div.layout div.main {
     position: relative;
     z-index: 1;
     height: 100%;
-    font-family: NanumBarunpen;
+    font-family: SCDream5;
     letter-spacing: 2px;
 }
 div.layout div.footer {
@@ -48,7 +49,7 @@ div.layout div.footer {
     z-index: 1;
     bottom: 0;
     padding: 30px 0;
-    font-family: NanumBarunpen;
+    font-family: SCDream5;
     letter-spacing: 1px;
 
 a {
