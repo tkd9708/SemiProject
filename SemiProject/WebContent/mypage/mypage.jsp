@@ -170,7 +170,7 @@ function drawCalendar(){ //달력 그리는 함수
 			var dNum = 1;
 			
 			//년월 띄우기
-			 tbCalendarYM.innerHTML = y+"년"+(m+1)+"월"; 
+			 tbCalendarYM.innerHTML = y+"년&nbsp;"+(m+1)+"월"; 
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -281,24 +281,24 @@ function getList(){
 	}
 	
 	if(title!="0"){
-		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
 	else if(subject!="0"){
-		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
 	else if(aroundId!="0"){
 		var split = aroundId.split(",");
 		var around = split[0];
-		s +="<span style='float: left;'class='wishday'>"+w+"</span><span style='float: right'>"+around+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+around+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
 	else {
-		s +="<span style='float: left;' class='wishday'>"+w+"</span><span style='float: right'>"+content+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;' class='wishday'>"+w+"</span><span style='float: right'>"+content+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
@@ -532,7 +532,7 @@ location.href = "index.jsp";
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="schedule_title" style="text-align: center" >
-			yyyy년m월 dd일	
+			<b>yyyy년m월 dd일</b>	
 			</h4>
         </div>
         <div class="modal-body">
