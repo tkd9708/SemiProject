@@ -135,7 +135,7 @@ public class SpotlistDao {
 	}
 	
 	public List<SpotlistDto> getList(int start, int perpage, String label2, String select){
-		// limit로 시작번지와 몇개를 가져올지 바인딩
+		// limit濡� �떆�옉踰덉��� 紐뉕컻瑜� 媛��졇�삱吏� 諛붿씤�뵫
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -148,7 +148,7 @@ public class SpotlistDao {
 		else if(select.equals("좋아요")) {
 			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by likes desc, title asc limit ?,?";
 		}
-		else if(select.equals("이름")) {
+		else if(select.equals("제목")) {
 			sql = "select * from spotlist where label2 like '%" + label2 + "%' order by title asc limit ?,?";
 		}
 		
@@ -252,9 +252,9 @@ public class SpotlistDao {
 		
 	}
 	
-	// 검색 list
+	// 寃��깋 list
 	public List<SpotlistDto> getSearchList(int start, int perpage, String selSearch, String search){
-		// limit로 시작번지와 몇개를 가져올지 바인딩
+		// limit濡� �떆�옉踰덉��� 紐뉕컻瑜� 媛��졇�삱吏� 諛붿씤�뵫
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -311,7 +311,7 @@ public class SpotlistDao {
 	}
 	
 	
-	// 검색 리스트 갯수
+	// 寃��깋 由ъ뒪�듃 媛��닔
 	public int getSearchTotalCount(String selSearch, String search) {
 		int total = 0;
 		Connection conn = null;
