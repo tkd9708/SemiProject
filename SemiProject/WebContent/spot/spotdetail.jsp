@@ -20,85 +20,43 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
-	.thumbnail {
-		width: 500px;
-		height: 500px;
-		margin-left: 200px;
-		margin-top: 150px;
-		display: inline-block;
-	
-	}
-	
-	div.thumbnailDetail {
-		display: inline-block;
-		margin-left: 100px;
-		width: 520px;
-		height: 500px;
-		vertical-align: bottom;
-	}
-	
-	div#spotReview {
-		margin-left: 200px;
-		margin-right: 200px;
-		margin-bottom: 200px;
-	}
-	
-	/* span.star {
-		font-size: 20pt; 
-		color: #F0CD58;
-		cursor: pointer;
-	} */
-	
-   /*별점 css*/
+
+   #thumbDiv {
+      margin-left: 200px;
+      margin-right: 200px;
+      margin-top: 150px;
+   }
+   .thumbnail {
+      width: 500px;
+      height: 500px;
+      
+      display: inline-block;
+   
+   }
+   
+   div.thumbnailDetail {
+      display: inline-block;
+      margin-left: 100px;
+      /* width: 420px;
+      height: 500px; */
+      /* vertical-align: bottom; */
+   }
+   
+   div#spotReview {
+      margin-left: 200px;
+      margin-right: 200px;
+      margin-bottom: 200px;
+   }
+   
+   
+   
+   /* span.star {
+      font-size: 20pt; 
+      color: #F0CD58;
+      cursor: pointer;
+   } */
+   
  
-
-.stars{
-    display: flex;
-    flex-wrap: wrap;
-
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-
-}
-
-.stars__star-icon{
-    stroke:#EFCE4A;
-    stroke-width: 2px;
-    fill: transparent;
-    transition: .1s all;
-}
-
-.stars__star{
-    width: 20px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-    margin: 5px;
-}
-
-.stars__checkbox{
-    position: absolute;
-    top: -9999px;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.stars__star:hover > .stars__star-icon{
-    fill: #EFCE4A;
-}
-
-.stars__star:hover ~ .stars__star > .stars__star-icon {
-    fill: #EFCE4A;
-}
-
-.stars__checkbox:checked + .stars__star > .stars__star-icon {
-    fill: #EFCE4A;
-}
-
-.stars__checkbox:checked ~ .stars__star > .stars__star-icon {
-    fill: #EFCE4A;
-}
    
    /* 명소 지도  */
    /* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -194,13 +152,13 @@ z-index:1111;
 .sd_heart {
     position: absolute;
     margin: auto;
-    /* top: 0; */
+    top: 30px;
     right: 30px;
-    bottom: 30px;
+    /* bottom: 30px; */
     /* left: 0; */
     background-color: #babbbc;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     transform: rotate(-45deg);
   }
   .sd_heart:after {
@@ -208,19 +166,19 @@ z-index:1111;
     content: "";
     border-radius: 50%;
     position: absolute;
-    width: 35px;
-    height: 30px;
+    width: 25px;
+    height: 20px;
     top: 0;
-    left: 15px;
+    left: 8px;
   }
   .sd_heart:before {
     background-color: #babbbc;
     content: "";
     border-radius: 50%;
     position: absolute;
-    width: 30px;
-    height: 35px;
-    top: -20px;
+      width: 20px;
+    height: 25px;
+    top: -13px;
     left: 0;
   }
   
@@ -283,185 +241,307 @@ z-index:1111;
       background-color: #e63d38;
     }
     
+    .thumbDiv {
+      width: 100%;
+      position: relative;
+      
+   }
+   
+   .thumbDiv img {
+      width: 100%;
+      vertical-align: middle;
+   }
+   
+   .thumbText {
+      padding-top: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 40px;
+      /* background-color: #333;
+      opacity: 0.5; */
+      background-color: rgba(0,0,0,0.5);
+      text-align: center;
+      position: absolute;
+      top: 30%;
+      left: 75%;
+      width: 500px;
+      height: 300px;
+      transform: translate( -50%, -50% );
+      display: table;
+   }
+   
+   /* 배너 */
+/*    #SCROLL {
+    POSITION: absolute; 
+    PADDING-BOTTOM: 0pt; 
+    MARGIN: 0pt; 
+    PADDING-LEFT: 0px; 
+    PADDING-RIGHT: 0pt; 
+    RIGHT: 0px; 
+    PADDING-TOP: 0pt; 
+    TOP: 100px;
+    z-index: 100;
+}
+ */
 
 </style>
 <%
-	request.setCharacterEncoding("utf-8");
-	String contentsid = request.getParameter("contentsid");
-	SpotlistDao dao = new SpotlistDao();
-	SpotlistDto dto = dao.getData(contentsid);
-	
-	SpotReviewDao rdao = new SpotReviewDao();
-	List<SpotReviewDto> list = rdao.getList(contentsid);
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
-	String myid = (String)session.getAttribute("myid");
-	String loginok = (String)session.getAttribute("loginok");
-	String today = sdf.format(new Date());
-	
-	MemberDao mdao = new MemberDao();
-	String memNum = mdao.getMemNum(myid);
-	
-	WishlistDao wdao = new WishlistDao();
-	boolean spotSearch = wdao.isSpotSearch(contentsid);
-	
+   request.setCharacterEncoding("utf-8");
+   String contentsid = request.getParameter("contentsid");
+   String up = request.getParameter("up");
+   if(up == null){
+      up = "0";
+   }
+   
+   SpotlistDao dao = new SpotlistDao();
+   SpotlistDto dto = dao.getData(contentsid);
+   
+   SpotReviewDao rdao = new SpotReviewDao();
+   List<SpotReviewDto> list = rdao.getList(contentsid);
+   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+   
+   String myid = (String)session.getAttribute("myid");
+   String loginok = (String)session.getAttribute("loginok");
+   String today = sdf.format(new Date());
+   
+   MemberDao mdao = new MemberDao();
+   String memNum = mdao.getMemNum(myid);
+   
+   WishlistDao wdao = new WishlistDao();
+   boolean spotSearch = wdao.isSpotSearch(contentsid, myid);
+   
 %>
 <script type="text/javascript">
-	$(function(){
-		if(<%=spotSearch%>){
-			$(".sd_heart").addClass('color');
-		} 
-		
-		//searchPlaces(); return false;
-		
-		/* $("#srstarBox span").on("click",function(){
-			var idx = $(this).index()+1;
-			$(".star").removeClass("glyphicon glyphicon-star-empty");
-			
-			for(var i=0; i<=idx; i++){
-			   	$(".star").eq(i).addClass("glyphicon glyphicon-star");
-			}
-			for(var i=idx; i<=5; i++){
-			   	$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
-			}
-			$("#spotReviewStar").val(idx);	
-		}); */
-		
-		$(".stars__checkbox").on("click", function(){
-			var idx = $(this).index()/2;
-			switch (idx) {
-			case 0:
-				idx=5;
-				break;
-			case 1:
-				idx=4;
-				break;
-			case 2:
-				idx=3;
-				break;
-			case 3:
-				idx=2;
-				break;
-			case 4:
-				idx=1;
-				break;
-			default:
-				break;
-			}
-			//alert(idx);
-			$("#spotReviewStar").val(idx);	
-		});
-		
-		$("#btnInsertReview").click(function(){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
-						"content":$("#srContent").val()},
-				url: "spot/insertspotreview.jsp",
-				success: function(data){
-					location.reload();
-				}
-			});
-		});
-		
-		/* $("div.sd_heart").click(function(){
-			$(".sd_heart:eq(0)").addClass('color');
-		}); */
-		
-		$("#spotHeart").click(function(){
-			$("#spotModal").modal();
-			
-		});
-		
-		$("#spotGoCal").click(function(){
-			if("<%=loginok%>" == "success"){ 
-				$.ajax({
-					type: "post",
-					dataType: "html",
-					url: "spot/insertspottocal.jsp",
-					data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
-					success: function(data){
-						$(".sd_heart").addClass('color');
-						var a = confirm("Mypage로 이동하시겠습니까?");
-						if(a){
-							location.href="index.jsp?main=mypage/mypage.jsp";
-						} 
-						$("#spotModal").modal("hide");
-					
-					}
-				});
-			}
-			else {
-				alert("로그인이 필요한 서비스입니다.");
-			}
-		});
-	});
+/* var BASE = 100; // 스크롤 시작 위치   
+var LEFT = 300; // 왼쪽 여백   
+var TOP1 = 100; // 위쪽 여백   
+var TOP2 = 100; // 스크롤시 브라우저 위쪽과 떨어지는 거리   
+var ActiveSpeed = 35;   
+var ScrollSpeed = 20;   
+var Timer;     
+
+function RefreshM() 
+{    
+    var StartPoint, EndPoint;    
+    StartPoint = parseInt(document.getElementById('SCROLL').style.top, 10);    
+      EndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + TOP2;
+
+    if (EndPoint < TOP1) EndPoint = TOP1;    
+    if (StartPoint != EndPoint) 
+    {     
+        ScrollAmount = Math.ceil( Math.abs( EndPoint - StartPoint ) / 15 );                                  
+        document.getElementById('SCROLL').style.top =                                                                                          parseInt(document.getElementById('SCROLL').style.top, 10) +
+                                ( ( EndPoint<StartPoint ) ? -ScrollAmount : ScrollAmount ) + "px";     
+        RefreshTimer = ScrollSpeed;     
+   }   
+   
+   Timer = setTimeout("RefreshM();", ActiveSpeed);    
+ }   
+
+function InitializeM() 
+{   
+    document.getElementById('SCROLL').style.left = LEFT + "px";                              
+    document.getElementById('SCROLL').style.top =
+                                             document.body.scrollTop + BASE + "px";    
+    RefreshM(); 
+} */
+
+   $(function(){
+      
+      if(<%=spotSearch%>  && <%=loginok != null%>){
+         $(".sd_heart").addClass('color');
+      } 
+      
+      //searchPlaces(); return false;
+      
+      /* $("#srstarBox span").on("click",function(){
+         var idx = $(this).index()+1;
+         $(".star").removeClass("glyphicon glyphicon-star-empty");
+         
+         for(var i=0; i<=idx; i++){
+               $(".star").eq(i).addClass("glyphicon glyphicon-star");
+         }
+         for(var i=idx; i<=5; i++){
+               $(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
+         }
+         $("#spotReviewStar").val(idx);   
+      }); */
+      
+      
+      /* $("div.sd_heart").click(function(){
+         $(".sd_heart:eq(0)").addClass('color');
+      }); */
+      
+      $("#spotHeart").click(function(){
+         $("#spotModal").modal();
+         
+      });
+      
+      $("#spotGoCal").click(function(){
+         if("<%=loginok%>" == "success"){ 
+            $.ajax({
+               type: "post",
+               dataType: "html",
+               url: "spot/insertspottocal.jsp",
+               data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
+               success: function(data){
+                  $(".sd_heart").addClass('color');
+                  var a = confirm("Mypage로 이동하시겠습니까?");
+                  if(a){
+                     location.href="index.jsp?main=mypage/mypage.jsp";
+                  } 
+                  $("#spotModal").modal("hide");
+               
+               }
+            });
+         }
+         else {
+            alert("로그인이 필요한 서비스입니다.");
+         }
+      });
+   });
 </script>
-<body>
-	<%
-	if(dto.getThumbnail() != null){
-		%>
-		<img class="thumbnail" src="<%=dto.getThumbnail()%>">
-		<%
-	}
-	else {
-		%>
-		<div class="thumbnail">썸네일 없음</div>
-		<%
-	}
-	%>
-	<div class="thumbnailDetail" style="position: relative;">
-		<span style="color: #F0CD58; font-size: 30px;">
-			<%
-        		for(int i=1; i<=5; i++){
-        			if(i<=dto.getStar()){
-        				%><span class="glyphicon glyphicon-star"></span><%
-        			}
-        			else {
-        				%><span class="glyphicon glyphicon-star-empty"></span><%
-        			}
-        		}
-        	%>
-		</span>
-		<br><br>
-		<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
-		<br><br>
-		<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
-		<hr>
-		<span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
-		<br><br>
-		<%
-		if(dto.getRoadaddr()!=null){
-			%>
-			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
-			<%
-		}
-		else {
-			%>
-			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
-			<%
-		}
-		
-		%>
-		<br>
-		<!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
-			<span class="glyphicon glyphicon-heart-empty"></span> 
-		</div> -->
-		<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
-	</div>
-	<hr>
-	<br><br>
-	
-	<br><br>
-	
-	
-	<!-- 명소 주변 맛집 -->
-	<div style="margin-left: 200px; margin-right: 200px;">
-		<h2>명소 주변</h2><br>
-		<div class="map_wrap" style="text-align: center;">
-    <div id="map" style="width:80%;height:100%; position:relative;overflow:hidden; margin-left: 100px;"></div>
-   <ul id="category">
+<body> <!-- onload="InitializeM();"> -->
+   
+   <!-- 배너 -->
+   <!-- <div style="position:relative;width:100px;height:100px">
+      <div id="SCROLL"> <span class="glyphicon glyphicon-star" style="font-size:30pt;"></span>
+       </div>
+
+   </div> -->
+
+   <div class="thumbDiv">
+      <%
+      if(dto.getThumbnail() != null){
+      %>
+         <img src="<%=dto.getImg()%>">
+      <%
+      }
+      else {
+         %>
+         <div style="width: 100%; height:400px; background-color: rgba(0,0,0,0.5);"></div>
+         <%
+      }
+      %>
+      <!-- <img src="https://api.cdn.visitjeju.net/photomng/imgpath/201804/30/28e3386a-6142-4cc1-9c3f-bc615079c965.jpg"> -->
+      <div class="thumbText">
+         <br>
+         
+         <b style="font-size: 30pt; color: #eee"><%=dto.getTitle() %></b>
+         <br>
+         <span style="color: #F0CD58; font-size: 20px;">
+            <%
+              for(int i=1; i<=5; i++){
+                 if(i<=dto.getStar()){
+                    %><span class="glyphicon glyphicon-star"></span><%
+                 }
+                 else {
+                    %><span class="glyphicon glyphicon-star-empty"></span><%
+                 }
+              }
+              %>
+         </span>
+         <br><br>
+         <span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;<b>>&nbsp;<%=dto.getTag() %></b></span><br>
+         <hr>
+         <b style="color: #eee;"><span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<%=dto.getIntroduction() %></b>
+         <br><br>
+         <%
+         if(dto.getRoadaddr()!=null){
+            %>
+            <b style="color: #eee;" style="display: table-row;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getRoadaddr() %></b>
+            <%
+         }
+         else {
+            %>
+            <b style="color: #eee;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getAddr() %></b>
+            <%
+         }
+      
+         %>
+         <br>
+               
+         <div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+      </div>
+   </div>
+   
+   <%-- <div id="thumbDiv">
+   <table style="width: 100%">
+      <tr height="500px">
+         <td style="width: 50%">
+            <%
+            if(dto.getThumbnail() != null){
+               %>
+               <img class="thumbnail" src="<%=dto.getThumbnail()%>">
+               <%
+            }
+            else {
+               %>
+               <div class="thumbnail">썸네일 없음</div>
+               <%
+            }
+            %>
+         </td>
+         <td style="width: 50%; position: relative;" valign="top">
+            <span style="color: #F0CD58; font-size: 30px;">
+                  <%
+                    for(int i=1; i<=5; i++){
+                       if(i<=dto.getStar()){
+                          %><span class="glyphicon glyphicon-star"></span><%
+                       }
+                       else {
+                          %><span class="glyphicon glyphicon-star-empty"></span><%
+                       }
+                    }
+                    %>
+               </span>
+               <br><br>
+               <b style="font-size: 20pt;"><%=dto.getTitle() %></b>
+               <br><br>
+               <span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
+               <hr>
+               <span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
+               <br><br>
+               <%
+               if(dto.getRoadaddr()!=null){
+                  %>
+                  <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+                  <%
+               }
+               else {
+                  %>
+                  <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
+                  <%
+               }
+      
+                  %>
+               <br>
+               <!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
+               <span class="glyphicon glyphicon-heart-empty"></span> 
+               </div> -->
+               <div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+            <!-- <div class="thumbnailDetail" style="position: relative;">
+               
+            </div> -->
+         </td>
+      </tr>
+   </table>
+   
+   
+   </div> --%>
+   
+   
+   <br><br>
+   
+   <br><br><br>
+   
+   
+   <!-- 명소 주변 맛집 -->
+   <div style="margin-left: 200px; margin-right: 200px;">
+      <h1 style="font-weight: 900;"><b>명소 주변</b></h1><br>
+      <div class="map_wrap" style="text-align: center;">
+       <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden;"></div>
+         <ul id="category">
         <li id="FD6" data-order="0"> 
             <span class="category_bg restaurant"></span>
             음식점
@@ -710,10 +790,10 @@ function getListItem(index, places) {
                  
     itemStr += '  <span class="tel">' + places.phone  + '</span>' + '</a>';  
     itemStr += '<div style="display: inline-block; width: 30%; font-size: 30pt; color:red; '
-    			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
-    			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
-    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
-    		
+             +   'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
+             //+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
+             + '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
+          
     el.innerHTML = itemStr;
     el.className = 'item';
 
@@ -856,138 +936,35 @@ function changeCategoryClass(el) {
 } 
 </script>
 
-	<br><br><br><br><br><br><br><br><br>
-	<hr>
-	<br>
-	<!-- 명소 리뷰 -->
-	<div id="spotReview">
-		<h2><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Review</h2>
-		<form id="newSpotReview" action="spot/insertspotreview.jsp">
-			<br>
-			<b style="margin-left: 60px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<br><br>
-			<!-- <div id="srstarBox" style="display: inline-block;">
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
-			</div> -->
-			
-                                 
-           <!-- 별점 -->
-     <div class="stars" style="margin-left: 50px;">
-        <input class="stars__checkbox" type="radio" id="sd_first-star" name="star">
-        <label class="stars__star" for="sd_first-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="sd_second-star" name="star">
-        <label class="stars__star" for="sd_second-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="sd_third-star" name="star">
-        <label class="stars__star" for="sd_third-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="sd_fourth-star" name="star">
-        <label class="stars__star" for="sd_fourth-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="sd_fifth-star" name="star">
-        <label class="stars__star" for="sd_fifth-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        </div>
-
-			<input type="hidden" name="star" id="spotReviewStar" value="0">
-			<br><br>
-			<textarea name="content" id="srContent" style="height: 150px;" class="form-control"></textarea>
-			<button type="button" class="btn btn-warning" id="btnInsertReview" style="float: right; margin-top: 10px;">작성</button>
-		</form>
-		<br><br><br><br><br>
-		
-		
-		<!-- 명소 리뷰 리스트 -->
-		<div id="spotReviewList">
-			<%
-			if(rdao.getTotalCount(contentsid) == 0){
-				%>
-				<div style="text-align: center;">
-					<h2>😢 등록된 review가 없습니다.</h2>
-				</div>
-				<%
-			}
-			else{
-				int total = 0;
-				for(SpotReviewDto rdto : list){
-					total += rdto.getStar();
-					%>
-					<br><br>
-					<hr>
-					<div style="margin-left: 100px; margin-right: 100px;">
-						<table>
-							<tr>
-								<td valign="top">
-									<span style="color: #F0CD58; font-size: 18px;">
-									<%
-	        							for(int i=1; i<=5; i++){
-	        								if(i<=rdto.getStar()){
-	        									%>★<%
-	        								}
-	        								else {
-	        									%>☆<%
-	        								}
-	        							}
-	        						%>
-									</span>
-								</td>
-								<td style="padding-left: 50px;">
-									<b style="font-size: 15pt;"><%=rdto.getContent().replace("\n", "<br>") %></b>
-								</td>
-							</tr>
-						</table>
-						
-						
-						<br><br>
-						<div style="float: right;">
-							<b><%=mdao.getData(rdto.getMemNum()).getId() %></b> | <%=sdf.format(rdto.getWriteday())%>
-							 | <a style="cursor:pointer;" href="spot/updateLikes.jsp">추천&nbsp;<%=rdto.getLikes() %></a>
-						</div>
-					</div>
-					
-					<%
-				}
-				if(total > 0){
-					dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
-				}
-			}
-			%>
-		</div>
-		
-	</div>
-	
-	<!-- around 일정 추가 modal -->
-	<div class="modal fade" id="aroundModal" role="dialog">
+   <br><br><br><br><br>
+   <hr style="color: #aaa">
+   <br>
+   <!-- 명소 리뷰 -->
+   <!-- <div id="spotReview"> -->
+      
+      
+      
+      <div id="spotReview">
+         <%
+         
+         if(up.equals("0")){
+            %>
+            <jsp:include page="spotreview.jsp?contentsid=<%=contentsid %>" />
+            <%
+         }
+         else{
+            %>
+            <jsp:include page="updatereview.jsp?contentsid=<%=contentsid %>&up=<%=up %>" />
+            <%
+         }
+         
+         %>
+      </div>
+      
+   <!-- </div> -->
+   
+   <!-- around 일정 추가 modal -->
+   <div class="modal fade" id="aroundModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -1044,50 +1021,59 @@ function changeCategoryClass(el) {
  
 <script type="text/javascript">
 
-	$(document).on("click", ".aroundHeart", function(){
-		$("#aroundModal").modal();
-		
-		var space = $(this).attr("space");
-		var addr = $(this).attr("addr");
-		var category = $(this).attr("category");
-		var s = "";
-		s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
-		s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
-		s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
-		s += "<input type='hidden' id='sd_category' value='" + category + "'>";
-		s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
-		s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
-		//s += "</div>";
-	
-		$("#aroundModalInfo").html(s);	
-		
-	});
-	
-	$("#aroundGoCal").click(function(){
-		
-		if("<%=loginok%>" == "success"){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				url: "spot/insertaroundtocal.jsp",
-				data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
-				success: function(data){
+   $(document).on("click", ".aroundHeart", function(){
+      $("#aroundModal").modal();
+      
+      var space = $(this).attr("space");
+      var addr = $(this).attr("addr");
+      var category = $(this).attr("category");
+      var s = "";
+      s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
+      s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
+      s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
+      s += "<input type='hidden' id='sd_category' value='" + category + "'>";
+      s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
+      s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
+      //s += "</div>";
+   
+      $("#aroundModalInfo").html(s);   
+      
+   });
+   
+   $("#aroundGoCal").click(function(){
+      
+      if("<%=loginok%>" == "success"){
+         $.ajax({
+            type: "post",
+            dataType: "html",
+            url: "spot/insertaroundtocal.jsp",
+            data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
+            success: function(data){
 
-					var heartidx = $("#sd_heartidx").val();
-					$(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
-					var a = confirm("Mypage로 이동하시겠습니까?");
-					if(a){
-						location.href="index.jsp?main=mypage/mypage.jsp";
-					} 
-					$("#aroundModal").modal("hide");
-				}
-			});
-		}
-		else {
-			alert("로그인이 필요한 서비스입니다.");
-		}
-		
-	});
+               var heartidx = $("#sd_heartidx").val();
+               $(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
+               var a = confirm("Mypage로 이동하시겠습니까?");
+               if(a){
+                  location.href="index.jsp?main=mypage/mypage.jsp";
+               } 
+               $("#aroundModal").modal("hide");
+            }
+         });
+      }
+      else {
+         alert("로그인이 필요한 서비스입니다.");
+      }
+      
+   });
+   
+   $(".upReview").click(function(){
+      var num = $(this).attr("num");
+      
+      location.href = "index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>&up=" + num + "#spotReview";
+   });
+   
+   
+   
 </script>
 
 

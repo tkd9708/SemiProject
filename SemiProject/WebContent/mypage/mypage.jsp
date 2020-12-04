@@ -15,10 +15,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 .modal-backdrop{height:100%; }
-
 div.mypage_main{
 margin-top: 200px;
-margin-bottom: 200px;
 }
 span.date{
    border-radius: 30px;
@@ -47,7 +45,6 @@ border: 1px solid gray;
 cursor:pointer;
 padding-top: 10px;
 padding-left: 10px;
-padding-right: 10px;
 }
 td.date:last-of-type span.date, td.dateTitle:last-of-type {
 color: #4d55e9; 
@@ -55,11 +52,9 @@ color: #4d55e9;
 td.date:first-of-type span.date, td.dateTitle:first-of-type{
 color: #e63d38; 
 }
-
 #calendarBody tr:last-of-type {
 border-bottom:5px solid gray;
 }
-
 #tbCalendarYM {
 font-size: 36px;
 }
@@ -89,9 +84,8 @@ float:right;
 span.btnScheduleAdd{
 margin-bottom: -50px;
  cursor:pointer;
- background-color:#FAAC58;
- font-size: 15pt;
- padding: 10px;
+ color:#FAAC58;
+ font-size: 30pt
 }
 span.btnDel{
 cursor:pointer;
@@ -105,24 +99,28 @@ z-index:1111;
 div.btnSchedulelist{
 float: left;
 }
+}
 span.btnSchedulelist{
 cursor: pointer;
-width: 20pt;
 }
-
-
 a { text-decoration:none; color: black}
 a:hover { text-decoration:none }
-
-
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 300px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.show {display: block;}
 </style>
 
 	<!-- 부트스트랩 모달 스크립트 -->
 <%String memId = (String)session.getAttribute("myid");
-
 WishlistDao dao = new WishlistDao();
 List<WishlistDto>list = dao.getList(memId);
-
 %>
 
 
@@ -175,6 +173,7 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			//년월 띄우기
 			 tbCalendarYM.innerHTML = y+"년&nbsp;"+(m+1)+"월"; 
+  
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";
@@ -192,24 +191,21 @@ function drawCalendar(){ //달력 그리는 함수
 							tdClass="";
 						}
 						
-						
+						/* //일정 어떻게 넣쥥
 						var memId = $("#memId").val();
 						var xmlyear = 0
 						var xmlmonth =0
 						var xmlday = 0
-						var content = 0; 
+						var content = 0; */
+						//dNum 일의 자리 앞에 0넣기
 						dNum=dNum+"";
-						dMon=m+1+"";
 					if(dNum.length==1){
 						dNum = "0"+dNum;
 					}
-					if(dMon.length==1){
-						dMon="0"+dMon;
-					}
 				
-						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
+						calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+(m+1)+"'day='"+dNum+"'>"
 						+"<span class='date"+" "+tdClass+"' day="+dNum+">"+dNum+"</span>"
-						+"<div id='"+y+dMon+dNum+"' style='margin-top:10px;margin-bottom:5px'></div>"
+						+"<div id='"+y+(m+1)+dNum+"'></div>"
 						+"</td>"
 						
 						dNum++;
@@ -223,8 +219,6 @@ function drawCalendar(){ //달력 그리는 함수
 			
 			$("#calendarBody").html(calendar);
 }
-
-
 function getData(){
 	<%
 		for(WishlistDto dto : list){
@@ -234,7 +228,6 @@ function getData(){
 		title = "<%=dto.getTitle()%>";
 		subject = "<%=dto.getSubject()%>";
 		aroundId ="<%=dto.getAroundId()%>";
-		
 		var wday = wishday.replaceAll("-", "");
 		var split = wishday.split("-");
 		var xmlyear = split[0];
@@ -264,21 +257,18 @@ function getData(){
 		
 <%}%>
 }
-
 function getList(){
 	
-	var s ="<div>";
+	var s="";
 	var wishday="";
 	var prewishday="0";
-
 	var w="";
 	$("#listModal").modal();
 	<%
 	for(WishlistDto dto : list){
 	%>
-	
 	var content = "<%=dto.getContent()%>";
-	wishday = "<span style='color: #F0CD58' class='glyphicon glyphicon-ok'></span>&nbsp;<%=dto.getWishday()%>";
+	wishday = "<%=dto.getWishday()%>";
 	w = wishday;
 	var title = "<%=dto.getTitle()%>";
 	var subject = "<%=dto.getSubject()%>";
@@ -286,18 +276,16 @@ function getList(){
 	if(prewishday!="0"){
 		if(prewishday == w){
 			w="";
-		}else{
-			s+="</div>";
-			s+="<div class='line' style='margin-top:15px'>";
 		}
 	}
+	
 	if(title!="0"){
 		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+title+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
 	else if(subject!="0"){
-		s +="<span style='float: left; font-weight: bold; 'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
+		s +="<span style='float: left; font-weight: bold;'class='wishday'>"+w+"</span><span style='float: right'>"+subject+"</span><br>";
 		prewishday=wishday;
 		//alert(pre);
 	}
@@ -313,11 +301,10 @@ function getList(){
 		prewishday=wishday;
 		//alert(pre);
 	}
-
+	
 	
 	
 	<%}%>
-	s+="</div>";
 	$("#myslist").html(s);
 	
 	
@@ -341,9 +328,7 @@ function getDetail(){
 	var xmlmonth = split[1];
 	var xmlday = split[2];
 	var detailcontent="";
-	
 	if(title!="0"){
-
 		$("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
 				"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
 				
@@ -377,19 +362,14 @@ function getDetail(){
 	}
 	
 <%}%>
-
 }
-
-
 </script>
 
 </head>
 <body>
 <%
 String loginok = (String)session.getAttribute("loginok");
-
 if(loginok!=null){
-
 	%>	
 
 
@@ -397,14 +377,14 @@ if(loginok!=null){
 
 	<div class="calendar">
 	<!-- 일정추가버튼 -->
-	<div class="btnScheduleAdd"><span class="btnScheduleAdd">일정추가하기</span></div>
+	<div class="btnScheduleAdd"><span class="btnScheduleAdd glyphicon glyphicon-plus"></span></div>
 
 
 	<h2 style="font-weight:bold">나의 일정</h2>
 	<br>
 	<br>
 	
-	<table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%; margin-bottom: 200px;">
+	<table id="calendar" align="center"style="border-color:gray; width: 100%; height:100%;">
 	    <caption style="text-align:left">       
 	     
 	</caption>
@@ -414,7 +394,7 @@ if(loginok!=null){
 	    		<!--일정 리스트버튼-->
 				<div class="btnSchedulelist">
 					<div class="slist" style="display: inline-block;">
-						<span class="btnSchedulelist glyphicon glyphicon-th-list" style="font-size: 25pt;" ></span>
+						<span class="btnSchedulelist glyphicon glyphicon-th-list" style="font-size: 16pt;" ></span>
 					</div>
 					
 				</div>
@@ -507,8 +487,8 @@ if(loginok!=null){
 		</table>
 	</div>
 	<hr>
-	<button type="button" class="btn btn-danger btn-sm"><b>회원탈퇴</b></button>  
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'"><b>회원정보수정</b></button>
+	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'"><b>회원탈퇴</b></button>  
+	<button type="button" class="btn btn-info btn-sm" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'"><b>회원정보수정</b></button>
 
 </div>
 
@@ -524,7 +504,7 @@ location.href = "index.jsp";
 <!-- 일정 목록 모달 -->
 <div class="modal fade" id="listModal" role="dialog">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
-      <div class="modal-content" style="width:450px">
+      <div class="modal-content" style="width:350px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 style="text-align: center" >
@@ -601,7 +581,6 @@ location.href = "index.jsp";
 	
 	//getdata();
 	getData();
-
 	$(document).on("click","span.btnSchedulelist",function(e){
 		getList();		
 	})
@@ -644,7 +623,6 @@ location.href = "index.jsp";
 	$(document).on("click","label",function(){
 		getData();
 	})
-
 	
 </script>
 </div>
