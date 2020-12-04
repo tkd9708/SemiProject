@@ -418,6 +418,7 @@ select.combobox{
 %>
 <script type="text/javascript">
 $(function(){
+	
 	$(".btn_search").click(function(){
 		var selSearch = $("#selSearch option:selected").val();
 		var search = $("#main_search").val();
