@@ -12,9 +12,9 @@ import data.dto.WishlistDto;
 import mysql.db.MysqlConnect;
 
 public class WishlistDao {
-   MysqlConnect db = new MysqlConnect();
+	MysqlConnect db = new MysqlConnect();
 
-	// 二쇰�紐낆냼 insert
+	// �ֺ���� insert
 	public void insertAround(WishlistDto dto) {
 		String sql = "insert into wishlist (memId, aroundId, content,wishday) values (?,?,?,?)";
 		Connection conn = null;
@@ -62,7 +62,7 @@ public class WishlistDao {
 
 	}
 
-	// 李쒗븳 紐낆냼�씤吏� �솗�씤
+	// ���� ������� Ȯ��
 	public boolean isSpotSearch(String contentsid) {
 		boolean find = false;
 		Connection conn = null;
@@ -155,6 +155,9 @@ public class WishlistDao {
 				dto.setContent(rs.getString("content"));
 				dto.setWishday(rs.getString("wishday"));
 				dto.setAroundId(rs.getString("aroundId"));
+				dto.setSpotId(rs.getString("spotId"));
+				dto.setShareNum(rs.getString("shareNum"));
+				dto.setNum(rs.getString("num"));
 				if(!rs.getString("spotId").equals("0")) {
 					String tsql = "select title from spotlist where contentsid=? ";
 					PreparedStatement tpstmt = null;
@@ -204,21 +207,23 @@ public class WishlistDao {
 		return list;
 	}
 	
-	//review媛��졇�삤湲�
+	//review������
 	
-	public List<SpotReviewDto>getMyreviews(String memNum){
+	public List<SpotReviewDto>getMyreviews(String memNum,int start, int end){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from spotreview where memNum=?";
+		String sql ="select * from spotreview where memNum=? order by num desc limit ?,?";
 		
 		conn=db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memNum);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				SpotReviewDto dto = new SpotReviewDto();
@@ -242,7 +247,7 @@ public class WishlistDao {
 	}
 	
 	
-	//理쒖떊由щ럭異쒕젰
+	//�ֽŸ������
 public List<SpotReviewDto>getRecentreviews(String memNum){
 		
 		List<SpotReviewDto> list = new ArrayList<SpotReviewDto>();
@@ -291,7 +296,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				title = rs.getString("title");
-				System.out.println(title);
+				//System.out.println(title);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -304,5 +309,60 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	}
 	
 	
+	//���������� �����ϱ�
+	public int getTotalCount(String memNum) {
+		int tot=0;
+		String sql = "select count(*) from spotreview where memNum=?";
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				tot = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		
+		return tot;
+	}
+	
+
+	public String getShareSubject(String shareNum) {
+		String subject="";
+		String sql = "select subject from shareboard where shareNum = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		conn=db.getConnection();
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, shareNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				subject = rs.getString("title");
+				//System.out.println(title);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+	
+		return subject ;
+	}
+	
 	
 }
+
