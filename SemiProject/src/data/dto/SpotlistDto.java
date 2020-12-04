@@ -12,10 +12,10 @@ public class SpotlistDto {
 	private Double longitude;
 	private String tag;
 	private String introduction;
+	private String img;
 	private String thumbnail;
 	private int star;
 	private int likes;
-	
 	public String getContentsid() {
 		return contentsid;
 	}
@@ -76,6 +76,12 @@ public class SpotlistDto {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -94,6 +100,7 @@ public class SpotlistDto {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+	
 	
 	
 }

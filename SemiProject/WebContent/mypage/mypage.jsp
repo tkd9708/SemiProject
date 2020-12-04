@@ -162,7 +162,7 @@ function drawCalendar(){ //달력 그리는 함수
 			var dNum = 1;
 			
 			//년월 띄우기
-			 tbCalendarYM.innerHTML = y+"년"+m+"월"; 
+			 tbCalendarYM.innerHTML = y+"년"+(m+1)+"월"; 
 			//행만들기
 			for(var i=1;i<=row;i++){
 				calendar += "<tr>";

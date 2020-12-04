@@ -70,6 +70,12 @@ public class SpotlistJSON {
 							dto.setThumbnail((String)parse_photoid.get("thumbnailpath"));
 							
 						}
+						if(parse_photoid.containsKey("imgpath")) {
+
+							dto.setImg((String)parse_photoid.get("imgpath"));
+							
+						}
+						
 					}
 				}
 				dto.setContentsid((String)obj.get("contentsid"));

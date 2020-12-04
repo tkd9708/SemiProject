@@ -5,5 +5,5 @@
 <%
 	String num = request.getParameter("num");
 	SpotReviewDao dao = new SpotReviewDao();
-	dao.updateLikes(num);
+	dao.delete(num);
 %>
