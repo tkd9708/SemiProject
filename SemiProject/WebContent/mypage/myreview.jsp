@@ -155,7 +155,7 @@ if(loginok!=null){
 						<span class="title"><%=title%></span>
 					</a>
 				</td>
-				<td style="text-align:left;width:600px">
+				<td style="text-align:left;width:550px">
 					<a href ="index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>#spotReview">
 					<span class="reviewcontent"><%=srdto.getContent() %></span>
 					</a>
@@ -173,12 +173,12 @@ if(loginok!=null){
 				%>
 				</span>
 				</td>
-				<td style="text-align:center">
+				<td style="text-align:center;width:150px">
 					<span>
 						<%=sessionId%>
 					</span>
 				</td>
-				<td style="text-align:center">
+				<td style="text-align:center;width:200px">
 					<span>
 						<%=sdf.format(srdto.getWriteday())%>
 					</span>

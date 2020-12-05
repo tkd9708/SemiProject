@@ -20,42 +20,41 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
-
-   #thumbDiv {
-      margin-left: 200px;
-      margin-right: 200px;
-      margin-top: 150px;
-   }
-   .thumbnail {
-      width: 500px;
-      height: 500px;
-      
-      display: inline-block;
-   
-   }
-   
-   div.thumbnailDetail {
-      display: inline-block;
-      margin-left: 100px;
-      /* width: 420px;
-      height: 500px; */
-      /* vertical-align: bottom; */
-   }
-   
-   div#spotReview {
-      margin-left: 200px;
-      margin-right: 200px;
-      margin-bottom: 200px;
-   }
-   
-   
-   
-   /* span.star {
-      font-size: 20pt; 
-      color: #F0CD58;
-      cursor: pointer;
-   } */
-   
+	#thumbDiv {
+		margin-left: 200px;
+		margin-right: 200px;
+		margin-top: 150px;
+	}
+	.thumbnail {
+		width: 500px;
+		height: 500px;
+		
+		display: inline-block;
+	
+	}
+	
+	div.thumbnailDetail {
+		display: inline-block;
+		margin-left: 100px;
+		/* width: 420px;
+		height: 500px; */
+		/* vertical-align: bottom; */
+	}
+	
+	div#spotReview {
+		margin-left: 200px;
+		margin-right: 200px;
+		margin-bottom: 200px;
+	}
+	
+	
+	
+	/* span.star {
+		font-size: 20pt; 
+		color: #F0CD58;
+		cursor: pointer;
+	} */
+	
  
    
    /* 명소 지도  */
@@ -135,7 +134,6 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-
 a.info {
    text-decoration: none;
    color: #333;
@@ -146,8 +144,6 @@ div.modal-content{
 margin-top:200px;
 z-index:1111;
 }
-
-
 /* 하트 */
 .sd_heart {
     position: absolute;
@@ -176,7 +172,7 @@ z-index:1111;
     content: "";
     border-radius: 50%;
     position: absolute;
-      width: 20px;
+   	width: 20px;
     height: 25px;
     top: -13px;
     left: 0;
@@ -214,7 +210,6 @@ z-index:1111;
     top: -13px;
     left: 0;
   }
-
   @keyframes beat {
     50% {
       transform: scale(1.6) rotate(-45deg);
@@ -242,36 +237,36 @@ z-index:1111;
     }
     
     .thumbDiv {
-      width: 100%;
-      position: relative;
-      
-   }
-   
-   .thumbDiv img {
-      width: 100%;
-      vertical-align: middle;
-   }
-   
-   .thumbText {
-      padding-top: 40px;
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 40px;
-      /* background-color: #333;
-      opacity: 0.5; */
-      background-color: rgba(0,0,0,0.5);
-      text-align: center;
-      position: absolute;
-      top: 30%;
-      left: 75%;
-      width: 500px;
-      height: 300px;
-      transform: translate( -50%, -50% );
-      display: table;
-   }
-   
-   /* 배너 */
-/*    #SCROLL {
+		width: 100%;
+		position: relative;
+		
+	}
+	
+	.thumbDiv img {
+		width: 100%;
+		vertical-align: middle;
+	}
+	
+	.thumbText {
+		padding-top: 40px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 40px;
+		/* background-color: #333;
+		opacity: 0.5; */
+		background-color: rgba(0,0,0,0.5);
+		text-align: center;
+		position: absolute;
+		top: 30%;
+		left: 75%;
+		width: 500px;
+		height: 300px;
+		transform: translate( -50%, -50% );
+		display: table;
+	}
+	
+	/* 배너 */
+/* 	#SCROLL {
     POSITION: absolute; 
     PADDING-BOTTOM: 0pt; 
     MARGIN: 0pt; 
@@ -283,33 +278,32 @@ z-index:1111;
     z-index: 100;
 }
  */
-
 </style>
 <%
-   request.setCharacterEncoding("utf-8");
-   String contentsid = request.getParameter("contentsid");
-   String up = request.getParameter("up");
-   if(up == null){
-      up = "0";
-   }
-   
-   SpotlistDao dao = new SpotlistDao();
-   SpotlistDto dto = dao.getData(contentsid);
-   
-   SpotReviewDao rdao = new SpotReviewDao();
-   List<SpotReviewDto> list = rdao.getList(contentsid);
-   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-   
-   String myid = (String)session.getAttribute("myid");
-   String loginok = (String)session.getAttribute("loginok");
-   String today = sdf.format(new Date());
-   
-   MemberDao mdao = new MemberDao();
-   String memNum = mdao.getMemNum(myid);
-   
-   WishlistDao wdao = new WishlistDao();
-   boolean spotSearch = wdao.isSpotSearch(contentsid, myid);
-   
+	request.setCharacterEncoding("utf-8");
+	String contentsid = request.getParameter("contentsid");
+	String up = request.getParameter("up");
+	if(up == null){
+		up = "0";
+	}
+	
+	SpotlistDao dao = new SpotlistDao();
+	SpotlistDto dto = dao.getData(contentsid);
+	
+	SpotReviewDao rdao = new SpotReviewDao();
+	List<SpotReviewDto> list = rdao.getList(contentsid);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	String myid = (String)session.getAttribute("myid");
+	String loginok = (String)session.getAttribute("loginok");
+	String today = sdf.format(new Date());
+	
+	MemberDao mdao = new MemberDao();
+	String memNum = mdao.getMemNum(myid);
+	
+	WishlistDao wdao = new WishlistDao();
+	boolean spotSearch = wdao.isSpotSearch(contentsid, myid);
+	
 %>
 <script type="text/javascript">
 /* var BASE = 100; // 스크롤 시작 위치   
@@ -319,13 +313,11 @@ var TOP2 = 100; // 스크롤시 브라우저 위쪽과 떨어지는 거리
 var ActiveSpeed = 35;   
 var ScrollSpeed = 20;   
 var Timer;     
-
 function RefreshM() 
 {    
     var StartPoint, EndPoint;    
     StartPoint = parseInt(document.getElementById('SCROLL').style.top, 10);    
-      EndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + TOP2;
-
+   	EndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + TOP2;
     if (EndPoint < TOP1) EndPoint = TOP1;    
     if (StartPoint != EndPoint) 
     {     
@@ -337,7 +329,6 @@ function RefreshM()
    
    Timer = setTimeout("RefreshM();", ActiveSpeed);    
  }   
-
 function InitializeM() 
 {   
     document.getElementById('SCROLL').style.left = LEFT + "px";                              
@@ -345,203 +336,201 @@ function InitializeM()
                                              document.body.scrollTop + BASE + "px";    
     RefreshM(); 
 } */
-
-   $(function(){
-      
-      if(<%=spotSearch%>  && <%=loginok != null%>){
-         $(".sd_heart").addClass('color');
-      } 
-      
-      //searchPlaces(); return false;
-      
-      /* $("#srstarBox span").on("click",function(){
-         var idx = $(this).index()+1;
-         $(".star").removeClass("glyphicon glyphicon-star-empty");
-         
-         for(var i=0; i<=idx; i++){
-               $(".star").eq(i).addClass("glyphicon glyphicon-star");
-         }
-         for(var i=idx; i<=5; i++){
-               $(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
-         }
-         $("#spotReviewStar").val(idx);   
-      }); */
-      
-      
-      /* $("div.sd_heart").click(function(){
-         $(".sd_heart:eq(0)").addClass('color');
-      }); */
-      
-      $("#spotHeart").click(function(){
-         $("#spotModal").modal();
-         
-      });
-      
-      $("#spotGoCal").click(function(){
-         if("<%=loginok%>" == "success"){ 
-            $.ajax({
-               type: "post",
-               dataType: "html",
-               url: "spot/insertspottocal.jsp",
-               data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
-               success: function(data){
-                  $(".sd_heart").addClass('color');
-                  var a = confirm("Mypage로 이동하시겠습니까?");
-                  if(a){
-                     location.href="index.jsp?main=mypage/mypage.jsp";
-                  } 
-                  $("#spotModal").modal("hide");
-               
-               }
-            });
-         }
-         else {
-            alert("로그인이 필요한 서비스입니다.");
-         }
-      });
-   });
+	$(function(){
+		
+		if(<%=spotSearch%>  && <%=loginok != null%>){
+			$(".sd_heart").addClass('color');
+		} 
+		
+		//searchPlaces(); return false;
+		
+		/* $("#srstarBox span").on("click",function(){
+			var idx = $(this).index()+1;
+			$(".star").removeClass("glyphicon glyphicon-star-empty");
+			
+			for(var i=0; i<=idx; i++){
+			   	$(".star").eq(i).addClass("glyphicon glyphicon-star");
+			}
+			for(var i=idx; i<=5; i++){
+			   	$(".star").eq(i).addClass("glyphicon glyphicon-star-empty");
+			}
+			$("#spotReviewStar").val(idx);	
+		}); */
+		
+		
+		/* $("div.sd_heart").click(function(){
+			$(".sd_heart:eq(0)").addClass('color');
+		}); */
+		
+		$("#spotHeart").click(function(){
+			$("#spotModal").modal();
+			
+		});
+		
+		$("#spotGoCal").click(function(){
+			if("<%=loginok%>" == "success"){ 
+				$.ajax({
+					type: "post",
+					dataType: "html",
+					url: "spot/insertspottocal.jsp",
+					data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
+					success: function(data){
+						$(".sd_heart").addClass('color');
+						var a = confirm("Mypage로 이동하시겠습니까?");
+						if(a){
+							location.href="index.jsp?main=mypage/mypage.jsp";
+						} 
+						$("#spotModal").modal("hide");
+					
+					}
+				});
+			}
+			else {
+				alert("로그인이 필요한 서비스입니다.");
+			}
+		});
+	});
 </script>
 <body> <!-- onload="InitializeM();"> -->
-   
-   <!-- 배너 -->
-   <!-- <div style="position:relative;width:100px;height:100px">
-      <div id="SCROLL"> <span class="glyphicon glyphicon-star" style="font-size:30pt;"></span>
-       </div>
+	
+	<!-- 배너 -->
+	<!-- <div style="position:relative;width:100px;height:100px">
+		<div id="SCROLL"> <span class="glyphicon glyphicon-star" style="font-size:30pt;"></span>
+ 		</div>
+	</div> -->
 
-   </div> -->
-
-   <div class="thumbDiv">
-      <%
-      if(dto.getThumbnail() != null){
-      %>
-         <img src="<%=dto.getImg()%>">
-      <%
-      }
-      else {
-         %>
-         <div style="width: 100%; height:400px; background-color: rgba(0,0,0,0.5);"></div>
-         <%
-      }
-      %>
-      <!-- <img src="https://api.cdn.visitjeju.net/photomng/imgpath/201804/30/28e3386a-6142-4cc1-9c3f-bc615079c965.jpg"> -->
-      <div class="thumbText">
-         <br>
-         
-         <b style="font-size: 30pt; color: #eee"><%=dto.getTitle() %></b>
-         <br>
-         <span style="color: #F0CD58; font-size: 20px;">
-            <%
-              for(int i=1; i<=5; i++){
-                 if(i<=dto.getStar()){
-                    %><span class="glyphicon glyphicon-star"></span><%
-                 }
-                 else {
-                    %><span class="glyphicon glyphicon-star-empty"></span><%
-                 }
-              }
-              %>
-         </span>
-         <br><br>
-         <span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;<b>>&nbsp;<%=dto.getTag() %></b></span><br>
-         <hr>
-         <b style="color: #eee;"><span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<%=dto.getIntroduction() %></b>
-         <br><br>
-         <%
-         if(dto.getRoadaddr()!=null){
-            %>
-            <b style="color: #eee;" style="display: table-row;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getRoadaddr() %></b>
-            <%
-         }
-         else {
-            %>
-            <b style="color: #eee;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getAddr() %></b>
-            <%
-         }
-      
-         %>
-         <br>
-               
-         <div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
-      </div>
-   </div>
-   
-   <%-- <div id="thumbDiv">
-   <table style="width: 100%">
-      <tr height="500px">
-         <td style="width: 50%">
-            <%
-            if(dto.getThumbnail() != null){
-               %>
-               <img class="thumbnail" src="<%=dto.getThumbnail()%>">
-               <%
-            }
-            else {
-               %>
-               <div class="thumbnail">썸네일 없음</div>
-               <%
-            }
-            %>
-         </td>
-         <td style="width: 50%; position: relative;" valign="top">
-            <span style="color: #F0CD58; font-size: 30px;">
-                  <%
-                    for(int i=1; i<=5; i++){
-                       if(i<=dto.getStar()){
-                          %><span class="glyphicon glyphicon-star"></span><%
-                       }
-                       else {
-                          %><span class="glyphicon glyphicon-star-empty"></span><%
-                       }
-                    }
-                    %>
-               </span>
-               <br><br>
-               <b style="font-size: 20pt;"><%=dto.getTitle() %></b>
-               <br><br>
-               <span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
-               <hr>
-               <span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
-               <br><br>
-               <%
-               if(dto.getRoadaddr()!=null){
-                  %>
-                  <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
-                  <%
-               }
-               else {
-                  %>
-                  <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
-                  <%
-               }
-      
-                  %>
-               <br>
-               <!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
-               <span class="glyphicon glyphicon-heart-empty"></span> 
-               </div> -->
-               <div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
-            <!-- <div class="thumbnailDetail" style="position: relative;">
-               
-            </div> -->
-         </td>
-      </tr>
-   </table>
-   
-   
-   </div> --%>
-   
-   
-   <br><br>
-   
-   <br><br><br>
-   
-   
-   <!-- 명소 주변 맛집 -->
-   <div style="margin-left: 200px; margin-right: 200px;">
-      <h1 style="font-weight: 900;"><b>명소 주변</b></h1><br>
-      <div class="map_wrap" style="text-align: center;">
-       <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden;"></div>
-         <ul id="category">
+	<div class="thumbDiv">
+		<%
+		if(dto.getThumbnail() != null){
+		%>
+			<img src="<%=dto.getImg()%>">
+		<%
+		}
+		else {
+			%>
+			<div style="width: 100%; height:400px; background-color: rgba(0,0,0,0.5);"></div>
+			<%
+		}
+		%>
+		<!-- <img src="https://api.cdn.visitjeju.net/photomng/imgpath/201804/30/28e3386a-6142-4cc1-9c3f-bc615079c965.jpg"> -->
+		<div class="thumbText">
+			<br>
+			
+			<b style="font-size: 30pt; color: #eee"><%=dto.getTitle() %></b>
+			<br>
+			<span style="color: #F0CD58; font-size: 20px;">
+				<%
+        		for(int i=1; i<=5; i++){
+        			if(i<=dto.getStar()){
+        				%><span class="glyphicon glyphicon-star"></span><%
+        			}
+        			else {
+        				%><span class="glyphicon glyphicon-star-empty"></span><%
+        			}
+        		}
+        		%>
+			</span>
+			<br><br>
+			<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;<b>>&nbsp;<%=dto.getTag() %></b></span><br>
+			<hr>
+			<b style="color: #eee;"><span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<%=dto.getIntroduction() %></b>
+			<br><br>
+			<%
+			if(dto.getRoadaddr()!=null){
+				%>
+				<b style="color: #eee;" style="display: table-row;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getRoadaddr() %></b>
+				<%
+			}
+			else {
+				%>
+				<b style="color: #eee;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getAddr() %></b>
+				<%
+			}
+		
+			%>
+			<br>
+					
+			<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+		</div>
+	</div>
+	
+	<%-- <div id="thumbDiv">
+	<table style="width: 100%">
+		<tr height="500px">
+			<td style="width: 50%">
+				<%
+				if(dto.getThumbnail() != null){
+					%>
+					<img class="thumbnail" src="<%=dto.getThumbnail()%>">
+					<%
+				}
+				else {
+					%>
+					<div class="thumbnail">썸네일 없음</div>
+					<%
+				}
+				%>
+			</td>
+			<td style="width: 50%; position: relative;" valign="top">
+				<span style="color: #F0CD58; font-size: 30px;">
+						<%
+        				for(int i=1; i<=5; i++){
+        					if(i<=dto.getStar()){
+        						%><span class="glyphicon glyphicon-star"></span><%
+        					}
+        					else {
+        						%><span class="glyphicon glyphicon-star-empty"></span><%
+        					}
+        				}
+        				%>
+					</span>
+					<br><br>
+					<b style="font-size: 20pt;"><%=dto.getTitle() %></b>
+					<br><br>
+					<span style="color: #ccc; font-size: 13px;">&nbsp;&nbsp;&nbsp;>&nbsp;<%=dto.getTag() %></span><br>
+					<hr>
+					<span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;&nbsp;<b style="color: gray;"><%=dto.getIntroduction() %></b>
+					<br><br>
+					<%
+					if(dto.getRoadaddr()!=null){
+						%>
+						<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getRoadaddr() %></b>
+						<%
+					}
+					else {
+						%>
+						<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<b><%=dto.getAddr() %></b>
+						<%
+					}
+		
+						%>
+					<br>
+					<!-- <div style="color: red; font-size: 50pt; position: absolute; bottom:20px; right: 20px; cursor: pointer;">
+					<span class="glyphicon glyphicon-heart-empty"></span> 
+					</div> -->
+					<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+				<!-- <div class="thumbnailDetail" style="position: relative;">
+					
+				</div> -->
+			</td>
+		</tr>
+	</table>
+	
+	
+	</div> --%>
+	
+	
+	<br><br>
+	
+	<br><br><br>
+	
+	
+	<!-- 명소 주변 맛집 -->
+	<div style="margin-left: 200px; margin-right: 200px;">
+		<h1 style="font-weight: 900;"><b>명소 주변</b></h1><br>
+		<div class="map_wrap" style="text-align: center;">
+    	<div id="map" style="width:100%;height:100%; position:relative;overflow:hidden;"></div>
+   		<ul id="category">
         <li id="FD6" data-order="0"> 
             <span class="category_bg restaurant"></span>
             음식점
@@ -566,31 +555,25 @@ function InitializeM()
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
-
 //마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
     markers = [], // 마커를 담을 배열입니다
     currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다~~~~~~~~~~~~~~~~~~~~~~~~
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(<%=dto.getLatitude()%>, <%=dto.getLongitude()%>), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
-
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
-
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(map);  
-
 //지도에 마커를 표시합니다 ~~~~~~~~~~~~~~~~~~~~~~~~~~`
 var marker = new kakao.maps.Marker({
    map: map, 
    position: new kakao.maps.LatLng(<%=dto.getLatitude()%>,<%=dto.getLongitude()%>)
 });  
-
 var content = '<div class="wrap">' + 
 '    <div class="info">' + 
 '        <div class="mtitle">' + 
@@ -609,8 +592,6 @@ var content = '<div class="wrap">' +
 '        </div>' +  --%>
 '    </div>' +    
 '</div>';
-
-
 //마커 위에 커스텀오버레이를 표시합니다
 //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 var overlay = new kakao.maps.CustomOverlay({
@@ -618,21 +599,15 @@ var overlay = new kakao.maps.CustomOverlay({
    map: map,
    position: marker.getPosition()       
 });
-
 //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function() {
    overlay.setMap(map);
 });
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
 // 키워드로 장소를 검색합니다
 //searchPlaces();
-
-
 //~~~~~~~~~~~~~~~~~~~~~
 //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 function closeOverlay() {
@@ -640,21 +615,16 @@ function closeOverlay() {
 }
 // 지도에 idle 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'idle', searchPlaces);
-
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 contentNode.className = 'placeinfo_wrap';
-
 // 커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
 // 지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 kakao.maps.event.preventMap 메소드를 등록합니다 
 addEventHandle(contentNode, 'mousedown', kakao.maps.event.preventMap);
 addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
-
 // 커스텀 오버레이 컨텐츠를 설정합니다
 placeOverlay.setContent(contentNode);  
-
 // 각 카테고리에 클릭 이벤트를 등록합니다
 addCategoryClickEvent();
-
 // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 function addEventHandle(target, type, callback) {
     if (target.addEventListener) {
@@ -663,33 +633,24 @@ function addEventHandle(target, type, callback) {
         target.attachEvent('on' + type, callback);
     }
 }
-
-
-
 //~~~~~~~~~~~~~~~~~~~~~~
-
-
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
-
    if (!currCategory) {
         return;
     }
    
     // 커스텀 오버레이를 숨깁니다 
     placeOverlay.setMap(null);
-
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
     
     ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true});
     
 }
-
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
    if (status === kakao.maps.services.Status.OK) {
-
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         displayPlaces(data);
         
@@ -697,16 +658,13 @@ function placesSearchCB(data, status, pagination) {
         displayPagination(pagination);
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
     } else if (status === kakao.maps.services.Status.ERROR) {
         // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
         
     }
 }
-
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-
    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
     var order = document.getElementById(currCategory).getAttribute('data-order');
@@ -717,21 +675,17 @@ function displayPlaces(places) {
     listStr = '';
  // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl);
-
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
     
     for ( var i=0; i<places.length; i++ ) {
-
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
-
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
@@ -739,11 +693,9 @@ function displayPlaces(places) {
             /* kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, place);
             });
-
             kakao.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             }); */
-
             kakao.maps.event.addListener(marker, 'click', function() {
                displayInfowindow(marker, place);
             });
@@ -754,25 +706,19 @@ function displayPlaces(places) {
                 //displayInfowindow(marker, title);
             displayPlaceInfo(place);
             };
-
             itemEl.onmouseout =  function () {
                 infowindow.close();
             }; */
         })(marker, places[i]);
-
         fragment.appendChild(itemEl);
-
     }
    
-
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
     menuEl.scrollTop = 0;
-
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
 }
-
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
     
@@ -780,7 +726,6 @@ function getListItem(index, places) {
     itemStr = '<div style="display: flex; margin-left: 100px;"><span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<a class="info" style="float:left; width: 70%; cursor:pointer;" href="' + places.place_url + '" target="_blank" title="' + places.place_name + '">' +
                 '   <h5 class="placeName">' + places.place_name + '</h5>';
-
     if (places.road_address_name) {
         itemStr += '    <span>' + places.road_address_name + '</span>' +
                     '   <span class="jibun gray">' +  places.address_name  + '</span>';
@@ -790,16 +735,14 @@ function getListItem(index, places) {
                  
     itemStr += '  <span class="tel">' + places.phone  + '</span>' + '</a>';  
     itemStr += '<div style="display: inline-block; width: 30%; font-size: 30pt; color:red; '
-             +   'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
-             //+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
-             + '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
-          
+    			+	'text-align: center; line-height: 150px; margin-right: 100px; position: relative;">' 
+    			//+ ' space="' + places.place_name + '" addr="' + places.road_address_name + '">♡</div></div>';
+    			+ '<div class="sd_heartlist aroundHeart" idx="' + index + '" style="cursor:pointer;" space="' + places.place_name + '" addr="' + places.road_address_name + '" category="' + currCategory + '"></div></div></div>';
+    		
     el.innerHTML = itemStr;
     el.className = 'item';
-
     return el;
 }
-
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
     var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
@@ -814,13 +757,10 @@ function addMarker(position, idx, title) {
             position: position, // 마커의 위치
             image: markerImage 
         });
-
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
     return marker;
 }
-
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
     for ( var i = 0; i < markers.length; i++ ) {
@@ -828,23 +768,19 @@ function removeMarker() {
     }   
     markers = [];
 }
-
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 function displayPagination(pagination) {
     var paginationEl = document.getElementById('pagination'),
         fragment = document.createDocumentFragment(),
         i; 
-
     // 기존에 추가된 페이지번호를 삭제합니다
     while (paginationEl.hasChildNodes()) {
         paginationEl.removeChild (paginationEl.lastChild);
     }
-
     for (i=1; i<=pagination.last; i++) {
         var el = document.createElement('a');
         el.href = "#";
         el.innerHTML = i;
-
         if (i===pagination.current) {
             el.className = 'on';
         } else {
@@ -854,12 +790,10 @@ function displayPagination(pagination) {
                 }
             })(i);
         }
-
         fragment.appendChild(el);
     }
     paginationEl.appendChild(fragment);
 }
-
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, place) {
@@ -882,7 +816,6 @@ function displayInfowindow(marker, place) {
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
-
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
     while (el.hasChildNodes()) {
@@ -890,25 +823,20 @@ function removeAllChildNods(el) {
     }
 }
  
-
 //각 카테고리에 클릭 이벤트를 등록합니다
 function addCategoryClickEvent() {
  var category = document.getElementById('category'),
      children = category.children;
-
  for (var i=0; i<children.length; i++) {
      children[i].onclick = onClickCategory;
  }
 }
-
 //카테고리를 클릭했을 때 호출되는 함수입니다
 function onClickCategory() {
    var id = this.id, className = this.className;
-
  
  
     placeOverlay.setMap(null);
-
     if (className === 'on') {
        currCategory = '';
         changeCategoryClass();
@@ -919,52 +847,49 @@ function onClickCategory() {
         searchPlaces();
     }
 }
-
 //클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
 function changeCategoryClass(el) {
  var category = document.getElementById('category'),
      children = category.children,
      i;
-
  for ( i=0; i<children.length; i++ ) {
      children[i].className = '';
  }
-
  if (el) {
      el.className = 'on';
  } 
 } 
 </script>
 
-   <br><br><br><br><br>
-   <hr style="color: #aaa">
-   <br>
-   <!-- 명소 리뷰 -->
-   <!-- <div id="spotReview"> -->
-      
-      
-      
-      <div id="spotReview">
-         <%
-         
-         if(up.equals("0")){
-            %>
-            <jsp:include page="spotreview.jsp?contentsid=<%=contentsid %>" />
-            <%
-         }
-         else{
-            %>
-            <jsp:include page="updatereview.jsp?contentsid=<%=contentsid %>&up=<%=up %>" />
-            <%
-         }
-         
-         %>
-      </div>
-      
-   <!-- </div> -->
-   
-   <!-- around 일정 추가 modal -->
-   <div class="modal fade" id="aroundModal" role="dialog">
+	<br><br><br><br><br>
+	<hr style="color: #aaa">
+	<br>
+	<!-- 명소 리뷰 -->
+	<!-- <div id="spotReview"> -->
+		
+		
+		
+		<div id="spotReview">
+			<%
+			
+			if(up.equals("0")){
+				%>
+				<jsp:include page="spotreview.jsp?contentsid=<%=contentsid %>" />
+				<%
+			}
+			else{
+				%>
+				<jsp:include page="updatereview.jsp?contentsid=<%=contentsid %>&up=<%=up %>" />
+				<%
+			}
+			
+			%>
+		</div>
+		
+	<!-- </div> -->
+	
+	<!-- around 일정 추가 modal -->
+	<div class="modal fade" id="aroundModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -1020,60 +945,58 @@ function changeCategoryClass(el) {
   </div>
  
 <script type="text/javascript">
-
-   $(document).on("click", ".aroundHeart", function(){
-      $("#aroundModal").modal();
-      
-      var space = $(this).attr("space");
-      var addr = $(this).attr("addr");
-      var category = $(this).attr("category");
-      var s = "";
-      s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
-      s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
-      s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
-      s += "<input type='hidden' id='sd_category' value='" + category + "'>";
-      s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
-      s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
-      //s += "</div>";
-   
-      $("#aroundModalInfo").html(s);   
-      
-   });
-   
-   $("#aroundGoCal").click(function(){
-      
-      if("<%=loginok%>" == "success"){
-         $.ajax({
-            type: "post",
-            dataType: "html",
-            url: "spot/insertaroundtocal.jsp",
-            data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
-            success: function(data){
-
-               var heartidx = $("#sd_heartidx").val();
-               $(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
-               var a = confirm("Mypage로 이동하시겠습니까?");
-               if(a){
-                  location.href="index.jsp?main=mypage/mypage.jsp";
-               } 
-               $("#aroundModal").modal("hide");
-            }
-         });
-      }
-      else {
-         alert("로그인이 필요한 서비스입니다.");
-      }
-      
-   });
-   
-   $(".upReview").click(function(){
-      var num = $(this).attr("num");
-      
-      location.href = "index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>&up=" + num + "#spotReview";
-   });
-   
-   
-   
+	$(document).on("click", ".aroundHeart", function(){
+		$("#aroundModal").modal();
+		
+		var space = $(this).attr("space");
+		var addr = $(this).attr("addr");
+		var category = $(this).attr("category");
+		var s = "";
+		s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + space + "</b><br><br>";
+		s += "<input type='hidden' id='sd_space' value='"+ space +"'>";
+		s += "<input type='hidden' id='sd_addr' value='"+ addr +"'>";
+		s += "<input type='hidden' id='sd_category' value='" + category + "'>";
+		s += "<input type='hidden' id='sd_heartidx' value='" + $(this).attr("idx") + "'";
+		s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
+		//s += "</div>";
+	
+		$("#aroundModalInfo").html(s);	
+		
+	});
+	
+	$("#aroundGoCal").click(function(){
+		
+		if("<%=loginok%>" == "success"){
+			$.ajax({
+				type: "post",
+				dataType: "html",
+				url: "spot/insertaroundtocal.jsp",
+				data: {"wishday":$("#sd_wishday").val(), "myId":"<%=myid%>", "aroundId":$("#sd_space").val(), "addr":$("#sd_addr").val(), "category":$("#sd_category").val()},
+				success: function(data){
+					var heartidx = $("#sd_heartidx").val();
+					$(".sd_heartlist:eq(" +heartidx+ ")").addClass('color');
+					var a = confirm("Mypage로 이동하시겠습니까?");
+					if(a){
+						location.href="index.jsp?main=mypage/mypage.jsp";
+					} 
+					$("#aroundModal").modal("hide");
+				}
+			});
+		}
+		else {
+			alert("로그인이 필요한 서비스입니다.");
+		}
+		
+	});
+	
+	$(".upReview").click(function(){
+		var num = $(this).attr("num");
+		
+		location.href = "index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>&up=" + num + "#spotReview";
+	});
+	
+	
+	
 </script>
 
 
