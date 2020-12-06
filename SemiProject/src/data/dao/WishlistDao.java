@@ -400,4 +400,3 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	}
 	
 }
-

@@ -16,7 +16,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 .modal-backdrop{height:100%; }
-
 div.mypage_main{
 margin-top: 100px;
 margin-bottom: 200px;
@@ -56,11 +55,9 @@ color: #4d55e9;
 td.date:first-of-type span.date, td.dateTitle:first-of-type{
 color: #e63d38; 
 }
-
 #calendarBody tr:last-of-type {
 border-bottom:5px solid gray;
 }
-
 #tbCalendarYM {
 font-size: 36px;
 }
@@ -110,11 +107,8 @@ span.btnSchedulelist{
 cursor: pointer;
 width: 20pt;
 }
-
-
 a { text-decoration:none; color: black}
 a:hover { text-decoration:none }
-
 div#myInfo{
 	padding: 20px 130px 20px 130px;
 	height:"100%";
@@ -125,14 +119,23 @@ div#myInfo>table{
 	border-collapse: inherit;
 }
 
+
+
+.listmodalcontent{
+overflow-y: initial !important
+}
+.listmodalbody{
+height: 300px;
+overflow-y: auto;
+}
+
+
 </style>
 
    <!-- 부트스트랩 모달 스크립트 -->
 <%String memId = (String)session.getAttribute("myid");
-
 WishlistDao dao = new WishlistDao();
 List<WishlistDto>list = dao.getList(memId);
-
 %>
 
 
@@ -217,7 +220,7 @@ function drawCalendar(){ //달력 그리는 함수
                   dMon="0"+dMon;
                }
             
-                  calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
+                  calendar +="<td style='width:12%' class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
                   +"<span class='date"+" "+tdClass+"' day="+dNum+">"+dNum+"</span>"
                   +"<div id='"+y+dMon+dNum+"' style='margin-top:10px;margin-bottom:5px'></div>"
                   +"</td>"
@@ -233,8 +236,6 @@ function drawCalendar(){ //달력 그리는 함수
          
          $("#calendarBody").html(calendar);
 }
-
-
 function getData(){
    <%
       for(WishlistDto dto : list){
@@ -274,13 +275,11 @@ function getData(){
       
 <%}%>
 }
-
 function getList(){
    
-   var s ="<div>";
+   var s ="<div >";
    var wishday="";
    var prewishday="0";
-
    var w="";
    $("#listModal").modal();
    <%
@@ -298,7 +297,7 @@ function getList(){
          w="";
       }else{
          s+="</div>";
-         s+="<div class='line' style='margin-top:15px'>";
+         s+="<div class='line' style='margin-top:15px;'>";
       }
    }
    if(title!="0"){
@@ -323,7 +322,6 @@ function getList(){
       prewishday=wishday;
       //alert(pre);
    }
-
    
    
    <%}%>
@@ -353,7 +351,6 @@ function getDetail(){
    var detailcontent="";
    
    if(title!="0"){
-
       $("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
             "<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
             
@@ -387,10 +384,7 @@ function getDetail(){
    }
    
 <%}%>
-
 }
-
-
 </script>
 
 </head>
@@ -404,7 +398,6 @@ WishlistDao wdao = new WishlistDao();
 List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);
 SpotlistDao sddao = new SpotlistDao();
 if(loginok!=null){
-
    %>   
 <div style="width: 100%; height: 400px; background-color: #f7f7f7; margin-top: 150px;">
 	<div id="myInfo">
@@ -566,15 +559,15 @@ location.href = "index.jsp";
 <!-- 일정 목록 모달 -->
 <div class="modal fade" id="listModal" role="dialog">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
-      <div class="modal-content" style="width:450px">
+      <div class="modal-content listmodalcontent" style="width:450px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 style="text-align: center" >
             <b>일정 목록</b>   
          </h4>
         </div>
-        <div class="modal-body" style="padding: 30px;">
-          <div id="myslist"></div>
+        <div class="modal-body listmodalbody" style="padding: 30px;">
+          <div id="myslist" style='overflow-y:auto'></div>
           
        </div>
       </div>
@@ -643,7 +636,6 @@ location.href = "index.jsp";
    
    //getdata();
    getData();
-
    $(document).on("click","span.btnSchedulelist",function(e){
       getList();      
    })
@@ -676,7 +668,9 @@ location.href = "index.jsp";
             dataType:"html",
             data:{"num":num},
             success:function(data){
-               location.reload();
+              location.reload();
+            // window.history.back();
+             getData();
             }
          })
       }
@@ -687,7 +681,6 @@ location.href = "index.jsp";
    $(document).on("click","label",function(){
       getData();
    })
-
    
 </script>
 </div>
