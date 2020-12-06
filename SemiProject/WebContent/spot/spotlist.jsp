@@ -36,10 +36,14 @@ font-family: SCDream5;
    }
    
    div#spotList {
-      overflow: hidden;
-      margin-left: 200px;
+      overflow: hidden;/* 
+      margin-left: 200px;    
+      margin-right: 130px; 
+      margin-top: 180px;*/
       margin-top: 180px;
-      margin-right: 130px;
+      width: 100%;
+      padding-left: 180px;
+      padding-right: 130px;
    }
    
    div.footer {

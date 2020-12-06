@@ -256,7 +256,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from spotreview where memNum= ? order by num desc limit 0,4";
+		String sql ="select * from spotreview where memNum= ? order by num desc limit 1,5";
 		conn=db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
