@@ -530,10 +530,10 @@ function InitializeM()
 	
 	</div> --%>
 	
-	<hr style="color: #aaa">
-	<br><br>
 	
 	<br><br>
+	
+	<br><br><br>
 	
 	
 	<!-- 명소 주변 맛집 -->

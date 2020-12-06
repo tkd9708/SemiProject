@@ -364,6 +364,40 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 		return subject ;
 	}
 	
+	public int getWishTotalCount(String memId, String category) {
+		int tot=0;
+		String sql = "";
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		if(category.equals("around")) {
+			sql = "select count(*) from wishlist where aroundid != '0' or sharenum!='0' and memid=?";
+		}
+		else if(category.equals("spot")) {
+			sql = "select count(*) from wishlist where spotId != '0' and memid=?";
+		}
+		else if(category.equals("my")) {
+			sql = "select count(*) from wishlist where aroundid = '0' and sharenum='0' and spotid='0' and memid=?";
+		}
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				tot = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		
+		return tot;
+	}
 	
 }
 
