@@ -116,6 +116,28 @@ public class WishlistDao {
 
 	}
 
+	// share insert
+	   public void insertShare(WishlistDto dto) {
+	      String sql = "insert into wishlist (memId, shareNum,wishday,content) values (?,?,?,0)";
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      
+	      conn = db.getConnection();
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, dto.getMemId());
+	         pstmt.setString(2, dto.getShareNum());
+	         pstmt.setString(3, dto.getWishday());
+	         
+	         pstmt.execute();
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }finally {
+	         db.dbClose(conn, pstmt);
+	      }
+	   }   
+	   
 	// delete
 	public void deleteContent(String num) {
 

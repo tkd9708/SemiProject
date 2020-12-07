@@ -20,7 +20,6 @@ response.setHeader("Refresh","3;url=index.jsp");
 </style>
 </head>
 <body>
-<h1>회원가입되었습니다</h1>
 <div class="success">
 <h1>회원가입을 축하드립니다!</h1>
    <h4>이제 멘도롱소랑의 다양한 기능을 이용하실 수 있습니다!</h4>

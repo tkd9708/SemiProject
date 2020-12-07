@@ -8,64 +8,51 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <style type="text/css">
+scroll-behavior: smooth;
+   div.subject{
+      margin-top: 100px;
+   }
+   
    th.td{
       padding: 6px;
       text-align: center;
    
    }
-   .usersubmit{
-      position: relative;
-      left: 150px;
-      margin-top:50px;
-      width: 100px;
-      height: 50px;
-      border-color: #f8c990;
-      background: #ff9933;
-      color: white;
-   }
-   .btn_cancel{
-      position: relative;
-      left: 200px;
-      margin-top:50px;
-      width: 100px;
-      height: 50px;
-      border-color: #e5e5e5;
-      background: white;
-      
-   }
-
    
    div.shareboardform{
-      position: absolute;
-      left: 250px;
+      margin-left: 600px;
+      margin-top: 150px;
+      
    }
    
-   /*별점 css*/
+  h2{
+      width:150px;
+      margin-left: 320px;
+  }
+  
+  div.share_btn{
+     margin-left: 250px;
+  }
+   
+   /*--------------------별점 css--------------------------------*/
  div.stars{
-   position: absolute;
-   top: 493px;
-   left: 100px;
+   float: left;
  
  }
  
  
-
 .stars{
     display: flex;
     flex-wrap: wrap;
-
     flex-direction: row-reverse;
     justify-content: center;
-
 }
-
 .stars__star-icon{
     stroke:#EFCE4A;
     stroke-width: 2px;
     fill: transparent;
     transition: .1s all;
 }
-
 .stars__star{
     width: 20px;
     height: 20px;
@@ -73,7 +60,6 @@
     cursor: pointer;
     margin: 5px;
 }
-
 .stars__checkbox{
     position: absolute;
     top: -9999px;
@@ -81,36 +67,28 @@
     width: 0;
     height: 0;
 }
-
 .stars__star:hover > .stars__star-icon{
     fill: #EFCE4A;
 }
-
 .stars__star:hover ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked + .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
-/*버튼 css*/
-
+/*--------------------------버튼 css--------------------------------------*/
 html, body {
   height: 100%;
 }
-
 .wrap {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .button {
   width: 100px;
   height: 40px;
@@ -129,29 +107,43 @@ html, body {
   
  }
  
- div.point{
-  position: relative;
-  top: -30px;
-  right: -830px;
- }
-  
-
-
 .button:hover {
   background-color: #ffaa00;
-
   transform: translateY(-7px);
 }
-
-div.btn{
-   position: absolute;
-   left: 300px;
+/*--------------------------테이블 css--------------------------------------*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
 }
-
-
-
+.styled-table th {
+    background-color:  #ffad33;
+    color: white;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table  th {
+    border-bottom: 1px solid white;
+}
+.styled-table  th:nth-of-type(even) {
+    background-color:  #ffad33;
+}
+.styled-table td:last-of-type {
+    border-bottom: 1px solid #ffad33;
+}
+.styled-table td.active-row {
+    font-weight: bold;
+    color: black;
+}
    
-
 </style>
 <script type="text/javascript">
 $(function(){
@@ -159,39 +151,49 @@ $(function(){
         var idx = $(this).index()/2;
         switch (idx) {
         case 0:
-           idx=5;
+           idx="5";
            break;
         case 1:
-           idx=4;
+           idx="4";
            break;
         case 2:
-           idx=3;
+           idx="3";
            break;
         case 3:
-           idx=2;
+           idx="2";
            break;
         case 4:
-           idx=1;
+           idx="1";
            break;
         default:
            break;
         }
-        alert(idx);
+        //alert(idx);
         $("#sharestar").val(idx);   
      });
-   
+ 
 }); //function close
 </script>
 </head>
 <body>
+<%
+   String id=(String)session.getAttribute("myid");
+   
+   String loginok=(String)session.getAttribute("loginok");
+   if(loginok.equals("success")){%>
+
+
+
+
+
 <div class="shareboardform">
-<fieldset style="width: 800px;">
-   <legend >공유하기</legend>
+<h2>공유하기</h2>
+<fieldset style="width: 800px;;">
    <form action="shareboard/shareboardaction.jsp" method="post" enctype="multipart/form-data">
-   <table class="table table-bordered">
+   <table class="styled-table">
          <tr>
-            <th bgcolor="#ffc34d"><span>추천맛집</span></th>
-            <td>
+            <th style="text-align: center;"><span>추천맛집</span></th>
+            <td> <input type="hidden" name="id"value="<%=id%>">
               <input type="text" name="subject" class="form-control"
                required="required" style="width: 200px;height: 30px;"
                placeholder="맛집이름을 적어주세요" >
@@ -199,7 +201,7 @@ $(function(){
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>맛집주소</span></th>
+            <th style="text-align: center;"><span>맛집주소</span></th>
             <td>
               <input type="text" name="addr" class="form-control"
                required="required" style="width:600px;height: 30px;"
@@ -208,14 +210,14 @@ $(function(){
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>이미지</span></th>
+            <th style="text-align: center;"><span>이미지</span></th>
             <td>
               <input class="btn" type="file" name="photo" style="width: 600px;">
             </td>
          </tr>
          
          <tr>
-            <th bgcolor="#ffc34d"><span>내용</span></th>
+            <th style="text-align: center;"><span>내용</span></th>
             <td>
               <textarea class="form-control"
                rows="13" cols="70" maxlength="1500" name="content" style="resize: none;">
@@ -224,11 +226,11 @@ $(function(){
          </tr>
          
          <tr>
-           <th bgcolor="#ffc34d"><span>평가</span></th>
+           <th style="text-align: center;"><span>평가</span></th>
             <td>
                 <input type="hidden" id="sharestar" name="stars" value="0">               
            <!-- 별점 -->
-      <div class="stars">
+        <div class="stars">
         <input class="stars__checkbox" type="radio" id="first-star" name="star">
         <label class="stars__star" for="first-star">
             <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -272,16 +274,21 @@ $(function(){
         </div>
         </td> 
        </tr>  
-        <tr>
-          <td colspan="2" align="center">
+       
+     </table> 
+      
+      
+      <div class="share_btn">
              <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
                
              <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
-               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">  
-          </td>             
-       </tr> 
-       </table> 
+               onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">      
+      </div>
     </form>
    </fieldset>
+       <%}else {%>
+       <b>먼저 로그인을 해주세요</b>
+    <%}%>
   </div>
 </body>
+</html>

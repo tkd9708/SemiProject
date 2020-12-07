@@ -406,12 +406,12 @@ if(loginok!=null){
    			<tr bgcolor="#fff" height="250px">
    				<td style="padding-left: 50px; padding-right: 50px; line-height: 30px; width:40%;">
    				<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
-   					<span class="glyphicon glyphicon-leaf"></span>&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
-   					<span class="glyphicon glyphicon-user"></span>&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
-   					<span class="glyphicon glyphicon-phone"></span>&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
-   					<span class="glyphicon glyphicon-envelope"></span>&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
-   					<span class="glyphicon glyphicon-home"></span>&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %>(<%=mdto.getAddrdetail() %>)<br>
-   					
+   					<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
+   					<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
+   					<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
+   					<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
+   					<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %><br>
+   					<p style="margin-left:80px;">(<%=mdto.getAddrdetail() %>)</p>
    				</td>
    				<td style="width:20%; text-align: center;">
    					<b>찜한 명소 갯수</b>

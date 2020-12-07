@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <select id="spotListSelect" style="float: right; margin-right: 70px;">
          <option value="평점" selected="selected">평점순</option>
          <option value="좋아요">좋아요순</option>
-         <option value="이름">이름순</option>
+         <option value="제목">제목순</option>
       </select>
       <br><br><br>
       <%
