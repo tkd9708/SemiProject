@@ -91,14 +91,16 @@
 		<div class="glyphicon glyphicon-list" style="font-size: 20pt; cursor: pointer;"
 			onclick="location.href='index.jsp?main=notice/noticelist.jsp?pageNum=<%=pageNum%>'"></div>
 		<%
+		//noticecontent.jsp (수정버튼)
 		if(loginok!=null && myid.equals("admin")){
-			%>
-			<div class="glyphicon glyphicon-pencil" style="font-size: 20pt; cursor: pointer; float:right;"
-					onclick="location.href='index.jsp?main=notice/updatenoticeform.jsp'"></div>
-			<div class="glyphicon glyphicon-trash" style="font-size: 20pt; cursor: pointer; float:right; margin-right: 20px;" id="btn_delnotice"></div>
-			<%
-		}
-		%>
+		         %>
+		         <div class="glyphicon glyphicon-pencil" style="font-size: 20pt; cursor: pointer; float:right;"
+		               onclick="location.href='index.jsp?main=notice/updatenoticeform.jsp?num=<%=num %>&pageNum=<%=pageNum%>'"></div>
+		         <div class="glyphicon glyphicon-trash" style="font-size: 20pt; cursor: pointer; float:right; margin-right: 20px;" id="btn_delnotice"></div>
+		         <%
+		      }
+		      %>
+		
 		
 		<br><br>
 		<table class="contentform table table-striped">

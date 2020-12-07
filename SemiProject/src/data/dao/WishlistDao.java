@@ -92,6 +92,35 @@ public class WishlistDao {
 		return find;
 
 	}
+	
+	public boolean isShareSearch(String num) {
+		boolean find = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from wishlist where shareNum = ?";
+		conn = db.getConnection();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				find = true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+
+		return find;
+
+	}
 
 	// insert
 	public void insertContent(WishlistDto dto) {
@@ -116,6 +145,28 @@ public class WishlistDao {
 
 	}
 
+	// share insert
+	   public void insertShare(WishlistDto dto) {
+	      String sql = "insert into wishlist (memId, shareNum,wishday,content) values (?,?,?,0)";
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      
+	      conn = db.getConnection();
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, dto.getMemId());
+	         pstmt.setString(2, dto.getShareNum());
+	         pstmt.setString(3, dto.getWishday());
+	         
+	         pstmt.execute();
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }finally {
+	         db.dbClose(conn, pstmt);
+	      }
+	   }   
+	   
 	// delete
 	public void deleteContent(String num) {
 
@@ -256,7 +307,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from spotreview where memNum= ? order by num desc limit 0,4";
+		String sql ="select * from spotreview where memNum= ? order by num desc limit 1,5";
 		conn=db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -400,4 +451,3 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 	}
 	
 }
-

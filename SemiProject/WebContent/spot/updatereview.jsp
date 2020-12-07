@@ -190,7 +190,7 @@
 						<input type="hidden" name="contentsid" value="<%=contentsid %>">
 						<input type="hidden" name="num" value="<%=up %>">
 						<input type="hidden" name="stars" id="up_spotReviewStar" value="<%=dto.getStar()%>">
-						<textarea name="content" id="up_srContent" style="height: 150px;" class="form-control"><%=dto.getContent() %></textarea>
+						<textarea name="content" id="up_srContent" style="height: 150px; resize: none;" class="form-control"><%=dto.getContent() %></textarea>
 			
 					</td>
 				</tr>

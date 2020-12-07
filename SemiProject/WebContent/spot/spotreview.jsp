@@ -192,7 +192,7 @@
 </script>
 </head>
 <body>
-<h1 style="font-weight: 900;"><b>Review&nbsp;&nbsp;</b><span class="glyphicon glyphicon-pencil"></span></h1>
+<h1 style="font-weight: 900;"><b>Review</b></h1>
 		<br><br>
 		<form id="newSpotReview" action="spot/insertspotreview.jsp">
 			<table style="width: 100%;">
@@ -263,7 +263,7 @@
 					</td>
 					<td style="width: 70%;">
 						<input type="hidden" name="star" id="spotReviewStar" value="0">
-						<textarea name="content" id="srContent" style="height: 150px;" class="form-control"></textarea>
+						<textarea name="content" id="srContent" style="height: 150px; resize: none;" class="form-control"></textarea>
 			
 					</td>
 					<td style="width: 10%; padding-left: 10px;">
