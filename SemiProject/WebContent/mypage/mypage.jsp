@@ -16,7 +16,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 .modal-backdrop{height:100%; }
-
 div.mypage_main{
 margin-top: 100px;
 margin-bottom: 200px;
@@ -56,11 +55,9 @@ color: #4d55e9;
 td.date:first-of-type span.date, td.dateTitle:first-of-type{
 color: #e63d38; 
 }
-
 #calendarBody tr:last-of-type {
 border-bottom:5px solid gray;
 }
-
 #tbCalendarYM {
 font-size: 36px;
 }
@@ -110,11 +107,8 @@ span.btnSchedulelist{
 cursor: pointer;
 width: 20pt;
 }
-
-
 a { text-decoration:none; color: black}
 a:hover { text-decoration:none }
-
 div#myInfo{
 	padding: 20px 130px 20px 130px;
 	height:"100%";
@@ -124,15 +118,22 @@ div#myInfo>table{
 	border-spacing: 20px;
 	border-collapse: inherit;
 }
-
+.listmodalcontent{
+overflow-y: initial !important
+}
+.listmodalbody{
+height: 300px;
+overflow-y: auto;
+}
 </style>
 
    <!-- 부트스트랩 모달 스크립트 -->
-<%String memId = (String)session.getAttribute("myid");
-
+<%
+System.out.println((String)session.getAttribute("myid"));
+String memId = (String)session.getAttribute("myid");
+System.out.println("memId 는 " + memId + "입니다");
 WishlistDao dao = new WishlistDao();
 List<WishlistDto>list = dao.getList(memId);
-
 %>
 
 
@@ -217,7 +218,7 @@ function drawCalendar(){ //달력 그리는 함수
                   dMon="0"+dMon;
                }
             
-                  calendar +="<td class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
+                  calendar +="<td style='width:12%' class='date"+" "+tdClass+"' year='"+y+"'month='"+dMon+"'day='"+dNum+"'>"
                   +"<span class='date"+" "+tdClass+"' day="+dNum+">"+dNum+"</span>"
                   +"<div id='"+y+dMon+dNum+"' style='margin-top:10px;margin-bottom:5px'></div>"
                   +"</td>"
@@ -233,8 +234,6 @@ function drawCalendar(){ //달력 그리는 함수
          
          $("#calendarBody").html(calendar);
 }
-
-
 function getData(){
    <%
       for(WishlistDto dto : list){
@@ -274,13 +273,11 @@ function getData(){
       
 <%}%>
 }
-
 function getList(){
    
-   var s ="<div>";
+   var s ="<div >";
    var wishday="";
    var prewishday="0";
-
    var w="";
    $("#listModal").modal();
    <%
@@ -298,7 +295,7 @@ function getList(){
          w="";
       }else{
          s+="</div>";
-         s+="<div class='line' style='margin-top:15px'>";
+         s+="<div class='line' style='margin-top:15px;'>";
       }
    }
    if(title!="0"){
@@ -323,7 +320,6 @@ function getList(){
       prewishday=wishday;
       //alert(pre);
    }
-
    
    
    <%}%>
@@ -353,7 +349,6 @@ function getDetail(){
    var detailcontent="";
    
    if(title!="0"){
-
       $("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
             "<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>");
             
@@ -387,10 +382,7 @@ function getDetail(){
    }
    
 <%}%>
-
 }
-
-
 </script>
 
 </head>
@@ -398,13 +390,12 @@ function getDetail(){
 <%
 String loginok = (String)session.getAttribute("loginok");
 MemberDao mdao = new MemberDao();
-MemberDto mdto = mdao.getData(memId);
+MemberDto mdto = mdao.getDataId(memId);
 String memNum = mdao.getMemNum(memId);
 WishlistDao wdao = new WishlistDao();
 List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);
 SpotlistDao sddao = new SpotlistDao();
 if(loginok!=null){
-
    %>   
 <div style="width: 100%; height: 400px; background-color: #f7f7f7; margin-top: 150px;">
 	<div id="myInfo">
@@ -412,12 +403,13 @@ if(loginok!=null){
    		<table>
    			<tr bgcolor="#fff" height="250px">
    				<td style="padding-left: 50px; padding-right: 50px; line-height: 30px; width:40%;">
-   					<b>I D : <%=mdto.getId() %></b><br>
-   					<b>이름 : <%=mdto.getName() %></b><br>
-   					<b>H P : <%=mdto.getHp() %></b><br>
-   					<b>Email : <%=mdto.getEmail() %></b><br>
-   					<b>주소 : <%=mdto.getAddress() %>(<%=mdto.getAddrdetail() %>)</b><br>
-   					<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
+   				<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
+   					<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
+   					<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
+   					<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
+   					<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
+   					<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %><br>
+   					<p style="margin-left:80px;">(<%=mdto.getAddrdetail() %>)</p>
    				</td>
    				<td style="width:20%; text-align: center;">
    					<b>찜한 명소 갯수</b>
@@ -501,12 +493,11 @@ if(loginok!=null){
    
    <div class="myreview">
       <h1 style="font-weight: 900;"><b>나의 리뷰</b></h1>
-  
-         <table class="myreview table table-condensed" style="width:90%;margin:auto" >
+  		<br><br>
+         <table class="myreview table table-condensed" style="width:100%;" >
          <caption><span style="float:right"><a href ="index.jsp?main=mypage/myreview.jsp" >전체보기</a></span></caption>
                <tr>   
-                  <th style="font-size:15pt;text-align:center;">관광지</th>
-                  
+                  <th style="font-size:15pt;text-align:center;">관광지</th>     
                   <th style="font-size:15pt;text-align:center;">리뷰</th>
                   <th style="font-size:15pt;text-align:center;">별점</th>
                </tr>
@@ -566,15 +557,15 @@ location.href = "index.jsp";
 <!-- 일정 목록 모달 -->
 <div class="modal fade" id="listModal" role="dialog">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
-      <div class="modal-content" style="width:450px">
+      <div class="modal-content listmodalcontent" style="width:450px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 style="text-align: center" >
             <b>일정 목록</b>   
          </h4>
         </div>
-        <div class="modal-body" style="padding: 30px;">
-          <div id="myslist"></div>
+        <div class="modal-body listmodalbody" style="padding: 30px;">
+          <div id="myslist" style='overflow-y:auto'></div>
           
        </div>
       </div>
@@ -643,7 +634,6 @@ location.href = "index.jsp";
    
    //getdata();
    getData();
-
    $(document).on("click","span.btnSchedulelist",function(e){
       getList();      
    })
@@ -676,7 +666,9 @@ location.href = "index.jsp";
             dataType:"html",
             data:{"num":num},
             success:function(data){
-               location.reload();
+              location.reload();
+            // window.history.back();
+             getData();
             }
          })
       }
@@ -687,7 +679,6 @@ location.href = "index.jsp";
    $(document).on("click","label",function(){
       getData();
    })
-
    
 </script>
 </div>
