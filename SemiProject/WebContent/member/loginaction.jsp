@@ -16,7 +16,7 @@
 	System.out.println(saveid);
 	
 	//dao 선언
-	MemberDao dao=new MemberDao();
+		MemberDao dao=new MemberDao();
 	
 	//loginProcess 호출
 	//아이디가 DB 명단에 없을경우 1반환

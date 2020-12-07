@@ -449,6 +449,76 @@ public class MemberDao {
 	}
 	
 	
+	public int getTotalCount(String dong)
+	{
+		int total=0;
+		//int n=0;
+		
+		String sql="select count(*) from zipcode where dong like '%" + dong + "%'";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			if(rs.next())
+			{
+				//total=rs.getInt("count(*)");
+//				n=rs.getInt(1);
+				total=rs.getInt(1);
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return total;
+	}
+	
+	
+	//페이징처리한 리스트 목록 반환
+		public List<ZipcodeDto> getList(int start,int end,String dong)
+		{
+			List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+			String sql="SELECT a.* FROM (SELECT @rownum:=@rownum+1 as RNUM, b.* FROM (SELECT * FROM zipcode WHERE dong like '%"+dong+"%')b, (SELECT @rownum:=0) TMP)a WHERE a.RNUM>="+start+" and a.RNUM<="+end;
+			
+			Connection conn=null;
+			Statement stmt=null;
+			ResultSet rs=null;
+			
+			conn=db.getConnection();
+			try {
+				stmt=conn.createStatement();
+				rs=stmt.executeQuery(sql);
+				while(rs.next())
+				{
+					ZipcodeDto dto=new ZipcodeDto();
+					dto.setId(rs.getInt("id"));
+					dto.setZipcode(rs.getString("zipcode"));
+					dto.setSido(rs.getString("sido"));
+					dto.setGugun(rs.getString("gugun"));
+					dto.setDong(rs.getString("dong"));
+					dto.setRi(rs.getString("ri"));
+					dto.setBunji(rs.getString("bunji"));
+					//list 에 추가
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(conn, stmt, rs);
+			}
+			return list;
+		}
 	
 	
 }
