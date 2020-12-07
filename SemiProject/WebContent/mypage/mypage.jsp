@@ -133,6 +133,10 @@ overflow-y: initial !important
 height: 300px;
 overflow-y: auto;
 }
+.hide{
+display:none;
+}
+
 
 /*년월선택*/
 
@@ -461,12 +465,13 @@ if(loginok!=null){
    		<table>
    			<tr bgcolor="#fff" height="250px">
    				<td style="padding-left: 50px; padding-right: 50px; line-height: 30px; width:40%;">
-   					<b>I D : <%=mdto.getId() %></b><br>
-   					<b>이름 : <%=mdto.getName() %></b><br>
-   					<b>H P : <%=mdto.getHp() %></b><br>
-   					<b>Email : <%=mdto.getEmail() %></b><br>
-   					<b>주소 : <%=mdto.getAddress() %>(<%=mdto.getAddrdetail() %>)</b><br>
-   					<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
+   				<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
+   					<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
+   					<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
+   					<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
+   					<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
+   					<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %><br>
+   					<p style="margin-left:80px;">(<%=mdto.getAddrdetail() %>)</p>
    				</td>
    				<td style="width:20%; text-align: center;">
    					<b>찜한 명소 갯수</b>
@@ -556,12 +561,11 @@ if(loginok!=null){
    
    <div class="myreview">
       <h1 style="font-weight: 900;"><b>나의 리뷰</b></h1>
-  
-         <table class="myreview table table-condensed" style="width:90%;margin:auto" >
+  		<br><br>
+         <table class="myreview table table-condensed" style="width:100%;" >
          <caption><span style="float:right"><a href ="index.jsp?main=mypage/myreview.jsp" >전체보기</a></span></caption>
                <tr>   
-                  <th style="font-size:15pt;text-align:center;">관광지</th>
-                  
+                  <th style="font-size:15pt;text-align:center;">관광지</th>     
                   <th style="font-size:15pt;text-align:center;">리뷰</th>
                   <th style="font-size:15pt;text-align:center;">별점</th>
                </tr>
@@ -729,6 +733,12 @@ location.href = "index.jsp";
       $("input[name=content]").val("");
       
    })
+   
+   /* $(document).on("click","#ym",function(){
+    //alert($(this).text());
+   $("div.dropdown-content").toggleClass("hide");
+    
+   });*/
    
    $(document).on("click","span.btnDel",function(){
       var ans = confirm("일정을 삭제하시겠습니까?");

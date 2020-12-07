@@ -3,12 +3,13 @@
 .alert-info {
 	width: 33.3%;height: 50%;text-align: center;
 	padding-top: 20px;
-	background-color: rgba(200,88,0,.6);
-	margin-top: 100px;
+	margin-top: 200px;
+	margin-bottom: 150px;
 	display: block;
 	border: 0;
-	box-shadow: .3rem .3rem .3rem .3rem rgba(0,0,0,.5);
 	margin-left: 33.35%;
+	color: black;
+	background: none;
 }
 
 .alert {
@@ -18,9 +19,13 @@
 .btnOut {
 	border: 0!important;
 	outline: 0!important;
-	background-color: #ffaa00!important;
+	background-color: #8cc63f!important;
 	color: #f4f4f4!important;
 	padding: 1rem 2rem;
+	display: block;
+	border-radius: 3px 3px 3px 3px;
+	margin: auto;
+	margin-top: 50px;
 }
 
 .passInput {
@@ -29,10 +34,10 @@
 	color: #ffaa00!important;
 	caret-color: #ff5500!important;
 	border: .8px solid #ffa900!important;
-}
-
-b {
-	color: #f4f4f4;
+	border-radius: 3px 3px 3px 3px;
+	height: 45px;
+	width: 350px;
+	margin-top: 20px;
 }
 
 .txtPass {
@@ -41,3 +46,7 @@ b {
 	border-radius: .3rem;
 	caret-color: orange;
 }
+
+b {
+    font-size: 25px;	
+} 

@@ -237,7 +237,7 @@ window.onload=function() {
 		//코드로 입력체크 추가
 		var pass1V=$(".pwText").val();
 		var pass2V=$(".cfpwText").val();
-		alert(pass1V+"VS"+pass2V);
+		//alert(pass1V+"VS"+pass2V);
 		
 		var rtn = false;
 		

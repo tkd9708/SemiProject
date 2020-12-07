@@ -19,13 +19,13 @@
       transition: top 0.5s;
       background-color: #FFF;
       border-radius: 0;
-        
+      border-bottom: 1px solid gray;
   } 
   
-  .navbar{
+  /* .navbar{
         box-shadow: 5px 5px 10px #9d9d9d;
         
-  }
+  } */
   div.header{
       position:relative;
       width: 100vw;  
@@ -51,6 +51,7 @@
   li.list {
       padding-right: 50px;
       font-family: SCDream5;
+      cursor: pointer;
       
   }
   li.list a {
@@ -59,7 +60,7 @@
   }
   
   .menu{
-      border: none;
+      
       border: 0px;
       margin: 0px;
       padding: 0px;
@@ -77,9 +78,13 @@
   .header .menu li.list{
       float: right;
       padding-top: 0px;
-      padding-bottom: 10px;
       line-height: 70px;
       list-style: none;
+  }
+  
+  .navbar{
+        box-shadow: 5px 5px 10px #9d9d9d;
+        
   }
    .navbar .menu li.list{
       float: right;
@@ -115,7 +120,7 @@
    }
 
     .menu li ul{
-      background: #9b9b9b;
+      /* background: #9b9b9b; */
       display:none; 
       height:40px;
       border:0px;
@@ -123,7 +128,7 @@
       width:100px;
       z-index:200;
       list-style: none;
-      opacity: 0.9;
+      /* opacity: 0.9; */
       /*top:1em;
       /*left:0;*/
     }
@@ -133,7 +138,7 @@
     }
 
     .menu li li {
-      background: #3f423e;
+      background-color: rgba( 63, 66, 62, 0.5 );
       display:block;
       float:none;
       margin:0px;
@@ -153,11 +158,12 @@
       margin:0px;
       padding:0px 10px 0px 15px;
       text-align:left;
+      color: black;
       
     }
 
     .menu li ul a:hover, .menu li ul li:hover a{
-      background: rgb(171,171,171);
+      background-color: #7b7b7b;
       border:0px;
       color:black;
       text-decoration:none;
@@ -170,9 +176,24 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	$("li.list").on('mouseover',function(){
-	    $("li.list a").css('color','black');	
-	});
+	var tborder1 = ($(location).attr('href')).slice(-9);
+	var tborder2 = ($(location).attr('href')).slice(-8);
+	if(tborder1 =="index.jsp" || tborder2 =="main.jsp" || ($(location).attr('href')).indexOf("spotdetail.jsp")!==-1){
+	      $("div.title").css('border','none');
+	   }else{
+		  $("div.title").css('border-bottom','0.5px solid gray'); 
+	   }
+	
+	$("#list a,#list").hover(function(){
+	       $(this).css('color','#545454');
+	   },function(){
+		   $(this).css('color','black');
+	   });
+	$("li.list ul li a").hover(function(){
+	       $(this).css('color','#ee990a');
+	   },function(){
+		   $(this).css('color','black');
+	   });
 });
 </script>
 </head>
@@ -191,7 +212,7 @@ $(function(){
           <li class="logo">
             <a href="index.jsp" class="link">
               <s_if_var_logoImage>
-                <img src="<%=url %>/image/logo.png" class="img_logo">
+                <img src="<%=url %>/image/logo2.png" class="img_logo">
               </s_if_var_logoImage>
             </a>
            </li>
@@ -226,7 +247,7 @@ $(function(){
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도">우도</a></li>
              </ul>
            </li>
-           <li class="list"><a href="<%=url%>/index.jsp?main=notice/noticelist.jsp">공지사항</a></li>
+           <li class="list" id="list"><a href="<%=url%>/index.jsp?main=notice/noticelist.jsp">공지사항</a></li>
         </ul>
       </div>
 <!-- // box_header -->
@@ -237,7 +258,7 @@ $(function(){
           <li class="logo">
             <a href="index.jsp" class="link">
               <s_if_var_logoImage>
-                <img src="<%=url %>/image/logo.png" class="img_logo">
+                <img src="<%=url %>/image/logo2.png" class="img_logo">
               </s_if_var_logoImage>
             </a>
            </li>
@@ -254,8 +275,8 @@ $(function(){
         	   <%
            }
            %>
-           <li class="list"><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
-           <li class="list">관광명소
+           <li class="list" id="list"><a href="<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp">공유게시판</a></li>
+           <li class="list" id="list">관광명소
              <ul>
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=제주">제주시</a></li>
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=한경">한경면</a></li>
@@ -272,7 +293,7 @@ $(function(){
              <li><a href="<%=url%>/index.jsp?main=spot/spotlist.jsp?area=우도">우도</a></li>
              </ul>
            </li>
-           <li class="list"><a href="<%=url%>/index.jsp?main=notice/noticelist.jsp">공지사항</a></li>
+           <li class="list" id="list"><a href="<%=url%>/index.jsp?main=notice/noticelist.jsp">공지사항</a></li>
          </ul>
       </div>         
 <!-- // box_header -->
@@ -314,7 +335,7 @@ function scrollFunction(){
 		  {
 		  document.getElementById("navbar").style.top = "0";
 		  }else{
-		  document.getElementById("navbar").style.top = "-200px";  
+		  document.getElementById("navbar").style.top = "-300px";  
 		  }
   }
   
