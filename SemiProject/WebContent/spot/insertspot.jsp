@@ -17,6 +17,8 @@
 	div.addmain{
 	margin-top: 100px;
 	margin-bottom: 200px;	
+	padding-left: 15%;
+	padding-right:15%;
 	}
 </style>
 <script type="text/javascript">
@@ -47,7 +49,9 @@ function sample4_execDaumPostcode() {
 }
 
 function getxy(){
-	var addr = $("#addr").val();
+	var detailaddr = $("#detailaddr").val().trim();
+	var addr = $("#addr").val()+" "+detailaddr;
+	//alert(addr);
 	var geocoder = new kakao.maps.services.Geocoder();
 	var lat ="";
 	var lon ="";
@@ -69,37 +73,39 @@ function getxy(){
 </head>
 <body>
 <div class="addmain">
-	
+	<h1 style="font-weight: 800;"><b>관광지 추가</b></h1>
 	<form action="/spot/addspotaction.jsp" method="post" enctype="multipart/form-data">
-	<table>
+	<table class="table tabld-bordered" style="width:100%">
 	<tr>
-		<td>contentsid</td>
+		<td width="50px">contentsid</td>
 		<td>
 			<input type="text" name="contentsid" required="required">
 		</td>
 	</tr>
 	<tr>
-		<td>이름</td>
+		<td >이름</td>
 		<td>
 			<input type="text" name="title" required="required">
 		</td>
 	</tr>
 	<tr>
-		<td>라벨1</td>
-		<td>
-			<select name="label1" required="required">
-				<option value="none" disabled="disabled" selected="selected">행정시</option>
+		<td colspan="2" >
+		<div style="display:inline-flex">
+		<span>행정시</span>
+				&nbsp;&nbsp;
+			<select name="label1" required="required" style="width:150px">
+				<option value="none" disabled="disabled" selected="selected">선택</option>
 				<option value="제주시">제주시</option>
 				<option value="서귀포시">서귀포시</option>
 				<option value="섬 속의 섬">섬속의섬</option>
 			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>라벨2</td>
-		<td>
-			<select name="label2" required="required">
-				<option value="none" disabled="disabled" selected="selected">지역명</option>
+		</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<div style="display:inline-flex">
+		<span>지역명</span>
+				&nbsp;&nbsp;
+			<select name="label2" required="required" style="width:150px">
+				<option value="none" disabled="disabled" selected="selected">선택</option>
 				<option value="제주">제주시</option>
 				<option value="한경">한경면</option>	
 				<option value="한림">한림읍</option>	
@@ -112,66 +118,68 @@ function getxy(){
 				<option value="성산">성산읍</option>	
 				<option value="우도">우도</option>		
 			</select>
+			</div>
 		</td>
 	</tr>
 	<tr >
-		<td>주소</td>
+		<td  style="vertical-align: middle">주소</td>
 		<td>
 		<div style="display:flex">
-			<input type="text" name="addr" id="addr" required="required" placeholder="주소">
-			<span class="searchaddr glyphicon glyphicon-search" onclick="sample4_execDaumPostcode()" style="font-size: 15pt;vertical-align: middle"></span>	
+			<input type="text" name="addr" id="addr" required="required" disabled="disabled" placeholder="주소" style="width:250px">
+			&nbsp;<span class="searchaddr glyphicon glyphicon-search" onclick="sample4_execDaumPostcode()" style="font-size: 15pt;vertical-align: middle"></span>	
 		</div>
-		<input type="text" name="detailaddr" id="detailaddr" placeholder="상세주소">
+		<input type="text" name="detailaddr" id="detailaddr" placeholder="상세주소"  style="width:250px">
 		</td>
 		<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 	</div>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="2">
 			<button type="button" id="btnxy" onclick="getxy()">위도경도검색</button>
 		</td>
 	</tr>
 	<tr>
-		<td>위도</td>
-		<td>
-			<input type="text" name="latitude" class="form-control" required="required" disabled="disabled">
-		
+		<td colspan="2">
+			<div style="display:inline-flex">
+				<span>위도</span>	
+				&nbsp;&nbsp;&nbsp;
+				<input type="text" name="latitude" required="required" disabled="disabled">
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div style="display:inline-flex">
+				<span>경도</span>	
+				&nbsp;&nbsp;&nbsp;
+				<input type="text" name="longitude" required="required"  disabled="disabled">
+			</div>
 		</td>
 	</tr>
 	<tr>
-		<td>경도</td>
-		<td>
-			<input type="text" name="longitude" class="form-control" required="required"  disabled="disabled">
-		
-		</td>
-	</tr>
-	<tr>
-		<td>사진</td>
+		<td >사진</td>
 		<td>
 			<input type="file" name="img">
 		</td>
 	</tr>
 	<tr>
-		<td>썸네일</td>
+		<td >썸네일</td>
 		<td>
 			<input type="file" name="thumbnail">
 		</td>
 	</tr>
 	<tr>
-		<td>태그</td>
+		<td >태그</td>
 		<td>
-			<input type="text" name="tag" class="form-control">
+			<input type="text" name="tag">
 		</td>
 	</tr>
 	<tr>
-		<td>소개</td>
+		<td >소개</td>
 		<td>
-			<textarea name="introduction" class="form-control" cols="40" rows="8"></textarea>
+			<textarea name="introduction" cols="40" rows="8"></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" >
 		<input type="submit" value="등록" id="add">
 		<input type="button" value="목록" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">
 		</td>
@@ -184,9 +192,5 @@ function getxy(){
 </div>
 </body>
 <script type="text/javascript">
-	$(document).on("#addr","change",function(){
-		$(this).val()
-		$("input[name=label2]").val();
-	})
 </script>
 </html>
