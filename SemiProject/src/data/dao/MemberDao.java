@@ -419,6 +419,35 @@ public class MemberDao {
 		}
 	}
 	
+	public String getMemNum(String id)
+	{
+		String num="";
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs=null;
+		String sql="select num from member where id=?";
+		
+		
+		conn=db.getConnection();
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(conn, pstmt, rs);
+		}	
+		return num;
+	}
+	
 	public int getTotalCount(String dong)
 	{
 		int total=0;
