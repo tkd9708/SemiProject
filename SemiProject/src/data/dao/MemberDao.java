@@ -16,7 +16,7 @@ import mysql.db.MysqlConnect;
 public class MemberDao {
 	MysqlConnect db=new MysqlConnect();
 	
-	//¾ÆÀÌµğ°¡ ÀÖÀ¸¸é true¹İÈ¯,¾øÀ¸¸é false¹İÈ¯
+	//ì•„ì´ë””ê°€ ìˆìœ¼ë©´ trueë°˜í™˜,ì—†ìœ¼ë©´ falseë°˜í™˜
 	public boolean isIdSearch(String id)
 	{
 		boolean find=false;
@@ -30,7 +30,7 @@ public class MemberDao {
 		conn=db.getConnection();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//¹ÙÀÎµù
+			//ë°”ì¸ë”©
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next())
@@ -45,7 +45,7 @@ public class MemberDao {
 		return find;
 	}
 	
-	//ÀÌ¸ŞÀÏÀÌ ÀÖÀ¸¸é true¹İÈ¯,¾øÀ¸¸é false¹İÈ¯
+	//ì´ë©”ì¼ì´ ìˆìœ¼ë©´ trueë°˜í™˜,ì—†ìœ¼ë©´ falseë°˜í™˜
 	public boolean isEmailSearch(String email)
 	{
 		boolean find=false;
@@ -102,7 +102,7 @@ public class MemberDao {
 		}
 	}
 	
-	//ÀüÃ¼ È¸¿ø ¸ñ·Ï
+	//ì „ì²´ íšŒì› ëª©ë¡
 	public List<MemberDto> getAllMembers()
 	{
 		List<MemberDto> list=new ArrayList<MemberDto>();
@@ -138,7 +138,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	//¾ÆÀÌµğ°¡ ÇØ´çÇÏ´Â ºñ¹øÀÌ ¸ÂÀ¸¸é true¹İÈ¯,Æ²¸®¸é false¹İÈ¯
+	//ì•„ì´ë””ê°€ í•´ë‹¹í•˜ëŠ” ë¹„ë²ˆì´ ë§ìœ¼ë©´ trueë°˜í™˜,í‹€ë¦¬ë©´ falseë°˜í™˜
 	public boolean isIdPassCheck(String id,String pass)
 	{
 		boolean find=false;
@@ -168,30 +168,30 @@ public class MemberDao {
 		return find;
 	}
 	
-	//·Î±×ÀÎ½Ã ÇÊ¿äÇÑ ¸Ş¼­µå
-	//¾ÆÀÌµğ°¡ DB ¸í´Ü¿¡ ¾øÀ»°æ¿ì 1¹İÈ¯
-	//¾ÆÀÌµğ´Â ÀÖ´Âµ¥ ºñ¹øÀÌ ¾È¸Â´Â°æ¿ì 2¹İÈ¯
-	//¾ÆÀÌµğ¿Í ºñ¹ø ¸ğµÎ ¸Â´Â°æ¿ì 3 ¹İÈ¯
+	//ë¡œê·¸ì¸ì‹œ í•„ìš”í•œ ë©”ì„œë“œ
+	//ì•„ì´ë””ê°€ DB ëª…ë‹¨ì— ì—†ì„ê²½ìš° 1ë°˜í™˜
+	//ì•„ì´ë””ëŠ” ìˆëŠ”ë° ë¹„ë²ˆì´ ì•ˆë§ëŠ”ê²½ìš° 2ë°˜í™˜
+	//ì•„ì´ë””ì™€ ë¹„ë²ˆ ëª¨ë‘ ë§ëŠ”ê²½ìš° 3 ë°˜í™˜
 	public int loginProcess(String id,String pass)
 	{
 		int ans=0;
 		if(this.isIdSearch(id))
 		{
-			//¾ÆÀÌµğ°¡ Á¸ÀçÇÏ´Â °æ¿ì
-			//ºñ¹øÀÌ ¸Â´ÂÁö Ã¼Å©ÇÏ±â
+			//ì•„ì´ë””ê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš°
+			//ë¹„ë²ˆì´ ë§ëŠ”ì§€ ì²´í¬í•˜ê¸°
 			if(this.isIdPassCheck(id, pass))
 			{
-				//ºñ¹øÀÌ ¸Â´Â°æ¿ì
+				//ë¹„ë²ˆì´ ë§ëŠ”ê²½ìš°
 				ans=3;
 			}
 			else
 			{
-				//ºñ¹øÀÌ Æ²¸°°æ¿ì
+				//ë¹„ë²ˆì´ í‹€ë¦°ê²½ìš°
 				ans=2;
 			}
 		}
 		else
-		{//¾ÆÀÌµğ°¡ ¾Æ¿¹ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		{//ì•„ì´ë””ê°€ ì•„ì˜ˆ ì¡´ì¬í•˜ì§€ ì•ŠëŠ”ê²½ìš°
 			ans=1;
 		}
 		
@@ -212,7 +212,7 @@ public class MemberDao {
 		
 		try {
 			//pstmt=conn.prepareStatement(sql);
-			//¹ÙÀÎµù
+			//ë°”ì¸ë”©
 //			pstmt.setString(1, id);
 //			rs=pstmt.executeQuery();
 //			if(rs.next())
@@ -232,7 +232,7 @@ public class MemberDao {
 		return name;
 	}
 	
-	//µ¿¿¡ ÇØ´çÇÏ´Â ÁÖ¼Ò ¹İÈ¯ÇÏ´Â ¸Ş¼­µå
+	//ë™ì— í•´ë‹¹í•˜ëŠ” ì£¼ì†Œ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œ
 	public List<ZipcodeDto> getSearchDong(String dong)
 	{
 		List<ZipcodeDto> list=new Vector<ZipcodeDto>();
@@ -245,9 +245,9 @@ public class MemberDao {
 		conn=db.getConnection();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//¹ÙÀÎµù
+			//ë°”ì¸ë”©
 			pstmt.setString(1, "%"+dong+"%");
-			//½ÇÇà
+			//ì‹¤í–‰
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -258,7 +258,7 @@ public class MemberDao {
 				dto.setDong(rs.getString("dong"));
 				dto.setRi(rs.getString("ri"));
 				dto.setBunji(rs.getString("bunji"));
-				//¸®½ºÆ®¿¡ Ãß°¡
+				//ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -270,7 +270,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	//»èÁ¦ÇÏ´Â ¸Ş¼­µå
+	//ì‚­ì œí•˜ëŠ” ë©”ì„œë“œ
 	public void deleteMember(String id)
 	{
 		String sql="delete from member where id=?";
@@ -281,9 +281,9 @@ public class MemberDao {
 		conn=db.getConnection();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//¹ÙÀÎµù
+			//ë°”ì¸ë”©
 			pstmt.setString(1, id);
-			//½ÇÇà
+			//ì‹¤í–‰
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -292,8 +292,8 @@ public class MemberDao {
 			db.dbClose(conn, pstmt);
 		}
 	}
-	
-	//id ¿¡ ÇØ´çÇÏ´Â dto ¹İÈ¯
+
+	//id ì— í•´ë‹¹í•˜ëŠ” dto ë°˜í™˜
 	public MemberDto getData(String id)
 	{
 		MemberDto dto=new MemberDto();
@@ -343,7 +343,7 @@ public class MemberDao {
 		return dto;
 	}
 	
-	//num ¿¡ ÇØ´çÇÏ´Â dto ¹İÈ¯
+	//num ì— í•´ë‹¹í•˜ëŠ” dto ë°˜í™˜
 	public MemberDto getDataByNum(String num)
 	{
 		MemberDto dto=new MemberDto();
@@ -395,7 +395,7 @@ public class MemberDao {
 		return dto;
 	}
 	
-	//¼öÁ¤-ÀÌ¸§,ÇÚµåÆù,ÀÌ¸ŞÀÏ,ÁÖ¼Ò¸¸ ¼öÁ¤
+	//ìˆ˜ì •-ì´ë¦„,í•¸ë“œí°,ì´ë©”ì¼,ì£¼ì†Œë§Œ ìˆ˜ì •
 	public void updateMember(MemberDto dto)
 	{
 //		String sql="update member set name=?,hp=?,email=?,address=?," +
@@ -448,7 +448,6 @@ public class MemberDao {
 		return num;
 	}
 	
-	
 	public int getTotalCount(String dong)
 	{
 		int total=0;
@@ -483,42 +482,167 @@ public class MemberDao {
 		return total;
 	}
 	
-	
-	//ÆäÀÌÂ¡Ã³¸®ÇÑ ¸®½ºÆ® ¸ñ·Ï ¹İÈ¯
-		public List<ZipcodeDto> getList(int start,int end,String dong)
-		{
-			List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
-			String sql="SELECT a.* FROM (SELECT @rownum:=@rownum+1 as RNUM, b.* FROM (SELECT * FROM zipcode WHERE dong like '%"+dong+"%')b, (SELECT @rownum:=0) TMP)a WHERE a.RNUM>="+start+" and a.RNUM<="+end;
-			
-			Connection conn=null;
-			Statement stmt=null;
-			ResultSet rs=null;
-			
-			conn=db.getConnection();
-			try {
-				stmt=conn.createStatement();
-				rs=stmt.executeQuery(sql);
-				while(rs.next())
-				{
-					ZipcodeDto dto=new ZipcodeDto();
-					dto.setId(rs.getInt("id"));
-					dto.setZipcode(rs.getString("zipcode"));
-					dto.setSido(rs.getString("sido"));
-					dto.setGugun(rs.getString("gugun"));
-					dto.setDong(rs.getString("dong"));
-					dto.setRi(rs.getString("ri"));
-					dto.setBunji(rs.getString("bunji"));
-					//list ¿¡ Ãß°¡
-					list.add(dto);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				db.dbClose(conn, stmt, rs);
-			}
-			return list;
+	public int getFullTotalCount(String sido,String gugun,String dong)
+	{
+		int total=0;
+		
+		String sql="select count(*) from zipcode where sido='"+sido+"' AND gugun='"+gugun+"' AND dong like '%"+dong+"%'";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			if(rs.next())
+				total=rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
 		}
+		
+		return total;
+	}
 	
+	//í˜ì´ì§•ì²˜ë¦¬í•œ ë¦¬ìŠ¤íŠ¸ ëª©ë¡ ë°˜í™˜
+	public List<ZipcodeDto> getList(int start,int end,String dong)
+	{
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT @rownum:=@rownum+1 as RNUM, b.* FROM (SELECT * FROM zipcode WHERE dong like '%"+dong+"%')b, (SELECT @rownum:=0) TMP)a WHERE a.RNUM>="+start+" and a.RNUM<="+end;
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setId(rs.getInt("id"));
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				dto.setRi(rs.getString("ri"));
+				dto.setBunji(rs.getString("bunji"));
+				//list ì— ì¶”ê°€
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		return list;
+	}
 	
+	public List<ZipcodeDto> getFullslist(int start,int end,String sido,String gugun,String dong)
+	{
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT @rownum:=@rownum+1 as RNUM, b.* FROM (SELECT * FROM zipcode WHERE sido='"+sido+"' AND gugun='"+gugun+"' AND dong LIKE '%"+dong+"%')b, (SELECT @rownum:=0) TMP)a WHERE a.RNUM>="+start+" and a.RNUM<="+end;
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				dto.setRi(rs.getString("ri"));
+				dto.setBunji(rs.getString("bunji"));
+				//list ì— ì¶”ê°€
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return list;
+	}
+	
+	//ì‚¬ìš©ìê°€ "ã„±"ë¥¼ ì…ë ¥í•œ ê²½ìš° DBì—ì„œ ê²€ìƒ‰í•´ì•¼ í•  ë²”ìœ„ëŠ” "ê°€"ë¶€í„° "ê¹‹"ê¹Œì§€ ì…ë‹ˆë‹¤.
+	public List<ZipcodeDto> getChoslist(String start,String end)
+	{
+		
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT DISTINCT sido,gugun,dong FROM zipcode WHERE dong >= '"+start+"' AND dong <= '"+end+"')a " + 
+				"WHERE dong regexp '[^0-9](ë™|ë©´|ê°€|ì‚¬ì„œí•¨)$' LIMIT 10";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return list;
+	}
+	
+	// ì´ˆì„± + ì¤‘ì„± + ì¢…ì„±ì´ ì…ë ¥ëœ ìƒíƒœ
+	// ì‚¬ìš©ìê°€ "ê°" ì…ë ¥í•œ ê²½ìš° DBì—ì„œ ê²€ìƒ‰í•´ì•¼ í•  ë²”ìœ„ëŠ” "ê°"ìœ¼ë¡œ ì‹œì‘í•˜ëŠ” ë‹¨ì–´ì…ë‹ˆë‹¤.
+	public List<ZipcodeDto> getSyllableList(String region)
+	{
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT DISTINCT sido,gugun,dong from zipcode where dong LIKE '"+region+"%')a WHERE dong REGEXP '[^0-9](ë™|ë©´|ê°€|ì‚¬ì„œí•¨)$' LIMIT 10";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return list;
+	}
 }
