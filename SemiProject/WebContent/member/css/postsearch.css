@@ -322,8 +322,6 @@ a:focus, a:hover {
 .imgLeft {
 	display: block;
 	margin: 15px auto 0;
-	width: 12px;
-	height: 16px;
 	text-align: center;
 	color: #ffaa00;
 }
@@ -342,4 +340,65 @@ a:focus, a:hover {
 
 .inShowNum {
 	text-shadow: .1rem .1rem .3rem #fd1c0f;
+}
+
+.popDownAddr li strong {
+	color: #ff5200!important;
+	font-weight: 400!important;
+}
+
+.popDownAddr li a.sgItem {
+	display: block!important;
+	padding: 0 50px 0 8px!important;
+	height: 100%!important;
+	font-size: 15px!important;
+}
+
+.popDownAddr a, .popDownAddr a:link, .popDownAddr a:visited {
+	text-decoration: none;
+}
+
+.popDownAddr li {
+	position: relative;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	line-height: 50px;
+	cursor: pointer;
+	list-style: none;
+	border-bottom: 1px solid #eee;
+}
+
+.popDownAddr ul {
+	padding-left: 0;
+	z-index: 99999;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.popDownAddr {
+	display: block;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	border-bottom: 1px solid #c5c5c5;
+	border-top: 0 none;
+	background-color: #fff;
+	font-size: 15px;
+	z-index: 99999;
+}
+
+.sgBtnAdd .ft {
+	display: block!important;
+	margin: 0 auto!important;
+	transform: translateY(1px)!important;
+	font-size: 22px;
+	font-weight: 800;
+	color: #999;
+}
+
+.popDownAddr li:hover {
+	background-color: rgba(220,100,0,.07);
 }

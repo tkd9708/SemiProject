@@ -453,6 +453,32 @@ public class MemberDao {
 		return total;
 	}
 	
+	public int getFullTotalCount(String sido,String gugun,String dong)
+	{
+		int total=0;
+		
+		String sql="select count(*) from zipcode where sido='"+sido+"' AND gugun='"+gugun+"' AND dong like '%"+dong+"%'";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			if(rs.next())
+				total=rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return total;
+	}
+	
 	//페이징처리한 리스트 목록 반환
 	public List<ZipcodeDto> getList(int start,int end,String dong)
 	{
@@ -486,6 +512,108 @@ public class MemberDao {
 		} finally {
 			db.dbClose(conn, stmt, rs);
 		}
+		return list;
+	}
+	
+	public List<ZipcodeDto> getFullslist(int start,int end,String sido,String gugun,String dong)
+	{
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT @rownum:=@rownum+1 as RNUM, b.* FROM (SELECT * FROM zipcode WHERE sido='"+sido+"' AND gugun='"+gugun+"' AND dong LIKE '%"+dong+"%')b, (SELECT @rownum:=0) TMP)a WHERE a.RNUM>="+start+" and a.RNUM<="+end;
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setZipcode(rs.getString("zipcode"));
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				dto.setRi(rs.getString("ri"));
+				dto.setBunji(rs.getString("bunji"));
+				//list 에 추가
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return list;
+	}
+	
+	//사용자가 "ㄱ"를 입력한 경우 DB에서 검색해야 할 범위는 "가"부터 "깋"까지 입니다.
+	public List<ZipcodeDto> getChoslist(String start,String end)
+	{
+		
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT DISTINCT sido,gugun,dong FROM zipcode WHERE dong >= '"+start+"' AND dong <= '"+end+"')a " + 
+				"WHERE dong regexp '[^0-9](동|면|가|사서함)$' LIMIT 10";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
+		return list;
+	}
+	
+	// 초성 + 중성 + 종성이 입력된 상태
+	// 사용자가 "감" 입력한 경우 DB에서 검색해야 할 범위는 "감"으로 시작하는 단어입니다.
+	public List<ZipcodeDto> getSyllableList(String region)
+	{
+		List<ZipcodeDto> list=new ArrayList<ZipcodeDto>();
+		String sql="SELECT a.* FROM (SELECT DISTINCT sido,gugun,dong from zipcode where dong LIKE '"+region+"%')a WHERE dong REGEXP '[^0-9](동|면|가|사서함)$' LIMIT 10";
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getConnection();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ZipcodeDto dto=new ZipcodeDto();
+				dto.setSido(rs.getString("sido"));
+				dto.setGugun(rs.getString("gugun"));
+				dto.setDong(rs.getString("dong"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, stmt, rs);
+		}
+		
 		return list;
 	}
 }
