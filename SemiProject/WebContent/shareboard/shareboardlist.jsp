@@ -118,7 +118,7 @@ div.likes{
 
 div.heart{
     margin-top: 80px;
-    
+    cursor:pointer;
     margin-left: 100px;
 
 
@@ -520,6 +520,7 @@ int no=totalCount-((currentPage-1)*perPage);
    
    no=totalCount-((currentPage-1)*perPage);
    
+  
    
    
    
@@ -572,8 +573,12 @@ $(function(){
       });
   
 
+     //닫기 할때 하트 이벤트 없애기
+	
      
-
+	$(".heart_close").click(function(){
+		location.reload();
+	});
 
     
     
@@ -590,9 +595,9 @@ $(function(){
          
          var s = "";
          
-         s+="<h2 id='modalnum' num='"+num+"'>"+num+"</h2>";
-         s+="<h2>"+subject+"</h2>";
-         s+="<h2>"+addr+"</h2>";
+         s+="<input type='hidden' id='modalnum' value='"+num+"'>";
+         s+="<h2>subject:"+subject+"</h2>";
+         s+="<h2>addr:"+addr+"</h2>";
          
          
          $("#Info").html(s);
@@ -611,6 +616,7 @@ $(function(){
              data:{"num":num,"wishday":$("#wishday").val(),"myid":"<%=id%>"},
              success:function(data){
                 $("#sharemodal").modal("hide");
+                //location.reload();
              }
              
            });
@@ -637,7 +643,7 @@ $(function(){
        //$(this).parent().parent().parent().next().toggle();
        $("#shareanswermodal").modal();
        var s="";
-       s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>"
+       s+="<div id='answermodalnum' num='"+num+"'><input type='hidden' value='num'></div>"
        s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>";
        s+="<input class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px;' id='answercontent' >"
        
@@ -652,7 +658,7 @@ $(function(){
        }); */
        
       });
-    
+    //댓글 쓰기 모달
     $(document).on("click","#answeraoCal",function(){
        if(<%=loginok!=null%>){
             var num=$("#answermodalnum").attr("num");
@@ -667,6 +673,10 @@ $(function(){
               success:function(data){
                  //$("#shareanswermodal").modal("hide");
             	  $("#shareanswermodal").modal("hide");
+            	  /* var stat= $(".answercount").text();
+            	  var num=parseInt(stat,10);
+            	  num++;
+            	  $(".answercount").text(num); */
               }
               
             }); 
@@ -676,12 +686,6 @@ $(function(){
          
     });
     
-    $(".button2").click(function(){
-       //alert($(this).parent().parent().parent().next().html());
-
-       $(this).parent().parent().parent().next().next().toggle();
-       
-      });
     
     $(".memo_plus").click(function(){
        //alert($(this).parent().parent().parent().next().html());
@@ -701,7 +705,7 @@ $(function(){
      
      
      
-    //댓글 추가
+    /* //댓글 추가
     $(document).on("click",".btn_submit",function(){
         var num=$(this).attr("num");
         var id=$(this).attr("id1");          
@@ -718,24 +722,29 @@ $(function(){
           }
        });  
        
-     });
+     }); */
      
      
      
      //게시글 수정(modal)
      $(document).on("click",".btn_update",function(){
-        var writeday=$(this).attr("writeday");
+    	var num=$(this).attr("num");
+        var subject=$(this).attr("subject");
         var content=$(this).attr("content");
         var photo=$(this).attr("photo");
-        var star=$(this).attr("star");
-        //alert(별);
+        var addr=$(this).attr("addr");
+        var pageNum=$(this).attr("pageNum");
+        //alert(pageNum);
         $("#shareupdate").modal();
         var s="";
-        s="추천맛집:&nbsp;<input type='text'><br><br>"
-        s+="맛집주소:&nbsp;<input type='text'><br><br>"
-        s+="이미지:&nbsp;<input type='file'><br>"
-        s+="내용:&nbsp;<textarea maxwidth='1000'></textarea>"
-         
+        s+="<form action='shareboard/shareboardupdateaction.jsp' method='post' enctype='multipart/form-data'>"
+        s+="<input type='hidden' name='num' value='"+num+"'>"
+        s+="<input type='hidden' name='pageNum' value='"+pageNum+"'>"
+        s+="추천맛집:&nbsp;<input type='text' name='subject' value='"+subject+"'><br><br>"
+        s+="맛집주소:&nbsp;<input type='text' name='addr' value='"+addr+"'><br><br>"
+        s+="이미지:&nbsp;<input type='file' name='photo' value='"+photo+"'><br>"
+        s+="내용:&nbsp;<textarea maxwidth='1000' name='content' value='"+content+"'></textarea>"
+        s+="<button type='submit' class='btn btn-warning' id='updateaoCal' style='margin-left:20px;margin-top:30px;'>수정</button></form>";
 
  
         
@@ -748,6 +757,9 @@ $(function(){
     
    $(".button2").click(function(){
       //var regroup = $(this).attr("regroup");
+      $(this).parent().parent().parent().next().next().toggle();
+      var now = $(this).parent().parent().parent().next().next();
+      
       var num=$(this).attr("num");
       //alert(num);
       $.ajax({
@@ -767,18 +779,31 @@ $(function(){
                
                s += "</b></div><br><hr>";
             });
-            $(".sreview_list").html(s);
+            //$(".sreview_list").html(s);
+            now.html(s);
             
          }
       });
    });
 
    
-    //게시글 삭제
+     //게시글 삭제
     $(document).on("click",".btn_delete",function(){
        var num=$(this).attr("num");
-       //alert(num);
-    });
+       var num1=$(this).attr("num");
+       //var regroup=$(this).attr("regroup");
+       //alert(num1);
+           $.ajax({
+    	   type:"post",
+    	   dataType:"html",
+    	   url:"shareboard/shareboarddelete.jsp",
+    	   data:{"num":num,"num1":num1},
+    	   success:function(data){
+    		   location.reload();
+    	   }
+       });   
+       
+    }); 
 
 
     
@@ -815,6 +840,7 @@ $(function(){
     
     <%
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh-mm");
+    
    
     for(ShareBoardDto dto : list){
    %>   
@@ -912,11 +938,11 @@ $(function(){
           <!--게시글 수정 삭제 버튼-->
          <div class="update_del_btn">
              <button type="button" class="btn_update btn btn-info" style="color: white;"
-             writeday="<%=sdf.format(dto.getWriteday()) %>"
+             addr="<%=dto.getAddr() %>"
              content="<%=dto.getContent()%>"  photo="<%=dto.getPhoto()%>"
-             star="<%=dto.getStar()%>">수정</button>
+             subject="<%=dto.getSubject()%>" num="<%=dto.getNum()%>" pageNum="<%=pageNum %>">수정</button>
              <button type="button" class="btn_delete btn btn-success" style="color: white;"
-             num="<%=dto.getNum() %>">삭제</button>
+             num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>">삭제</button>
          </div>
          <!-- 게시글 수정 삭제 버튼 close -->
                 
@@ -926,7 +952,7 @@ $(function(){
          <!-- 댓글버튼-->
          <div class="review_btn">
              <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>"
-             num="<%=dto.getNum()%>">댓글(0)</button>
+             num="<%=dto.getNum()%>">댓글(<%=db.getCount(dto.getNum()) %>)</button>
              <button type="button" class="button1" style="color: white;" num="<%=dto.getNum() %>">댓글쓰기</button>
          </div>
          <!-- 댓글버튼 close -->
@@ -946,7 +972,7 @@ $(function(){
      <!-- 댓글 입력창-->
      <div class="sreview" >
            
-        <div class="sreview_id">ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>
+        <%-- <div class="sreview_id">ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>
          
          
         <div class="sreview_memo"> 
@@ -1001,14 +1027,14 @@ $(function(){
             </svg>
         </label>
         평점:&nbsp;
-       </div>
+       </div> --%>
         
-     </div>
+     </div> 
    <!-- 댓글 입력창 close-->
      
       <!-- 댓글목록-->
      <div class="sreview_list">
-         <div > 
+         <%-- <div > 
          
          <% 
          for(ShareBoardDto sdto : list){
@@ -1025,7 +1051,7 @@ $(function(){
          %>
             
          
-         </div>
+         </div> --%>
      </div>
      
      <!-- 댓글창 close-->
@@ -1071,7 +1097,7 @@ $(function(){
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-warning" id="aoCal">추가</button>
-             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="heart_close btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -1098,7 +1124,7 @@ $(function(){
            </div>
         </div>
         <div class="modal-footer">
-           <button type="button" class="btn btn-warning" id="aoCal">추가</button>
+           
              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

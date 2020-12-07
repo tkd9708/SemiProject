@@ -6,6 +6,7 @@
 <%
    request.setCharacterEncoding("utf-8");   
    String num=request.getParameter("num");
+   
    String id=request.getParameter("myid");
    String content=request.getParameter("content");
    ShareBoardDto dto = new ShareBoardDto();
@@ -15,10 +16,12 @@
    dto.setStar("0");
    dto.setAddr("no");
    dto.setContent(content==null?"no":content);
-   dto.setRegroup(Integer.parseInt(num));
+   
    dto.setPhoto("no");
    ShareBoardDao dao = new ShareBoardDao();
+   //int num=dao.getMaxNum();
    //System.out.println(dto.getNum());
+   dto.setRegroup(Integer.parseInt(num));
    dao.insertBoard(dto);
    
    

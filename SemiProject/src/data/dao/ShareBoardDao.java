@@ -338,14 +338,15 @@ public class ShareBoardDao {
         }
         
         //게시글 삭제
-        public void sharedelete(String num) {
+        public void sharedelete(String num,String num1) {
           Connection conn=null;
           PreparedStatement pstmt=null;
-          String sql="delete from shareboard where num=?";
+          String sql="delete from shareboard where num=? or regroup=?";
           conn=my.getConnection();
           try {
              pstmt=conn.prepareStatement(sql);
              pstmt.setString(1, num);
+             pstmt.setString(2, num1);
              pstmt.execute();
           }catch(SQLException e) {
              e.printStackTrace();
@@ -353,7 +354,71 @@ public class ShareBoardDao {
              my.dbClose(conn, pstmt);
           }
        }
+        //댓글 개수 구하기
+        public int getCount(String num){
+            int count =0;
+            Connection conn=null;
+            PreparedStatement pstmt=null;
+            ResultSet rs=null;
+            String sql="select count(*) from shareboard where regroup=? and relevel!=0";
+            conn=my.getConnection();
+            try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, num);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					count=rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            return count;
+            
+		 
+        }
         
+        //게시글 수정
+        
+        
+        public void updateShardBoard(ShareBoardDto dto) {
+           Connection conn=null;
+           PreparedStatement pstmt=null;
+           String sql="";
+           conn=my.getConnection();
+           try {
+              if(dto.getPhoto()==null) {
+                 sql="update shareboard set subject=?, addr=?, content=? where num=?";
+                 pstmt=conn.prepareStatement(sql);
+                 //바인딩
+                 pstmt.setString(1, dto.getSubject());
+                 pstmt.setString(2, dto.getAddr());
+                 pstmt.setString(3, dto.getContent());
+                 pstmt.setString(4, dto.getNum());
+              }else {
+                 sql="update shareboard set subject=?, addr=?, photo=? , content=? where num=?";
+                 pstmt=conn.prepareStatement(sql);
+                 //바인딩
+                 pstmt.setString(1, dto.getSubject());
+                 pstmt.setString(2, dto.getAddr());
+                 pstmt.setString(3, dto.getPhoto());
+                 pstmt.setString(4, dto.getContent());
+                    pstmt.setString(5, dto.getNum());
+                 
+                 
+              }
+              pstmt.execute();
+           } catch (SQLException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+           }finally {
+              my.dbClose(conn, pstmt);
+           }
+        }
+        
+        
+       
      
            
   

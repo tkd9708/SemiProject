@@ -225,6 +225,7 @@ $(function(){
    <table class="styled-table">
          <tr>
             <th style="text-align: center;"><span>추천맛집</span></th>
+           
             <td> <input type="hidden" name="id"value="<%=id%>">
               <input type="text" name="subject" class="form-control"
                required="required" style="width: 200px;height: 30px;"

@@ -36,6 +36,7 @@
       dao.insertBoard(dto);
       //insert 된 num값 얻기
       int num=dao.getMaxNum();
+     
       //페이지번호 읽기
       String pageNum=request.getParameter("pageNum");
       if(pageNum==null)
