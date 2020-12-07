@@ -116,7 +116,7 @@ public class ShareBoardDao {
       public List<ShareBoardDto> getList(int start,int end)
       {
          List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
-         String sql="select * from shareboard order by regroup desc, restep asc limit ?,?";
+         String sql="select * from shareboard where relevel=0 and restep=0 order by regroup desc, restep asc limit ?,?";
                   
          Connection conn=null;
          PreparedStatement pstmt=null;
@@ -156,10 +156,10 @@ public class ShareBoardDao {
          return list;
       }
 
-      public List<ShareBoardDto> getReviewList(int regroup)
+      public List<ShareBoardDto> getReviewList(String num)
       {
          List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
-         String sql="select * from shareboard where regroup=? and relevel!=0 order by restep asc";
+         String sql="select distinct * from shareboard  where ?=regroup and relevel!=0 order by restep asc";
                   
          Connection conn=null;
          PreparedStatement pstmt=null;
@@ -169,7 +169,8 @@ public class ShareBoardDao {
          try {
             pstmt=conn.prepareStatement(sql);
             //바인딩
-            pstmt.setInt(1, regroup);
+          
+          pstmt.setString(1, num);
             //실행
             rs=pstmt.executeQuery();
             while(rs.next())
@@ -242,7 +243,7 @@ public class ShareBoardDao {
       
     //데이터 추가시 같은 그룹중 전달받은 step보다 큰값을 가진
      //데이터들은 restep을 무조건+1을 한다
-     public void updateRestep(int regroup,int restep1) {
+     public void updateRestep(int regroup,int restep) {
         String sql="update shareboard set restep=restep+1 where regroup=? and restep>?";
         Connection conn=null;
         PreparedStatement pstmt=null;
@@ -250,7 +251,7 @@ public class ShareBoardDao {
         try {
            pstmt=conn.prepareStatement(sql);
            pstmt.setInt(1, regroup);
-           pstmt.setInt(2, restep1);
+           pstmt.setInt(2, restep);
            
            pstmt.execute();
         } catch (SQLException e) {
@@ -335,6 +336,23 @@ public class ShareBoardDao {
            
            return flag;
         }
+        
+        //게시글 삭제
+        public void sharedelete(String num) {
+          Connection conn=null;
+          PreparedStatement pstmt=null;
+          String sql="delete from shareboard where num=?";
+          conn=my.getConnection();
+          try {
+             pstmt=conn.prepareStatement(sql);
+             pstmt.setString(1, num);
+             pstmt.execute();
+          }catch(SQLException e) {
+             e.printStackTrace();
+          }finally {
+             my.dbClose(conn, pstmt);
+          }
+       }
         
      
            

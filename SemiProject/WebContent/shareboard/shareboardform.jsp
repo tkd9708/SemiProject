@@ -311,16 +311,20 @@ $(function(){
       
       
       <div class="share_btn">
-             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
+             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;" >
                
              <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
                onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">      
       </div>
     </form>
    </fieldset>
-       <%}else {%>
-       <b>먼저 로그인을 해주세요</b>
-    <%}%>
+      
   </div>
+   <%}else {%>
+       <script type="text/javascript">
+             alert("먼저 로그인을 해주세요");
+       
+       </script>
+    <%}%>
 </body>
 </html>

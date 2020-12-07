@@ -12,8 +12,4 @@
    dto.setWishday(wishday);
    WishlistDao dao = new WishlistDao();
    dao.insertShare(dto);
-
-
-
-
 %>
