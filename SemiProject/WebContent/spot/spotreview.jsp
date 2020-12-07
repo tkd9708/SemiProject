@@ -17,23 +17,18 @@
 <style type="text/css">
 	  /*별점 css*/
  
-
 .stars{
     display: flex;
     flex-wrap: wrap;
-
     flex-direction: row-reverse;
     justify-content: flex-end;
-
 }
-
 .stars__star-icon{
     stroke:#EFCE4A;
     stroke-width: 2px;
     fill: transparent;
     transition: .1s all;
 }
-
 .stars__star{
     width: 20px;
     height: 20px;
@@ -41,7 +36,6 @@
     cursor: pointer;
     margin: 5px;
 }
-
 .stars__checkbox{
     position: absolute;
     top: -9999px;
@@ -49,19 +43,15 @@
     width: 0;
     height: 0;
 }
-
 .stars__star:hover > .stars__star-icon{
     fill: #EFCE4A;
 }
-
 .stars__star:hover ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked + .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
@@ -124,7 +114,6 @@
 %>
 <script type="text/javascript">
 	$(function(){
-
 		$(".stars__checkbox").on("click", function(){
 			var idx = $(this).index()/2;
 			switch (idx) {
@@ -180,7 +169,6 @@
 					url: "spot/deleteReview.jsp",
 					data: {"num": $(this).attr("num")},
 					success: function(data){
-
 						location.reload();
 					}
 				});
@@ -195,7 +183,6 @@
 				url: "spot/updatelikes.jsp",
 				data: {"num": $(this).attr("num")},
 				success: function(data){
-
 					location.reload();
 				}
 			});
@@ -211,7 +198,15 @@
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 20%;">
+					<%
+					if(myid==null)
+					{%>
+						<b style="margin-left: 20px;">작성하려면 로그인 해주세요</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%}
+					else
+					{%>
 						<b style="margin-left: 20px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%}%>
 			<br><br>
 			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
