@@ -81,7 +81,7 @@ div.btn{
        			</tr>
        			<tr>
           			<td colspan="2" align="center">
-             			<input type="button" value="등록" class="button" style="width: 100px;color: white;"
+             			<input type="button" value="수정" class="button" style="width: 100px;color: white;"
                					onclick="submitContents(this)">
                
              			<input type="button" value="목록" class="button" style="width: 100px;color: white;"
@@ -135,5 +135,19 @@ function pasteHTML(filepath){
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
 
 }
+
+function loadContent(){
+	
+	$.ajax({
+		type:"post",
+		url:""
+	})
+	
+}
+
+
+
+
+
 </script>
 </body>

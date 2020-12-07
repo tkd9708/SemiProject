@@ -354,4 +354,41 @@ public class SpotlistDao {
 		
 		return total;
 	}
+	
+	
+	
+	public void addSpot(SpotlistDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "insert into spotlist(contentsid, title, label1,label2, roadaddr, latitude, longitude, tag, introduction, img, thumbnail) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getContentsid());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getLabel1());
+			pstmt.setString(4, dto.getLabel2());
+			pstmt.setString(5, dto.getRoadaddr());
+			pstmt.setDouble(6, dto.getLatitude());
+			pstmt.setDouble(7, dto.getLongitude());
+			pstmt.setString(8, dto.getTag());
+			pstmt.setString(9, dto.getIntroduction());
+			pstmt.setString(10, dto.getImg());
+			pstmt.setString(11, dto.getThumbnail());
+			
+			pstmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt);
+		}
+	}
+	
+	
+	
 }

@@ -54,6 +54,8 @@ div.btn{
 }
 </style>
 <body>
+<script src="<%=request.getContextPath()%>/se2/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script>
 
 <div class="noticeform">
 	<fieldset>
