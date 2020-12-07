@@ -128,6 +128,10 @@ overflow-y: initial !important
 height: 300px;
 overflow-y: auto;
 }
+.hide{
+display:none;
+}
+
 
 
 </style>
@@ -470,7 +474,15 @@ if(loginok!=null){
               <label onclick="prevCalendar()" style=" font-size: 20pt;cursor:pointer;float:right" class="   glyphicon glyphicon-menu-left"></label>   
            </td>   
            <td align="center" id="tbCalendarYM" colspan="3" style="background-color: white;color:black;font-weight:bold">
+              <div id="ym">
               <b>yyyy m</b>
+              </div>
+              <div class="dropdown-content hide" style="font-size: 10pt">
+                 <input type="month" name ="inputym">
+                 <button type="button" class="btn_select" onclick="gotoselect()">이동</button>
+           </div>
+
+
            </td>
            <td style="background-color:white;color:black;"colspan="2">   
               <label onclick="nextCalendar()" style="font-size: 20pt; cursor:pointer" class="glyphicon glyphicon-menu-right" ></label>
@@ -657,6 +669,11 @@ location.href = "index.jsp";
       
    })
    
+    $(document).on("click","#ym",function(){
+    //alert($(this).text());
+   $("div.dropdown-content").toggleClass("hide");
+    
+   })
    
    $(document).on("click","span.btnDel",function(){
       var ans = confirm("일정을 삭제하시겠습니까?");

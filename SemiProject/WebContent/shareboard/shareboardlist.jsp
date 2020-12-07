@@ -18,16 +18,22 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-div.smain h2{
+/* div.smain h2{
       margin-left: 880px;
       margin-top: 150px;
        
+} */
+
+div.main{
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 150px;
 }
+
 div.shareboard{
       display: flex;
-      max-width: 1000px;
       height: 330px;
-      margin: auto;
+      /* margin: auto; */
       margin-top: 50px;
       border-top: 5px solid #ffc266;
       border-bottom: 2px solid #ffc266;
@@ -41,44 +47,45 @@ div.image_star{
      
 }
 div.content_addr{
-     flex-basis: 400px;
+     flex-basis: 550px;
      flex-wrap : wrap;
      padding-left: 25px;
      padding-top: 25px;
      height: 100%;
      font-size: 14px;
-     color: grey;
 }
 div.subject{
      padding-bottom: 10px;
+     font-size: 20pt;
+     font-weight: 900;
 }
 div.addr{
      padding-bottom: 10px
 }
 div.id_writeday{
     display: inline-block;
-    padding-top: 120px;
-    
+    padding-top: 50px;
+    float: right;
+    color: gray;
+    opacity: 0.8;
 }
 div.userimg img{
     width: 350px;
     margin-left: 25px;
-    padding-top: 10px;
+    padding-top: 30px;
     height: 250px;
     
     
 }
 div.userstar{
-    margin-top: 15px;
-    margin-left: 25px;
-    font-size: 20px;
+    margin-bottom: 10px;
 } 
 div.likes_heart{
     
      display: flex;
      flex: 1;
      flex-direction: column;
-     padding-right: 20px;
+     /* padding-right: 20px; */
      height: 100%;
      float: right;
 }
@@ -108,11 +115,11 @@ div.sreview_rere{
 div.sreview_list{
  
    margin-top: 20px;
-   margin-left: 460px;
+   /* margin-left: 460px; */
    margin-bottom: 20px;
    padding-bottom: 20px;
    border-bottom: 1px solid #ffc266;
-   max-width: 1000px;
+   /* max-width: 1000px; */
  
 }
 div.sreview{
@@ -228,9 +235,8 @@ div.update_del_btn{
 }
 /*맛집공유 버튼 css*/
  div.point{
-  margin-left: 1300px;
-  padding-top: 50px;
-     
+ 
+ float: right;
      
     
  }
@@ -405,13 +411,14 @@ int totalCount = db.getTotalCount();
 	
 	// mysql은 첫 글이 0번이므로 +1 안해도됨 (오라클은 1번)
 	start = (currentPage-1) * perPage;
-List<ShareBoardDto> list=db.getList(start, perPage);
-//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
-int no=totalCount-((currentPage-1)*perPage);
+	List<ShareBoardDto> list=db.getList(start, perPage);
+	
+	//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
+	int no=totalCount-((currentPage-1)*perPage);
    
    no=totalCount-((currentPage-1)*perPage);
    
-   
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
    
    
 %>
@@ -461,18 +468,35 @@ $(function(){
          });
       });
   
-     
+     $(document).on("click", ".review_plus", function(){
+    	var num = $(this).attr("num");
+    	var regroup = $(this).attr("regroup");
+    	var relevel = $(this).attr("relevel");
+    	var restep = $(this).attr("restep");
+    	//alert(relevel);
+    	
+    	var s="";
+    	s += "<input type='hidden' id='answerNum' value='" + num + "'>";
+    	s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
+    	s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
+    	s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
+        s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>"
+        s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>";
+        s+="<input class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px;' id='answercontent' >"
+           
+        $("#Infoanswer").html(s);
+        $("#shareanswermodal").modal();
+         
+     });
     
     
     //하트 버튼 클릭시 스케줄 모달
     
     $("div.heart").click(function(){
-      //alert("ggg");
-    
-     var num= $(this).attr("num");
-     var subject=$(this).attr("subject");
-     var addr=$(this).attr("addr");
-         $(this).addClass('color');
+    	 var num= $(this).attr("num");
+     	var subject=$(this).attr("subject");
+     	var addr=$(this).attr("addr");
+         
          $("#sharemodal").modal();
          
          var s = "";
@@ -498,6 +522,7 @@ $(function(){
              data:{"num":num,"wishday":$("#wishday").val(),"myid":"<%=id%>"},
              success:function(data){
                 $("#sharemodal").modal("hide");
+                $(this).addClass('color');
              }
              
            });
@@ -514,18 +539,81 @@ $(function(){
     $(".sreview_list").hide();
     $(".sreview_rere").hide();
     
+    
+    
     $(".button1").click(function(){
-    	//alert($(this).parent().parent().parent().next().html());
-    	$(this).parent().parent().parent().next().toggle();
-    	
+       //alert($(this).parent().parent().parent().next().html());
+      var num=$(this).attr("num");
+      var regroup = $(this).attr("regroup");
+      var relevel = $(this).attr("relevel");
+      var restep = $(this).attr("restep");
+      
+      var s="";
+      s += "<input type='hidden' id='answerNum' value='" + num + "'>";
+  	s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
+  	s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
+  	s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
+      s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>"
+      s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>";
+      s+="<input class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px;' id='answercontent' >"
+         
+      $("#Infoanswer").html(s);
+      $("#shareanswermodal").modal();
+       
       });
     
-    $(".button2").click(function(){
-    	//alert($(this).parent().parent().parent().next().html());
-    	$(this).parent().parent().parent().next().next().toggle();
-    	
-      });
+    $(document).on("click","#answeraoCal",function(){
+       if(<%=loginok!=null%>){
+            var num=$("#answerNum").val();
+            var regroup = $("#answerRegroup").val();
+            var relevel = $("#answerRelevel").val();
+            var restep = $("#answerRestep").val();
+            var content=$("#answercontent").val();
+          
+            //alert(num + " " + regroup + " " + relevel + " " + restep);
+             $.ajax({
+              type:"post",
+              dataType:"html",
+              url:"shareboard/insertshareboardanswer.jsp",
+              data:{"num":num, "regroup":regroup, "relevel":relevel, "restep":restep, "content":content,"id":"<%=id%>"},
+              success:function(data){
+                 //$("#shareanswermodal").modal("hide");
+            	  $("#shareanswermodal").modal("hide");
+            	  location.reload();
+              }
+              
+            }); 
+         }else{
+            alert("로그인이 필요합니다");
+         }
+         
+    });
     
+    // 댓글 각자 삭제
+    $(document).on("click",".delReview",function(){
+    	var num = $(this).attr("num");
+    	var relevel = $(this).attr("relevel");
+    	var regroup = $(this).attr("regroup");
+    	var restep = $(this).attr("restep");
+    	
+        var a = confirm("정말 삭제하시겠습니까?");
+        if(a){
+        	$.ajax({
+                type:"get",
+                dataType:"html",
+                url:"shareboard/deleteReview.jsp",
+                data:{"num":num, "relevel":relevel, "regroup":regroup, "restep":restep},
+                success:function(data){
+                   location.reload();
+                }
+        	});
+        }
+         
+    });
+    
+    
+    
+   
     $(".memo_plus").click(function(){
     	//alert($(this).parent().parent().parent().next().html());
     	$(this).parent().parent().next().toggle();
@@ -533,14 +621,6 @@ $(function(){
       });
       
     
-   /*  $(".button2").click(function(){
-    	//alert($(this).parent().parent().parent().next().find(".sreview").html());
-    
-    	$(this).parent().parent().parent().next().find(".sreview_list").toggle();
-    	
-      });
-     */
-     
      
      
     //댓글 추가
@@ -563,57 +643,108 @@ $(function(){
      
      
      
-     //게시글 수정(modal)
-     $(document).on("click",".btn_update",function(){
-        var writeday=$(this).attr("writeday");
-        var content=$(this).attr("content");
-        var photo=$(this).attr("photo");
-        var star=$(this).attr("star");
-        //alert(별);
-        $("#shareupdate").modal();
-        var s="";
-        s="추천맛집:&nbsp;<input type='text'><br><br>"
-        s+="맛집주소:&nbsp;<input type='text'><br><br>"
-        s+="이미지:&nbsp;<input type='file'><br>"
-        s+="내용:&nbsp;<input type='text' style='width:100px;height:200px;'>"
-   		
- 
-        
-        
-        
-        $("#Infoupdate").html(s);
-        
-         
-     });
+  //게시글 수정(modal)
+    $(document).on("click",".btn_update",function(){
+      var num=$(this).attr("num");
+       var subject=$(this).attr("subject");
+       var content=$(this).attr("content");
+       var photo=$(this).attr("photo");
+       var addr=$(this).attr("addr");
+       //alert(num);
+       $("#shareupdate").modal();
+       var s="";
+       s+="<form action='shareboard/shareboardupdateaction.jsp' method='post' enctype='multipart/form-data'>"
+       s+="<input type='hidden' name='num' value='"+num+"'>"
+       s+="추천맛집:&nbsp;<input type='text' name='subject' value='"+subject+"'><br><br>"
+       s+="맛집주소:&nbsp;<input type='text' name='addr' value='"+addr+"'><br><br>"
+       s+="이미지:&nbsp;<input type='file' name='photo' value='"+photo+"'><br>"
+       s+="내용:&nbsp;<textarea maxwidth='1000' name='content'>" + content + "</textarea>"
+       s+="<button type='submit' class='btn btn-warning' id='updateaoCal'>수정</button></form>";
+       
+       $("#Infoupdate").html(s);
+    });
+
     
-	$(".button2").click(function(){
-		var regroup = $(this).attr("regroup");
-		//alert(regroup);
-		$.ajax({
-			type: "get",
-			url: "shareboard/shareboardxml.jsp",
-			dataType: "xml",
-			data: {"regroup":regroup},
-			success: function(data){
-				var s ="";
-				$(data).find("dto").each(function(i, element) {
-					s+="<div>ID:"+$(this).find("id").text();
-					s += "<br>" + $(this).find("content").text();
-					s += "<br><b style='float: right; color:gray;'>" + $(this).find("writeday").text();
-					s += "<span style='float: right;'>+</span>"
-					
-					
-					s += "</b></div><br><hr>";
-				});
-				$(".sreview_list").html(s);
-			}
-		});
-	});
+     $(".button2").click(function(){
+    	 
+    	 $(this).parent().parent().parent().next().toggle();
+    	 var now = $(this).parent().parent().parent().next();
+    	 
+         var regroup = $(this).attr("regroup");
+        // var num=$(this).attr("num");
+         //alert(regroup);
+         $.ajax({
+            type: "get",
+            url: "shareboard/shareboardxml.jsp",
+            dataType: "xml",
+            data: {"regroup" : regroup},
+            success: function(data){
+            	
+               var s ="";
+               if($(data).find("dto").text() == ''){
+            	   s += "<b style='text-align:center;'>등록된 review가 없습니다.</b>";
+               }
+               else{
+            	   $(data).find("dto").each(function(i, element) {
+                	   var myid = $(this).find("id").text();
+                	   var relevel = $(this).find("relevel").text();
+                	   s += "<div>";
+                	  for(var i = 0; i<relevel; i++)
+                		  s += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                	
+                      s += "↪&nbsp;&nbsp;" + $(this).find("content").text();
+                      if("<%=id%>"==myid){
+                    	  s += "&nbsp;&nbsp;<b style='color:tomato; cursor:pointer;' class='delReview' num='" + $(this).attr("num") + "' relevel='"+$(this).find("relevel").text()
+                    	  		+"' regroup='" + $(this).find("regroup").text() + "' restep='" + $(this).find("restep").text() + "'>X</b>";
+                    	  s += "&nbsp;&nbsp;<span class='glyphicon glyphicon-pencil' style='cursor:pointer;'></span>";
+                      }
+                      s += "<span style='float: right;font-size:20px; cursor: pointer;' class='review_plus' num='"+ $(this).attr("num") 
+                      		+ "' regroup='" + $(this).find("regroup").text() + "' relevel='" + $(this).find("relevel").text() 
+                      		+ "' restep='" + $(this).find("restep").text() + "'>+</span>"
+                     /*  s += "<br>" + $(this).find("content").text(); */
+                      s += "<br><br><b style='float: right; color:gray;'>"+ myid + " | " + $(this).find("writeday").text();
+                      
+                      
+                      
+                      s += "</b></div><br><hr>";
+                   });
+               }
+               
+               //$(".sreview_list").html(s);
+               now.html(s);
+               
+            }
+         });
+      });
    
     
+     //게시글 삭제
+     $(document).on("click",".btn_delete",function(){
+        var num=$(this).attr("num");
+        var num1=$(this).attr("num");
+        //var regroup=$(this).attr("regroup");
+        //alert(num1);
+        var a = confirm("정말 삭제하시겠습니까?");
+        if(a){
+        	$.ajax({
+                type:"get",
+                dataType:"html",
+                url:"shareboard/shareboarddelete.jsp",
+                data:{"num":num, "num1":num1},
+                success:function(data){
+                   location.reload();
+                }
+             });  
+        }
+        
+         
+        
+     }); 
     
     
 }); //function close
+
+
 </script>
 
 
@@ -622,9 +753,13 @@ $(function(){
 <body>
 
 
-  <!--게시판 제목 -->
+<!-- 전체 div -->
+<div class="main">
+	
+	 <!--게시판 제목 -->
     <div class="smain">
-       <h2 >맛집 공유 게시판</h2>
+    	<h1 style="font-weight: 900;"><b>맛집 공유 게시판</b></h1>
+      
     </div>
   <!-- 제목 close-->  
  
@@ -634,24 +769,17 @@ $(function(){
       <input type="button" value="맛집공유" style="color: white;"class="button" 
       onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
    </div>
+   <br><br>
    <!-- 맛집 공유 버튼 close -->
- 
-
-<!-- 전체 div -->
-<div class="main">
-    
+     
     <%
-    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh-mm");
+    
    
     for(ShareBoardDto dto : list){
 	%>   
-
-
-	   	
+  	
 	<!-- shardboard 부분 -->
-  	<div class="shareboard">
-                 
-        
+  	<div class="shareboard"> 
         
         <!-- 이미지+stat 묶음 div -->
         <div class="image_star">
@@ -669,10 +797,18 @@ $(function(){
              </div><!-- 이미지부분 close -->
                      
                        
-             <!-- 별 -->
+             
+       </div>
+       <!-- 이미지+stat 묶음 div close -->      
+               
+                   
+      <!-- 주소 내용  -->
+      <div class="content_addr">
+                       
+                       <!-- 별 -->
              <div class="userstar">
-                  <div class="starcount">맛집점수:
-                     <span style="color: #F0CD58; font-size: 18px;">
+                  <div class="starcount">
+                     <span style="color: #F0CD58; font-size: 20pt;">
                                  <%
                                  for(int i=1; i<=5; i++){
                                  if(i<=Integer.parseInt(dto.getStar())){
@@ -688,38 +824,23 @@ $(function(){
                   </div>
             </div>
             <!-- 별 close-->
-       </div>
-       <!-- 이미지+stat 묶음 div close -->      
-    
-            
-            
-         
-                     
-                     
-                   
-      <!-- 주소 내용  -->
-      <div class="content_addr">
-                       
            <div class="subject_addr_content">
             <div class="subject"><%=dto.getSubject()%></div>
             <br>
-            <div class="addr">주소:<%=dto.getAddr()%></div>
+            <div class="addr"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getAddr()%></div>
             <br>
             <div class="contnet"><%=dto.getContent()%></div>
            </div>
         
             
           <div class="id_writeday">
-            <div class="userid">ID:<%=dto.getId()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일:&nbsp;<%=sdf.format(dto.getWriteday())%></div>
+            <div class="userid"><%=dto.getId()%>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<%=sdf.format(dto.getWriteday())%></div>
             <%-- <div class="userwriteday"><%=sdf.format(dto.getWriteday())%></div> --%>
           </div>
               
       </div>
       <!-- 주소 내용 close -->
-                     
-                     
-                 
-                 
+              
     
      <!-- 좋아요 찜하기(하트) 댓글버튼,게시글 수정 삭제 -->
     <div class="likes_heart">
@@ -727,7 +848,7 @@ $(function(){
          <!-- 좋아요 -->
          <div class="likes">
             <span class="likes glyphicon glyphicon-thumbs-up"  num="<%=dto.getNum()%>">
-            </span><%=dto.getLikes()%>
+            </span>&nbsp;<%=dto.getLikes()%>
          </div>
          <!-- 좋아요 close -->
                   
@@ -737,13 +858,27 @@ $(function(){
          <!-- 찜하기(하트) close -->       
          
           <!--게시글 수정 삭제 버튼-->
+          <%
+          if(id.equals(dto.getId())){
+        	  %>
+        	  
          <div class="update_del_btn">
              <button type="button" class="btn_update btn btn-info" style="color: white;"
-             writeday="<%=sdf.format(dto.getWriteday()) %>"
+             addr="<%=dto.getAddr() %>"
              content="<%=dto.getContent()%>"  photo="<%=dto.getPhoto()%>"
-             star="<%=dto.getStar()%>">수정</button>
-             <button type="button" class="btn_delete btn btn-success" style="color: white;">삭제</button>
+             subject="<%=dto.getSubject()%>" num="<%=dto.getNum()%>">수정</button>
+             <button type="button" class="btn_delete btn btn-success" style="color: white;"
+             num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>">삭제</button>
          </div>
+        	  <%
+          }
+          else{
+        	  %>
+        	   <div class="update_del_btn" style="height: 100px;"></div>
+        	  <%
+          }
+          %>
+         
          <!-- 게시글 수정 삭제 버튼 close -->
                 
          
@@ -751,8 +886,9 @@ $(function(){
          
          <!-- 댓글버튼-->
          <div class="review_btn">
-             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(0)</button>
-             <button type="button" class="button1" style="color: white;">댓글쓰기</button>
+             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(<%=db.getCount(dto.getNum()) %>)</button>
+             <button type="button" class="button1" style="color: white;" num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>"
+              relevel="<%=dto.getRelevel()%>" restep="<%=dto.getRestep()%>">댓글쓰기</button>
          </div>
          <!-- 댓글버튼 close -->
 	   	          
@@ -762,13 +898,9 @@ $(function(){
   </div>
   <!-- shareboard close -->
 
- 	    
 
-
-
-
-
-     <!-- 댓글 입력창-->
+ 
+  <%--    <!-- 댓글 입력창-->
      <div class="sreview" >
  	       
  	    <div class="sreview_id">ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>
@@ -831,29 +963,36 @@ $(function(){
  	    
  	 </div>
    <!-- 댓글 입력창 close-->
+      --%>
+     
+
      
       <!-- 댓글목록-->
      <div class="sreview_list">
- 	     <div >
- 	     
- 	     <%-- <%
- 	     for(ShareBoardDto sdto : list){
- 	    	 %>
- 	         ID:&nbsp;<%=sdto.getId()%>
- 	         <br>
- 	         <%=sdto.getStar()%>
- 	         <br>
- 	         <%=sdto.getContent()%> 
- 	       <span class="memo_plus glyphicon glyphicon-plus" ></span>
- 	    	 
- 	    	 <%
- 	     }
- 	     %>
- 	        --%>
- 	     
- 	     </div>
+         
+         <%-- <% 
+         for(ShareBoardDto sdto : list){
+            %>
+             ID:&nbsp;<%=sdto.getId()%>
+             <br>
+             <%=sdto.getStar()%>
+             <br>
+             <%=sdto.getContent()%> 
+           <span class="memo_plus glyphicon glyphicon-plus" ></span>
+            
+            <%
+         }
+         %> --%>
+            
+         
      </div>
      
+          	      <%
+	   
+	   
+   }
+    	
+ %>
      <!-- 댓글창 close-->
      
      <!-- 댓글 댓글 입력창-->
@@ -869,13 +1008,7 @@ $(function(){
 
 
 
-  <%
-	   
-	   
-   }
-    
-    
- %>
+
  <!-- 하트 클릭->스케줄 일정 추가 modal -->
    <div class="modal fade" id="sharemodal" role="dialog">
     <div class="modal-dialog">
@@ -923,15 +1056,36 @@ $(function(){
                 
            </div>
         </div>
+       </div>
+     </div>
+  </div>
+ 
+ <!-- 댓글쓰기 클릭 -->
+  <div class="modal fade" id="shareanswermodal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">댓글쓰기</h4>
+        </div>
+        <div class="modal-body">
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="Infoanswer"></div>
+              <br>
+              
+               
+           </div>
+        </div>
         <div class="modal-footer">
-           <button type="button" class="btn btn-warning" id="aoCal">추가</button>
+           <button type="button" class="btn btn-warning" id="answeraoCal">등록</button>
              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
     </div>
-  </div> 
- 
+  </div>
  
 <!-- 페이징처리 -->
   <div style="width: 700px;" class=page >
