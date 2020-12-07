@@ -1,3 +1,4 @@
+<%@page import="data.dao.WishlistDao"%>
 <%@page import="data.dto.ShareBoardDto"%>
 <%@page import="data.dao.ShareBoardDao"%>
 <%@page import="java.util.List"%>
@@ -23,11 +24,15 @@
       margin-top: 150px;
        
 } */
-
+div.container{
+ 	text-align: center;
+}
 div.main{
 	margin-left: 100px;
 	margin-right: 100px;
 	margin-top: 150px;
+	margin-bottom: 200px;
+	/* text-align: center; */
 }
 
 div.shareboard{
@@ -69,7 +74,7 @@ div.id_writeday{
     color: gray;
     opacity: 0.8;
 }
-div.userimg img{
+div.userimg img, div.userimg div{
     width: 350px;
     margin-left: 25px;
     padding-top: 30px;
@@ -150,9 +155,9 @@ input.form-control{
     padding-bottom: 10px;
   
 }
-div.page{
+/* div.page{
    margin-left: 880px;
-}
+} */
 span.memo_plus{
     float: right;
     cursor: pointer;
@@ -372,14 +377,87 @@ margin-top:200px;
 z-index:1111;
 }
     
+/* 검색창 */
+/* div.container{
+    position: relative;
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 3%; 
+    max-width: 1500px;
+    float:right;
+    
+}
+#custom-search-input{
+    padding-left: 3px;
+    padding-right: 3px;
+    border: solid 1px #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    display: inline-block;
+    float: right;
+    height: 55px;
+}
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+    display: inline-block;
+}
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+select.combobox{
+    display: inline-block;
+    width: 100px;
+    background-color: #fff;
+    float: left;
+    height: 55px;
+    margin-top: 1px;
+    border: solid 1px #ccc; 
+    border-radius: 6px;
+}
+
+#main_search{
+    padding-left: 5px;
+} 
+
+.input-lg{
+    height: 44px;
+}
+
+.row{
+    width: 600px;
+} */
     
 </style>
 <%
 String id=(String)session.getAttribute("myid");
 String loginok=(String)session.getAttribute("loginok");
+String search = request.getParameter("search");
+
    ShareBoardDao db=new ShareBoardDao();
 //페이징 처리에 필요한 변수들   
-int totalCount = db.getTotalCount();
+	int totalCount = 0;
+	if(search != null){
+		totalCount = db.getSearchTotalCount(search);
+	}
+	else{
+		totalCount= db.getTotalCount();
+	}
+    //System.out.println("토탈" + totalCount);
 	int perPage = 10; // 한페이지당 보여질 글의 갯수
 	int perBlock = 5; // 한블럭당 출력할 페이지의 갯수
 	int totalPage; // 총 페이지의 갯수
@@ -411,7 +489,14 @@ int totalCount = db.getTotalCount();
 	
 	// mysql은 첫 글이 0번이므로 +1 안해도됨 (오라클은 1번)
 	start = (currentPage-1) * perPage;
-	List<ShareBoardDto> list=db.getList(start, perPage);
+	
+	List<ShareBoardDto> list;
+	if(search != null){
+		list = db.getSearchList(start, perPage, search);
+	}
+	else{
+		list=db.getList(start, perPage);	
+	} 
 	
 	//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
 	int no=totalCount-((currentPage-1)*perPage);
@@ -420,7 +505,7 @@ int totalCount = db.getTotalCount();
    
    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
    
-   
+   WishlistDao wdao = new WishlistDao();
 %>
 <script type="text/javascript">
 $(function(){
@@ -468,68 +553,52 @@ $(function(){
          });
       });
   
-     $(document).on("click", ".review_plus", function(){
-    	var num = $(this).attr("num");
-    	var regroup = $(this).attr("regroup");
-    	var relevel = $(this).attr("relevel");
-    	var restep = $(this).attr("restep");
-    	//alert(relevel);
-    	
-    	var s="";
-    	s += "<input type='hidden' id='answerNum' value='" + num + "'>";
-    	s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
-    	s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
-    	s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
-        s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>"
-        s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>";
-        s+="<input class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px;' id='answercontent' >"
-           
-        $("#Infoanswer").html(s);
-        $("#shareanswermodal").modal();
-         
-     });
     
     
     //하트 버튼 클릭시 스케줄 모달
     
     $("div.heart").click(function(){
-    	 var num= $(this).attr("num");
-     	var subject=$(this).attr("subject");
-     	var addr=$(this).attr("addr");
-         
-         $("#sharemodal").modal();
-         
-         var s = "";
-         
-         s+="<h2 id='modalnum' num='"+num+"'>"+num+"</h2>";
-         s+="<h2>"+subject+"</h2>";
-         s+="<h2>"+addr+"</h2>";
-         
-         
-         $("#Info").html(s);
+    	if(<%=loginok!=null%>){
+    		var num= $(this).attr("num");
+         	var subject=$(this).attr("subject");
+         	var addr=$(this).attr("addr");
+            var idx = $(this).attr("idx");
+           // alert(idx);
+         	
+             $("#sharemodal").modal();
+
+             var s = "";
+             
+             s += "<input type='hidden' id='heart_idx' value='" + idx + "'>";
+             s += "<input type='hidden' id='modalnum' num='"+num+"'>";
+             s += "<span class='glyphicon glyphicon-tags'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + subject + "</b><br><br>";
+             s += "<span class='glyphicon glyphicon-map-marker'></span>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + addr + "</b><br>";
+             
+             
+             $("#Info").html(s);
+    	}
+    	else{
+    		alert("로그인이 필요한 서비스입니다.");
+    	}
          
          
       });
     
    //하트 버튼 클릭 스케줄 모달
     $(document).on("click","#aoCal",function(){
-        if(<%=loginok!=null%>){
-           var num=$("#modalnum").attr("num");
-           $.ajax({
-             type:"post",
-             dataType:"html",
-             url:"shareboard/insertshareboard.jsp",
-             data:{"num":num,"wishday":$("#wishday").val(),"myid":"<%=id%>"},
-             success:function(data){
-                $("#sharemodal").modal("hide");
-                $(this).addClass('color');
-             }
-             
-           });
-        }else{
-           alert("로그인이 필요합니다");
-        }
-        
+    	
+    	var num=$("#modalnum").attr("num");
+        $.ajax({
+          type:"post",
+          dataType:"html",
+          url:"shareboard/insertshareboard.jsp",
+          data:{"num":num,"wishday":$("#wishday").val(),"myid":"<%=id%>"},
+          success:function(data){
+             $("#sharemodal").modal("hide");
+             $(".heart:eq(" + $("#heart_idx").val() + ")").addClass('color');
+          }
+          
+        });
      });
     
     
@@ -540,52 +609,79 @@ $(function(){
     $(".sreview_rere").hide();
     
     
-    
+    // 원글에 댓글추가
     $(".button1").click(function(){
        //alert($(this).parent().parent().parent().next().html());
-      var num=$(this).attr("num");
-      var regroup = $(this).attr("regroup");
-      var relevel = $(this).attr("relevel");
-      var restep = $(this).attr("restep");
+       if(<%=loginok!=null%>){
+    	   var num=$(this).attr("num");
+    	      var regroup = $(this).attr("regroup");
+    	      var relevel = $(this).attr("relevel");
+    	      var restep = $(this).attr("restep");
+    	      
+    	      var s="";
+    	      s += "<input type='hidden' id='answerNum' value='" + num + "'>";
+    	  	  s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
+    	      s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
+    	  	  s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
+    	      /* s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>" */
+    	      s += "<span class='glyphicon glyphicon-user'></span><b>&nbsp;&nbsp;&nbsp;<%=id%></b><br><br>";
+    	      s+="<textarea class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px; resize:none; height: 100px;' id='answercontent' ></textarea>";
+    	         
+    	      $("#Infoanswer").html(s);
+    	      $("#shareanswermodal").modal();
+       }
+       else{
+    	   alert("로그인이 필요합니다");
+       }
       
-      var s="";
-      s += "<input type='hidden' id='answerNum' value='" + num + "'>";
-  	s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
-  	s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
-  	s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
-      s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>"
-      s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>";
-      s+="<input class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px;' id='answercontent' >"
-         
-      $("#Infoanswer").html(s);
-      $("#shareanswermodal").modal();
        
       });
-    
+
+	 // 대댓글 추가
+    $(document).on("click", ".review_plus", function(){
+    	var num = $(this).attr("num");
+	   		var regroup = $(this).attr("regroup");
+	   		var relevel = $(this).attr("relevel");
+	   		var restep = $(this).attr("restep");
+	   		var content = $(this).attr("content");
+	   		//alert(relevel);
+	   	
+	   		var s="";
+	   		s += "<input type='hidden' id='answerNum' value='" + num + "'>";
+	   		s += "<input type='hidden' id='answerRegroup' value='" + regroup + "'>";
+	   		s += "<input type='hidden' id='answerRelevel' value='" + relevel + "'>";
+	   		s += "<input type='hidden' id='answerRestep' value='" + restep + "'>";
+	         <%-- s+="<div id='answermodalnum' num='"+num+"'>num:"+num+"</div>" ;
+	        s+="<div class='sreview_id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>"; --%>
+	        
+	        s += "<span style='text-overflow:ellipsis;overflow: hidden;white-space: nowrap;display: inline-block;max-width: 350px;'>"+content+"</span><br><br>";
+	        s += "↪&nbsp;&nbsp;<span class='glyphicon glyphicon-user'></span><b>&nbsp;&nbsp;&nbsp;<%=id%></b><br><br>";
+		    s+="<textarea class='form-control' placeholder='리뷰를 입력하세요' style='width: 350px; resize:none; height: 100px;' id='answercontent' ></textarea>";
+	          
+	        $("#Infoanswer").html(s);
+	        $("#shareanswermodal").modal();
+        
+    });
+	 
+	// 대댓글 모달 추가버튼 
     $(document).on("click","#answeraoCal",function(){
-       if(<%=loginok!=null%>){
-            var num=$("#answerNum").val();
-            var regroup = $("#answerRegroup").val();
-            var relevel = $("#answerRelevel").val();
-            var restep = $("#answerRestep").val();
-            var content=$("#answercontent").val();
+    	var num=$("#answerNum").val();
+        var regroup = $("#answerRegroup").val();
+        var relevel = $("#answerRelevel").val();
+        var restep = $("#answerRestep").val();
+        var content=$("#answercontent").val();
+      
+         $.ajax({
+          type:"post",
+          dataType:"html",
+          url:"shareboard/insertshareboardanswer.jsp",
+          data:{"num":num, "regroup":regroup, "relevel":relevel, "restep":restep, "content":content,"id":"<%=id%>"},
+          success:function(data){
+        	  $("#shareanswermodal").modal("hide");
+        	  location.reload();
+          }
           
-            //alert(num + " " + regroup + " " + relevel + " " + restep);
-             $.ajax({
-              type:"post",
-              dataType:"html",
-              url:"shareboard/insertshareboardanswer.jsp",
-              data:{"num":num, "regroup":regroup, "relevel":relevel, "restep":restep, "content":content,"id":"<%=id%>"},
-              success:function(data){
-                 //$("#shareanswermodal").modal("hide");
-            	  $("#shareanswermodal").modal("hide");
-            	  location.reload();
-              }
-              
-            }); 
-         }else{
-            alert("로그인이 필요합니다");
-         }
+        }); 
          
     });
     
@@ -596,7 +692,7 @@ $(function(){
     	var regroup = $(this).attr("regroup");
     	var restep = $(this).attr("restep");
     	
-        var a = confirm("정말 삭제하시겠습니까?");
+        var a = confirm("댓글을 삭제하시겠습니까?");
         if(a){
         	$.ajax({
                 type:"get",
@@ -643,7 +739,7 @@ $(function(){
      
      
      
-  //게시글 수정(modal)
+  /* //게시글 수정(modal)
     $(document).on("click",".btn_update",function(){
       var num=$(this).attr("num");
        var subject=$(this).attr("subject");
@@ -662,7 +758,7 @@ $(function(){
        s+="<button type='submit' class='btn btn-warning' id='updateaoCal'>수정</button></form>";
        
        $("#Infoupdate").html(s);
-    });
+    }); */
 
     
      $(".button2").click(function(){
@@ -690,17 +786,20 @@ $(function(){
                 	   var relevel = $(this).find("relevel").text();
                 	   s += "<div>";
                 	  for(var i = 0; i<relevel; i++)
-                		  s += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                		  s += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 	
                       s += "↪&nbsp;&nbsp;" + $(this).find("content").text();
-                      if("<%=id%>"==myid){
+                      if("<%=id%>"==myid && <%=loginok!= null%> ){
                     	  s += "&nbsp;&nbsp;<b style='color:tomato; cursor:pointer;' class='delReview' num='" + $(this).attr("num") + "' relevel='"+$(this).find("relevel").text()
                     	  		+"' regroup='" + $(this).find("regroup").text() + "' restep='" + $(this).find("restep").text() + "'>X</b>";
-                    	  s += "&nbsp;&nbsp;<span class='glyphicon glyphicon-pencil' style='cursor:pointer;'></span>";
+                    	  s += "&nbsp;&nbsp;<span class='answerupdate glyphicon glyphicon-pencil' style='cursor:pointer;' num='"+$(this).attr("num")+"' content='"+$(this).find("content").text()+"'></span>";
                       }
-                      s += "<span style='float: right;font-size:20px; cursor: pointer;' class='review_plus' num='"+ $(this).attr("num") 
-                      		+ "' regroup='" + $(this).find("regroup").text() + "' relevel='" + $(this).find("relevel").text() 
-                      		+ "' restep='" + $(this).find("restep").text() + "'>+</span>"
+                      if(<%=loginok!=null%>){
+                    	  s += "<span style='float: right;font-size:20px; cursor: pointer;' class='review_plus' num='"+ $(this).attr("num") 
+                    		+ "' regroup='" + $(this).find("regroup").text() + "' relevel='" + $(this).find("relevel").text() 
+                    		+ "' restep='" + $(this).find("restep").text() + "' content='"+$(this).find("content").text() + "'>+</span>";
+                      }
+                      
                      /*  s += "<br>" + $(this).find("content").text(); */
                       s += "<br><br><b style='float: right; color:gray;'>"+ myid + " | " + $(this).find("writeday").text();
                       
@@ -724,7 +823,7 @@ $(function(){
         var num1=$(this).attr("num");
         //var regroup=$(this).attr("regroup");
         //alert(num1);
-        var a = confirm("정말 삭제하시겠습니까?");
+        var a = confirm("게시글을 삭제하시겠습니까?");
         if(a){
         	$.ajax({
                 type:"get",
@@ -740,8 +839,33 @@ $(function(){
          
         
      }); 
+     
+     $(".btn_search").click(function(){
+    	 var search = $("#share_search").val();
+    	 
+    	 location.href = "index.jsp?main=shareboard/shareboardlist.jsp?pageNum=1&search=" + search;
+     });
     
     
+     //댓글 수정 모달
+     $(document).on("click",".answerupdate",function(){
+        var num=$(this).attr("num");
+        var content=$(this).attr("content");
+        //alert(num);
+        $("#answerupdatemodal").modal();
+        var s="";
+        s+="<form action='shareboard/shareboardReviewaction.jsp' method='post'>";
+        s+="<input type='hidden' name='num' value='"+num+"'>";
+        s+="<input type='hidden' name='pageNum' value='" + "<%=currentPage%>" + "'>";
+        <%-- s+="아이디:&nbsp;<input type='text' name='id' value='"+"<%=id%>"+"'><br>";
+        s+="수정 내용:&nbsp;<textarea maxwidth='1000' name='content'>"+content+"</textarea><br>"; --%>
+        s += "<span class='glyphicon glyphicon-user'></span><b>&nbsp;&nbsp;&nbsp;<%=id%></b><br><br>";
+	    s+="<textarea class='form-control' style='width: 350px; resize:none; height: 100px;' name='content'>" + content + "</textarea>";
+        s += "<br>";
+        s+="<button type='submit' class='btn btn-warning' id='answeraoCal' style='margin-left: 150px;'>수정</button></form>";
+        $("#Infoanswerupdate").html(s);
+     });
+     
 }); //function close
 
 
@@ -759,22 +883,29 @@ $(function(){
 	 <!--게시판 제목 -->
     <div class="smain">
     	<h1 style="font-weight: 900;"><b>맛집 공유 게시판</b></h1>
+    	<!-- <button ><img src="image/plus.png"></button> -->
       
     </div>
   <!-- 제목 close-->  
- 
+ <div class="cc">
  
    <!-- 맛집 공유 버튼  -->
-   <div class="point">
-      <input type="button" value="맛집공유" style="color: white;"class="button" 
-      onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
-   </div>
-   <br><br>
-   <!-- 맛집 공유 버튼 close -->
-     
+   <%
+   if(loginok != null){
+	   %>
+	   <div class="point">
+	      <input type="button" value="맛집공유" style="color: white;"class="button" 
+	      onclick="location.href='index.jsp?main=shareboard/shareboardform.jsp'">
+	   </div>
+	   <%
+   }
+   %>
+   
+   
+    <br><br>
     <%
     
-   
+    int idx = 0;
     for(ShareBoardDto dto : list){
 	%>   
   	
@@ -792,6 +923,11 @@ $(function(){
                   {%>
                   <img src="shareboardsave/<%=dto.getPhoto() %>">
                   <%}
+                  else{
+                	  %>
+                	  <div>썸네일 없음</div><%-- 수진아. 여기 img크기만큼 엑스자 그림 넣어줄 수 있니 ㅎ.ㅎ --%>
+                	  <%
+                  }
                   %>
                  </div>
              </div><!-- 이미지부분 close -->
@@ -829,7 +965,7 @@ $(function(){
             <br>
             <div class="addr"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<%=dto.getAddr()%></div>
             <br>
-            <div class="contnet"><%=dto.getContent()%></div>
+            <div class="contnet"><%=dto.getContent().replace("\n", "<br>")%></div>
            </div>
         
             
@@ -853,20 +989,23 @@ $(function(){
          <!-- 좋아요 close -->
                   
          <!-- 찜하기(하트) -->    
-         <div class="heart" num="<%=dto.getNum() %>" subject="<%=dto.getSubject() %>"
-                                 addr="<%=dto.getAddr() %>"></div>
+         <div class="heart <%if(wdao.isShareSearch(dto.getNum())){
+        	 %>
+        	 color
+        	 <%
+         	} %>" 
+         	num="<%=dto.getNum() %>" subject="<%=dto.getSubject() %>"
+                                 addr="<%=dto.getAddr() %>" idx="<%=idx++%>"></div>
          <!-- 찜하기(하트) close -->       
          
           <!--게시글 수정 삭제 버튼-->
           <%
-          if(id.equals(dto.getId())){
+          if((id.equals(dto.getId())||id.equals("admin")) && loginok!=null){
         	  %>
         	  
          <div class="update_del_btn">
              <button type="button" class="btn_update btn btn-info" style="color: white;"
-             addr="<%=dto.getAddr() %>"
-             content="<%=dto.getContent()%>"  photo="<%=dto.getPhoto()%>"
-             subject="<%=dto.getSubject()%>" num="<%=dto.getNum()%>">수정</button>
+             onclick="location.href='index.jsp?main=shareboard/updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
              <button type="button" class="btn_delete btn btn-success" style="color: white;"
              num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>">삭제</button>
          </div>
@@ -900,96 +1039,13 @@ $(function(){
 
 
  
-  <%--    <!-- 댓글 입력창-->
-     <div class="sreview" >
- 	       
- 	    <div class="sreview_id">ID:&nbsp;<%=id%> &nbsp;&nbsp;</div>
- 	     
- 	     
- 	    <div class="sreview_memo"> 
- 	       <input class="form-control" placeholder="리뷰를 입력하세요" style="width: 800px" id="content" >
- 	          <div class="review_enter_btn">
-                 <button type="button" class="btn_submit btn btn-warning"
-                 num="<%=dto.getNum() %>" id="<%=dto.getId() %>" subject="<%=dto.getSubject() %>"
-                 addr="<%=dto.getAddr() %>" photo="<%=dto.getPhoto() %>" likes="<%=dto.getLikes() %>" 
-                 star="<%=dto.getStar() %> " content="<%=dto.getContent()%>" id1="<%=id%>">등록</button>
-              </div>
- 	     </div> 
- 	    
- 	    
- 	    <div class="stars"> 
- 	    <input class="stars__checkbox" type="radio" id="first-star" name="star">
-        <label class="stars__star" for="first-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="second-star" name="star">
-        <label class="stars__star" for="second-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="third-star" name="star">
-        <label class="stars__star" for="third-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="fourth-star" name="star">
-        <label class="stars__star" for="fourth-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        <input class="stars__checkbox" type="radio" id="fifth-star" name="star">
-        <label class="stars__star" for="fifth-star">
-            <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 53.867 53.867" style="enable-background:new 0 0 53.867 53.867;" xml:space="preserve">
-                <polygon points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 
-                    10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/>
-            </svg>
-        </label>
-        평점:&nbsp;
-       </div>
- 	    
- 	 </div>
-   <!-- 댓글 입력창 close-->
-      --%>
-     
-
      
       <!-- 댓글목록-->
      <div class="sreview_list">
          
-         <%-- <% 
-         for(ShareBoardDto sdto : list){
-            %>
-             ID:&nbsp;<%=sdto.getId()%>
-             <br>
-             <%=sdto.getStar()%>
-             <br>
-             <%=sdto.getContent()%> 
-           <span class="memo_plus glyphicon glyphicon-plus" ></span>
-            
-            <%
-         }
-         %> --%>
-            
-         
      </div>
      
-          	      <%
-	   
-	   
+       <%   
    }
     	
  %>
@@ -1014,7 +1070,7 @@ $(function(){
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content" style="width: 400px;">
+      <div class="modal-content" style="width: 500px;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">일정 추가</h4>
@@ -1037,11 +1093,11 @@ $(function(){
     </div>
   </div>
   
-    <!-- 게시판 원글 수정 -->
+    <!--  게시판 원글 수정 
   <div class="modal fade" id="shareupdate" role="dialog">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
+      Modal content
       <div class="modal-content" style="width: 400px;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -1058,8 +1114,33 @@ $(function(){
         </div>
        </div>
      </div>
-  </div>
+  </div> -->
  
+ <!-- 댓글 수정 -->
+   <div class="modal fade" id="answerupdatemodal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">댓글 수정</h4>
+        </div>
+        <div class="modal-body">
+           <div style="margin-left: 10px; margin-right: 10px;">
+              <div id="Infoanswerupdate"></div>
+              <br>
+              
+               
+           </div>
+        </div>
+        <div class="modal-footer">
+           
+             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
  <!-- 댓글쓰기 클릭 -->
   <div class="modal fade" id="shareanswermodal" role="dialog">
     <div class="modal-dialog">
@@ -1086,9 +1167,21 @@ $(function(){
       
     </div>
   </div>
- 
+ <div class="container">
+ <div class="input-group col-md-12" style="width: 300px;">
+        <input type="text" class="form-control input-lg" id="share_search" placeholder="검색할 지역을 입력해주세요" />
+             <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg btn_search" type="button" style="background-color: #aaa; border: none;">
+                       <i class="glyphicon glyphicon-search"></i>
+                   </button>
+             </span>
+    </div>
+     
+    
+
+<br><br><br>
 <!-- 페이징처리 -->
-  <div style="width: 700px;" class=page >
+  <div style="width: 100%;" class="page" >
     <ul class="pagination">
     <!-- 이전(첫블럭이 아니면 보이게하기) -->
    <%
@@ -1123,7 +1216,7 @@ $(function(){
     </ul>   
   </div>
 <!-- 페이징처리 close-->
-
+</div>
 </div>
 <!-- 전체 div close -->
 

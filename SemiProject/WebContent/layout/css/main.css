@@ -27,6 +27,9 @@ div.btn_go {
     opacity: 0;
     font-weight: bold;
     font-size: 25px;
+    position: relative;
+    margin: auto;
+    max-width: 1000px;
 } 
 
 div.btn_go a{
@@ -59,8 +62,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .jocheon a {
-    left:56.8%;
-    margin-top: 12%;
+    left:60%;
+    margin-top:18%;
 }
 /*서귀포*/
 #btn_go_seogwipo{
@@ -84,8 +87,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .seogwipo a{
-    left:42.5%;
-    margin-top: 28%; 
+    left:38%;
+    margin-top: 43%;
 }
 /*제주*/
 #btn_go_jeju{
@@ -109,8 +112,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .jeju a{
-    left:46.5%;
-    margin-top: 15%;
+    left:45.5%;
+    margin-top: 23%;
 }
 /*구좌*/
 #btn_go_gujwa{
@@ -134,8 +137,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .gujwa a{
-    left:66.1%;
-    margin-top: 10%; 
+    left:75%;
+    margin-top: 16%; 
 }
 /*성산*/
 #btn_go_sungsan{
@@ -159,8 +162,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .sungsan a{
-    left:70%;
-    margin-top: 17.5%; 
+    left:81%;
+    margin-top:27%; 
 }
 /*표선*/
 #btn_go_pyoseon{
@@ -184,8 +187,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .pyoseon a{
-    left:63.7%;
-    margin-top: 21%;  
+    left:71%;
+    margin-top: 32%;  
 }
 /*남원*/
 #btn_go_namwon{
@@ -209,8 +212,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .namwon a{
-    left:56%;
-    margin-top: 25%;
+    left:60%;
+    margin-top: 38%;
 }
 /*안덕*/
 #btn_go_andeok{
@@ -234,8 +237,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .andeok a{
-    left:31.7%;
-    margin-top: 28.3%; 
+    left:21.8%;
+    margin-top: 44%; 
 }
 /*대정*/
 #btn_go_daejung{
@@ -259,8 +262,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .daejung a{
-    left:25.3%;
-    margin-top: 31%; 
+    left:12%;
+    margin-top: 47%; 
 }
 /*한경*/
 #btn_go_hangyeong{
@@ -284,8 +287,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .hangyeong a{
-    left:24%;
-    margin-top: 25.3%;
+    left:11%;
+    margin-top: 39%;
 }
 /*한림*/
 #btn_go_hanrim{
@@ -309,8 +312,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .hanrim a{
-    left:27.5%;
-    margin-top: 21%; 
+    left:16%;
+    margin-top: 32.5%;
 }
 /*애월*/
 #btn_go_aewol{
@@ -334,8 +337,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .aewol a{
-    left:35%;
-    margin-top: 18%;
+    left:27.5%;
+    margin-top: 28%;
 }
 /*우도*/
 #btn_go_udo{
@@ -359,8 +362,8 @@ div.btn_go a{
     transform: translate(-50%,-50%); 
 }
 .udo a{
-    left:80.5%;
-    margin-top: 10%; 
+    left:95%;
+    margin-top: 18%; 
 }
 
 .nslist {

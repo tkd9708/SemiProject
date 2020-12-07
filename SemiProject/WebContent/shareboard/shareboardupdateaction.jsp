@@ -24,6 +24,7 @@
       String content=multi.getParameter("content");
       String subject=multi.getParameter("subject");
       String addr=multi.getParameter("addr");
+      String stars = multi.getParameter("stars");
       
       //dto에 넣기
       ShareBoardDto dto = new ShareBoardDto();
@@ -32,6 +33,7 @@
       dto.setContent(content);
       dto.setAddr(addr);
       dto.setSubject(subject);
+      dto.setStar(stars);
       
       //dao 선언
       ShareBoardDao dao = new ShareBoardDao();

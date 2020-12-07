@@ -92,6 +92,35 @@ public class WishlistDao {
 		return find;
 
 	}
+	
+	public boolean isShareSearch(String num) {
+		boolean find = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from wishlist where shareNum = ?";
+		conn = db.getConnection();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				find = true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+
+		return find;
+
+	}
 
 	// insert
 	public void insertContent(WishlistDto dto) {

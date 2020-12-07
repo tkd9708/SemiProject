@@ -236,42 +236,70 @@ public class NoticeDao {
 		}
 	}
 	
-	//main에서 일부 페이지 보기
+	//main에서 일부 페이지 보기  
 	   public List<NoticeDto> getMainList()
-	   {
-	      
-	      String sql="SELECT * FROM noticeboard ORDER BY num DESC limit 0,5";
-	      List<NoticeDto> list=new ArrayList<NoticeDto>();
-	      Connection conn=null;
-	      PreparedStatement pstmt=null;
-	      ResultSet rs=null;
-	      
-	      conn=my.getConnection();
-	      try {
-	         pstmt=conn.prepareStatement(sql);
-	         //실행
-	         rs=pstmt.executeQuery();
-	         while(rs.next())
-	         {
-	            NoticeDto dto=new NoticeDto();
-	            dto.setNum(rs.getString("num"));
-	            dto.setId(rs.getString("id"));
-	            dto.setSubject(rs.getString("subject"));
-	            dto.setContent(rs.getString("content"));
-	            dto.setWriteday(rs.getTimestamp("writeday"));
-	            dto.setReadcount(rs.getInt("readcount"));
-	            dto.setStar(rs.getInt("star"));
-	            
-	            
-	            //list에 추가
-	            list.add(dto);
-	         }
-	      } catch (SQLException e) {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }finally {
-	         my.dbClose(conn, pstmt, rs);
-	      }
-	      return list;
-	   }
+		{
+
+			String sql="SELECT * FROM noticeboard ORDER BY num DESC limit 0,5";
+			List<NoticeDto> list=new ArrayList<NoticeDto>();
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+
+			conn=my.getConnection();
+			try {
+				pstmt=conn.prepareStatement(sql);
+				//실행
+				rs=pstmt.executeQuery();
+				while(rs.next())
+				{
+					NoticeDto dto=new NoticeDto();
+					dto.setNum(rs.getString("num"));
+					dto.setId(rs.getString("id"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setContent(rs.getString("content"));
+					dto.setWriteday(rs.getTimestamp("writeday"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setStar(rs.getInt("star"));
+
+
+					//list에 추가
+					list.add(dto);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				my.dbClose(conn, pstmt, rs);
+			}
+			return list;
+		}
+
+
+
+		//수정
+		public void updateData(NoticeDto dto)
+		{
+
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			String sql="update noticeboard set subject=?,content=? where num=?";
+			conn=my.getConnection();
+			 try {
+				pstmt=conn.prepareStatement(sql);
+
+			    pstmt.setString(1, dto.getSubject());
+				pstmt.setString(2, dto.getContent());
+				pstmt.setString(3, dto.getNum());
+
+
+				pstmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				my.dbClose(conn, pstmt);
+			}
+
+		}
 }
