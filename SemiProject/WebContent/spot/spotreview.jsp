@@ -17,23 +17,18 @@
 <style type="text/css">
 	  /*별점 css*/
  
-
 .stars{
     display: flex;
     flex-wrap: wrap;
-
     flex-direction: row-reverse;
     justify-content: flex-end;
-
 }
-
 .stars__star-icon{
     stroke:#EFCE4A;
     stroke-width: 2px;
     fill: transparent;
     transition: .1s all;
 }
-
 .stars__star{
     width: 20px;
     height: 20px;
@@ -41,7 +36,6 @@
     cursor: pointer;
     margin: 5px;
 }
-
 .stars__checkbox{
     position: absolute;
     top: -9999px;
@@ -49,19 +43,15 @@
     width: 0;
     height: 0;
 }
-
 .stars__star:hover > .stars__star-icon{
     fill: #EFCE4A;
 }
-
 .stars__star:hover ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked + .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
@@ -124,7 +114,6 @@
 %>
 <script type="text/javascript">
 	$(function(){
-
 		$(".stars__checkbox").on("click", function(){
 			var idx = $(this).index()/2;
 			switch (idx) {
@@ -153,16 +142,37 @@
 		});
 		
 		$("#btnInsertReview").click(function(){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
-						"content":$("#srContent").val()},
-				url: "spot/insertspotreview.jsp",
-				success: function(data){
-					location.reload();
-				}
-			});
+			if("<%=loginok%>" == "success"){
+				$.ajax({
+					type: "post",
+					dataType: "html",
+					data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
+							"content":$("#srContent").val()},
+					url: "spot/insertspotreview.jsp",
+					success: function(data){
+						location.reload();
+					}
+				});
+			}
+			else{
+				alert("로그인이 필요한 서비스입니다.");
+			}
+			
+		});
+		
+		$(".delReview").click(function(){
+			var a = confirm("정말 삭제하시겠습니까?");
+			if(a){
+				$.ajax({
+					type: "get",
+					dataType: "html",
+					url: "spot/deleteReview.jsp",
+					data: {"num": $(this).attr("num")},
+					success: function(data){
+						location.reload();
+					}
+				});
+			}
 		});
 		
 		$(".review_likes").click(function(){
@@ -173,7 +183,6 @@
 				url: "spot/updatelikes.jsp",
 				data: {"num": $(this).attr("num")},
 				success: function(data){
-
 					location.reload();
 				}
 			});
@@ -183,13 +192,21 @@
 </script>
 </head>
 <body>
-<h2><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Review</h2>
+<h1 style="font-weight: 900;"><b>Review&nbsp;&nbsp;</b><span class="glyphicon glyphicon-pencil"></span></h1>
 		<br><br>
 		<form id="newSpotReview" action="spot/insertspotreview.jsp">
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 20%;">
-						<b style="margin-left: 60px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+					if(myid==null)
+					{%>
+						<b style="margin-left: 20px;">작성하려면 로그인 해주세요</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%}
+					else
+					{%>
+						<b style="margin-left: 20px;">작성자 : <%=myid %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%}%>
 			<br><br>
 			<!-- <div id="srstarBox" style="display: inline-block;">
 				<span class="glyphicon glyphicon-star-empty star"></span>
@@ -201,7 +218,7 @@
 			
                                  
            <!-- 별점 -->
-     <div class="stars" style="margin-left: 50px;">
+     <div class="stars" style="margin-left: 10px;">
         <input class="stars__checkbox" type="radio" id="sd_first-star" name="star">
         <label class="stars__star" for="sd_first-star">
             <svg class="stars__star-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -277,7 +294,7 @@
 					%>
 					<br><br>
 					<hr>
-					<div style="margin-left: 100px; margin-right: 100px;">
+					<div style="margin-left: 50px; margin-right: 50px;">
 						<table style="width: 100%">
 							<tr>
 								<td valign="top" style="width:10%">
@@ -295,7 +312,7 @@
 									</span>
 								</td>
 								<td style="padding-left: 50px; width:80%">
-									<b style="font-size: 15pt;"><%=rdto.getContent().replace("\n", "<br>") %></b>
+									<p style="font-size: 12pt;"><%=rdto.getContent().replace("\n", "<br>") %></p>
 									
 								</td>
 								<td valign="top" style="width:10%;">
@@ -303,6 +320,12 @@
 									if(myid.equals(mdao.getDataByNum(rdto.getMemNum()).getId())){
 										%>
 										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-pencil upReview"
+											num="<%=rdto.getNum()%>"></span>
+										<%
+									}
+									if(myid.equals("admin")){
+										%>
+										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-minus-sign delReview"
 											num="<%=rdto.getNum()%>"></span>
 										<%
 									}
