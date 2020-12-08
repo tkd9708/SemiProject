@@ -15,6 +15,7 @@ System.out.println(num);
    //db로부터 getData 호출후 폼안에 값 넣어주기
    MemberDao dao=new MemberDao();
    MemberDto dto=dao.getDataByNum(num);
+   String memId = (String)session.getAttribute("myid");
 %>
 <script type="text/javascript">
 		//주소검색파일 오픈

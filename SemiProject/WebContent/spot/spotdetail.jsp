@@ -920,7 +920,7 @@ function changeCategoryClass(el) {
 	<!-- </div> -->
 	
 	<!-- around 일정 추가 modal -->
-	<div class="modal fade" id="aroundModal" role="dialog">
+	<div class="modal fade" id="aroundModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -947,7 +947,7 @@ function changeCategoryClass(el) {
   </div>
   
   <!-- spot 일정 추가 modal -->
-   <div class="modal fade" id="spotModal" role="dialog">
+   <div class="modal fade" id="spotModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
     
       <!-- Modal content-->

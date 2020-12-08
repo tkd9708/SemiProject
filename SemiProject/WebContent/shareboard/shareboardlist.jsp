@@ -925,7 +925,7 @@ $(function(){
                   <%}
                   else{
                 	  %>
-                	  <div>썸네일 없음</div><%-- 수진아. 여기 img크기만큼 엑스자 그림 넣어줄 수 있니 ㅎ.ㅎ --%>
+                	  <div>썸네일 없음</div>
                 	  <%
                   }
                   %>
@@ -989,7 +989,8 @@ $(function(){
          <!-- 좋아요 close -->
                   
          <!-- 찜하기(하트) -->    
-         <div class="heart <%if(wdao.isShareSearch(dto.getNum())){
+         <div class="heart 
+         <%if(wdao.isShareSearch(dto.getNum(), id)){
         	 %>
         	 color
         	 <%

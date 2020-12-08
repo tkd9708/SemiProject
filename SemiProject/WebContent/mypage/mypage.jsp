@@ -450,7 +450,7 @@ function getDetail(){
 <%
 String loginok = (String)session.getAttribute("loginok");
 MemberDao mdao = new MemberDao();
-MemberDto mdto = mdao.getDataId(memId);
+MemberDto mdto = mdao.getData(memId);
 String memNum = mdao.getMemNum(memId);
 WishlistDao wdao = new WishlistDao();
 List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);
@@ -623,7 +623,7 @@ location.href = "index.jsp";
 <%
 } %>
 <!-- 일정 목록 모달 -->
-<div class="modal fade" id="listModal" role="dialog">
+<div class="modal fade" id="listModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
       <div class="modal-content listmodalcontent" style="width:450px">
         <div class="modal-header">
@@ -641,7 +641,7 @@ location.href = "index.jsp";
   </div>
 
    <!-- 상세일정모달 -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;">
       <div class="modal-content" style="width:500px">
         <div class="modal-header">
@@ -659,7 +659,7 @@ location.href = "index.jsp";
   </div>
   
   <!-- 일정추가 모달 -->
- <div class="modal fade" id="addModal" role="dialog">
+ <div class="modal fade" id="addModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog modal-lg" style="margin-right:35%; margin-left:35%;" >
       <div class="modal-content" style="height:250px;width:600px">
         <div class="modal-header">
