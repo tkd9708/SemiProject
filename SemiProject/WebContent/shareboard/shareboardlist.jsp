@@ -766,7 +766,7 @@ $(function(){
     	s+="<input type='hidden' name='num' value='"+num+"'>";
     	s+="<input type='hidden' name='pageNum' value='"+"<%=pageNum%>"+"'>";
     	s+="<div class='id'>ID:&nbsp;<%=id%> &nbsp;&nbsp;</div><br>";
-    	s+="수정 내용:&nbsp;<textarea maxwidth='1000' name='content'>"+content+"</textarea><br>";
+    	s+="수정 내용:&nbsp;<input class='form-control' name='content'>"+content+"</textarea><br>";
     	s+="<button type='submit' class='btn btn-warning' id='answeraoCal'>추가</button></form>";
     	$("#Infoanswerupdate").html(s);
     });
