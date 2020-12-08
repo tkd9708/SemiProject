@@ -22,6 +22,8 @@ System.out.println(num);
 		$(".postSearch").click(function() {
 			window.open("member/postsearch.jsp","","left=100px,top=100px,width=500px,height=600px");
 		});
+		
+		console.log(document.documentElement.clientWidth);
 	});
 </script>
 </head>
@@ -88,7 +90,7 @@ System.out.println(num);
 		  			required="required" autocomplete="new-password"><br>
 	  			</div>
 	  			<div class="item" style="text-align: center;">
-	  			<button type="button" class="btnMem" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'">
+	  			<button type="button" class="btnMem" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=dto.getId()%>'">
 					회원탈퇴</button>&nbsp;&nbsp;
 					<button type="submit" class="btnMem">
 
