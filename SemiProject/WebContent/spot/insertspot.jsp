@@ -18,7 +18,7 @@
 	margin-top: 150px;
 	margin-bottom: 200px;	
 	}
-	table.td
+	
 </style>
 <script type="text/javascript">
 function sample4_execDaumPostcode() {

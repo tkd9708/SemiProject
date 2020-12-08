@@ -22,18 +22,29 @@
 div.smain {
     width: 500px; 
     text-align: center;
-    margin-left: 2%;     
+    margin-left: 2%; 
+    display: inline-block; 
+
     
 }
+
+
+div.smain_point {
+   margin: auto;
+}
+
 div.container{
-    text-align: center;
+   margin-top: 40px;
+}
+div.input-group.col-md-12{
+   margin:auto;
 }
 div.main{
-   margin-left: 100px;
-   margin-right: 100px;
+    left:50%;
    margin-top: 150px;
    margin-bottom: 200px;
    width: 1500px;
+   margin-left: -750px;
     
    /* text-align: center; */
 }
@@ -47,9 +58,12 @@ div.shareboard{
       border-bottom: 2px solid #696969;
       margin: 0 auto;
       margin-bottom: 150px;
-      margin-top: 150px;
+      margin-top: 100px;
       
       
+}
+div.shareboard:first-child {
+     margin-top: 70px;
 }
 
 div.image_star{
@@ -110,16 +124,29 @@ div.likes_heart{
      float: right;
 }
 div.likes{
-    margin-top: 20px;
-    margin-left: 100px;
+    margin-top: 50px;
+    margin-left: 120px;
     font-size: 20px;
     
   
 }
 div.heart{
-    margin-top: 80px;
+    margin-top: 150px;
+    margin-left: 130px;
+}
+input.form-control.input-lg{
+    height: 44px;
+}
+
+div.update_del_btn {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 20px;
+    width: 1000px;
+    left: 85%;
+ 
     
-    margin-left: 100px;
 }
 /*-------------------댓글창-------------------*/
 div.sreview_rere{
@@ -138,8 +165,9 @@ div.sreview_list{
    /* margin-left: 460px; */
    margin-bottom: 20px;
    padding-bottom: 20px;
-   border-bottom: 1px solid #ffc266;
-   /* max-width: 1000px; */
+   border-bottom: 1px solid #696969;
+   max-width: 1200px;
+   margin: auto;
  
 }
 div.sreview{
@@ -170,10 +198,10 @@ input.form-control{
     padding-bottom: 10px;
   
 }
-/* div.page{
-   margin-left: 880px;
-} */
-span.memo_plus{
+div.page {
+   text-align: center;
+}
+/*span.memo_plus{
     float: right;
     cursor: pointer;
 }
@@ -244,22 +272,17 @@ div.review_enter_btn{
 }
 /*댓글(),댓글쓰기 버튼 css*/
 div.review_btn{
-   margin-bottom: 22px;
-   
-   margin-left: 40px;
+   margin-left: 72px;
+   margin-top: 195px;
  
 }
 /*수정 삭제 버튼 */
-div.update_del_btn{
-    margin-left: 60px;
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+
 /*맛집공유 버튼 css*/
  div.point{
  
  float: right;
-     
+ display: inline-block;
     
  }
 html, body {
@@ -274,7 +297,7 @@ html, body {
 .button {
   width: 140px;
   height: 55px;
-  font-size: 18px;
+  font-size: 25px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 600;
@@ -287,7 +310,7 @@ html, body {
   outline: none;
   display: block;
   margin-top: 50px;
-  margin-right: 10%;
+  margin-right: 200px;
  
   
  }
@@ -295,12 +318,12 @@ html, body {
  .button1 {
   width: 66px;
   height: 25px;
-  font-size: 5px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 600;
-  color: #000;
-  background-color: #ffc34d;
+  color: black;
+  /*background-color: #ffc34d;*/
   border: none;
   border-radius: 5px;
   transition: all 0.3s ease 0s;
@@ -313,12 +336,12 @@ html, body {
   .button2 {
   width: 66px;
   height: 25px;
-  font-size: 5px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 600;
-  color: #000;
-  background-color: #ffc34d;
+  color: black;
+  /*background-color: #ffc34d;*/
   border: none;
   border-radius: 5px;
   transition: all 0.3s ease 0s;
@@ -783,7 +806,7 @@ $(function(){
         var now = $(this).parent().parent().parent().next();
         
         if(now.css("display") == "none"){   
-           $("div.shareboard").css('margin-bottom','150px');  
+           $("div.shareboard").css('margin-bottom','100px');  
         } else {  
            $("div.shareboard").css('margin-bottom','20px');
         }  
@@ -908,7 +931,7 @@ $(function(){
 
 <!-- 전체 div -->
 <div class="main">
-   
+   <div class="smain_point">
     <!--게시판 제목 -->
     <div class="smain">
        <h1 style="font-weight: 900;"><b>맛집 공유 게시판</b></h1>
@@ -926,6 +949,7 @@ $(function(){
       <%
    }
    %>  
+   </div>
      <!-- 맛집 공유 버튼  -->
  <div class="cc">
  
@@ -937,6 +961,7 @@ $(function(){
     int idx = 0;
     for(ShareBoardDto dto : list){
    %>   
+       
      
    <!-- shardboard 부분 -->
      <div class="shareboard"> 
@@ -1004,6 +1029,24 @@ $(function(){
       </div>
       <!-- 주소 내용 close -->
               
+               <!--게시글 수정 삭제 버튼-->
+          <%
+          if((id.equals(dto.getId())||id.equals("admin")) && loginok!=null){
+             %>
+             
+         <div class="update_del_btn">
+            <span class="glyphicon glyphicon-edit" style="cursor: pointer;" onclick="location.href='index.jsp?main=shareboard/updateform.jsp?num=<%=dto.getNum()%>'"></span>
+            <span class="glyphicon glyphicon-remove btn_delete" style="cursor: pointer;" num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>"></span>
+             <%-- <button type="button" class="glyphicon glyphicon-edit"
+             onclick="location.href='index.jsp?main=shareboard/updateform.jsp?num=<%=dto.getNum()%>'"></button>
+             <button type="button" class="btn_delete btn btn-success" style="color: white;"
+             num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>">삭제</button> --%>
+         </div>
+             <%
+          }
+          %>
+         
+         <!-- 게시글 수정 삭제 버튼 close -->
     
      <!-- 좋아요 찜하기(하트) 댓글버튼,게시글 수정 삭제 -->
     <div class="likes_heart">
@@ -1025,35 +1068,14 @@ $(function(){
                                  addr="<%=dto.getAddr() %>" idx="<%=idx++%>"></div>
          <!-- 찜하기(하트) close -->       
          
-          <!--게시글 수정 삭제 버튼-->
-          <%
-          if((id.equals(dto.getId())||id.equals("admin")) && loginok!=null){
-             %>
-             
-         <div class="update_del_btn">
-             <button type="button" class="btn_update btn btn-info" style="color: white;"
-             onclick="location.href='index.jsp?main=shareboard/updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
-             <button type="button" class="btn_delete btn btn-success" style="color: white;"
-             num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>">삭제</button>
-         </div>
-             <%
-          }
-          else{
-             %>
-              <div class="update_del_btn" style="height: 100px;"></div>
-             <%
-          }
-          %>
-         
-         <!-- 게시글 수정 삭제 버튼 close -->
                 
          
          
          
          <!-- 댓글버튼-->
          <div class="review_btn">
-             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(<%=db.getCount(dto.getRegroup()) %>)</button>
-             <button type="button" class="button1" style="color: white;" num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>"
+             <button type="button" class="button2"  regroup="<%=dto.getRegroup()%>">댓글(<%=db.getCount(dto.getRegroup()) %>)</button>
+             <button type="button" class="button1"  num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>"
               relevel="<%=dto.getRelevel()%>" restep="<%=dto.getRestep()%>">댓글쓰기</button>
          </div>
          <!-- 댓글버튼 close -->
@@ -1206,10 +1228,8 @@ $(function(){
     </div>
      
     
-
-<br><br><br>
 <!-- 페이징처리 -->
-  <div style="width: 100%;" class="page" >
+  <div class="page" >
     <ul class="pagination">
     <!-- 이전(첫블럭이 아니면 보이게하기) -->
    <%
@@ -1248,7 +1268,7 @@ $(function(){
 </div>
 <!-- 전체 div close -->
 
-
+</div>
 </body>
 
 </html>

@@ -393,9 +393,6 @@ function getDetail(){
    
   <%
    for(WishlistDto dto : list){
-	   if(list.isEmpty()){
-		   return;
-	   }
 %>
    content = "<%=dto.getContent()%>";
    wishday = "<%=dto.getWishday()%>";
@@ -726,13 +723,14 @@ location.href = "index.jsp";
       var modal_month=$(this).attr("month");
       var modal_year = $(this).attr("year");
       var dayid = modal_year+modal_month+modal_day;
+      //alert(dayid);
       $("div.modal-body div.detail").empty();
       $("div.modal-body div.detail").attr("id",modal_year+modal_month+modal_day);
-      if($("#"+dayid).is(':empty')){
-    	  $(".modal-body").empty();
-    	 	$(".modal-body").append("저장된 일정이 없습니다");
+      if($("#"+dayid).children().length==0){
+    	 	$("div.modal-body div.detail").text("저장된 일정이 없습니다");
     	 	//alert(dayid);
       }else{
+    	  //alert("일정있음");
     	  getDetail();
       }
       schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일";
