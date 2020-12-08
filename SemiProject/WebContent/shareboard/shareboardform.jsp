@@ -20,7 +20,7 @@ scroll-behavior: smooth;
    }
    
    div.shareboardform{
-     max-width:700px;
+     max-width:720px;
      position:relative;
      margin: auto;
      margin-top: 200px;
@@ -93,15 +93,14 @@ html, body {
 .button {
   width: 100px;
   height: 40px;
-  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 400;
   color: #000;
-  background-color: #ffc34d;
+  background-color: #8cc63f;
   border: none;
-  border-radius: 45px;
+  border-radius: 5px;
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
@@ -109,7 +108,6 @@ html, body {
  }
  
 .button:hover {
-  background-color: #ffaa00;
   transform: translateY(-7px);
 }
 /*--------------------------테이블 css--------------------------------------*/

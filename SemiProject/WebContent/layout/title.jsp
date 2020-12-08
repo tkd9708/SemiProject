@@ -181,7 +181,8 @@ $(function(){
 	if(tborder1 =="index.jsp" || tborder2 =="main.jsp" || ($(location).attr('href')).indexOf("spotdetail.jsp")!==-1){
 	      $("div.title").css('border','none');
 	   }else{
-		  $("div.title").css('box-shadow','5px 5px 10px #9d9d9d'); 
+		  $("div.title").css(' box-shadow','5px 5px 10px #9d9d9d'); 
+
 	   }
 	
 	$("#list a,#list").hover(function(){
