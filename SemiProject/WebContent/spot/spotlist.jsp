@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function(){
         	%>
         	<div class="detail">
         	<div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
+
         		   <%
               if(dto.getThumbnail() == null){
               %>

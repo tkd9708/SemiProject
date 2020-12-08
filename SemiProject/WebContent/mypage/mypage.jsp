@@ -391,8 +391,11 @@ function getList(){
 function getDetail(){
    
    
-   <%
+  <%
    for(WishlistDto dto : list){
+	   if(list.isEmpty()){
+		   return;
+	   }
 %>
    content = "<%=dto.getContent()%>";
    wishday = "<%=dto.getWishday()%>";
@@ -407,6 +410,8 @@ function getDetail(){
    var xmlmonth = split[1];
    var xmlday = split[2];
    var detailcontent="";
+
+   
    
    if(title!="0"){
       $("#"+wday+".detail").append("<div style='font-size:13pt; margin-left:20px;'>🚩&nbsp;<a href='index.jsp?main=spot/spotdetail.jsp?contentsid="+spotId+"'>"+title+"</a>"+
@@ -440,7 +445,7 @@ function getDetail(){
       var print ="<div style='font-size:13pt; margin-left:20px;' >"+detailcontent+"<span num='"+num+"'style='float:right; margin-right:20px; color: tomato' class='btnDel glyphicon glyphicon-minus-sign'></span></div></br>";
       $("#"+wday+".detail").append(print);
    }
-   
+ 
 <%}%>
 }
 </script>
@@ -647,11 +652,12 @@ location.href = "index.jsp";
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="schedule_title" style="text-align: center" >
-         <b>yyyy년m월 dd일</b>   
+        	<b>yyyy년m월 dd일</b>   
          </h4>
         </div>
         <div class="modal-body">
           <div class="detail">
+          	저장된 일정이 없습니다.
           </div>
        </div>
       </div>
@@ -669,7 +675,7 @@ location.href = "index.jsp";
          </h4>
         </div>
         <div class="modal-body">
-           <div class="addSchedule" align="center" >
+           <div class="addSchedule" align="center" data-backdrop="false">
             <form action ="mypage/scheduleAdd.jsp" method="post" class="form-inline" >
                  <table class="modal_table table table-condensed">
                  
@@ -719,10 +725,18 @@ location.href = "index.jsp";
       var modal_day=$(this).attr("day");
       var modal_month=$(this).attr("month");
       var modal_year = $(this).attr("year");
+      var dayid = modal_year+modal_month+modal_day;
       $("div.modal-body div.detail").empty();
       $("div.modal-body div.detail").attr("id",modal_year+modal_month+modal_day);
-      getDetail();
-      schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일"; 
+      if($("#"+dayid).is(':empty')){
+    	  $(".modal-body").empty();
+    	 	$(".modal-body").append("저장된 일정이 없습니다");
+    	 	//alert(dayid);
+      }else{
+    	  getDetail();
+      }
+      schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일";
+      
    })
    
    //일정 추가

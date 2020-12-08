@@ -355,7 +355,7 @@ public class SpotlistDao {
 		return total;
 	}
 	
-	   
+
 	   public void addSpot(SpotlistDto dto) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;

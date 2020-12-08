@@ -410,6 +410,7 @@ function InitializeM()
 	</div> -->
 
 	<div class="thumbDiv">
+
 		<div class="thumbDiv">
       <%
       if(dto.getThumbnail() != null){

@@ -15,7 +15,7 @@ System.out.println(num);
    //db로부터 getData 호출후 폼안에 값 넣어주기
    MemberDao dao=new MemberDao();
    MemberDto dto=dao.getDataByNum(num);
-   String memId = (String)session.getAttribute("myid");
+   String sessionId = (String)session.getAttribute("myid");
 %>
 <script type="text/javascript">
 		//주소검색파일 오픈
@@ -89,7 +89,7 @@ System.out.println(num);
 		  			required="required" autocomplete="new-password"><br>
 	  			</div>
 	  			<div class="item" style="text-align: center;">
-	  			<button type="button" class="btnMem" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=memId%>'">
+	  			<button type="button" class="btnMem" onclick="location.href='index.jsp?main=member/deletepassform.jsp?id=<%=sessionId%>'">
 					회원탈퇴</button>&nbsp;&nbsp;
 					<button type="submit" class="btnMem">
 

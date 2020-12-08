@@ -27,7 +27,7 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //πŸ¿Œµ˘
+            //   ÁêØ 
             pstmt.setString(1, dto.getId());
             pstmt.setString(2, dto.getPhoto());
             pstmt.setString(3, dto.getSubject());
@@ -37,7 +37,7 @@ public class ShareBoardDao {
             
                                     
 
-            //Ω««‡
+            //    
             pstmt.execute();
          } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -83,9 +83,9 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //πŸ¿Œµ˘
+            //   ÁêØ 
             pstmt.setString(1, num);
-            //Ω««‡
+            //    
             rs=pstmt.executeQuery();
             if(rs.next())
             {
@@ -116,7 +116,7 @@ public class ShareBoardDao {
 
       }
       
-      //∆‰¿Ã¬°√≥∏Æ«— ∏ÆΩ∫∆Æ ∏Ò∑œ π›»Ø
+      //    ÏßïÏ≤ò         Ìä∏       Ìôò
       public List<ShareBoardDto> getList(int start,int end)
       {
          List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
@@ -129,10 +129,10 @@ public class ShareBoardDao {
 
          try {
             pstmt=conn.prepareStatement(sql);
-            //πŸ¿Œµ˘
+            //   ÁêØ 
             pstmt.setInt(1, start);
             pstmt.setInt(2, end);
-            //Ω««‡
+            //    
             rs=pstmt.executeQuery();
             while(rs.next())
             {
@@ -150,7 +150,7 @@ public class ShareBoardDao {
                dto.setRelevel(rs.getInt("relevel"));
                dto.setRestep(rs.getInt("restep"));     
 
-               //listø° √ﬂ∞°
+               //list    ÁÖû 
                list.add(dto);
             }
          } catch (SQLException e) {
@@ -174,9 +174,9 @@ public class ShareBoardDao {
 
          try {
             pstmt=conn.prepareStatement(sql);
-            //πŸ¿Œµ˘
+            //   ÁêØ 
             pstmt.setInt(1, regroup);
-            //Ω««‡
+            //    
             rs=pstmt.executeQuery();
             while(rs.next())
             {
@@ -190,7 +190,7 @@ public class ShareBoardDao {
                dto.setRelevel(rs.getInt("relevel"));
                dto.setRestep(rs.getInt("restep"));      
 
-               //listø° √ﬂ∞°
+               //list    ÁÖû 
                list.add(dto);
             }
          } catch (SQLException e) {
@@ -226,7 +226,7 @@ public class ShareBoardDao {
 
 
       }
-      //¡¡æ∆ø‰ ¡ı∞°
+      //   Ìã∏      
       public void updateLikes(String num)
       {
          String sql="update shareboard set likes=likes+1 where num=?";
@@ -235,10 +235,10 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //πŸ¿Œµ˘ 
+            //   ÁêØ  
             pstmt.setString(1, num);
 
-            //Ω««‡ 
+            //     
             pstmt.execute();
          } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -248,8 +248,8 @@ public class ShareBoardDao {
          }
       }
       
-    //µ•¿Ã≈Õ √ﬂ∞°Ω√ ∞∞¿∫ ±◊∑Ï¡ﬂ ¿¸¥ﬁπﬁ¿∫ step∫∏¥Ÿ ≈´∞™¿ª ∞°¡¯
-     //µ•¿Ã≈ÕµÈ¿∫ restep¿ª π´¡∂∞«+1¿ª «—¥Ÿ
+    //        ÁÖû          ÁÄè       Ë≥ì    step     ÌÅ∞         
+     //     Â≠§    restep         +1    Á£Ø 
      public void updateRestep(int regroup,int restep1) {
         String sql="update shareboard set restep=restep+1 where regroup=? and restep>?";
         Connection conn=null;
@@ -269,10 +269,10 @@ public class ShareBoardDao {
         }
      }
      
-  //insert:¡¶¿œ ¡ﬂø‰«—∞« ¿Ã∞‘ ªı±€∑Œ √ﬂ∞°∏¶ «“∞Õ¿Œ¡ˆ,
-     //¥‰±€∑Œ √ﬂ∞°∏¶ «“∞Õ¿Œ¡ˆ¿Ã¥Ÿ.°⁄°⁄°⁄°⁄°⁄
-     //±◊∑°º≠ ∆«¥‹¿ª dtoø° µÈæÓ¿÷¥¬ num¿Ã null¿Ã∏È ªı±€∑Œ
-     //null¿Ã æ∆¥œ∏È ¥‰±€∑Œ insert∏¶ «“∞Õ¿Ã¥Ÿ.
+  //insert:      ÂÇ∑  Áí£   Èöî     Á¥°   ÁÖû     Êü∞     ,
+     //  Á¥°   ÁÖû     Êü∞      ÁîÑ . Ê±∂Ê±∂Ê±∂Ê±∂ 
+     // ÁÄè     Ìíî    dto       Áçµ  num   null Ë¶ã     Á¥° 
+     //null    ÌãàÁéñ    Á¥°  insert    Êü∞  ÁîÑ .
      public void insertBoard(ShareBoardDto dto) {
         String num=dto.getNum();
         int regroup=dto.getRegroup();
@@ -281,15 +281,15 @@ public class ShareBoardDao {
         String sql="insert into shareboard (id,subject,addr,photo,content,"
               + "star,relevel,regroup,restep,writeday) values (?,?,?,?,?,?,?,?,?,now())";
         if(num==null) {
-           //ªı±€¿ª ¿«πÃ«—¥Ÿ
+           //        Ììú  Á£Ø 
            regroup=this.getMaxNum()+1;
            relevel=0;
            restep=0;
         }else {
-           //¥‰±€¿ª ¿«πÃ«—¥Ÿ
-           //∞∞¿∫ ±◊∑Ï¡ﬂ restep¿Ã ¿¸¥ﬁπﬁ¿∫ ∞™∫∏¥Ÿ ≈´∞ÊøÏ π´¡∂∞« 1 ¡ı∞°
+           //       Ììú  Á£Ø 
+           //      ÁÄè    restep      Ë≥ì           ÌÅ∞           1     
            this.updateRestep(regroup, restep);
-           //±◊∏Æ∞Ì ¿¸¥ﬁπﬁ¿∫ level,step¿ª 1 ¡ı∞°«—¥Ÿ\
+           // Áêâ       Ë≥ì    level,step   1      Á£Ø \
            relevel+=1;
            restep+=1;
         }
@@ -304,7 +304,7 @@ public class ShareBoardDao {
            pstmt.setString(4, dto.getPhoto());
            pstmt.setString(5, dto.getContent());
            pstmt.setString(6, dto.getStar());
-           //ø©±‚∫Œ≈Õ ¡÷¿«
+           //            
            pstmt.setInt(7, relevel);
            pstmt.setInt(8, regroup);
            pstmt.setInt(9, restep);
@@ -318,7 +318,7 @@ public class ShareBoardDao {
         
      }
      
-  //ø¯±€¿Ã ¿÷¥¬¡ˆ ∞ÀªÁ-¿÷¿ª∞ÊøÏ true
+  //        Áçµ     Ë¨õ -        true
         public boolean isGroupStep(int regroup) {
            boolean flag=false;
            String sql="select * from shareboard where regroup=? and restep=0";
@@ -330,7 +330,7 @@ public class ShareBoardDao {
               pstmt=conn.prepareStatement(sql);
               pstmt.setInt(1, regroup);
               rs=pstmt.executeQuery();
-              //µ•¿Ã≈Õ∞° ¿÷¿ª∞ÊøÏ true
+              //     Âè©          true
               if(rs.next()) {
                  flag=true;
               }
@@ -345,8 +345,8 @@ public class ShareBoardDao {
         }
         
         public int isNextStep(int regroup, int relevel, int restep) {
-			/* boolean flag=false; */
-        	int num=0;
+         /* boolean flag=false; */
+           int num=0;
             String sql="select * from shareboard where regroup=? and relevel = ? and restep = ?";
             Connection conn=null;
             PreparedStatement pstmt=null;
@@ -358,7 +358,7 @@ public class ShareBoardDao {
                pstmt.setInt(2, relevel+1);
                pstmt.setInt(3, restep+1);
                rs=pstmt.executeQuery();
-               //µ•¿Ã≈Õ∞° ¿÷¿ª∞ÊøÏ true
+               //     Âè©          true
                if(rs.next()) {
                   num=rs.getInt("num");
                }
@@ -372,7 +372,7 @@ public class ShareBoardDao {
             return num;
          }
            
-      //∞‘Ω√±€ ªË¡¶
+      // Áù£Ï±∞      
         public void sharedelete(String num,String num1) {
           Connection conn=null;
           PreparedStatement pstmt=null;
@@ -390,7 +390,7 @@ public class ShareBoardDao {
           }
        }
         
-      //¥Ò±€ ªË¡¶
+      //        
         public void deleteReview(String num) {
           Connection conn=null;
           PreparedStatement pstmt=null;
@@ -407,8 +407,7 @@ public class ShareBoardDao {
           }
        }
       
-        
-      //¥Ò±€ ∞≥ºˆ ±∏«œ±‚
+
         public int getCount(int regroup){
             int count =0;
             Connection conn=null;
@@ -433,7 +432,7 @@ public class ShareBoardDao {
        
         }
         
-//∞‘Ω√±€ ºˆ¡§
+// Áù£Ï±∞      
         
         
         public void updateShardBoard(ShareBoardDto dto) {
@@ -445,7 +444,7 @@ public class ShareBoardDao {
               if(dto.getPhoto()==null) {
                  sql="update shareboard set subject=?, addr=?, content=?, star=? where num=?";
                  pstmt=conn.prepareStatement(sql);
-                 //πŸ¿Œµ˘
+                 //   ÁêØ 
                  pstmt.setString(1, dto.getSubject());
                  pstmt.setString(2, dto.getAddr());
                  pstmt.setString(3, dto.getContent());
@@ -454,7 +453,7 @@ public class ShareBoardDao {
               }else {
                  sql="update shareboard set subject=?, addr=?, photo=? , content=?, star=? where num=?";
                  pstmt=conn.prepareStatement(sql);
-                 //πŸ¿Œµ˘
+                 //   ÁêØ 
                  pstmt.setString(1, dto.getSubject());
                  pstmt.setString(2, dto.getAddr());
                  pstmt.setString(3, dto.getPhoto());
@@ -475,74 +474,74 @@ public class ShareBoardDao {
      
         
         public List<ShareBoardDto> getSearchList(int start, int perpage, String search){
-    		List<ShareBoardDto> list = new ArrayList<ShareBoardDto>();
-    		Connection conn = null;
-    		PreparedStatement pstmt = null;
-    		ResultSet rs = null;
-    		String sql = "select * from shareboard where addr like '%" + search + "%' limit ?,?";
-    		
-    		conn = my.getConnection();
-    		try {
-    			pstmt = conn.prepareStatement(sql);
-    			pstmt.setInt(1, start);
-    			pstmt.setInt(2, perpage);
-    			rs = pstmt.executeQuery();
-    			
-    			while(rs.next()) {
-    				ShareBoardDto dto=new ShareBoardDto();
-    	               dto.setNum(rs.getString("num"));
-    	               dto.setId(rs.getString("id"));
-    	               dto.setSubject(rs.getString("subject"));
-    	               dto.setContent(rs.getString("content"));
-    	               dto.setAddr(rs.getString("addr"));
-    	               dto.setLikes(rs.getInt("likes"));
-    	               dto.setStar(rs.getString("star"));
-    	               dto.setPhoto(rs.getString("photo"));
-    	               dto.setWriteday(rs.getTimestamp("writeday"));
-    	               dto.setRegroup(rs.getInt("regroup"));
-    	               dto.setRelevel(rs.getInt("relevel"));
-    	               dto.setRestep(rs.getInt("restep"));     
+          List<ShareBoardDto> list = new ArrayList<ShareBoardDto>();
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select * from shareboard where addr like '%" + search + "%' limit ?,?";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             pstmt.setInt(1, start);
+             pstmt.setInt(2, perpage);
+             rs = pstmt.executeQuery();
+             
+             while(rs.next()) {
+                ShareBoardDto dto=new ShareBoardDto();
+                      dto.setNum(rs.getString("num"));
+                      dto.setId(rs.getString("id"));
+                      dto.setSubject(rs.getString("subject"));
+                      dto.setContent(rs.getString("content"));
+                      dto.setAddr(rs.getString("addr"));
+                      dto.setLikes(rs.getInt("likes"));
+                      dto.setStar(rs.getString("star"));
+                      dto.setPhoto(rs.getString("photo"));
+                      dto.setWriteday(rs.getTimestamp("writeday"));
+                      dto.setRegroup(rs.getInt("regroup"));
+                      dto.setRelevel(rs.getInt("relevel"));
+                      dto.setRestep(rs.getInt("restep"));     
 
-    	               //listø° √ﬂ∞°
-    	               list.add(dto);
-    			}
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} finally {
-    			my.dbClose(conn, pstmt, rs);
-    		}
-    		
-    		return list;
-    	}
-    	
-    	
-    	public int getSearchTotalCount(String search) {
-    		int total = 0;
-    		Connection conn = null;
-    		PreparedStatement pstmt = null;
-    		ResultSet rs = null;
-    		String sql = "select count(*) from shareboard where addr like '%" + search + "%'";
-    		
-    		conn = my.getConnection();
-    		try {
-    			pstmt = conn.prepareStatement(sql);
-    			rs = pstmt.executeQuery();
-    			if(rs.next()) {
-    				total = rs.getInt(1);
-    			}
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} finally {
-    			my.dbClose(conn, pstmt, rs);
-    		}
-    		
-    		
-    		return total;
-    	}
-    	
-    	 //¥Ò±€ ºˆ¡§
+                      //list    ÁÖû 
+                      list.add(dto);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          return list;
+       }
+       
+       
+       public int getSearchTotalCount(String search) {
+          int total = 0;
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select count(*) from shareboard where addr like '%" + search + "%'";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             rs = pstmt.executeQuery();
+             if(rs.next()) {
+                total = rs.getInt(1);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          
+          return total;
+       }
+       
+        //        
         public void updateShardBoardanswer(String content,String num) {
             Connection conn=null;
             PreparedStatement pstmt=null;
@@ -560,8 +559,9 @@ public class ShareBoardDao {
                my.dbClose(conn, pstmt);
             }
          }
-        
-      //mainø°º≠ ¿œ∫Œ ∆‰¿Ã¡ˆ ∫∏±‚  
+
+      //mainÏóêÏÑú ÏùºÎ∂Ä ÌéòÏù¥ÏßÄ Î≥¥Í∏∞  
+
         public List<ShareBoardDto> getMainList()
         {
 
@@ -574,7 +574,9 @@ public class ShareBoardDao {
            conn=my.getConnection();
            try {
               pstmt=conn.prepareStatement(sql);
-              //Ω««‡
+
+              //Ïã§Ìñâ
+
               rs=pstmt.executeQuery();
               while(rs.next())
               {
@@ -592,7 +594,9 @@ public class ShareBoardDao {
                      dto.setRelevel(rs.getInt("relevel"));
                      dto.setRestep(rs.getInt("restep")); 
                  
-                    //listø° √ﬂ∞°
+
+                    //listÏóê Ï∂îÍ∞Ä
+
                 list.add(dto);
               }
            } catch (SQLException e) {
