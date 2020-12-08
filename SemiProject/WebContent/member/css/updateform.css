@@ -30,26 +30,23 @@ h3 {
 .gridContainer {
 	display: grid;
 	grid-template-rows: repeat(4, 1fr);
-	padding: 10px;
+	padding: 8px;
 	row-gap: 10px;
-	grid-template-rows: fit-content(300px);
+	grid-template-rows: fit-content(500px);
 	grid-template-columns: fit-content(300px);
 	justify-items: center;
-	justify-content: center;
 }
 .item {
 	background: rgba(230,150,10,.6);
 	padding: 20px;
 	font-size: 18px;
-	text-align: center;
 	box-shadow: .3rem .3rem .3rem .3rem rgba(200,100,10,.8);
-	border-radius: 35%;
+	border-radius: 5rem;
 }
 
-/* .frmUpdate {	
-    margin-top: 150px;
-    margin-left: 37%;
-    margin-bottom: 100px;
+.frmUpdate {	
+    margin-top: 80px;
+    margin-left: 730px;
 }
 /* .btnMemUpdate {
 	color: #f4f4f4;
@@ -75,7 +72,7 @@ h3 {
 	fill: orange;	
 }
 .gridContainer {
-	width: 500px;
+	width: 1000px;
 }
 .item {
 	border: .06em solid rgba(150,150,150,.8);
@@ -83,8 +80,6 @@ h3 {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-size: 18px;
-
-	
 }
 .item b {
 	padding-left:20px;
@@ -99,16 +94,26 @@ h3 {
     margin-left: 50px;
     width: 300px;
     font-size: 20px;
-    margin-top: -5px;
+    outline: 0;
+    border: .056rem solid rgba(200,150,0,.3);
+    margin-right: 50px;
+    border-radius: 1rem;
+}
+
+.item button {
+	border-radius: 50%;
+	font-size: 16px;
 }
 
 .item button.btnMem{  
-	width: 150px;
-	height: 50px;
-	border-radius: 3px 3px 3px 3px;
-	font-size: 20px;
+	width: 120px;
+	height: 90px;
 	text-align: center;
 	background-color: #ffaa00;
 	color: #fff;
 	border: none;
+}
+
+.txtAddrdetail {
+	margin-left: 50px!important;
 }
