@@ -115,26 +115,33 @@ div.page {
 	$(function(){
 		$(".nt_star").click(function(){
 			<%
-			if(myid.equals("admin")){
-				%>
-				$.ajax({
-					type: "get",
-					dataType: "html",
-					url: "notice/updateStar.jsp",
-					data: {"num": $(this).attr("num")},
-					success: function(){
-						location.reload();
-					}
-				});
-				<%
+			if(loginok!=null){
+				if(myid.equals("admin")){
+					%>
+					$.ajax({
+						type: "get",
+						dataType: "html",
+						url: "notice/updateStar.jsp",
+						data: {"num": $(this).attr("num")},
+						success: function(){
+							location.reload();
+						}
+					});
+					<%
+				}
+				else{
+					%>
+					alert("관리자만 접근 가능합니다.");
+					<%
+				}
 			}
 			else{
 				%>
 				alert("관리자만 접근 가능합니다.");
 				<%
 			}
-			%>
 			
+			%>
 		});
 	});
 </script>

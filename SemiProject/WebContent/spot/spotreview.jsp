@@ -142,7 +142,7 @@
 		});
 		
 		$("#btnInsertReview").click(function(){
-			if("<%=loginok%>" == "success"){
+			if(<%=loginok!=null%>){
 				$.ajax({
 					type: "post",
 					dataType: "html",
@@ -199,7 +199,7 @@
 				<tr>
 					<td style="width: 20%;">
 					<%
-					if(myid==null)
+					if(loginok==null)
 					{%>
 						<b style="margin-left: 20px;">작성하려면 로그인 해주세요</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%}
@@ -317,20 +317,23 @@
 								</td>
 								<td valign="top" style="width:10%;">
 									<%
-									if(myid.equals(mdao.getDataByNum(rdto.getMemNum()).getId())){
-										%>
-										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-pencil upReview"
-											num="<%=rdto.getNum()%>"></span>
-										<%
+									if(loginok!=null){
+										if(myid.equals(mdao.getDataByNum(rdto.getMemNum()).getId())){
+											%>
+											<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-pencil upReview"
+												num="<%=rdto.getNum()%>"></span>
+											<%
+										}
+										if(myid.equals("admin")){
+											%>
+											<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-minus-sign delReview"
+												num="<%=rdto.getNum()%>"></span>
+											<%
+										}
+										
 									}
-									if(myid.equals("admin")){
-										%>
-										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-minus-sign delReview"
-											num="<%=rdto.getNum()%>"></span>
-										<%
-									}
-									%>
 									
+									%>
 								</td>
 							</tr>
 						</table>

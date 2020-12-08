@@ -376,31 +376,32 @@ function InitializeM()
 		}); */
 		
 		$("#spotHeart").click(function(){
-			$("#spotModal").modal();
-			
-		});
-		
-		$("#spotGoCal").click(function(){
-			if("<%=loginok%>" == "success"){ 
-				$.ajax({
-					type: "post",
-					dataType: "html",
-					url: "spot/insertspottocal.jsp",
-					data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
-					success: function(data){
-						$(".sd_heart").addClass('color');
-						var a = confirm("Mypage로 이동하시겠습니까?");
-						if(a){
-							location.href="index.jsp?main=mypage/mypage.jsp";
-						} 
-						$("#spotModal").modal("hide");
-					
-					}
-				});
+			if(<%=loginok!=null%>){
+
+				$("#spotModal").modal();	
 			}
 			else {
 				alert("로그인이 필요한 서비스입니다.");
 			}
+		});
+		
+		$("#spotGoCal").click(function(){
+			$.ajax({
+				type: "post",
+				dataType: "html",
+				url: "spot/insertspottocal.jsp",
+				data: {"wishday":$("#sd_spotwishday").val(), "spotId":"<%=contentsid%>", "myId":"<%=myid%>"},
+				success: function(data){
+					$(".sd_heart").addClass('color');
+					var a = confirm("Mypage로 이동하시겠습니까?");
+					if(a){
+						location.href="index.jsp?main=mypage/mypage.jsp";
+					} 
+					$("#spotModal").modal("hide");
+				
+				}
+			});
+			
 		});
 	});
 </script>
@@ -474,10 +475,12 @@ function InitializeM()
 			<br>
 			
 			<%
-			if(myid.equals("admin")){
-				%>
-				<div class="glyphicon glyphicon-edit editSpot" style="color: #eee; cursor: pointer;" onclick="location.href='index.jsp?main=spot/updatespot.jsp?contentsid=<%=contentsid%>'"></div>
-				<%
+			if(loginok != null){
+				if(myid.equals("admin")){
+					%>
+					<div class="glyphicon glyphicon-edit editSpot" style="color: #eee; cursor: pointer;" onclick="location.href='index.jsp?main=spot/updatespot.jsp?contentsid=<%=contentsid%>'"></div>
+					<%
+				}
 			}
 			else{
 				%>
