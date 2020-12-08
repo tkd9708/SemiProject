@@ -224,7 +224,7 @@ $(function(){
         	   <%
         	   if(myid.equals("admin")){
         		   %>
-              		<li class="list" id="list"><a class="main_addSpot">명소관리</a></li>
+              		<li class="list" id="list"><a class="main_addSpot">명소추가</a></li>
            	   	   <%
         	   }
         	   else{
@@ -280,7 +280,7 @@ $(function(){
            		<%
         	   if(myid.equals("admin")){
         		   %>
-              		<li class="list" id="list"><a class="main_addSpot">명소관리</a></li>
+              		<li class="list" id="list"><a class="main_addSpot">명소추가</a></li>
            	   	   <%
         	   }
         	   else{

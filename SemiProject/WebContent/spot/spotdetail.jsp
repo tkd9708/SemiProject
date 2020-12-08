@@ -427,7 +427,7 @@ function InitializeM()
       }
       else {
          %>
-			<div style="width: 100%; height:400px; background-color: rgba(0,0,0,0.5);"></div>
+			<div style="width: 100%; height:800px; background-color: rgba(0,0,0,0.5);"></div>
 			<%
 		}
 		%>

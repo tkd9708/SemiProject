@@ -1059,7 +1059,7 @@ $(function(){
          <!-- 좋아요 close -->
                   
          <!-- 찜하기(하트) -->    
-         <div class="heart <%if(wdao.isShareSearch(dto.getNum())){
+         <div class="heart <%if(wdao.isShareSearch(dto.getNum(), id)){
         	 %>
         	 color
         	 <%
@@ -1227,7 +1227,7 @@ $(function(){
              </span>
     </div>
      
-    
+    <br><br>
 <!-- 페이징처리 -->
   <div class="page" >
     <ul class="pagination">

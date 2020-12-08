@@ -96,15 +96,14 @@ html, body {
 .button {
   width: 100px;
   height: 40px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  font-weight: 400;
+  font-weight: 500;
   color: #000;
   background-color: #ffc34d;
   border: none;
-  border-radius: 45px;
+  border-radius: 5px;
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;

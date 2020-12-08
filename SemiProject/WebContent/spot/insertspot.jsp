@@ -18,7 +18,22 @@
 	margin-top: 150px;
 	margin-bottom: 200px;	
 	}
-	table.td
+	  .button {
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+ }
 </style>
 <script type="text/javascript">
 function sample4_execDaumPostcode() {
@@ -179,8 +194,8 @@ function getxy(){
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align: center">
-		<input type="submit" value="등록" id="add" class="btn btn-danger">
-		<input type="button" value="목록" class="btn btn-info" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">
+		<input type="submit" value="등록" id="add" class="button">
+		<input type="button" value="취소" class="button" onclick="location.href='index.jsp?main=layout/main.jsp'">
 		</td>
 	</tr>
 	</table>

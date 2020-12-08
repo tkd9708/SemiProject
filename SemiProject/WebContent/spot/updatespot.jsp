@@ -20,6 +20,28 @@
    margin-top: 150px;
    margin-bottom: 200px;   
    }
+   
+   .button {
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #ffc34d;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+ }
+ 
+.button:hover {
+  background-color: #ffaa00;
+  transform: translateY(-7px);
+}
 </style>
 <%
 	String contentsid = request.getParameter("contentsid");
@@ -214,9 +236,9 @@ function getxy(){
    </tr>
    <tr>
       <td colspan="2" style="text-align: center;">
-      <input type="submit" value="수정" id="update">
-      <input type="button" value="삭제" id="spotdelete">
-      <input type="button" value="목록" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">
+      <input type="submit" class="button" value="수정" id="update">
+      <input type="button" class="button" value="삭제" id="spotdelete">
+      <input type="button" class="button" value="취소" onclick="location.href='index.jsp?main=spot/spotdetail.jsp?contentsid=<%=contentsid%>'">
       </td>
    </tr>
    

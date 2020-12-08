@@ -183,7 +183,7 @@ letter-spacing: 2px;
         		   <%
               if(dto.getThumbnail() == null){
               %>
-                 <div style="width: 330px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
+                 <img style="width: 330px; height: 250px;" src="image/imgX.png"><br>
               <%
               }
               else {
