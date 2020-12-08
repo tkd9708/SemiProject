@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/updateform.css">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="image/favicon.ico">
+<meta charset="UTF-8">
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 <%
    //num 읽기
    String num=request.getParameter("num");

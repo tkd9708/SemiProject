@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
 <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/postsearch.js" ></script> 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/postsearch.css">
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -20,7 +18,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="shortcut icon" href="../image/favicon.ico">
 
-<title>멘도롱 또똣 :: 우편번호 보기</title>
+<link rel="shortcut icon" href="image/favicon.ico">
+<meta charset="UTF-8">
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 </head>
 <body>
    <div class="popupPost">

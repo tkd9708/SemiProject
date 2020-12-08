@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 소랑 :: 제주여행의모든것</title>Insert title here</title>
 <style type="text/css">
 	@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
 	span.barcode{

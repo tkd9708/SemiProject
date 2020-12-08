@@ -2,8 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="font/SCDream5.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">

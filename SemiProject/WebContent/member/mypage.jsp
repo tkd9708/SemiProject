@@ -27,8 +27,9 @@ String url=request.getContextPath();
 		}
 	}
 </script>
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 </head>
 <body>
 	<nav>
