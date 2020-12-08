@@ -1,0 +1,509 @@
+@charset "UTF-8";
+body {
+   /*background-color: #7eb9e3;*/
+   /*background-image: url("image/wave2.png");
+   background-repeat:no-repeat;
+   background-size:cover;
+   background-position: 0px 800px;*/
+   margin: 0;
+   height: 100%;
+
+}
+
+.jejuisland {
+    padding-top: 50px;
+    transition: transform 0.7s, opacity 1s;
+    opacity: 0;
+    position: relative;
+    z-index: -9;
+    display: block;
+    left: 50%;
+    transform: translate(-50%,-50%); 
+}
+
+div.btn_go {
+    padding-top: 50px;
+    transition: transform 0.7s, opacity 1s;
+    opacity: 0;
+    font-weight: bold;
+    font-size: 25px;
+} 
+
+div.btn_go a{
+    z-index: 3;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 4px 2px gray;
+}
+
+/*조천*/
+#btn_go_jocheon{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+#btn_go_jocheon.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.jocheon a {
+    left:56.8%;
+    margin-top: 12%;
+}
+/*서귀포*/
+#btn_go_seogwipo{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_seogwipo.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.seogwipo a{
+    left:42.5%;
+    margin-top: 28%; 
+}
+/*제주*/
+#btn_go_jeju{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_jeju.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.jeju a{
+    left:46.5%;
+    margin-top: 15%;
+}
+/*구좌*/
+#btn_go_gujwa{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_gujwa.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.gujwa a{
+    left:66.1%;
+    margin-top: 10%; 
+}
+/*성산*/
+#btn_go_sungsan{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_sungsan.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.sungsan a{
+    left:70%;
+    margin-top: 17.5%; 
+}
+/*표선*/
+#btn_go_pyoseon{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_pyoseon.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.pyoseon a{
+    left:63.7%;
+    margin-top: 21%;  
+}
+/*남원*/
+#btn_go_namwon{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_namwon.hover{
+   width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.namwon a{
+    left:56%;
+    margin-top: 25%;
+}
+/*안덕*/
+#btn_go_andeok{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+#btn_go_andeok.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.andeok a{
+    left:31.7%;
+    margin-top: 28.3%; 
+}
+/*대정*/
+#btn_go_daejung{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_daejung.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.daejung a{
+    left:25.3%;
+    margin-top: 31%; 
+}
+/*한경*/
+#btn_go_hangyeong{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_hangyeong.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.hangyeong a{
+    left:24%;
+    margin-top: 25.3%;
+}
+/*한림*/
+#btn_go_hanrim{
+    top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+#btn_go_hanrim.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.hanrim a{
+    left:27.5%;
+    margin-top: 21%; 
+}
+/*애월*/
+#btn_go_aewol{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_aewol.hover{
+   width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.aewol a{
+    left:35%;
+    margin-top: 18%;
+}
+/*우도*/
+#btn_go_udo{
+     top: 421px; 
+    position: absolute;
+    z-index: 2; 
+    visibility: hidden;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+#btn_go_udo.hover{
+    width:100%;
+    max-width:1000px;
+    vertical-align: middle;  
+    position: absolute;
+    z-index: 2; 
+    visibility: visible;
+    display:block;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+.udo a{
+    left:80.5%;
+    margin-top: 10%; 
+}
+
+.nslist {
+    margin: auto;
+    margin-top: 80px; 
+    font-size: 11px;
+    margin-bottom: 100px;
+}
+.nslist table{
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+.nslist th {
+    padding: 5px 0px; 
+    text-align: center;
+    font-size: 13px;
+    border-bottom: 2px solid gray;
+    color: black;
+}
+.nslist td {
+    padding: 7px 10px; 
+    border-bottom: 1px dotted gray;
+    color: black;
+}
+.nslist td  a{
+    color: black;
+}
+.nslist td  a:hover{
+    color: #696969;
+    text-decoration: none;
+}
+.notice {
+    position: relative;
+    width:100%;
+    max-width: 500px;
+    display: inline-block;
+    margin-left: 15%;
+
+}
+
+.notice h5 {
+    display: inline-block;
+    float: left;
+}
+
+#btn_go_notice {
+    border: none;
+    background: none;
+    display: inline-block;
+    float: right;
+    padding-top: 15px;
+}
+
+.notice img {
+    width: 25px;
+}
+
+.shareboard {
+    position: relative;
+    width:100%;
+    max-width: 500px;
+    display: inline-block;
+    float: right;
+    margin-right: 15%;
+}
+
+.shareboard h5 {
+    display: inline-block; 
+    float: left; 
+}
+
+#btn_go_shareboard {
+    border: none;
+    background: none;
+    display: inline-block;
+    float: right;
+    padding-top: 15px;
+}
+
+.shareboard img {
+    width: 25px;
+}
+
+.msubject {
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    max-width: 500px;
+}
+
+div.container{
+    position: relative;
+    width: max-content;
+    margin: auto;
+    transition: transform 0.7s, opacity 1s;
+    opacity: 0;
+    left:17%;
+    margin-top: 8%; 
+}
+#custom-search-input{
+    padding-left: 3px;
+    padding-right: 3px;
+    border: solid 5px #ffa400;
+    border-radius: 6px;
+    background-color: #fff;
+    display: inline-block;
+    float: right;
+    height: 55px;
+}
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+    display: inline-block;
+}
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+select.combobox{
+    display: inline-block;
+    width: 100px;
+    background-color: #fff;
+    float: left;
+    height: 55px;
+    margin-top: 1px;
+    border: solid 5px #ffa400; 
+    border-radius: 6px;
+}
+
+#main_search{
+    padding-left: 5px;
+} 

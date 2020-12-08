@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/data/dao/SpotlistDao.java=UTF-8
+<<<<<<< HEAD
 encoding//src/data/dao/WishlistDao.java=UTF-8
 encoding//src/data/dto/MemberDto.java=UTF-8
 encoding//src/mysql/db/MysqlConnect.java=UTF-8
+=======
+encoding//src/data/dto/MemberDto.java=UTF-8
+encoding//src/data/dao/WishlistDao.java=UTF-8
+>>>>>>> branch 'feature/1' of https://github.com/tkd9708/SemiProject.git

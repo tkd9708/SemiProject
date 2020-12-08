@@ -1,3 +1,4 @@
+
 <%@page import="data.dao.ShareBoardDao"%>
 <%@page import="data.dto.ShareBoardDto"%>
 
@@ -18,10 +19,10 @@
             "utf-8",new DefaultFileRenamePolicy());
       //입력한 데이터 읽기
       String num=multi.getParameter("num");
-      String pageNum=multi.getParameter("pageNum");
-		//System.out.println(num);
+      //System.out.println(num);
       String photo=multi.getFilesystemName("photo");
-   
+      String pageNum=multi.getParameter("pageNum");
+
       String content=multi.getParameter("content");
       String subject=multi.getParameter("subject");
       String addr=multi.getParameter("addr");
@@ -41,6 +42,7 @@
       //방명록 페이지로 이동
       String go="../index.jsp?main=shareboard/shareboardlist.jsp?num="+dto.getNum()+"&pageNum="+pageNum;
       response.sendRedirect(go);
+
    }catch(Exception e){
       System.out.println("업로드 오류:"+e.getMessage());
    }

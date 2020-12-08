@@ -1,6 +1,8 @@
 package data.dto;
 
 public class ZipcodeDto {
+
+	private int id;
 	private String zipcode;
 	private String sido;
 	private String gugun;
@@ -8,6 +10,12 @@ public class ZipcodeDto {
 	private String ri;
 	private String bunji;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getZipcode() {
 		return zipcode;
 	}

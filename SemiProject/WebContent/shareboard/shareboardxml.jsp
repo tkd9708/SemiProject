@@ -6,11 +6,10 @@
 <%@ page language="java" contentType="text/xml; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-   //String regroup = request.getParameter("regroup");
-   String num=request.getParameter("num");
+   String regroup = request.getParameter("regroup");
     ShareBoardDao dao=new ShareBoardDao();
-    List<ShareBoardDto> list=dao.getReviewList(num);
-    SimpleDateFormat sdf = new SimpleDateFormat();
+    List<ShareBoardDto> list=dao.getReviewList(Integer.parseInt(regroup));
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     %>
     <list>
     <%
@@ -22,6 +21,9 @@
          <content><%=dto.getContent()%></content>
          <star><%=dto.getStar()%></star>
          <writeday><%=sdf.format(dto.getWriteday())%></writeday>
+         <regroup><%=dto.getRegroup()%></regroup>
+         <relevel><%=dto.getRelevel()%></relevel>
+         <restep><%=dto.getRestep()%></restep>
       </dto>
    
 

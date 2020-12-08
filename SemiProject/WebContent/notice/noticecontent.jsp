@@ -16,6 +16,11 @@
    #cl-dashboard{display: none;}
    
 
+  /* .contentform{
+      position: absolute;
+      left: 250px;
+   } */
+   
    .button {
   width: 100px;
   height: 40px;

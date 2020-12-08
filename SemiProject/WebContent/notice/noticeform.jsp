@@ -49,44 +49,6 @@ div.btn{
    left: 300px;
 }
 
-/*--------------------------테이블 css--------------------------------------*/
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    
-}
-
-.styled-table th {
-    background-color:  #ffad33;
-    color: white;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-.styled-table  th {
-    border-bottom: 1px solid white;
-}
-
-.styled-table  th:nth-of-type(even) {
-    background-color:  #ffad33;
-}
-
-.styled-table td:last-of-type {
-    border-bottom: 1px solid #ffad33;
-}
-
-.styled-table td.active-row {
-    font-weight: bold;
-    color: black;
-}
    
 </style>
 
@@ -96,8 +58,45 @@ div.btn{
 
 <body>
 
-<div class="h2point">
-<h2>공지사항 작성</h2>
+<div class="noticeform">
+	<fieldset>
+   		<legend><h2>공지사항 작성</h2></legend>
+   		<form action="notice/noticeaction.jsp" method="post" enctype="multipart/form-data" name="f">
+    		<table class="table table-bordered">
+       			<tr>
+          			<th width="150" bgcolor="#ffc34d">작성자</th>
+          			<td>
+             			<input type="text" class="form-control" style="width: 200px;" required="required"
+               					name="id" value="관리자">                  
+          			</td>
+       			</tr>
+       			<tr>
+          			<th width="150" bgcolor="#ffc34d">제 목</th>
+          				<td>
+             				<input type="text" class="form-control" style="width: 500px;" required="required"
+               						name="subject" placeholder="제목">                  
+          				</td>
+       			</tr>
+       
+      			 <tr>
+          			<th width="150" bgcolor="#ffc34d" align="center">내용</th>
+          			<td>
+            			<textarea class="form-control" style="width:100%; height:300px; display:none;"
+             						 name="content" id="content"></textarea>
+           			</td>
+       			</tr>
+       			<tr>
+          			<td colspan="2" align="center">
+             			<input type="button" value="등록" class="button" style="width: 100px;color: white;"
+               					onclick="submitContents(this)">
+               
+             			<input type="button" value="목록" class="button" style="width: 100px;color: white;"
+               					onclick="location.href='index.jsp?main=notice/noticelist.jsp'">
+          			</td>             
+       			</tr>
+     		</table>     
+    	</form>
+  		</fieldset>
 </div>
 
 <div class="noticeform">

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.dto.ShareBoardDto;
+import data.dto.SpotlistDto;
 import data.dto.WishlistDto;
 import mysql.db.MysqlConnect;
 
@@ -46,13 +47,14 @@ public class ShareBoardDao {
          }
       }
       
+      //게시글 갯수 
       public int getTotalCount()
       {
          int n=0;
          Connection conn=null;
          PreparedStatement pstmt=null;
          ResultSet rs=null;
-         String sql="select count(*) from shareboard";
+         String sql="select count(*) from shareboard where relevel=0";
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
@@ -97,6 +99,9 @@ public class ShareBoardDao {
                dto.setStar(rs.getString("star"));
                dto.setPhoto(rs.getString("photo"));
                dto.setWriteday(rs.getTimestamp("writeday"));
+               dto.setRegroup(rs.getInt("regroup"));
+               dto.setRelevel(rs.getInt("relevel"));
+               dto.setRestep(rs.getInt("restep"));
                
                
 
@@ -142,7 +147,9 @@ public class ShareBoardDao {
                dto.setStar(rs.getString("star"));
                dto.setPhoto(rs.getString("photo"));
                dto.setWriteday(rs.getTimestamp("writeday"));
-                     
+               dto.setRegroup(rs.getInt("regroup"));
+               dto.setRelevel(rs.getInt("relevel"));
+               dto.setRestep(rs.getInt("restep"));     
 
                //list에 추가
                list.add(dto);
@@ -156,10 +163,10 @@ public class ShareBoardDao {
          return list;
       }
 
-      public List<ShareBoardDto> getReviewList(String num)
+      public List<ShareBoardDto> getReviewList(int regroup)
       {
          List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
-         String sql="select distinct * from shareboard  where ?=regroup and relevel!=0 order by restep asc";
+         String sql="select * from shareboard where regroup=? and relevel!=0 order by restep asc";
                   
          Connection conn=null;
          PreparedStatement pstmt=null;
@@ -169,8 +176,7 @@ public class ShareBoardDao {
          try {
             pstmt=conn.prepareStatement(sql);
             //바인딩
-          
-          pstmt.setString(1, num);
+            pstmt.setInt(1, regroup);
             //실행
             rs=pstmt.executeQuery();
             while(rs.next())
@@ -181,7 +187,9 @@ public class ShareBoardDao {
                dto.setContent(rs.getString("content"));
                dto.setStar(rs.getString("star"));
                dto.setWriteday(rs.getTimestamp("writeday"));
-                     
+               dto.setRegroup(rs.getInt("regroup"));
+               dto.setRelevel(rs.getInt("relevel"));
+               dto.setRestep(rs.getInt("restep"));      
 
                //list에 추가
                list.add(dto);
@@ -243,7 +251,7 @@ public class ShareBoardDao {
       
     //데이터 추가시 같은 그룹중 전달받은 step보다 큰값을 가진
      //데이터들은 restep을 무조건+1을 한다
-     public void updateRestep(int regroup,int restep) {
+     public void updateRestep(int regroup,int restep1) {
         String sql="update shareboard set restep=restep+1 where regroup=? and restep>?";
         Connection conn=null;
         PreparedStatement pstmt=null;
@@ -251,7 +259,7 @@ public class ShareBoardDao {
         try {
            pstmt=conn.prepareStatement(sql);
            pstmt.setInt(1, regroup);
-           pstmt.setInt(2, restep);
+           pstmt.setInt(2, restep1);
            
            pstmt.execute();
         } catch (SQLException e) {
@@ -310,34 +318,49 @@ public class ShareBoardDao {
         }
         
      }
-     
-  //원글이 있는지 검사-있을경우 true
-        public boolean isGroupStep(int regroup) {
-           boolean flag=false;
-           String sql="select * from shareboard where regroup=? and restep=0";
-           Connection conn=null;
-           PreparedStatement pstmt=null;
-           ResultSet rs=null;
-           conn=my.getConnection();
-           try {
-              pstmt=conn.prepareStatement(sql);
-              pstmt.setInt(1, regroup);
-              rs=pstmt.executeQuery();
-              //데이터가 있을경우 true
-              if(rs.next()) {
-                 flag=true;
-              }
-           } catch (SQLException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-           }finally {
-              my.dbClose(conn, pstmt,rs);
-           }
-           
-           return flag;
-        }
+		/*
+		 * //원글이 있는지 검사-있을경우 true public boolean isGroupStep(int regroup) { boolean
+		 * flag=false; String
+		 * sql="select * from shareboard where regroup=? and restep=0"; Connection
+		 * conn=null; PreparedStatement pstmt=null; ResultSet rs=null;
+		 * conn=my.getConnection(); try { pstmt=conn.prepareStatement(sql);
+		 * pstmt.setInt(1, regroup); rs=pstmt.executeQuery(); //데이터가 있을경우 true
+		 * if(rs.next()) { flag=true; } } catch (SQLException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }finally { my.dbClose(conn,
+		 * pstmt,rs); }
+		 * 
+		 * return flag; }
+		 */
         
-        //게시글 삭제
+        public int isNextStep(int regroup, int relevel, int restep) {
+         /* boolean flag=false; */
+           int num=0;
+            String sql="select * from shareboard where regroup=? and relevel = ? and restep = ?";
+            Connection conn=null;
+            PreparedStatement pstmt=null;
+            ResultSet rs=null;
+            conn=my.getConnection();
+            try {
+               pstmt=conn.prepareStatement(sql);
+               pstmt.setInt(1, regroup);
+               pstmt.setInt(2, relevel+1);
+               pstmt.setInt(3, restep+1);
+               rs=pstmt.executeQuery();
+               //데이터가 있을경우 true
+               if(rs.next()) {
+                  num=rs.getInt("num");
+               }
+            } catch (SQLException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }finally {
+               my.dbClose(conn, pstmt,rs);
+            }
+            
+            return num;
+         }
+           
+      //게시글 삭제
         public void sharedelete(String num,String num1) {
           Connection conn=null;
           PreparedStatement pstmt=null;
@@ -354,8 +377,27 @@ public class ShareBoardDao {
              my.dbClose(conn, pstmt);
           }
        }
-        //댓글 개수 구하기
-        public int getCount(String num){
+        
+      //댓글 삭제
+        public void deleteReview(String num) {
+          Connection conn=null;
+          PreparedStatement pstmt=null;
+          String sql="delete from shareboard where num = ?";
+          conn=my.getConnection();
+          try {
+             pstmt=conn.prepareStatement(sql);
+             pstmt.setString(1, num);
+             pstmt.execute();
+          }catch(SQLException e) {
+             e.printStackTrace();
+          }finally {
+             my.dbClose(conn, pstmt);
+          }
+       }
+      
+        
+      //댓글 개수 구하기
+        public int getCount(int regroup){
             int count =0;
             Connection conn=null;
             PreparedStatement pstmt=null;
@@ -363,23 +405,23 @@ public class ShareBoardDao {
             String sql="select count(*) from shareboard where regroup=? and relevel!=0";
             conn=my.getConnection();
             try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, num);
-				rs=pstmt.executeQuery();
-				if(rs.next()) {
-					count=rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1, regroup);
+            rs=pstmt.executeQuery();
+            if(rs.next()) {
+               count=rs.getInt(1);
+            }
+         } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
             
             return count;
             
-		 
+       
         }
         
-        //게시글 수정
+//게시글 수정
         
         
         public void updateShardBoard(ShareBoardDto dto) {
@@ -416,13 +458,94 @@ public class ShareBoardDao {
               my.dbClose(conn, pstmt);
            }
         }
+     
         
-        
+        public List<ShareBoardDto> getSearchList(int start, int perpage, String search){
+          List<ShareBoardDto> list = new ArrayList<ShareBoardDto>();
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select * from shareboard where addr like '%" + search + "%' limit ?,?";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             pstmt.setInt(1, start);
+             pstmt.setInt(2, perpage);
+             rs = pstmt.executeQuery();
+             
+             while(rs.next()) {
+                ShareBoardDto dto=new ShareBoardDto();
+                      dto.setNum(rs.getString("num"));
+                      dto.setId(rs.getString("id"));
+                      dto.setSubject(rs.getString("subject"));
+                      dto.setContent(rs.getString("content"));
+                      dto.setAddr(rs.getString("addr"));
+                      dto.setLikes(rs.getInt("likes"));
+                      dto.setStar(rs.getString("star"));
+                      dto.setPhoto(rs.getString("photo"));
+                      dto.setWriteday(rs.getTimestamp("writeday"));
+                      dto.setRegroup(rs.getInt("regroup"));
+                      dto.setRelevel(rs.getInt("relevel"));
+                      dto.setRestep(rs.getInt("restep"));     
+
+                      //list에 추가
+                      list.add(dto);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          return list;
+       }
        
-     
-           
-  
-     
+       
+       public int getSearchTotalCount(String search) {
+          int total = 0;
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select count(*) from shareboard where addr like '%" + search + "%'";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             rs = pstmt.executeQuery();
+             if(rs.next()) {
+                total = rs.getInt(1);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          
+          return total;
+       }
+       
+       //댓글 수정
+       public void updateShardBoardanswer(String content,String num) {
+           Connection conn=null;
+           PreparedStatement pstmt=null;
+           String sql="update shareboard set content=? where num=?";
+           conn=my.getConnection();
+           try {
+              pstmt=conn.prepareStatement(sql);
+              pstmt.setString(1, content);
+              pstmt.setString(2, num);
+              pstmt.execute();
+           } catch (SQLException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+           }finally {
+              my.dbClose(conn, pstmt);
+           }
+        }
 }
 
       

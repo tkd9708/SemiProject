@@ -1,3 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.NoticeDao"%>
+<%@page import="data.dto.NoticeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,415 +14,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-
-<style type="text/css">
-
-body {
-   /*background-color: #7eb9e3;*/
-   /*background-image: url("image/wave2.png");*/
-   background-repeat:no-repeat;
-   background-size:cover;
-   background-position: 0px 800px;
-   margin: 0;
-   height: 100%;
-   
-}
-
-.jejuisland {
-    left:267px;
-    padding-top: 50px;
-    transition: transform 0.7s, opacity 1s;
-    opacity: 0;
-    position: relative;
-    z-index: -9;
-    display: block;
-}
-
-div.btn_go {
-    padding-top: 50px;
-    transition: transform 0.7s, opacity 1s;
-    opacity: 0;
-    font-weight: bold;
-    font-size: 25px;
-} 
-
-div.btn_go a{
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
-    text-shadow: 2px 4px 2px gray;
-}
-
-/*조천*/
-#btn_go_jocheon{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_jocheon.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.jocheon a {
-    top: 220px; 
-    left: 870px; 
-}
-
-/*서귀포*/
-#btn_go_seogwipo{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_seogwipo.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.seogwipo a{
-    top: 470px; 
-    left: 640px; 
-}
-
-/*제주*/
-#btn_go_jeju{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_jeju.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.jeju a{
-    top: 260px; 
-    left: 710px; 
-}
-
-/*구좌*/
-#btn_go_gujwa{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_gujwa.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.gujwa a{
-    top: 180px; 
-    left: 1000px; 
-}
-
-/*성산*/
-#btn_go_sungsan{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_sungsan.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.sungsan a{
-    top: 320px; 
-    left: 1070px; 
-}
-
-/*표선*/
-#btn_go_pyoseon{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_pyoseon.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.pyoseon a{
-    top: 370px; 
-    left: 975px; 
-}
-
-/*남원*/
-#btn_go_namwon{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_namwon.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.namwon a{
-    top: 400px; 
-    left: 820px; 
-}
-
-/*안덕*/
-#btn_go_andeok{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_andeok.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.andeok a{
-    top: 500px; 
-    left: 480px; 
-}
-
-/*대정*/
-#btn_go_daejung{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_daejung.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.daejung a{
-    top: 510px; 
-    left: 390px; 
-}
-
-/*한경*/
-#btn_go_hangyeong{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_hangyeong.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.hangyeong a{
-    top: 430px; 
-    left: 370px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-    color: #fff;
-}
-
-/*한림*/
-#btn_go_hanrim{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_hanrim.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.hanrim a{
-    top: 370px; 
-    left: 430px; 
-}
-
-/*애월*/
-#btn_go_aewol{
-    top: 93px; 
-    left: 260px;
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_aewol.hover{
-    top: 93px; 
-    left: 260px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.aewol a{
-    top: 350px; 
-    left: 530px; 
-    z-index: 3;
-    position: absolute;
-    text-decoration: none;
-}
-
-/*우도*/
-#btn_go_udo{
-    top: 95px; 
-    left: 262px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: hidden; 
-}
-
-#btn_go_udo.hover{
-    top: 95px; 
-    left: 262px; 
-    position: absolute;
-    z-index: 2; 
-    visibility: visible; 
-}
-
-.udo a{
-    top: 200px; 
-    left: 1230px; 
-}
-
-.notice {
-    position: relative;
-}
-
-.shareboard {
-    position: relative;
-}
-
-div.container{
-    position: relative;
-    top: 100px;
-    width: max-content;
-    margin: auto;
-    transition: transform 0.7s, opacity 1s;
-    opacity: 0;
-    padding-top: 100px;
-    margin-left: 400px;
-    margin-bottom: 100px;
-}
-
-#custom-search-input{
-    padding: 3px;
-    border: solid 3px #ffa400;
-    border-radius: 6px;
-    background-color: #fff;
-    display: inline-block;
-    float: right;
-    height: 55px;
-}
-
-#custom-search-input input{
-    border: 0;
-    box-shadow: none;
-    display: inline-block;
-}
-
-#custom-search-input button{
-    margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;
-}
-
-#custom-search-input button:hover{
-    border: 0;
-    box-shadow: none;
-    border-left: solid 1px #ccc;
-}
-
-#custom-search-input .glyphicon-search{
-    font-size: 23px;
-}
-
-select.combobox{
-    display: inline-block;
-    width: 100px;
-    background-color: #fff;
-    float: left;
-    height: 55px;
-    margin-top: 1px;
-    border: solid 3px #ffa400; 
-    border-radius: 6px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="layout/css/main.css">
 <%
    // 프로젝트 경로 구하기
    String url = request.getContextPath();
 %>
 <script type="text/javascript">
 $(function(){
-	
 	$(".btn_search").click(function(){
 		var selSearch = $("#selSearch option:selected").val();
 		var search = $("#main_search").val();
@@ -427,7 +29,6 @@ $(function(){
 			alert("검색할 단어를 입력해주세요.");
 		}
 		else {
-
 			location.href = "<%=url%>/index.jsp?main=spot/spotsearch.jsp?search=" + search + "&selSearch=" + selSearch;
 		}
 		//alert($("#selSearch option:selected").val());
@@ -551,20 +152,44 @@ $(function(){
      const { innerHeight } = window;
      return top > innerHeight + (triggerDiff || 0);
    };
-
    function handleScroll() {
-     const elems = document.querySelectorAll('.jejuisland,.btn_go,.container');
+     const elems = document.querySelectorAll('.jejuisland');
      elems.forEach(elem => {
-       if (isElementUnderBottom(elem, -300)) {
+       if (isElementUnderBottom(elem, -200)) {
          elem.style.opacity = "0";
-         elem.style.transform = 'translateY(100px)';
+         elem.style.transform = 'translate(-50%, 100px)';
        } else {
          elem.style.opacity = "1";
-         elem.style.transform = 'translateY(0px)';
+         elem.style.transform = 'translate(-50%, 0px)';
        }
      });
    };
-
+   
+   function handleScroll2() {
+	     const elems = document.querySelectorAll('.container');
+	     elems.forEach(elem => {
+	       if (isElementUnderBottom(elem, -50)) {
+	         elem.style.opacity = "0";
+	         elem.style.transform = 'translateY(100px)';
+	       } else {
+	         elem.style.opacity = "1";
+	         elem.style.transform = 'translateY(0px)';
+	       }
+	     });
+	   };
+	   
+	   function handleScroll3() {
+		     const elems = document.querySelectorAll('.btn_go');
+		     elems.forEach(elem => {
+		       if (isElementUnderBottom(elem, -200)) {
+		         elem.style.opacity = "0";
+		         elem.style.transform = 'translateY(100px)';
+		       } else {
+		         elem.style.opacity = "1";
+		         elem.style.transform = 'translateY(0px)';
+		       }
+		     });
+		   };
 </script>
 </head>
 <body>
@@ -575,28 +200,29 @@ $(function(){
       <ul class="slides">
          <li><img src="image/udo1.jpg">
             <div class="caption right-align">
-               <h1>맨도롱 또똣</h1>
-               <h5 class="indigo-text text-lighten-1">
-               기분좋게 따뜻한</h5>
+               <h1 style="color: #5c538a;">맨도롱하다</h1>
+               <h5 style="color: #463e68;">
+               기분좋게 따뜻하다</h5>
             </div></li>
-         <li><img src="image/jeju2.jpg">
+         <li><img src="image/jeju1.jpg">
             <div class="caption left-align">
-               <h1>올레</h1>
-               <h5 class="light grey-text text-lighten-3">
-               집 앞까지 이어지는 작은 골목길</h5>
-            </div></li>
-          <li><img src="image/jeju1.jpg">
-            <div class="caption center-align">
-               <h1 style="color: #84c3ec;">인사리</h1>
-               <h5 class="light grey-text text-lighten-3">
+               <h1 style="color: #3a6b79;">인사리</h1>
+               <h5 style="color: #214651;">
                외로움의 벗이 되는 것</h5>
+            </div></li>
+          <li><img src="image/jeju2.jpg">
+            <div class="caption center-align">
+               <h1 style="color: #c1451c;">올레</h1>
+               <h5 style="color: #923614;">
+               집 앞까지 이어지는 작은 골목길</h5>
+               
             </div></li>
        </ul>
    </div>
    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
    <!-- 상단 슬라이드 부분 close -->
- 
+
 <div class="container">
  <div class="combo">
             <select class="combobox" id="selSearch">
@@ -694,16 +320,49 @@ $(function(){
 
 <script type="text/javascript">
 window.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', handleScroll2);
+window.addEventListener('scroll', handleScroll3);
 </script>
-<img class="jejuisland" src="image/jejuisland_d.png" style="max-width: 100%;height: auto;">
+<img class="jejuisland" src="image/jejuisland_d.png" style="max-width: 100%;">
 
 <!-- 땅부분 종료 -->
-
+<div class="nslist">
+<!-- 공지사항 -->
 <div class="notice">
-<button id="btn_go_notice" onclick="location.href='<%=url%>/index.jsp?main=notice/noticelist.jsp'">공지사항</button>
+<h5>공지사항</h5>
+   <button id="btn_go_notice" onclick="location.href='<%=url%>/index.jsp?main=notice/noticelist.jsp'"><img src="<%=url %>/image/plus.png"></button>
+   <%
+   //최신글 4개 가져오기
+   NoticeDao ndao=new NoticeDao();
+   List<NoticeDto> nlist=ndao.getMainList();
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+   %>
+   <table class="ntable">
+      <tr>
+             <th>제   목</th>
+             <th>작성일</th>
+        </tr>
+        <%
+        for(NoticeDto dto:nlist)
+          {%>
+        <tr>
+             <td>
+                <a href="index.jsp?main=notice/noticelist.jsp?num=<%=dto.getNum() %>&pageNum=1&key=a">
+                <span class="msubject"><%=dto.getSubject() %></span>
+                </a>            
+             </td>
+             <td style="text-align: center;"><%=sdf.format(dto.getWriteday())%></td>
+        </tr>
+        <%}
+        %>
+   </table>
 </div>
+<!-- 공유게시판-->
 <div class="shareboard">
-<button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'">공유게시판</button>
+<h5>공유게시판</h5>
+<button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'"><img src="<%=url %>/image/plus.png"></button>
+<!-- shareboard list 자리 -->
+</div>
 </div>
 
 </body>

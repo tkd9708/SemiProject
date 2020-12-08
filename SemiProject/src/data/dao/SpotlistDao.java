@@ -354,4 +354,22 @@ public class SpotlistDao {
 		
 		return total;
 	}
+	
+	public void spotdelete(String contentsid) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="delete from spotlist where contentsid=?";
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, contentsid);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 }

@@ -21,11 +21,13 @@ public class MysqlConnect {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Mysql �뱶�씪�씠踰� �삤瑜� : " + e.getMessage());
+
+			System.out.println("Mysql 드라이버 오류 : " + e.getMessage());
 		}
 	}
 	
-	// mysql �뿰寃�
+
+	// mysql 연결
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
@@ -33,7 +35,8 @@ public class MysqlConnect {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("而댄벂�꽣 mysql �뿰寃� �떎�뙣 : " + e.getMessage());
+
+			System.out.println("컴퓨터 mysql 연결 실패 : " + e.getMessage());
 		}
 		
 		return conn;

@@ -44,23 +44,18 @@ scroll-behavior: smooth;
  }
  
  
-
 .stars{
     display: flex;
     flex-wrap: wrap;
-
     flex-direction: row-reverse;
     justify-content: center;
-
 }
-
 .stars__star-icon{
     stroke:#EFCE4A;
     stroke-width: 2px;
     fill: transparent;
     transition: .1s all;
 }
-
 .stars__star{
     width: 20px;
     height: 20px;
@@ -68,7 +63,6 @@ scroll-behavior: smooth;
     cursor: pointer;
     margin: 5px;
 }
-
 .stars__checkbox{
     position: absolute;
     top: -9999px;
@@ -76,36 +70,29 @@ scroll-behavior: smooth;
     width: 0;
     height: 0;
 }
-
 .stars__star:hover > .stars__star-icon{
     fill: #EFCE4A;
 }
-
 .stars__star:hover ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked + .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
-
 .stars__checkbox:checked ~ .stars__star > .stars__star-icon {
     fill: #EFCE4A;
 }
 
 /*--------------------------버튼 css--------------------------------------*/
-
 html, body {
   height: 100%;
 }
-
 .wrap {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .button {
   width: 100px;
   height: 40px;
@@ -126,13 +113,8 @@ html, body {
  
 .button:hover {
   background-color: #ffaa00;
-
   transform: translateY(-7px);
 }
-
-
-
-
 
 /*--------------------------테이블 css--------------------------------------*/
 .styled-table {
@@ -150,32 +132,24 @@ html, body {
     color: white;
     text-align: left;
 }
-
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
 }
-
 .styled-table  th {
     border-bottom: 1px solid white;
 }
-
 .styled-table  th:nth-of-type(even) {
     background-color:  #ffad33;
 }
-
 .styled-table td:last-of-type {
     border-bottom: 1px solid #ffad33;
 }
-
 .styled-table td.active-row {
     font-weight: bold;
     color: black;
 }
-
-
    
-
 </style>
 <script type="text/javascript">
 $(function(){
@@ -225,7 +199,7 @@ $(function(){
    <table class="styled-table">
          <tr>
             <th style="text-align: center;"><span>추천맛집</span></th>
-           
+
             <td> <input type="hidden" name="id"value="<%=id%>">
               <input type="text" name="subject" class="form-control"
                required="required" style="width: 200px;height: 30px;"
@@ -312,20 +286,19 @@ $(function(){
       
       
       <div class="share_btn">
-             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;" >
+
+             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
                
              <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
                onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">      
       </div>
     </form>
    </fieldset>
-      
-  </div>
-   <%}else {%>
-       <script type="text/javascript">
-             alert("먼저 로그인을 해주세요");
-       
-       </script>
+
+       <%}else {%>
+       <b>먼저 로그인을 해주세요</b>
     <%}%>
+  </div>
+
 </body>
 </html>

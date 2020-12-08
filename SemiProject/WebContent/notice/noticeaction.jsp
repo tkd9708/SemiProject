@@ -57,7 +57,7 @@
 		dto.setContent(content);
 		dto.setId(id);
 		dto.setSubject(subject);
-		dto.setFiles(files);
+		//dto.setFiles(files);
 		
 		db.insertNotice(dto);
 		

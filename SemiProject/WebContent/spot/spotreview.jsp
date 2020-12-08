@@ -153,16 +153,39 @@
 		});
 		
 		$("#btnInsertReview").click(function(){
-			$.ajax({
-				type: "post",
-				dataType: "html",
-				data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
-						"content":$("#srContent").val()},
-				url: "spot/insertspotreview.jsp",
-				success: function(data){
-					location.reload();
-				}
-			});
+
+			if("<%=loginok%>" == "success"){
+				$.ajax({
+					type: "post",
+					dataType: "html",
+					data: {"contentsid":"<%=contentsid%>", "memNum":"<%=memNum%>", "star":$("#spotReviewStar").val(),
+							"content":$("#srContent").val()},
+					url: "spot/insertspotreview.jsp",
+					success: function(data){
+						location.reload();
+					}
+				});
+			}
+			else{
+				alert("로그인이 필요한 서비스입니다.");
+			}
+			
+		});
+		
+		$(".delReview").click(function(){
+			var a = confirm("정말 삭제하시겠습니까?");
+			if(a){
+				$.ajax({
+					type: "get",
+					dataType: "html",
+					url: "spot/deleteReview.jsp",
+					data: {"num": $(this).attr("num")},
+					success: function(data){
+
+						location.reload();
+					}
+				});
+			}
 		});
 		
 		$(".review_likes").click(function(){
@@ -303,6 +326,12 @@
 									if(myid.equals(mdao.getDataByNum(rdto.getMemNum()).getId())){
 										%>
 										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-pencil upReview"
+											num="<%=rdto.getNum()%>"></span>
+										<%
+									}
+									if(myid.equals("admin")){
+										%>
+										<span style="float:right; cursor: pointer; font-size: 15pt;" class="glyphicon glyphicon-minus-sign delReview"
 											num="<%=rdto.getNum()%>"></span>
 										<%
 									}

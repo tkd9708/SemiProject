@@ -32,7 +32,6 @@ div.container{
   margin-right: 200px; 
   
 
-
  }
 
 
@@ -44,46 +43,16 @@ div.page {
    margin-bottom: 50px;
    text-align: center;
    
-
 }
 
 
-.btn_notice:hover 
+.btn_notice:hover {
   transform: translateY(-7px);
 }
 
 /*--------------------------테이블 css--------------------------------------*/
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    
-}
-
-.styled-table th {
-    background-color:  #ffad33;
-    color: white;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-.styled-table  th {
-    border-bottom: 1px solid #ffad33;
-}
-
-.styled-table  th:nth-of-type(even) {
-    background-color:  #ffad33;
-}
-
-.styled-table td:last-of-type {
-    border-bottom: 1px solid #ffad33;
 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     
@@ -98,7 +67,6 @@ div.page {
 .styled-table th,.styled-table td {
     padding: 12px 15px;
     border-bottom: 1px dotted #ddd;
-
 }
 
 .styled-table td.active-row {
@@ -298,3 +266,8 @@ div.page {
     
 </body>
 </html>
+
+
+
+
+

@@ -42,7 +42,7 @@ div.layout div.main {
     z-index: 1;
     height: 100%;
     font-family: SCDream5;
-    letter-spacing: 2px;
+
 }
 div.layout div.footer {
     position: inherit;
@@ -50,7 +50,7 @@ div.layout div.footer {
     bottom: 0;
     padding: 30px 0;
     font-family: SCDream5;
-    letter-spacing: 1px;
+
 
 a {
 	cursor:pointer;

@@ -94,13 +94,5 @@ public void setWriteday(Timestamp writeday) {
    
    
    
+
 }  
-   
-   
-   
-   
-   
-   
-   
-   
-   
