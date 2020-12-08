@@ -236,4 +236,29 @@ public class SpotReviewDao {
 		}
 		
 	}
+	
+	public int AvgStar(String contentsid) {
+		int sum = 0;
+		int total = this.getTotalCount(contentsid);
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select sum(star) from spotreview where contentsid=?";
+		
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, contentsid);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				sum = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(conn, pstmt, rs);
+		}
+		
+		return (int)sum/total;
+	}
 }

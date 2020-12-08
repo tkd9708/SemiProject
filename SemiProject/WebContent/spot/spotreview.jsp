@@ -288,9 +288,9 @@
 				<%
 			}
 			else{
-				int total = 0;
+				/* int total = 0; */
 				for(SpotReviewDto rdto : list){
-					total += rdto.getStar();
+					/* total += rdto.getStar(); */
 					%>
 					<br><br>
 					<hr>
@@ -349,13 +349,13 @@
 				<br><br>
 				<hr>
 				<%
-				if(total > 0){
+				/* if(total > 0){
 					dao.updateStar(contentsid, total/rdao.getTotalCount(contentsid));
-				}
+				} */
 			}
 			%>
 			
-			<div class="footer">
+			<div style="text-align: center; margin-top: 100px;">
 		<ul class="pagination">
 		<%
 			if(startPage > 1){

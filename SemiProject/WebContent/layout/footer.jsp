@@ -8,7 +8,7 @@
 <style type="text/css">
 div.ffooter {
    text-align: center;
-   padding-bottom: 100px;
+   padding-bottom: 50px;
 }
  #logo_footer {
    position: inherit;

@@ -314,6 +314,9 @@ z-index:1111;
 	WishlistDao wdao = new WishlistDao();
 	boolean spotSearch = wdao.isSpotSearch(contentsid, myid);
 	
+	int avgStar = rdao.AvgStar(contentsid);
+	dao.updateStar(contentsid, avgStar);
+	
 %>
 <script type="text/javascript">
 /* var BASE = 100; // 스크롤 시작 위치   
