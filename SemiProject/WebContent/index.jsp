@@ -20,12 +20,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-body { 
-    -ms-overflow-style: none; 
+body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     height: 100%;
+     overflow: -moz-scrollbars-vertical; 
 } 
 ::-webkit-scrollbar {
     display: none; 
