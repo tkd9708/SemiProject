@@ -17,6 +17,7 @@
 		//비번이 맞는 경우 삭제
 		dao.deleteMember(id);
 		session.removeAttribute("loginok");
+		session.removeAttribute("idforsavebtn");
 		response.sendRedirect("../index.jsp?main=layout/main.jsp");//여기는 action파일이라 member폴더안에 있어서 인덱스로 가려면 상위폴더로 가야한다
 	}
 	else
