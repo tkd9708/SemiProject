@@ -38,7 +38,7 @@ $(function(){
 	String saveid=(String)session.getAttribute("saveid");
 	String id="";
 	if(saveid!=null){
-		id=(String)session.getAttribute("myid");
+		id=(String)session.getAttribute("idforsavebtn");
 	}
 %>
 <body>

@@ -156,7 +156,7 @@ List<WishlistDto>list = dao.getList(memId);
  String syear =(String)session.getAttribute("year");
  String smonth = (String)session.getAttribute("month");
  %>
-	 
+	
 
  <script type="text/javascript">
 	
@@ -277,9 +277,7 @@ today = new Date( today.getFullYear(), today.getMonth() + 1, today.getDate());
 		*/
         drawCalendar();//달력 cell 만들어 출력
 }
-
-
-
+   
 function getData(){
    <%
       for(WishlistDto dto : list){
@@ -452,7 +450,7 @@ function getDetail(){
 <%
 String loginok = (String)session.getAttribute("loginok");
 MemberDao mdao = new MemberDao();
-MemberDto mdto = mdao.getData(memId);
+MemberDto mdto = mdao.getDataId(memId);
 String memNum = mdao.getMemNum(memId);
 WishlistDao wdao = new WishlistDao();
 List<SpotReviewDto> srlist = wdao.getRecentreviews(memNum);

@@ -32,7 +32,7 @@ font-family: SCDream5;
       margin-bottom: 80px;
       margin-right: 70px;
       /* box-shadow: 2px 2px 2px 2px #ddd; */
-      border: 1px solid #ddd;
+      border: 1px solid #eee;
    }
    
    div#spotList {
@@ -48,7 +48,6 @@ font-family: SCDream5;
    
    div.footer {
        text-align: center;
-       margin-bottom: 100px;
    }
    
 
@@ -358,13 +357,13 @@ document.addEventListener('DOMContentLoaded', function(){
         		</div>
         		</div><!-- gotodetail 끝 -->
         		<br><br>
-        		<table style="table-layout: fixed; width: 100%;">
+        		<table class="table table-bordered" style="table-layout: fixed; border: 1px solid #eee; width: 100%;">
         			<tr height="70px;">
-        				<td style="vertical-align: middle; border-top: 1px solid #ddd; border-right: 1px solid #ddd;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
+        				<td style="vertical-align: middle;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
         					<span class="glyphicon glyphicon-thumbs-up"></span><br>
         					<%=dto.getLikes() %>
         				</td>
-        				<td style="vertical-align: middle; border-top: 1px solid #ddd;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
+        				<td style="vertical-align: middle;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
         					<span class="glyphicon glyphicon-edit" style="font-size: 10pt;"></span>&nbsp;<b>리뷰</b>
         				</td>
         			</tr>

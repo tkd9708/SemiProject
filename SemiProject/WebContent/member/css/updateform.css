@@ -1,6 +1,52 @@
 @charset "UTF-8";
 
-.frmUpdate {	
+.btnMemUpdate {
+	color: #f4f4f4;
+	background-color: #ffaa00;
+	border: 0;
+	outline: 0;
+	padding: 12px 16px;
+}
+.updateWrite {
+	margin: 40px auto 60px;
+	position: relative;
+	padding: 0;
+	font-size: 16px;
+	letter-spacing: -0.03em;
+	line-height: normal;
+}
+h3 {
+	position: relative;
+	width: auto;
+	padding: 5px 0 15px;
+	font-size: 35px;
+	font-weight: bold;
+	color: #ffaa00;
+	display: inline-block;
+}
+.bi-pencil {
+	fill: orange;	
+}
+.gridContainer {
+	display: grid;
+	grid-template-rows: repeat(4, 1fr);
+	padding: 10px;
+	row-gap: 10px;
+	grid-template-rows: fit-content(300px);
+	grid-template-columns: fit-content(300px);
+	justify-items: center;
+	justify-content: center;
+}
+.item {
+	background: rgba(230,150,10,.6);
+	padding: 20px;
+	font-size: 18px;
+	text-align: center;
+	box-shadow: .3rem .3rem .3rem .3rem rgba(200,100,10,.8);
+	border-radius: 35%;
+}
+
+/* .frmUpdate {	
     margin-top: 150px;
     margin-left: 37%;
     margin-bottom: 100px;
