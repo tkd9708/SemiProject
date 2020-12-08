@@ -22,7 +22,7 @@
       String content=multi.getParameter("content");
       String photo= multi.getFilesystemName("photo");
       String star=multi.getParameter("stars");
-      //System.out.println(별);
+      System.out.println(savePath);
       ShareBoardDto dto = new ShareBoardDto();
       
       dto.setId(id);

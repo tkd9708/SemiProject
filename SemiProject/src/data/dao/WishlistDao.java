@@ -93,18 +93,19 @@ public class WishlistDao {
 
 	}
 	
-	public boolean isShareSearch(String num) {
+	public boolean isShareSearch(String num, String myid) {
 		boolean find = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from wishlist where shareNum = ?";
+		String sql = "select * from wishlist where shareNum = ? and memId=?";
 		conn = db.getConnection();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
+			pstmt.setString(2, myid);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {

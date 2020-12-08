@@ -1,5 +1,6 @@
 <%@page import="data.dao.ShareBoardDao"%>
 <%@page import="data.dto.ShareBoardDto"%>
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.NoticeDao"%>
@@ -198,7 +199,7 @@ $(function(){
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
  
    
-   <div class="slider">
+   <div class="slider" >
       <ul class="slides">
          <li><img src="image/udo1.jpg">
             <div class="caption right-align">

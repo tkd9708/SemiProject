@@ -56,9 +56,9 @@
       dto.setImg(img);
       dto.setThumbnail(thumbnail);
       
-      db.addSpot(dto);
+      db.updateSpot(dto);
       
-      String path = "../index.jsp?main=spot/spotdetail.jsp?contentsid="+contentsid;
+      String path = "../index.jsp?main=spot/spotdetail.jsp?contentsid=" + contentsid;
       response.sendRedirect(path);
    }catch(Exception e){
       e.printStackTrace();
@@ -66,7 +66,5 @@
       }
 
 %>
-<body>
-
 </body>
 </html>

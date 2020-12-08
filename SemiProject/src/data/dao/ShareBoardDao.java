@@ -27,7 +27,7 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //   ε 
+            //   琯 
             pstmt.setString(1, dto.getId());
             pstmt.setString(2, dto.getPhoto());
             pstmt.setString(3, dto.getSubject());
@@ -83,7 +83,7 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //   ε 
+            //   琯 
             pstmt.setString(1, num);
             //    
             rs=pstmt.executeQuery();
@@ -116,7 +116,7 @@ public class ShareBoardDao {
 
       }
       
-      //    ¡ó         Ʈ       ȯ
+      //    징처         트       환
       public List<ShareBoardDto> getList(int start,int end)
       {
          List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
@@ -129,7 +129,7 @@ public class ShareBoardDao {
 
          try {
             pstmt=conn.prepareStatement(sql);
-            //   ε 
+            //   琯 
             pstmt.setInt(1, start);
             pstmt.setInt(2, end);
             //    
@@ -150,7 +150,7 @@ public class ShareBoardDao {
                dto.setRelevel(rs.getInt("relevel"));
                dto.setRestep(rs.getInt("restep"));     
 
-               //list    ߰ 
+               //list    煞 
                list.add(dto);
             }
          } catch (SQLException e) {
@@ -174,7 +174,7 @@ public class ShareBoardDao {
 
          try {
             pstmt=conn.prepareStatement(sql);
-            //   ε 
+            //   琯 
             pstmt.setInt(1, regroup);
             //    
             rs=pstmt.executeQuery();
@@ -190,7 +190,7 @@ public class ShareBoardDao {
                dto.setRelevel(rs.getInt("relevel"));
                dto.setRestep(rs.getInt("restep"));      
 
-               //list    ߰ 
+               //list    煞 
                list.add(dto);
             }
          } catch (SQLException e) {
@@ -226,7 +226,7 @@ public class ShareBoardDao {
 
 
       }
-      //   ƿ      
+      //   틸      
       public void updateLikes(String num)
       {
          String sql="update shareboard set likes=likes+1 where num=?";
@@ -235,7 +235,7 @@ public class ShareBoardDao {
          conn=my.getConnection();
          try {
             pstmt=conn.prepareStatement(sql);
-            //   ε  
+            //   琯  
             pstmt.setString(1, num);
 
             //     
@@ -248,8 +248,8 @@ public class ShareBoardDao {
          }
       }
       
-    //        ߰          ׷       ޹    step     ū         
-     //     ͵    restep         +1    Ѵ 
+    //        煞          瀏       賓    step     큰         
+     //     孤    restep         +1    磯 
      public void updateRestep(int regroup,int restep1) {
         String sql="update shareboard set restep=restep+1 where regroup=? and restep>?";
         Connection conn=null;
@@ -269,10 +269,10 @@ public class ShareBoardDao {
         }
      }
      
-  //insert:      ߿  Ѱ   ̰     ۷   ߰     Ұ     ,
-     //  ۷   ߰     Ұ      ̴ . ڡڡڡڡ 
-     // ׷     Ǵ    dto       ִ  num   null ̸     ۷ 
-     //null    ƴϸ    ۷  insert    Ұ  ̴ .
+  //insert:      傷  璣   隔     紡   煞     柰     ,
+     //  紡   煞     柰      甄 . 汶汶汶汶 
+     // 瀏     풔    dto       獵  num   null 見     紡 
+     //null    틈玖    紡  insert    柰  甄 .
      public void insertBoard(ShareBoardDto dto) {
         String num=dto.getNum();
         int regroup=dto.getRegroup();
@@ -281,15 +281,15 @@ public class ShareBoardDao {
         String sql="insert into shareboard (id,subject,addr,photo,content,"
               + "star,relevel,regroup,restep,writeday) values (?,?,?,?,?,?,?,?,?,now())";
         if(num==null) {
-           //        ǹ  Ѵ 
+           //        퓜  磯 
            regroup=this.getMaxNum()+1;
            relevel=0;
            restep=0;
         }else {
-           //       ǹ  Ѵ 
-           //      ׷    restep      ޹           ū           1     
+           //       퓜  磯 
+           //      瀏    restep      賓           큰           1     
            this.updateRestep(regroup, restep);
-           // ׸       ޹    level,step   1      Ѵ \
+           // 琉       賓    level,step   1      磯 \
            relevel+=1;
            restep+=1;
         }
@@ -318,7 +318,7 @@ public class ShareBoardDao {
         
      }
      
-  //        ִ     ˻ -        true
+  //        獵     講 -        true
         public boolean isGroupStep(int regroup) {
            boolean flag=false;
            String sql="select * from shareboard where regroup=? and restep=0";
@@ -330,7 +330,7 @@ public class ShareBoardDao {
               pstmt=conn.prepareStatement(sql);
               pstmt.setInt(1, regroup);
               rs=pstmt.executeQuery();
-              //     Ͱ          true
+              //     叩          true
               if(rs.next()) {
                  flag=true;
               }
@@ -358,7 +358,7 @@ public class ShareBoardDao {
                pstmt.setInt(2, relevel+1);
                pstmt.setInt(3, restep+1);
                rs=pstmt.executeQuery();
-               //     Ͱ          true
+               //     叩          true
                if(rs.next()) {
                   num=rs.getInt("num");
                }
@@ -372,7 +372,7 @@ public class ShareBoardDao {
             return num;
          }
            
-      // Խñ      
+      // 督챰      
         public void sharedelete(String num,String num1) {
           Connection conn=null;
           PreparedStatement pstmt=null;
@@ -407,8 +407,7 @@ public class ShareBoardDao {
           }
        }
       
-        
-      //            ϱ 
+
         public int getCount(int regroup){
             int count =0;
             Connection conn=null;
@@ -433,7 +432,7 @@ public class ShareBoardDao {
        
         }
         
-// Խñ      
+// 督챰      
         
         
         public void updateShardBoard(ShareBoardDto dto) {
@@ -445,7 +444,7 @@ public class ShareBoardDao {
               if(dto.getPhoto()==null) {
                  sql="update shareboard set subject=?, addr=?, content=?, star=? where num=?";
                  pstmt=conn.prepareStatement(sql);
-                 //   ε 
+                 //   琯 
                  pstmt.setString(1, dto.getSubject());
                  pstmt.setString(2, dto.getAddr());
                  pstmt.setString(3, dto.getContent());
@@ -454,7 +453,7 @@ public class ShareBoardDao {
               }else {
                  sql="update shareboard set subject=?, addr=?, photo=? , content=?, star=? where num=?";
                  pstmt=conn.prepareStatement(sql);
-                 //   ε 
+                 //   琯 
                  pstmt.setString(1, dto.getSubject());
                  pstmt.setString(2, dto.getAddr());
                  pstmt.setString(3, dto.getPhoto());
@@ -503,7 +502,7 @@ public class ShareBoardDao {
                       dto.setRelevel(rs.getInt("relevel"));
                       dto.setRestep(rs.getInt("restep"));     
 
-                      //list    ߰ 
+                      //list    煞 
                       list.add(dto);
              }
           } catch (SQLException e) {
@@ -560,8 +559,9 @@ public class ShareBoardDao {
                my.dbClose(conn, pstmt);
             }
          }
-        
+
       //main에서 일부 페이지 보기  
+
         public List<ShareBoardDto> getMainList()
         {
 
@@ -574,7 +574,9 @@ public class ShareBoardDao {
            conn=my.getConnection();
            try {
               pstmt=conn.prepareStatement(sql);
+
               //실행
+
               rs=pstmt.executeQuery();
               while(rs.next())
               {
@@ -592,7 +594,9 @@ public class ShareBoardDao {
                      dto.setRelevel(rs.getInt("relevel"));
                      dto.setRestep(rs.getInt("restep")); 
                  
+
                     //list에 추가
+
                 list.add(dto);
               }
            } catch (SQLException e) {

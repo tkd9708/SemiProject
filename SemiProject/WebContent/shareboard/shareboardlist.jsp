@@ -954,7 +954,7 @@ $(function(){
                   <%}
                   else{
                      %>
-                     <div><img src="image/imgX.png" style="background-color: gray;width: 100%;"></div><%-- 수진아. 여기 img크기만큼 엑스자 그림 넣어줄 수 있니 ㅎ.ㅎ --%>
+                     <div><img src="image/imgX.png" style="background-color: gray;width: 100%;"></div>
                      <%
                   }
                   %>
@@ -1015,13 +1015,14 @@ $(function(){
          </div>
          <!-- 좋아요 close -->
                   
-         <!-- 찜하기(하트) -->    
-         <div class="heart <%if(wdao.isShareSearch(dto.getNum())){
-            %>
-            color
-            <%
-            } %>" 
-            num="<%=dto.getNum() %>" subject="<%=dto.getSubject() %>"
+         <!-- 찜하기(하트) -->   
+         <div class="heart 
+         <%if(wdao.isShareSearch(dto.getNum(), id)){
+        	 %>
+        	 color
+        	 <%
+         	} %>" 
+         	num="<%=dto.getNum() %>" subject="<%=dto.getSubject() %>"
                                  addr="<%=dto.getAddr() %>" idx="<%=idx++%>"></div>
          <!-- 찜하기(하트) close -->       
          
