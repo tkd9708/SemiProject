@@ -409,7 +409,7 @@ public class ShareBoardDao {
       
         
       //댓글 개수 구하기
-        public int getCount(String num){
+        public int getCount(int regroup){
             int count =0;
             Connection conn=null;
             PreparedStatement pstmt=null;
@@ -418,7 +418,7 @@ public class ShareBoardDao {
             conn=my.getConnection();
             try {
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, num);
+            pstmt.setInt(1, regroup);
             rs=pstmt.executeQuery();
             if(rs.next()) {
                count=rs.getInt(1);
@@ -560,6 +560,49 @@ public class ShareBoardDao {
                my.dbClose(conn, pstmt);
             }
          }
+        
+      //main에서 일부 페이지 보기  
+        public List<ShareBoardDto> getMainList()
+        {
+
+           String sql="SELECT * FROM shareboard where not subject = 'no' ORDER BY num DESC limit 0,5";
+           List<ShareBoardDto> list=new ArrayList<ShareBoardDto>();
+           Connection conn=null;
+           PreparedStatement pstmt=null;
+           ResultSet rs=null;
+
+           conn=my.getConnection();
+           try {
+              pstmt=conn.prepareStatement(sql);
+              //실행
+              rs=pstmt.executeQuery();
+              while(rs.next())
+              {
+                 ShareBoardDto dto=new ShareBoardDto();
+              dto.setNum(rs.getString("num"));
+                     dto.setId(rs.getString("id"));
+                     dto.setSubject(rs.getString("subject"));
+                     dto.setContent(rs.getString("content"));
+                     dto.setAddr(rs.getString("addr"));
+                     dto.setLikes(rs.getInt("likes"));
+                     dto.setStar(rs.getString("star"));
+                     dto.setPhoto(rs.getString("photo"));
+                     dto.setWriteday(rs.getTimestamp("writeday"));
+                     dto.setRegroup(rs.getInt("regroup"));
+                     dto.setRelevel(rs.getInt("relevel"));
+                     dto.setRestep(rs.getInt("restep")); 
+                 
+                    //list에 추가
+                list.add(dto);
+              }
+           } catch (SQLException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+           }finally {
+              my.dbClose(conn, pstmt, rs);
+           }
+           return list;
+        }
 }
 
       

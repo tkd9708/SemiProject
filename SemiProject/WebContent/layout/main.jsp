@@ -1,3 +1,5 @@
+<%@page import="data.dto.ShareBoardDto"%>
+<%@page import="data.dao.ShareBoardDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.NoticeDao"%>
@@ -196,7 +198,7 @@ $(function(){
    <!-- 상단 슬라이드 부분(script는 css 관련이기에 건들면 안됩니다!) -->
  
    
-   <div class="slider">
+   <div class="slider" >
       <ul class="slides">
          <li><img src="image/udo1.jpg">
             <div class="caption right-align">
@@ -361,6 +363,29 @@ window.addEventListener('scroll', handleScroll3);
 <div class="shareboard">
 <h5>공유게시판</h5>
 <button id="btn_go_shareboard" onclick="location.href='<%=url%>/index.jsp?main=shareboard/shareboardlist.jsp'"><img src="<%=url %>/image/plus.png"></button>
+<!-- shareboard list 자리 -->
+<%
+ShareBoardDao shdao = new ShareBoardDao();
+List<ShareBoardDto> shlist = shdao.getMainList();
+%>
+<table class="shtable">
+   <tr>
+      <th>제목</th>
+      <th>작성일</th>
+   </tr>
+   <% for(ShareBoardDto dto:shlist){ %>
+   <tr>
+      <td>
+         <a href="index.jsp?main=shareboard/shareboardlist.jsp?num=<%=dto.getNum() %>">
+            <span class="shsubject"><%=dto.getSubject()%></span>
+         </a>
+      </td>
+      <td style="text-align:center;"><%=sdf.format(dto.getWriteday()) %></td>
+   </tr>
+   <%} %>
+</table>
+
+</div>
 <!-- shareboard list 자리 -->
 </div>
 </div>

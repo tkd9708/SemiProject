@@ -298,18 +298,25 @@ document.addEventListener('DOMContentLoaded', function(){
         	%>
         	<div class="detail">
         	<div class ="gotodetail" contentsid="<%=dto.getContentsid()%>">
-        		<%
-        		if(dto.getThumbnail() == null){
-        		%>
-        			<div style="width: 330px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
-        		<%
-        		}
-        		else {
-        		%>
-        			<img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
-        		<%
-        		}
-        		%>
+        		   <%
+              if(dto.getThumbnail() == null){
+              %>
+                 <div style="width: 330px; height: 250px; float: left; text-align: center;">썸네일 없음</div>
+              <%
+              }
+              else {
+                    if(dto.getThumbnail().substring(0, 4).equals("http")){
+                    %>
+                      <img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
+                    <%   
+                    }
+                 else {%>
+
+                 <img style="width:330px;height:250px;" src="addspotsave/<%=dto.getThumbnail()%>"><br>
+                 <%
+                 }
+              }
+              %>
         		<div style="width: 330px; margin-top: 20px;">
         			<b style="font-size: 13pt;"><%=title %></b>
         		</div>

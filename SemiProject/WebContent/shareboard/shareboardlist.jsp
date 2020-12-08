@@ -1025,7 +1025,7 @@ $(function(){
          
          <!-- 댓글버튼-->
          <div class="review_btn">
-             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(<%=db.getCount(dto.getNum()) %>)</button>
+             <button type="button" class="button2" style="color: white;" regroup="<%=dto.getRegroup()%>">댓글(<%=db.getCount(dto.getRegroup()) %>)</button>
              <button type="button" class="button1" style="color: white;" num="<%=dto.getNum() %>" regroup="<%=dto.getRegroup()%>"
               relevel="<%=dto.getRelevel()%>" restep="<%=dto.getRestep()%>">댓글쓰기</button>
          </div>
