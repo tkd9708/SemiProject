@@ -12,7 +12,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/2bootstrap.min.css"> --%>
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -32,11 +31,17 @@
 			});
 			
 			$(document).on('click','.sgLi', function(event) {
-				let first = $(this).children(".sgIitem").children(".strongWord").html();
+				let first = $(this).attr("id");
 				alert(first);
-				first = first.replace(/&nbsp;/g, ' ');
+				first = first.substring(first.length-1, first.length);
 				alert(first);
-				txtRegion.value = first;
+				let btnsel = $("#btn"+first);
+				btnsel = btnsel.attr("data-address");
+				alert(btnsel);
+				txtRegion.value = btnsel;
+				/* first = first.replace(/&nbsp;/g, ' ');
+				alert(first);
+				txtRegion.value = first; */
 				$(".btnSearch:button").trigger("click");
 				/* let spanShow = document.getElementsByClassName("show");
 				spanShow.setAttribute("label-value", inTxt);
@@ -125,14 +130,16 @@
 					info = info + "<div class='popDownAddr'>";
 					info = info + "<ul>";
 					$(data).find("address").each(function(i, element) {
-						info = info + "<li class='sgLi'>";
+						info = info + "<li class='sgLi' id='li"+i+"'>";
 						info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
+						info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
 						info = info + "<strong class='strongWord'>";
-						info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;" + $(this).find("dong").text();
+						info = info + $(this).find("dong").text().substring(0, 1);
 						info = info + "</strong>";
+						info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
 						info = info + "</a>";
-						info = info + "<button type='button' class='sgBtnAdd'>";
-						info = info + "<span class='ft'>↖</span>"
+						info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
+						info = info + "<span class='ft'>↖</span>";
 						info = info + "</button>";
 						info = info + "</li>";
 					});
@@ -160,14 +167,16 @@
 						info = info + "<div class='popDownAddr'>";
 						info = info + "<ul>";
 						$(data).find("address").each(function(i, element) {
-							info = info + "<li class='sgLi'>";
+							info = info + "<li class='sgLi' id='li"+i+"'>";
 							info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
+							info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
 							info = info + "<strong class='strongWord'>";
-							info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;" + $(this).find("dong").text();
+							info = info + $(this).find("dong").text().substring(0, 1);
 							info = info + "</strong>";
+							info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
 							info = info + "</a>";
-							info = info + "<button type='button' class='sgBtnAdd'>";
-							info = info + "<span class='ft'>↖</span>"
+							info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
+							info = info + "<span class='ft'>↖</span>";
 							info = info + "</button>";
 							info = info + "</li>";
 						});
@@ -189,14 +198,16 @@
 						info = info + "<div class='popDownAddr'>";
 						info = info + "<ul>";
 						$(data).find("address").each(function(i, element) {
-							info = info + "<li class='sgLi'>";
-							info = info + "<a class='sgItem' href='javascript:;' onclick='return false;'>";
+							info = info + "<li class='sgLi' id='li"+i+"'>";
+							info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
+							info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
 							info = info + "<strong class='strongWord'>";
-							info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;" + $(this).find("dong").text();
+							info = info + $(this).find("dong").text().substring(0, 1);
 							info = info + "</strong>";
+							info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
 							info = info + "</a>";
-							info = info + "<button type='button' class='sgBtnAdd'>";
-							info = info + "<span class='ft'>↖</span>"
+							info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
+							info = info + "<span class='ft'>↖</span>";
 							info = info + "</button>";
 							info = info + "</li>";
 						});
@@ -257,10 +268,6 @@
 		<div class="popBody">
 			<div class="Postinfo">
 				<!-- <p class="infoWrite">아래와 같이 검색하세요.</p>
-				<p class="infoWrite">도로명 + 건물번호</p>
-				<span class="txtInfo">예) 강남대로 459,&nbsp;&nbsp;영동대로 220</span>
-				<p class="infoWrite2">지역명(동/리) + 번지</p>
-				<span class="txtInfo">예) 서초동 269-4,&nbsp;&nbsp;귤현동 234-7</span>
 				<p class="infoWrite2">지역명(동/리) + 건물명(아파트명)</p>
 				<span class="txtInfo">예) 분당 주공,&nbsp;&nbsp;귤현동 힐타운11차</span>
 				<p class="infoWrite2">사서함명 + 번호</p>
