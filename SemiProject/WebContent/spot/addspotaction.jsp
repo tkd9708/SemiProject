@@ -25,18 +25,21 @@
 		String label2 = multi.getParameter("label2");
 		String addr = multi.getParameter("addr");
 		String detailaddr = multi.getParameter("detailaddr");
+	
 		detailaddr=detailaddr.trim();
 		String roadaddr = addr+" "+detailaddr;
-	
+
+	String lat = multi.getParameter("latitude");
+	String lon = multi.getParameter("longitude");
+	if(lat==null) lat = "0";
+	if(lon==null) lon ="0";
 		//String addr = multi.getParameter("addr");
-		Double latitude = Double.parseDouble(multi.getParameter("latitude"));
-		Double longitude = Double.parseDouble(multi.getParameter("longitude"));
+		Double latitude = Double.parseDouble(lat);
+		Double longitude = Double.parseDouble(lon);
 		String tag = multi.getParameter("tag");
 		String introduction = multi.getParameter("introduction");
 		String img = multi.getFilesystemName("img");
 		String thumbnail = multi.getFilesystemName("thumbnail");
-		
-		
 		
 		SpotlistDto dto = new SpotlistDto();
 		dto.setContentsid(contentsid);
@@ -57,6 +60,7 @@
 		String path = "../index.jsp?main=spot/spotlist.jsp?area="+label2;
 		response.sendRedirect(path);
 	}catch(Exception e){
+		e.printStackTrace();
 		out.write("파일 업로드 오류: "+e.getMessage());
 		}
 

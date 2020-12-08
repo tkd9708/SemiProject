@@ -402,9 +402,16 @@ function InitializeM()
 	<div class="thumbDiv">
 		<%
 		if(dto.getThumbnail() != null){
-		%>
-			<img src="<%=dto.getImg()%>">
-		<%
+			if(dto.getThumbnail().substring(0, 4).equals("http")){
+				%>
+				  <img src="<%=dto.getImg()%>"><br>
+				<%	
+				}
+			else {%>
+
+			<img src="addspotsave/<%=dto.getImg()%>"><br>
+			<%
+			}
 		}
 		else {
 			%>

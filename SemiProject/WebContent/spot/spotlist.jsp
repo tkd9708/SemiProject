@@ -301,9 +301,16 @@ document.addEventListener('DOMContentLoaded', function(){
         		<%
         		}
         		else {
-        		%>
-        			<img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
-        		<%
+        				if(dto.getThumbnail().substring(0, 4).equals("http")){
+        				%>
+        				  <img style="width: 330px; height: 250px;" src = "<%=dto.getThumbnail()%>"><br>
+        				<%	
+        				}
+        			else {%>
+
+        			<img style="width:330px;height:250px;" src="addspotsave/<%=dto.getThumbnail()%>"><br>
+        			<%
+        			}
         		}
         		%>
         		<div style="width: 330px; margin-top: 20px;">

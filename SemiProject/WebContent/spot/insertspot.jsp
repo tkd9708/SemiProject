@@ -49,8 +49,7 @@ function sample4_execDaumPostcode() {
 }
 
 function getxy(){
-	var detailaddr = $("#detailaddr").val().trim();
-	var addr = $("#addr").val()+" "+detailaddr;
+	var addr = $("#addr").val();
 	//alert(addr);
 	var geocoder = new kakao.maps.services.Geocoder();
 	var lat ="";
@@ -74,7 +73,7 @@ function getxy(){
 <body>
 <div class="addmain">
 	<h1 style="font-weight: 800;"><b>관광지 추가</b></h1>
-	<form action="/spot/addspotaction.jsp" method="post" enctype="multipart/form-data">
+	<form action="spot/addspotaction.jsp" method="post" enctype="multipart/form-data">
 	<table class="table tabld-bordered" style="width:100%">
 	<tr>
 		<td width="50px">contentsid</td>
@@ -144,13 +143,13 @@ function getxy(){
 			<div style="display:inline-flex">
 				<span>위도</span>	
 				&nbsp;&nbsp;&nbsp;
-				<input type="text" name="latitude" required="required" disabled="disabled">
+				<input type="text" name="latitude" required="required">
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<div style="display:inline-flex">
 				<span>경도</span>	
 				&nbsp;&nbsp;&nbsp;
-				<input type="text" name="longitude" required="required"  disabled="disabled">
+				<input type="text" name="longitude" required="required">
 			</div>
 		</td>
 	</tr>
@@ -189,8 +188,8 @@ function getxy(){
 	
 	</table>
 	</form>
+	
+	<button type="button" class="print">엥</button>
 </div>
 </body>
-<script type="text/javascript">
-</script>
 </html>
