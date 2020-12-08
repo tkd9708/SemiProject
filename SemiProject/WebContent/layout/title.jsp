@@ -40,7 +40,7 @@
   div.header a.main_login, div.header a.main_mypage{
       float: right;
   }
-  a.main_login, a.main_mypage{
+  a.main_login, a.main_mypage, a.main_addSpot{
       float: right;
   }
   
@@ -182,6 +182,7 @@ $(function(){
 	      $("div.title").css('border','none');
 	   }else{
 		  $("div.title").css(' box-shadow','5px 5px 10px #9d9d9d'); 
+
 	   }
 	
 	$("#list a,#list").hover(function(){
@@ -220,8 +221,18 @@ $(function(){
            if(loginok!=null){
         	   %>
         	   <li class="list" id="list"><a class="main_logout">LOGOUT</a></li>
-           		<li class="list" id="list"><a class="main_mypage">Mypage</a></li>
         	   <%
+        	   if(myid.equals("admin")){
+        		   %>
+              		<li class="list" id="list"><a class="main_addSpot">명소관리</a></li>
+           	   	   <%
+        	   }
+        	   else{
+        		   %>
+              		<li class="list" id="list"><a class="main_mypage">Mypage</a></li>
+           	   	   <%
+        	   }
+        	   
            }
            else {
 				%>
@@ -266,8 +277,17 @@ $(function(){
            if(loginok!=null){
         	   %>
         	   <li class="list" id="list"><a class="main_logout">LOGOUT</a></li>
-           		<li class="list"><a class="main_mypage">Mypage</a></li>
-        	   <%
+           		<%
+        	   if(myid.equals("admin")){
+        		   %>
+              		<li class="list" id="list"><a class="main_addSpot">명소관리</a></li>
+           	   	   <%
+        	   }
+        	   else{
+        		   %>
+              		<li class="list" id="list"><a class="main_mypage">Mypage</a></li>
+           	   	   <%
+        	   }
            }
            else {
 				%>
@@ -324,6 +344,11 @@ $(function(){
   $("a.main_mypage").click(function(e){
 	  e.preventDefault();
 	  location.href="<%=url%>/index.jsp?main=mypage/mypage.jsp";
+  });
+  
+  $("a.main_addSpot").click(function(e){
+	  e.preventDefault();
+	  location.href="<%=url%>/index.jsp?main=spot/insertspot.jsp";
   });
   
   window.onscroll = function () {

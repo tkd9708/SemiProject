@@ -144,40 +144,15 @@ div.modal-content{
 margin-top:200px;
 z-index:1111;
 }
-/* 하트 */
-.sd_heart {
-    position: absolute;
-    margin: auto;
-    top: 30px;
+.editSpot{
+  	position: absolute !important;
+    top: 30px !important;
     right: 30px;
-    /* bottom: 30px; */
-    /* left: 0; */
-    background-color: #babbbc;
-    height: 20px;
-    width: 20px;
-    transform: rotate(-45deg);
-  }
-  .sd_heart:after {
-    background-color: #babbbc;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    width: 25px;
-    height: 20px;
-    top: 0;
-    left: 8px;
-  }
-  .sd_heart:before {
-    background-color: #babbbc;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-   	width: 20px;
-    height: 25px;
-    top: -13px;
-    left: 0;
+    font-size: 20pt;
   }
   
+/* 하트 */
+
   .sd_heartlist {
     position: absolute;
     margin: auto;
@@ -210,6 +185,41 @@ z-index:1111;
     top: -13px;
     left: 0;
   }
+  
+  .sd_heart {
+    position: absolute;
+    margin: auto;
+    top: 30px;
+    right: 30px;
+    /* bottom: 30px; */
+    /* left: 0; */
+    background-color: #babbbc;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg);
+  }
+  
+  .sd_heart:after {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    top: 0;
+    left: 8px;
+  }
+  .sd_heart:before {
+    background-color: #babbbc;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+   	width: 20px;
+    height: 25px;
+    top: -13px;
+    left: 0;
+  }
+  
   @keyframes beat {
     50% {
       transform: scale(1.6) rotate(-45deg);
@@ -400,14 +410,23 @@ function InitializeM()
 	</div> -->
 
 	<div class="thumbDiv">
-		<%
-		if(dto.getThumbnail() != null){
-		%>
-			<img src="<%=dto.getImg()%>">
-		<%
-		}
-		else {
-			%>
+
+		<div class="thumbDiv">
+      <%
+      if(dto.getThumbnail() != null){
+         if(dto.getThumbnail().substring(0, 4).equals("http")){
+            %>
+              <img src="<%=dto.getImg()%>"><br>
+            <%   
+            }
+         else {%>
+
+         <img src="addspotsave/<%=dto.getImg()%>"><br>
+         <%
+         }
+      }
+      else {
+         %>
 			<div style="width: 100%; height:400px; background-color: rgba(0,0,0,0.5);"></div>
 			<%
 		}
@@ -416,7 +435,8 @@ function InitializeM()
 		<div class="thumbText">
 			<br>
 			
-			<b style="font-size: 30pt; color: #eee"><%=dto.getTitle() %></b>
+			<b style="font-size: 30pt; color: #eee"><%=dto.getTitle() %>&nbsp;&nbsp;</b>
+			
 			<br>
 			<span style="color: #F0CD58; font-size: 20px;">
 				<%
@@ -449,8 +469,20 @@ function InitializeM()
 		
 			%>
 			<br>
-					
-			<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+			
+			<%
+			if(myid.equals("admin")){
+				%>
+				<div class="glyphicon glyphicon-edit editSpot" style="color: #eee; cursor: pointer;" onclick="location.href='index.jsp?main=spot/updatespot.jsp?contentsid=<%=contentsid%>'"></div>
+				<%
+			}
+			else{
+				%>
+				<div class="sd_heart" style="cursor:pointer;" id="spotHeart"></div>
+				<%
+			}
+			%>		
+			
 		</div>
 	</div>
 	
@@ -889,7 +921,7 @@ function changeCategoryClass(el) {
 	<!-- </div> -->
 	
 	<!-- around 일정 추가 modal -->
-	<div class="modal fade" id="aroundModal" role="dialog">
+	<div class="modal fade" id="aroundModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -916,7 +948,7 @@ function changeCategoryClass(el) {
   </div>
   
   <!-- spot 일정 추가 modal -->
-   <div class="modal fade" id="spotModal" role="dialog">
+   <div class="modal fade" id="spotModal" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
     
       <!-- Modal content-->

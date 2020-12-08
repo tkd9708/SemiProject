@@ -32,8 +32,6 @@
     //         올 경우에만 증가함)
    //조회수 증가
    ShareBoardDao db=new ShareBoardDao();
-   if(key!=null && key.equals("list"))
-      db.updateReadcount(num);
    
    //번호에 해당하는 dto 가져오기
    ShareBoardDto dto=db.getData(num);
