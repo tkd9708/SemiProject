@@ -15,11 +15,10 @@
 	cursor: pointer;
 	}
 	div.addmain{
-	margin-top: 100px;
+	margin-top: 150px;
 	margin-bottom: 200px;	
-	padding-left: 15%;
-	padding-right:15%;
 	}
+	table.td
 </style>
 <script type="text/javascript">
 function sample4_execDaumPostcode() {
@@ -72,9 +71,10 @@ function getxy(){
 </head>
 <body>
 <div class="addmain">
-	<h1 style="font-weight: 800;"><b>관광지 추가</b></h1>
+	<h1 style="font-weight: 900;text-align:center"><b>관광지 추가</b></h1>
+	<br><br>
 	<form action="spot/addspotaction.jsp" method="post" enctype="multipart/form-data">
-	<table class="table tabld-bordered" style="width:100%">
+	<table class="table tabld-bordered" style="width:600px; margin-left: auto; margin-right: auto;">
 	<tr>
 		<td width="50px">contentsid</td>
 		<td>
@@ -124,7 +124,7 @@ function getxy(){
 		<td  style="vertical-align: middle">주소</td>
 		<td>
 		<div style="display:flex">
-			<input type="text" name="addr" id="addr" required="required" disabled="disabled" placeholder="주소" style="width:250px">
+			<input type="text" name="addr" id="addr" required="required" placeholder="주소" style="width:250px">
 			&nbsp;<span class="searchaddr glyphicon glyphicon-search" onclick="sample4_execDaumPostcode()" style="font-size: 15pt;vertical-align: middle"></span>	
 		</div>
 		<input type="text" name="detailaddr" id="detailaddr" placeholder="상세주소"  style="width:250px">
@@ -178,18 +178,13 @@ function getxy(){
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" >
-		<input type="submit" value="등록" id="add">
-		<input type="button" value="목록" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">
+		<td colspan="2" style="text-align: center">
+		<input type="submit" value="등록" id="add" class="btn btn-danger">
+		<input type="button" value="목록" class="btn btn-info" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">
 		</td>
 	</tr>
-	
-	
-	
 	</table>
 	</form>
-	
-	<button type="button" class="print">엥</button>
 </div>
 </body>
 </html>
