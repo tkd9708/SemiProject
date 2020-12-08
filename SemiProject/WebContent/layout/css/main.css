@@ -510,3 +510,6 @@ select.combobox{
 #main_search{
     padding-left: 5px;
 } 
+h1,h5 {
+	font-weight: 900;
+}

@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-div.footer {
+div.ffooter {
    text-align: center;
+   padding-bottom: 100px;
 }
  #logo_footer {
    position: inherit;
@@ -17,7 +18,7 @@ div.footer {
 </style>
 </head>
 <body>
-<div class="footer">
+<div class="ffooter">
 <img id="logo_footer"src="image/logo2.png">
 <h6>(주)멘도롱소랑  | 서울 서초구 강남대로 459 (서초동 1303-34)<br>
 사업자 번호 147-14-12345 | 전화번호:02-123-1234 | 팩스 02-1234-1234 | 이메일 help@naver.com</h6>

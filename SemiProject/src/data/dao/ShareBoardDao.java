@@ -345,8 +345,8 @@ public class ShareBoardDao {
         }
         
         public int isNextStep(int regroup, int relevel, int restep) {
-			/* boolean flag=false; */
-        	int num=0;
+         /* boolean flag=false; */
+           int num=0;
             String sql="select * from shareboard where regroup=? and relevel = ? and restep = ?";
             Connection conn=null;
             PreparedStatement pstmt=null;
@@ -475,74 +475,74 @@ public class ShareBoardDao {
      
         
         public List<ShareBoardDto> getSearchList(int start, int perpage, String search){
-    		List<ShareBoardDto> list = new ArrayList<ShareBoardDto>();
-    		Connection conn = null;
-    		PreparedStatement pstmt = null;
-    		ResultSet rs = null;
-    		String sql = "select * from shareboard where addr like '%" + search + "%' limit ?,?";
-    		
-    		conn = my.getConnection();
-    		try {
-    			pstmt = conn.prepareStatement(sql);
-    			pstmt.setInt(1, start);
-    			pstmt.setInt(2, perpage);
-    			rs = pstmt.executeQuery();
-    			
-    			while(rs.next()) {
-    				ShareBoardDto dto=new ShareBoardDto();
-    	               dto.setNum(rs.getString("num"));
-    	               dto.setId(rs.getString("id"));
-    	               dto.setSubject(rs.getString("subject"));
-    	               dto.setContent(rs.getString("content"));
-    	               dto.setAddr(rs.getString("addr"));
-    	               dto.setLikes(rs.getInt("likes"));
-    	               dto.setStar(rs.getString("star"));
-    	               dto.setPhoto(rs.getString("photo"));
-    	               dto.setWriteday(rs.getTimestamp("writeday"));
-    	               dto.setRegroup(rs.getInt("regroup"));
-    	               dto.setRelevel(rs.getInt("relevel"));
-    	               dto.setRestep(rs.getInt("restep"));     
+          List<ShareBoardDto> list = new ArrayList<ShareBoardDto>();
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select * from shareboard where addr like '%" + search + "%' limit ?,?";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             pstmt.setInt(1, start);
+             pstmt.setInt(2, perpage);
+             rs = pstmt.executeQuery();
+             
+             while(rs.next()) {
+                ShareBoardDto dto=new ShareBoardDto();
+                      dto.setNum(rs.getString("num"));
+                      dto.setId(rs.getString("id"));
+                      dto.setSubject(rs.getString("subject"));
+                      dto.setContent(rs.getString("content"));
+                      dto.setAddr(rs.getString("addr"));
+                      dto.setLikes(rs.getInt("likes"));
+                      dto.setStar(rs.getString("star"));
+                      dto.setPhoto(rs.getString("photo"));
+                      dto.setWriteday(rs.getTimestamp("writeday"));
+                      dto.setRegroup(rs.getInt("regroup"));
+                      dto.setRelevel(rs.getInt("relevel"));
+                      dto.setRestep(rs.getInt("restep"));     
 
-    	               //list에 추가
-    	               list.add(dto);
-    			}
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} finally {
-    			my.dbClose(conn, pstmt, rs);
-    		}
-    		
-    		return list;
-    	}
-    	
-    	
-    	public int getSearchTotalCount(String search) {
-    		int total = 0;
-    		Connection conn = null;
-    		PreparedStatement pstmt = null;
-    		ResultSet rs = null;
-    		String sql = "select count(*) from shareboard where addr like '%" + search + "%'";
-    		
-    		conn = my.getConnection();
-    		try {
-    			pstmt = conn.prepareStatement(sql);
-    			rs = pstmt.executeQuery();
-    			if(rs.next()) {
-    				total = rs.getInt(1);
-    			}
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} finally {
-    			my.dbClose(conn, pstmt, rs);
-    		}
-    		
-    		
-    		return total;
-    	}
-    	
-    	 //댓글 수정
+                      //list에 추가
+                      list.add(dto);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          return list;
+       }
+       
+       
+       public int getSearchTotalCount(String search) {
+          int total = 0;
+          Connection conn = null;
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          String sql = "select count(*) from shareboard where addr like '%" + search + "%'";
+          
+          conn = my.getConnection();
+          try {
+             pstmt = conn.prepareStatement(sql);
+             rs = pstmt.executeQuery();
+             if(rs.next()) {
+                total = rs.getInt(1);
+             }
+          } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+          } finally {
+             my.dbClose(conn, pstmt, rs);
+          }
+          
+          
+          return total;
+       }
+       
+        //댓글 수정
         public void updateShardBoardanswer(String content,String num) {
             Connection conn=null;
             PreparedStatement pstmt=null;

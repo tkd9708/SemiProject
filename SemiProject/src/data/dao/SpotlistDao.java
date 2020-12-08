@@ -138,7 +138,7 @@ public class SpotlistDao {
 	}
 	
 	public List<SpotlistDto> getList(int start, int perpage, String label2, String select){
-		// limit濡� �떆�옉踰덉��� 紐뉕컻瑜� 媛��졇�삱吏� 諛붿씤�뵫
+		// limit嚥∽옙 占쎈뻻占쎌삂甕곕뜆占쏙옙占� 筌뤿돂而사몴占� 揶쏉옙占쎌죬占쎌궞筌욑옙 獄쏅뗄�뵥占쎈뎃
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -256,9 +256,9 @@ public class SpotlistDao {
 		
 	}
 	
-	// 寃��깋 list
+	// 野껓옙占쎄퉳 list
 	public List<SpotlistDto> getSearchList(int start, int perpage, String selSearch, String search){
-		// limit濡� �떆�옉踰덉��� 紐뉕컻瑜� 媛��졇�삱吏� 諛붿씤�뵫
+		// limit嚥∽옙 占쎈뻻占쎌삂甕곕뜆占쏙옙占� 筌뤿돂而사몴占� 揶쏉옙占쎌죬占쎌궞筌욑옙 獄쏅뗄�뵥占쎈뎃
 		List<SpotlistDto> list = new ArrayList<SpotlistDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -316,7 +316,7 @@ public class SpotlistDao {
 	}
 	
 	
-	// 寃��깋 由ъ뒪�듃 媛��닔
+	// 野껓옙占쎄퉳 �뵳�딅뮞占쎈뱜 揶쏉옙占쎈땾
 	public int getSearchTotalCount(String selSearch, String search) {
 		int total = 0;
 		Connection conn = null;
