@@ -17,7 +17,7 @@ String url=request.getContextPath();
 <div class="regWrap">
 	<form action="member/insertaction.jsp" method="post"
 		class="regForm" name="memberform" id="myRegfrm">
-          <h1 style="font-weight: 900">회원가입</h1>
+          <h1>회원가입</h1>
                        
 						<div class="formHolder id">
 						    <span class="glyphicon glyphicon-user"></span>
@@ -237,7 +237,7 @@ window.onload=function() {
 		//코드로 입력체크 추가
 		var pass1V=$(".pwText").val();
 		var pass2V=$(".cfpwText").val();
-		alert(pass1V+"VS"+pass2V);
+		//alert(pass1V+"VS"+pass2V);
 		
 		var rtn = false;
 		

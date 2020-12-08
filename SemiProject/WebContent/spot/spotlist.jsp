@@ -32,19 +32,22 @@ font-family: SCDream5;
       margin-bottom: 80px;
       margin-right: 70px;
       /* box-shadow: 2px 2px 2px 2px #ddd; */
-      border: 1px solid #ddd;
+      border: 1px solid #eee;
    }
    
    div#spotList {
-      overflow: hidden;
-      margin-left: 200px;
+      overflow: hidden;/* 
+      margin-left: 200px;    
+      margin-right: 130px; 
+      margin-top: 180px;*/
       margin-top: 180px;
-      margin-right: 130px;
+      width: 100%;
+      padding-left: 180px;
+      padding-right: 130px;
    }
    
    div.footer {
        text-align: center;
-       margin-bottom: 100px;
    }
    
 
@@ -285,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <select id="spotListSelect" style="float: right; margin-right: 70px;">
          <option value="평점" selected="selected">평점순</option>
          <option value="좋아요">좋아요순</option>
-         <option value="이름">이름순</option>
+         <option value="제목">제목순</option>
       </select>
       <br><br><br>
       <%
@@ -354,13 +357,13 @@ document.addEventListener('DOMContentLoaded', function(){
         		</div>
         		</div><!-- gotodetail 끝 -->
         		<br><br>
-        		<table style="table-layout: fixed; width: 100%;">
+        		<table class="table table-bordered" style="table-layout: fixed; border: 1px solid #eee; width: 100%;">
         			<tr height="70px;">
-        				<td style="vertical-align: middle; border-top: 1px solid #ddd; border-right: 1px solid #ddd;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
+        				<td style="vertical-align: middle;" class="likesTD" contentsid="<%=dto.getContentsid()%>">
         					<span class="glyphicon glyphicon-thumbs-up"></span><br>
         					<%=dto.getLikes() %>
         				</td>
-        				<td style="vertical-align: middle; border-top: 1px solid #ddd;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
+        				<td style="vertical-align: middle;" class="goToReview" contentsid="<%=dto.getContentsid()%>">
         					<span class="glyphicon glyphicon-edit" style="font-size: 10pt;"></span>&nbsp;<b>리뷰</b>
         				</td>
         			</tr>

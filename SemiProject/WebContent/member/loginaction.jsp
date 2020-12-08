@@ -47,6 +47,7 @@
 		if(saveid!=null)//아이디저장 체크한경우
 		{
 			session.setAttribute("saveid", "yes");
+			session.setAttribute("idforsavebtn", id);
 		}
 		else//체크안한경우
 		{

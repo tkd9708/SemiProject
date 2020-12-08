@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="data.dto.ShareBoardDto"%>
+<%@page import="data.dao.ShareBoardDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <style type="text/css">
 scroll-behavior: smooth;
    div.subject{
@@ -19,7 +22,7 @@ scroll-behavior: smooth;
    
    }
    
-   div.shareboardform{
+   div.shareupdateform{
      max-width:700px;
      position:relative;
      margin: auto;
@@ -176,25 +179,26 @@ $(function(){
 }); //function close
 </script>
 </head>
-<body>
 <%
    String id=(String)session.getAttribute("myid");
-   
+   String num = request.getParameter("num"); 
+   ShareBoardDao dao = new ShareBoardDao();
+   ShareBoardDto dto = dao.getData(num);
 %>
+<body>
 
 
-
-<div class="shareboardform">
-<h1 style="font-weight: 900;"><b>맛집 추가</b></h1>
+<div class="shareupdateform">
+<h1 style="font-weight: 900;"><b>맛집 수정</b></h1>
 <fieldset>
-   <form action="shareboard/shareboardaction.jsp" method="post" enctype="multipart/form-data">
+   <form action="shareboard/shareboardupdateaction.jsp" method="post" enctype="multipart/form-data">
    <table class="styled-table">
          <tr>
             <th style="text-align: center;"><span>추천맛집</span></th>
-            <td> <input type="hidden" name="id"value="<%=id%>">
+            <td> <input type="hidden" name="num" value="<%=dto.getNum()%>">
               <input type="text" name="subject" class="form-control"
                required="required" style="width: 200px;height: 30px;"
-               placeholder="맛집이름을 적어주세요" >
+               value="<%=dto.getSubject()%>">
             </td>
          </tr>
          
@@ -203,14 +207,14 @@ $(function(){
             <td>
               <input type="text" name="addr" class="form-control"
                required="required" style="width:600px;height: 30px;"
-               placeholder="주소를 입력하세요">
+               value="<%=dto.getAddr()%>">
              </td>
          </tr>
          
          <tr>
             <th style="text-align: center;"><span>이미지</span></th>
             <td>
-              <input class="btn" type="file" name="photo" style="width: 600px;">
+              <input class="btn" type="file" name="photo" style="width: 600px;" value="shareboardsave/<%=dto.getPhoto()%>"> <%--이미지 불러오기 모르겠당 --%>
             </td>
          </tr>
          
@@ -218,7 +222,7 @@ $(function(){
             <th style="text-align: center;"><span>내용</span></th>
             <td>
               <textarea class="form-control"
-               rows="13" cols="70" maxlength="1500" name="content" style="resize: none;"></textarea>
+               rows="13" cols="70" maxlength="1500" name="content" style="resize: none;"><%=dto.getContent() %></textarea>
             </td>
          </tr>
          
@@ -276,9 +280,9 @@ $(function(){
       
       
       <div class="share_btn">
-             <input type="submit" value="공유하기" id="btn_1" class="button" style="width: 100px; color: white;">
+             <input type="submit" value="수정" id="up_share" class="button" style="width: 100px; color: white;">
                
-             <input type="button" value="추천목록" id="btn_2" class="button" style="width: 100px;color: white;"
+             <input type="button" value="목록" id="up_goToList" class="button" style="width: 100px;color: white;"
                onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">      
       </div>
     </form>
