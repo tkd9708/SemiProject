@@ -12,8 +12,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<link href="font/SCDream5.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

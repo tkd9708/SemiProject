@@ -10,8 +10,9 @@ String url=request.getContextPath();
 %>
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/memberlogin.css">
 <!-- <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/memberlogin.js"></script> -->
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>맨도롱 또똣 :: 제주한달살기</title>
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 </head>
 <body>
 <div class="regWrap">

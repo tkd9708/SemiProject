@@ -9,8 +9,9 @@ String url=request.getContextPath();
 System.out.println(url);
 %>
 <link rel="stylesheet" type="text/css" href="<%=url%>/member/css/loginform.css">
+<link rel="shortcut icon" href="image/favicon.ico">
 <meta charset="UTF-8">
-<title>맨도롱 또똣 :: 1등 여행사</title>
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 </head>
 <body>
 	<!-- 헤더시작 -->

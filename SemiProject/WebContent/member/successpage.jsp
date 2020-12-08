@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <%--
 만약 자바코드로 해야할 상황일경우
 response.setHeader("Refresh","3;url=index.jsp");
  --%>
-<title>맨도롱 또똣 :: 가고싶은제주맛집</title>
-<title>맨도롱 소랑</title>
+<link rel="shortcut icon" href="image/favicon.ico">
+<meta charset="UTF-8">
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 <style type="text/css">
 .success {  
    text-align: center;

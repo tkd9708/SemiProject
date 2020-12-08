@@ -4,9 +4,10 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/reallogin.css">
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="image/favicon.ico">
+<meta charset="UTF-8">
+<title>멘도롱 소랑 :: 제주여행의모든것</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/member/css/bootstrap.min.css">
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/member/js/jquery-3.5.1.min.js"></script>
