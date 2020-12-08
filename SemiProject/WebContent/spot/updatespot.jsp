@@ -16,11 +16,9 @@
    span.searchaddr{
    cursor: pointer;
    }
-   div.addmain{
-   margin-top: 100px;
+   div.updatemain{
+   margin-top: 150px;
    margin-bottom: 200px;   
-   padding-left: 15%;
-   padding-right:15%;
    }
 </style>
 <%
@@ -108,10 +106,10 @@ function getxy(){
 </head>
 
 <body>
-<div class="addmain">
-   <h1 style="font-weight: 900;"><b>관광지 수정</b></h1><br>
+<div class="updatemain">
+   <h1 style="font-weight: 900; text-align:center;"><b>관광지 수정</b></h1><br><br>
    <form action="spot/updatespotaction.jsp" method="post" enctype="multipart/form-data">
-   <table class="table tabld-bordered" style="width:100%">
+   <table class="table tabld-bordered" style="width:600px; margin-left: auto; margin-right: auto;">
    <tr>
       <td width="50px">contentsid</td>
       <td>
@@ -215,7 +213,7 @@ function getxy(){
       </td>
    </tr>
    <tr>
-      <td colspan="2" >
+      <td colspan="2" style="text-align: center;">
       <input type="submit" value="수정" id="update">
       <input type="button" value="삭제" id="spotdelete">
       <input type="button" value="목록" onclick="location.href='index.jsp?main=shareboard/shareboardlist.jsp'">

@@ -115,13 +115,13 @@ width: 20pt;
 a { text-decoration:none; color: black}
 a:hover { text-decoration:none }
 div#myInfo{
-	padding: 20px 130px 20px 130px;
-	height:"100%";
+   padding: 20px 130px 20px 130px;
+   height:"100%";
 }
 div#myInfo>table{
-	width: 100%; 
-	border-spacing: 20px;
-	border-collapse: inherit;
+   width: 100%; 
+   border-spacing: 20px;
+   border-collapse: inherit;
 }
 
 
@@ -156,10 +156,10 @@ List<WishlistDto>list = dao.getList(memId);
  String syear =(String)session.getAttribute("year");
  String smonth = (String)session.getAttribute("month");
  %>
-	
+   
 
  <script type="text/javascript">
-	
+   
 today = new Date(); //오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
  var date = new Date(); //today의 Date를 세어주는 역할
  var content = "";
@@ -175,10 +175,10 @@ today = new Date(); //오늘 날짜//내 컴퓨터 로컬을 기준으로 today�
 
 
 function drawCalendar(){ //달력 그리는 함수
-	
-		y = today.getFullYear(); //년
-		m = today.getMonth(); //월
-		d = today.getDate(); //일
+   
+      y = today.getFullYear(); //년
+      m = today.getMonth(); //월
+      d = today.getDate(); //일
 
          //현재 년,월의 첫번째 일
          var firstDate = new Date(y,m,1);
@@ -250,31 +250,31 @@ function drawCalendar(){ //달력 그리는 함수
 }
 
 function prevCalendar() {
-		//이전 달
+      //이전 달
     // 이전 달을 today에 값을 저장하고
     //getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
   today = new Date(today.getFullYear(), today.getMonth()- 1,today.getDate());
-	 /*    if(m==1){
-	    	y = y-1;
-	    	m=12;
-	    }else{
-	    	m = m-1;
-	    }
-	    calPage = y+m; */
-	   
+    /*    if(m==1){
+          y = y-1;
+          m=12;
+       }else{
+          m = m-1;
+       }
+       calPage = y+m; */
+      
 drawCalendar(); //달력 cell 만들어 출력 
 }
 
 function nextCalendar() {//다음 달
 today = new Date( today.getFullYear(), today.getMonth() + 1, today.getDate());
-		/* 	 if(m==12){
-					today = new Date(y+1,1,today.getDate());
-			}	
-			else
-			{
-				today = new Date(y,m+1,today.getDate());
-			}
-		*/
+      /*     if(m==12){
+               today = new Date(y+1,1,today.getDate());
+         }   
+         else
+         {
+            today = new Date(y,m+1,today.getDate());
+         }
+      */
         drawCalendar();//달력 cell 만들어 출력
 }
    
@@ -319,18 +319,18 @@ function getData(){
 <%}%>
 }
 function gotoselect(){ //선택한 년월로 이동
-	 var select = $('input[name=inputym]').val();
-	
-	 if (select == ""){
-		 alert("날짜를 선택해주세요");
-	 }else{
-		var split = select.split("-");
-		var selectY=split[0];
-		var selectM=split[1];
-		today = new Date(selectY,selectM-1);
-		drawCalendar();
-		getData();
-	 }
+    var select = $('input[name=inputym]').val();
+   
+    if (select == ""){
+       alert("날짜를 선택해주세요");
+    }else{
+      var split = select.split("-");
+      var selectY=split[0];
+      var selectM=split[1];
+      today = new Date(selectY,selectM-1);
+      drawCalendar();
+      getData();
+    }
 }
 
 function getList(){
@@ -393,9 +393,9 @@ function getDetail(){
    
   <%
    for(WishlistDto dto : list){
-	   if(list.isEmpty()){
-		   return;
-	   }
+      if(list.isEmpty()){
+         return;
+      }
 %>
    content = "<%=dto.getContent()%>";
    wishday = "<%=dto.getWishday()%>";
@@ -463,39 +463,39 @@ SpotlistDao sddao = new SpotlistDao();
 if(loginok!=null){
    %>   
 <div style="width: 100%; height: 400px; background-color: #f7f7f7; margin-top: 150px;">
-	<div id="myInfo">
-		<h1 style="font-weight: 900;"><b>내 정보 관리</b></h1>
-   		<table>
-   			<tr bgcolor="#fff" height="250px">
-   				<td style="padding-left: 50px; padding-right: 50px; line-height: 30px; width:40%;">
-   				<button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
-   					<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
-   					<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
-   					<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
-   					<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
-   					<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %><br>
-   					<p style="margin-left:80px;">(<%=mdto.getAddrdetail() %>)</p>
-   				</td>
-   				<td style="width:20%; text-align: center;">
-   					<b>찜한 명소 갯수</b>
-   					<br><br>
-   					<h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "spot") %></h1>
-   					
-   				</td>
-   				<td style="width:20%; text-align: center;">
-   					<b>찜한 명소 주변 갯수</b>
-   					<br><br>
-   					<h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "around") %></h1>
-   				</td>
-   				<td style="width:20%; text-align: center;">
-   					<b>추가 일정 갯수</b>
-   					<br><br>
-   					<h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "my") %></h1>
-   				</td>
-   			</tr>
-   		</table>
-	</div>
-	
+   <div id="myInfo">
+      <h1 style="font-weight: 900;"><b>내 정보 관리</b></h1>
+         <table>
+            <tr bgcolor="#fff" height="250px">
+               <td style="padding-left: 50px; padding-right: 50px; line-height: 30px; width:40%;">
+               <button type="button" style="border: none; border-radius: 10px; float: right;" onclick="location.href='index.jsp?main=member/updateform.jsp?num=<%=memNum%>'">회원정보 수정</button>
+                  <span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;<b>I D &nbsp;:&nbsp;&nbsp; </b><%=mdto.getId() %><br>
+                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>이름 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getName() %><br>
+                  <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b>H P &nbsp;:&nbsp;&nbsp; </b><%=mdto.getHp() %><br>
+                  <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<b>Email &nbsp;:&nbsp;&nbsp; </b><%=mdto.getEmail() %><br>
+                  <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>주소 &nbsp;:&nbsp;&nbsp; </b><%=mdto.getAddress() %><br>
+                  <p style="margin-left:80px;">(<%=mdto.getAddrdetail() %>)</p>
+               </td>
+               <td style="width:20%; text-align: center;">
+                  <b>찜한 명소 갯수</b>
+                  <br><br>
+                  <h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "spot") %></h1>
+                  
+               </td>
+               <td style="width:20%; text-align: center;">
+                  <b>찜한 명소 주변 갯수</b>
+                  <br><br>
+                  <h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "around") %></h1>
+               </td>
+               <td style="width:20%; text-align: center;">
+                  <b>추가 일정 갯수</b>
+                  <br><br>
+                  <h1 style="font-weight: 900"><%=wdao.getWishTotalCount(memId, "my") %></h1>
+               </td>
+            </tr>
+         </table>
+   </div>
+   
 </div>
 <br><br>
 <div class="mypage_main">
@@ -537,8 +537,8 @@ if(loginok!=null){
               <b>yyyy m</b>
               </div>
               <div class="dropdown-content hide" style="font-size: 10pt">
-              	<input type="month" name ="inputym">
-              	<button type="button" class="btn_select" onclick="gotoselect()">이동</button>
+                 <input type="month" name ="inputym">
+                 <button type="button" class="btn_select" onclick="gotoselect()">이동</button>
               </div>
            </td>
            <td style="background-color:white;color:black;"colspan="2">   
@@ -564,7 +564,7 @@ if(loginok!=null){
    
    <div class="myreview">
       <h1 style="font-weight: 900;"><b>나의 리뷰</b></h1>
-  		<br><br>
+        <br><br>
          <table class="myreview table table-condensed" style="width:100%;" >
          <caption><span style="float:right"><a href ="index.jsp?main=mypage/myreview.jsp" >전체보기</a></span></caption>
                <tr>   
@@ -652,12 +652,12 @@ location.href = "index.jsp";
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 id="schedule_title" style="text-align: center" >
-        	<b>yyyy년m월 dd일</b>   
+           <b>yyyy년m월 dd일</b>   
          </h4>
         </div>
         <div class="modal-body">
           <div class="detail">
-          	저장된 일정이 없습니다.
+             저장된 일정이 없습니다.
           </div>
        </div>
       </div>
@@ -714,9 +714,9 @@ location.href = "index.jsp";
    })
    
    $(document).on("click","#ym",function(){
-	 //alert($(this).text());
-	$("div.dropdown-content").toggleClass("hide");
-	 
+    //alert($(this).text());
+   $("div.dropdown-content").toggleClass("hide");
+    
    })
    
    //날짜 셀 클릭 시 모달
@@ -728,12 +728,12 @@ location.href = "index.jsp";
       var dayid = modal_year+modal_month+modal_day;
       $("div.modal-body div.detail").empty();
       $("div.modal-body div.detail").attr("id",modal_year+modal_month+modal_day);
-      if($("#"+dayid).is(':empty')){
-    	  $(".modal-body").empty();
-    	 	$(".modal-body").append("저장된 일정이 없습니다");
-    	 	//alert(dayid);
+      if($("#"+dayid).text()==""){
+        // $(".modal-body").empty();
+           $(".modal-body div.detail").text("저장된 일정이 없습니다");
+           //alert(dayid);
       }else{
-    	  getDetail();
+         getDetail();
       }
       schedule_title.innerHTML =modal_year + "년 " +modal_month + "월 "+modal_day+"일";
       

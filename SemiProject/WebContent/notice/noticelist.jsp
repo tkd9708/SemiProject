@@ -24,9 +24,7 @@
 div.container{
   /*  margin: 0 auto;
    width: 1000px; */
-  margin-left: 200px;
   margin-top: 150px;
-  margin-right: 200px; 
   
 
  }
