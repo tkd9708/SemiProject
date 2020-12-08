@@ -32,12 +32,12 @@
 			
 			$(document).on('click','.sgLi', function(event) {
 				let first = $(this).attr("id");
-				alert(first);
+				/* alert(first); */
 				first = first.substring(first.length-1, first.length);
-				alert(first);
+				/* alert(first); */
 				let btnsel = $("#btn"+first);
 				btnsel = btnsel.attr("data-address");
-				alert(btnsel);
+				/* alert(btnsel); */
 				txtRegion.value = btnsel;
 				/* first = first.replace(/&nbsp;/g, ' ');
 				alert(first);
@@ -106,63 +106,28 @@
 		
 		console.log("입력한 글자는 : " + r);
 		console.log("16진수로는 : " + r.charCodeAt(0).toString(16));
-		if(r.charCodeAt(0).toString(16) < "ac00"){
-			let start=r.charCodeAt(0) - 0x3131;
-			console.log("시작번지는 : " + start);
-			let startHan= aFsearch[start];
-			console.log("시작글자는 : " + startHan);
-			for(var i=0 ; i < aFront.length ; i=i+1){
-				if(r==aFront[i]){
-					var fIndex = i;
+		console.log("입력한 글자의 길이는 : " + r.length);
+		if(r.length==1){
+			if(r.charCodeAt(0).toString(16) < "ac00"){
+				let start=r.charCodeAt(0) - 0x3131;
+				console.log("시작번지는 : " + start);
+				let startHan= aFsearch[start];
+				console.log("시작글자는 : " + startHan);
+				for(var i=0 ; i < aFront.length ; i=i+1){
+					if(r==aFront[i]){
+						var fIndex = i;
+					}
 				}
-			}
-			let end=0xAC00 + (fIndex * 21 * 28) + ((aMiddle.length - 1) * 28) + (aBack.length - 1);
-			end = String.fromCharCode(end);
-			console.log("끝 글자는 : " + end);
-			/* console.log("가보다 작습니다."); */
-			$.ajax({
-				type: "get",
-				url: "searchAddr.jsp",
-				dataType: "xml",
-				data: {"start":startHan,"end":end},
-				success: function(data){
-					var info = "";
-					info = info + "<div class='popDownAddr'>";
-					info = info + "<ul>";
-					$(data).find("address").each(function(i, element) {
-						info = info + "<li class='sgLi' id='li"+i+"'>";
-						info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
-						info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
-						info = info + "<strong class='strongWord'>";
-						info = info + $(this).find("dong").text().substring(0, 1);
-						info = info + "</strong>";
-						info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
-						info = info + "</a>";
-						info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
-						info = info + "<span class='ft'>↖</span>";
-						info = info + "</button>";
-						info = info + "</li>";
-					});
-					info = info + "</ul>";
-					info = info + "</div>";
-					$(".popSuggestTen").html(info);
-				}
-			});
-		}
-		else if(r.charCodeAt(0) - 44032 >= 0){
-			let back = (r.charCodeAt(0) - 0xAC00) %28;
-			console.log("종성위치는 : " + back);
-			if(back==0){
-				let end = r.charCodeAt(0) +27;
-				console.log("끝글자 코드는 : " + end);
+				let end=0xAC00 + (fIndex * 21 * 28) + ((aMiddle.length - 1) * 28) + (aBack.length - 1);
 				end = String.fromCharCode(end);
-				console.log("끝글자는 : " + end);
+				console.log("끝 글자는 : " + end);
+				/* console.log("가보다 작습니다."); */
 				$.ajax({
 					type: "get",
 					url: "searchAddr.jsp",
 					dataType: "xml",
-					data: {"start":r,"end":end},
-					success:function(data){
+					data: {"start":startHan,"end":end},
+					success: function(data){
 						var info = "";
 						info = info + "<div class='popDownAddr'>";
 						info = info + "<ul>";
@@ -186,37 +151,76 @@
 					}
 				});
 			}
-			else{
-				console.log("찾을 조합글자는 : " + r);
-				$.ajax({
-					type: "get",
-					url: "searchAddr.jsp",
-					dataType: "xml",
-					data: {"region":r},
-					success:function(data){
-						var info = "";
-						info = info + "<div class='popDownAddr'>";
-						info = info + "<ul>";
-						$(data).find("address").each(function(i, element) {
-							info = info + "<li class='sgLi' id='li"+i+"'>";
-							info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
-							info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
-							info = info + "<strong class='strongWord'>";
-							info = info + $(this).find("dong").text().substring(0, 1);
-							info = info + "</strong>";
-							info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
-							info = info + "</a>";
-							info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
-							info = info + "<span class='ft'>↖</span>";
-							info = info + "</button>";
-							info = info + "</li>";
-						});
-						info = info + "</ul>";
-						info = info + "</div>";
-						$(".popSuggestTen").html(info);
-					}
-				});
+			else if(r.charCodeAt(0) - 44032 >= 0){
+				let back = (r.charCodeAt(0) - 0xAC00) %28;
+				console.log("종성위치는 : " + back);
+				if(back==0){
+					let end = r.charCodeAt(0) +27;
+					console.log("끝글자 코드는 : " + end);
+					end = String.fromCharCode(end);
+					console.log("끝글자는 : " + end);
+					$.ajax({
+						type: "get",
+						url: "searchAddr.jsp",
+						dataType: "xml",
+						data: {"start":r,"end":end},
+						success:function(data){
+							var info = "";
+							info = info + "<div class='popDownAddr'>";
+							info = info + "<ul>";
+							$(data).find("address").each(function(i, element) {
+								info = info + "<li class='sgLi' id='li"+i+"'>";
+								info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
+								info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
+								info = info + "<strong class='strongWord'>";
+								info = info + $(this).find("dong").text().substring(0, 1);
+								info = info + "</strong>";
+								info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
+								info = info + "</a>";
+								info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
+								info = info + "<span class='ft'>↖</span>";
+								info = info + "</button>";
+								info = info + "</li>";
+							});
+							info = info + "</ul>";
+							info = info + "</div>";
+							$(".popSuggestTen").html(info);
+						}
+					});
+				}
+				else{
+					console.log("찾을 조합글자는 : " + r);
+					$.ajax({
+						type: "get",
+						url: "searchAddr.jsp",
+						dataType: "xml",
+						data: {"region":r},
+						success:function(data){
+							var info = "";
+							info = info + "<div class='popDownAddr'>";
+							info = info + "<ul>";
+							$(data).find("address").each(function(i, element) {
+								info = info + "<li class='sgLi' id='li"+i+"'>";
+								info = info + "<a class='sgIitem' href='javascript:;' onclick='return false;'>";
+								info = info + $(this).find("sido").text() + "&nbsp;" + $(this).find("gugun").text() + "&nbsp;";
+								info = info + "<strong class='strongWord'>";
+								info = info + $(this).find("dong").text().substring(0, 1);
+								info = info + "</strong>";
+								info = info + $(this).find("dong").text().substring(1, $(this).find("dong").text().length);
+								info = info + "</a>";
+								info = info + "<button type='button' class='sgBtnAdd' data-address='"+$(this).find("sido").text()+" "+$(this).find("gugun").text()+" "+$(this).find("dong").text()+"' id='btn"+i+"'>";
+								info = info + "<span class='ft'>↖</span>";
+								info = info + "</button>";
+								info = info + "</li>";
+							});
+							info = info + "</ul>";
+							info = info + "</div>";
+							$(".popSuggestTen").html(info);
+						}
+					});
+				}
 			}
+			
 		}
 		
 	}
@@ -290,22 +294,22 @@
 		String cfpost="";
 		if(addrArr.length>1)
 		{
-			imsi=addrArr[2].substring(addrArr[2].length()-1, addrArr[2].length());
+			imsi=addrArr[addrArr.length-1].substring(addrArr[addrArr.length-1].length()-1, addrArr[addrArr.length-1].length());
 			System.out.println(imsi);
-			cfpost=addrArr[2].substring(addrArr[2].length()-3, addrArr[2].length());
+			cfpost=addrArr[addrArr.length-1].substring(addrArr[addrArr.length-1].length()-3, addrArr[addrArr.length-1].length());
 			
 			if(cfpost.equals("사서함"))
 			{
-				inputDong=addrArr[2];
+				inputDong=addrArr[addrArr.length-1];
 			}
 			else
 			{
 				if(imsi.equals("동"))
-					inputDong=addrArr[2].substring(0, addrArr[2].length()-1);
+					inputDong=addrArr[addrArr.length-1].substring(0, addrArr[addrArr.length-1].length()-1);
 				else if(imsi.equals("면"))
-					inputDong=addrArr[2].substring(0, addrArr[2].length()-1);
+					inputDong=addrArr[addrArr.length-1].substring(0, addrArr[addrArr.length-1].length()-1);
 				else if(imsi.equals("가"))
-					inputDong=addrArr[2].substring(0, addrArr[2].length()-1);
+					inputDong=addrArr[addrArr.length-1].substring(0, addrArr[addrArr.length-1].length()-1);
 							
 				System.out.println(inputDong);
 			}
@@ -317,9 +321,16 @@
 		//List<ZipcodeDto> list=dao.getSearchDong(regionName);
 		
 		int totalCount=0;
+		String gugunStr = "";
 		if(addrArr.length>1)
 		{
-			totalCount=dao.getFullTotalCount(addrArr[0], addrArr[1], inputDong);
+			for(int i=1 ; i<addrArr.length-1 ; i=i+1)
+			{
+				gugunStr = gugunStr + addrArr[i] + " ";
+			}
+			System.out.println(gugunStr);
+			gugunStr = gugunStr.trim();
+			totalCount=dao.getFullTotalCount(addrArr[0], gugunStr, inputDong);
 		}
 		else if(addrArr.length==1)
 		{
@@ -363,8 +374,8 @@
 		
 		List<ZipcodeDto>list=dao.getList(start, end, regionName);
 		//최종 페이지에 해당하는 방명록 글 가져오기
-		if(addrArr.length==3)
-			list=dao.getFullslist(start, end, addrArr[0], addrArr[1], inputDong);
+		if(addrArr.length>1)
+			list=dao.getFullslist(start, end, addrArr[0], gugunStr, inputDong);
 		//출력
 	%>
 		<div><b>검색결과</b></div>
