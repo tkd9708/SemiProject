@@ -25,7 +25,7 @@ public class MemberDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="select * from member where id=?";
+		String sql="select * from member where BINARY id=?";
 		
 		conn=db.getConnection();
 		try {
@@ -54,7 +54,7 @@ public class MemberDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		
-		String sql="SELECT * FROM member WHERE email='"+email+"'";
+		String sql="SELECT * FROM member WHERE BINARY email='"+email+"'";
 		
 		conn=db.getConnection();
 		
@@ -147,7 +147,7 @@ public class MemberDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 		
-		String sql="SELECT * FROM member WHERE id='"+id+"' and pass='"+pass+"'";
+		String sql="SELECT * FROM member WHERE BINARY id='"+id+"' and BINARY pass='"+pass+"'";
 		
 		conn=db.getConnection();
 		
@@ -205,7 +205,7 @@ public class MemberDao {
 		Statement stmt=null;
 		
 		ResultSet rs=null;
-		String sql="select name from member where id='"+id+"'";
+		String sql="select name from member where BINARY id='"+id+"'";
 		
 		
 		conn=db.getConnection();
@@ -273,7 +273,7 @@ public class MemberDao {
 	//삭제하는 메서드
 	public void deleteMember(String id)
 	{
-		String sql="delete from member where id=?";
+		String sql="delete from member where BINARY id=?";
 		
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -294,7 +294,7 @@ public class MemberDao {
 	}
 
 	//id 에 해당하는 dto 반환
-	public MemberDto getData(String id)
+	public MemberDto getDataId(String id)
 	{
 		MemberDto dto=new MemberDto();
 		
@@ -304,7 +304,7 @@ public class MemberDao {
 		
 		ResultSet rs=null;
 		
-		String sql="select * from member where id='"+id+"'";
+		String sql="select * from member where BINARY id='"+id+"'";
 		
 		conn=db.getConnection();
 		try {
@@ -426,7 +426,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		
 		ResultSet rs=null;
-		String sql="select num from member where id=?";
+		String sql="select num from member where BINARY id=?";
 		
 		
 		conn=db.getConnection();
