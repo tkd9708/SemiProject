@@ -113,3 +113,6 @@ button.SearchPost {
      width: 20px;	
 }
 
+form.regForm {
+	user-select: none;
+}
