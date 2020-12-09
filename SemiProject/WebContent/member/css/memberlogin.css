@@ -100,10 +100,14 @@ button.btnbigpink {
 	font-size: 20px;
 	text-align: center;
 	margin-left: 180px;
-	background-color: #8cc63f;
+	background-color: #8cc63f!important;
 	color: #fff;
 	border: none;
 	margin-top: 30px;
+}
+
+button.SearchPost {
+	outline: 0;
 }
 #post {
      width: 20px;	
