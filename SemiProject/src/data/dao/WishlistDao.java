@@ -423,7 +423,7 @@ public List<SpotReviewDto>getRecentreviews(String memNum){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		if(category.equals("around")) {
-			sql = "select count(*) from wishlist where aroundid != '0' or sharenum!='0' and memid=?";
+			sql = "select count(*) from wishlist where aroundid != '0' and memid=?";
 		}
 		else if(category.equals("spot")) {
 			sql = "select count(*) from wishlist where spotId != '0' and memid=?";

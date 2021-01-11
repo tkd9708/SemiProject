@@ -240,6 +240,10 @@ public class SpotReviewDao {
 	public int AvgStar(String contentsid) {
 		int sum = 0;
 		int total = this.getTotalCount(contentsid);
+		if(total==0) {
+			return 0;
+		}
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

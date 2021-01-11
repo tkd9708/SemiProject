@@ -138,7 +138,7 @@ font-family: SCDream5;
    
    // 총 갯수 구하기
    int totalCount = dao.getTotalCount(area);
-   int perPage = 9; // 한페이지당 보여질 글의 갯수
+   int perPage = 12; // 한페이지당 보여질 글의 갯수
    int perBlock = 5; // 한블럭당 출력할 페이지의 갯수
    int totalPage; // 총 페이지의 갯수
    int startPage; // 각 블럭당 시작 페이지 번호
