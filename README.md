@@ -30,14 +30,14 @@
 
 ### 지역별 관광지 <br/>
 * 지역별 해당 관광지를 원하는 카테고리순으로 볼 수 있다.
-* <img src="https://user-images.githubusercontent.com/55429998/112022513-b9d34f80-8b75-11eb-9309-2cea01b223c9.png" width="800" height="300">
+<img src="https://user-images.githubusercontent.com/55429998/112022513-b9d34f80-8b75-11eb-9309-2cea01b223c9.png" width="600" height="300">
 <br/>
 
 ### 관광지 상세 <br/>
 * 상세 정보, 일정 추가
-<img src="https://user-images.githubusercontent.com/55429998/112021819-05d1c480-8b75-11eb-901d-d8e3e55689e4.png" width="600" height="300">
-* 관광지 주변 음식점, 카페, 숙소를 검색하여 일정추가할 수 있다.
 <img src="https://user-images.githubusercontent.com/55429998/112021939-26018380-8b75-11eb-96aa-27c0ef82e999.png" width="600" height="300">
+* 관광지 주변 음식점, 카페, 숙소를 검색하여 일정추가할 수 있다.
+<img src="https://user-images.githubusercontent.com/55429998/112022941-1898c900-8b76-11eb-9998-94e42da2694f.png" width="600" height="300">
 * 관광지 후기를 남길 수 있다.
 <img src="https://user-images.githubusercontent.com/55429998/112021994-344f9f80-8b75-11eb-8118-5f1896f51a22.png" width="600" height="250">
 <br/>
@@ -53,3 +53,5 @@
 <img src="https://user-images.githubusercontent.com/55429998/112021285-77f5d980-8b74-11eb-9e9b-960c1e05b5fc.png" width="600" height="250">
 * 추가한 일정들을 한 눈에 확인할 수 있다.
 <img src="https://user-images.githubusercontent.com/55429998/112021202-601e5580-8b74-11eb-8ac0-c40285896edf.png" width="600" height="250">
+<br/>
+
