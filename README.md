@@ -47,6 +47,7 @@
 <img src="https://user-images.githubusercontent.com/55429998/112021406-9bb91f80-8b74-11eb-8c8d-86d115b8a8fd.png" width="600" height="250">
 * 답변형 댓글 작성
 <img src="https://user-images.githubusercontent.com/55429998/112022249-7547b400-8b75-11eb-8f15-b8f9a7bf2a63.png" width="600" height="250">
+<br/>
 
 ## My page<br/>
 * 회원 정보 및 추가 일정을 확인할 수 있다.
