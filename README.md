@@ -17,37 +17,39 @@
 ## 기능
 ### Main
 * main home
+* 원하는 지역의 관광지 목록으로 이동한다.
+<img src="https://user-images.githubusercontent.com/55429998/112021676-e175e800-8b74-11eb-9574-c0508f0830e5.png" width="600" height="300">
 * 검색창을 통해서 관광지를 검색할 수 있다.<br/>
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58bf21f5-c8ca-4414-894a-31e2cb9a26c8/Untitled.png" width="800" height="300">
+<img src="https://user-images.githubusercontent.com/55429998/112021769-f9e60280-8b74-11eb-8a7c-a800543467d1.png" width="500" height="150">
 <br/>
 
 ### 공지사항<br/>
 * smart editor를 사용하여 작성가능하다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cea31f71-0d8c-4a0a-9f53-46ac0e99ecdb/Untitled.png" width="500" height="300">
+<img src="https://user-images.githubusercontent.com/55429998/112021506-b55a6700-8b74-11eb-85a7-d41cea6b8e4f.png" width="700" height="300">
 <br/>
 
 ### 지역별 관광지 <br/>
 * 지역별 해당 관광지를 원하는 카테고리순으로 볼 수 있다.
-* <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d82bf832-9a0a-4f61-9b03-b583d2f84275/Untitled.png" width="800" height="300">
+* <img src="https://user-images.githubusercontent.com/55429998/112022513-b9d34f80-8b75-11eb-9309-2cea01b223c9.png" width="800" height="300">
 <br/>
 
 ### 관광지 상세 <br/>
 * 상세 정보, 일정 추가
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7fece1b8-1617-47fe-8ac5-659207fc3fe5/Untitled.png" width="200" height="100">
+<img src="https://user-images.githubusercontent.com/55429998/112021819-05d1c480-8b75-11eb-901d-d8e3e55689e4.png" width="600" height="300">
 * 관광지 주변 음식점, 카페, 숙소를 검색하여 일정추가할 수 있다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6e7f544-987a-4d64-897f-853a32c18398/Untitled.png" width="600" height="300">
+<img src="https://user-images.githubusercontent.com/55429998/112021939-26018380-8b75-11eb-96aa-27c0ef82e999.png" width="600" height="300">
 * 관광지 후기를 남길 수 있다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9ce2606f-4164-4ac9-a412-21a99da4aac2/Untitled.png" width="600" height="250">
+<img src="https://user-images.githubusercontent.com/55429998/112021994-344f9f80-8b75-11eb-8118-5f1896f51a22.png" width="600" height="250">
 <br/>
 
 ### 회원 맛집 공유<br/>
 * 회원만 작성하여 공유할 수 있다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da3c4983-f8e4-468d-94ae-f6005811008b/Untitled.png" width="600" height="250">
+<img src="https://user-images.githubusercontent.com/55429998/112021406-9bb91f80-8b74-11eb-8c8d-86d115b8a8fd.png" width="600" height="250">
 * 답변형 댓글 작성
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3640ebe5-a03d-4987-a086-5a81b1578d61/Untitled.png" width="600" height="250">
+<img src="https://user-images.githubusercontent.com/55429998/112022249-7547b400-8b75-11eb-8f15-b8f9a7bf2a63.png" width="600" height="250">
 
 ## My page<br/>
 * 회원 정보 및 추가 일정을 확인할 수 있다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/753b3bc6-c997-4c93-9887-53fabffd3c40/Untitled.png" width="600" height="250">
+<img src="https://user-images.githubusercontent.com/55429998/112021285-77f5d980-8b74-11eb-9e9b-960c1e05b5fc.png" width="600" height="250">
 * 추가한 일정들을 한 눈에 확인할 수 있다.
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/01851879-c122-4a7b-b952-97092359d7c0/Untitled.png" width="600" height="250">
+<img src="https://user-images.githubusercontent.com/55429998/112021202-601e5580-8b74-11eb-8ac0-c40285896edf.png" width="600" height="250">
