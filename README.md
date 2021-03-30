@@ -1,2 +1,1 @@
-# SemiProject
-비트캠프 SemiProject
+# 맨도롱소랑
